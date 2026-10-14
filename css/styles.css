@@ -1,0 +1,1615 @@
+/* Estilos personalizados para a plataforma de adoção e Painel Administrativo */
+
+:root {
+  --font-brand: 'Fredoka', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --theme-font: var(--font-body);
+  --theme-primary: #007E82; /* Deep Velvet Violet (Harmonized with logo stroke #007E82) */
+  --theme-primary-hover: #00686c;
+  --theme-primary-dark: #004d50; /* Exact logo stroke color */
+  --theme-primary-vibrant: #007E82; /* Action purple */
+  --theme-primary-light: #e6f4f5;
+  --theme-bg: #F7EFE4;
+  --theme-secondary: #D19864;
+  --theme-secondary-hover: #b97e4a;
+  --theme-secondary-light: #faeee3;
+  --theme-border: #e8ddcf;
+  --theme-card-radius: 1.75rem;
+  --theme-card-shadow: 0 4px 20px -2px rgba(0, 126, 130, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+}
+
+.font-brand {
+  font-family: var(--font-brand);
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.brand-title {
+  font-family: var(--font-brand);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #1e1b4b;
+}
+
+.brand-subtitle {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Monoline Card Styling mirroring the logo stroke */
+.brand-card {
+  background: #ffffff;
+  border: 2px solid #e8ddcf;
+  border-radius: 1.75rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  box-shadow: 0 4px 20px -2px rgba(0, 126, 130, 0.06);
+}
+
+.brand-card:hover {
+  border-color: #007E82;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -8px rgba(0, 126, 130, 0.12), 0 8px 12px -4px rgba(0, 126, 130, 0.06);
+}
+
+/* Glassmorphism Header */
+.brand-header {
+  background: rgba(247, 239, 228, 0.96);
+  border-bottom: 2px solid #e8ddcf;
+}
+
+html {
+  text-rendering: optimizeSpeed;
+}
+
+body {
+  font-family: var(--theme-font);
+  background-color: #F7EFE4 !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  overflow-x: hidden;
+}
+
+/* Cute Ambient Background Stickers */
+.cute-bg-sticker {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.14;
+  transition: opacity 0.3s ease;
+  animation: cute-float 8s ease-in-out infinite alternate;
+}
+
+.cute-bg-sticker-reverse {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.12;
+  transition: opacity 0.3s ease;
+  animation: cute-float-reverse 9s ease-in-out infinite alternate;
+}
+
+@keyframes cute-float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+@keyframes cute-float-reverse {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(14px) rotate(-4deg); }
+  100% { transform: translateY(0px) rotate(2deg); }
+}
+
+/* Card layout & scroll optimizations - ultra-smooth hardware-accelerated 60/120fps */
+.pet-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pet-card:hover {
+  transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Grid smooth containment */
+#pets-grid, #ongs-grid, #eventos-grid, #rifas-grid {
+  content-visibility: visible;
+}
+
+/* Video badge glow & pulse */
+@keyframes pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1 !important;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1 !important;
+  }
+}
+
+.video-pulse {
+  animation: pulse-soft 2s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Modal animations */
+.modal-backdrop {
+  transition: opacity 0.25s ease-out;
+}
+
+.modal-content {
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Video aspect ratio */
+.video-responsive-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: #0f172a;
+}
+
+.video-responsive-wrapper iframe,
+.video-responsive-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Dropzone de Upload de Mídias */
+.dropzone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #f8fafc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzone.dragover {
+  border-color: #007E82;
+  background-color: #f5f3ff;
+}
+
+/* Miniaturas com botão de remover */
+.photo-preview-item {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.photo-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-preview-item .remove-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  background-color: rgba(239, 68, 68, 0.9);
+  color: white;
+  border-radius: 9999px;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.photo-preview-item:hover .remove-btn {
+  opacity: 1;
+}
+
+/* Toast Notifications */
+#toast-notification {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
+}
+
+/* Quiz Radio Option Cards */
+#quiz-form label:has(input:checked) {
+  border-color: #007E82;
+  background-color: #faf5ff;
+  box-shadow: 0 0 0 2px #007E82;
+}
+
+/* Custom badge styling & Tons Pastéis */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  line-height: 1;
+}
+
+.badge-pastel-purple {
+  background-color: #e6f4f5;
+  color: #6b21a8;
+  border: 1px solid #b2dedf;
+}
+
+.badge-pastel-mint {
+  background-color: #f0fdfa;
+  color: #0f766e;
+  border: 1px solid #99f6e4;
+}
+
+.badge-pastel-sky {
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.badge-pastel-amber {
+  background-color: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.badge-pastel-rose {
+  background-color: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+/* Cores Chamativas & Vibrantes para Alertas e Cuidados Extras */
+.badge-chamativo-amber {
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: #020617;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  letter-spacing: 0.025em;
+}
+
+.badge-chamativo-rose {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  color: #020617;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.4);
+  letter-spacing: 0.025em;
+}
+
+.badge-chamativo-teal {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: #020617;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.35);
+}
+
+.cuidados-extras-alert-box {
+  background: linear-gradient(135deg, #fffbeb 0%, #fff7ed 60%, #fff1f2 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 1rem;
+  box-shadow: 0 4px 14px -2px rgba(245, 158, 11, 0.18);
+}
+
+/* ==========================================================================
+   ESTILOS DO CONTRATO DE PARCERIA & CESSÃO DE IMAGENS (TIMBRADO & IMPRESSÃO)
+   ========================================================================== */
+
+.contract-scroll-box {
+  max-height: 340px;
+  overflow-y: auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background-color: #f8fafc;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.contract-seal {
+  border: 2px dashed #0d9488;
+  border-radius: 1rem;
+  background-color: #f0fdfa;
+  padding: 1rem;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #ngo-contract-printable-area, #ngo-contract-printable-area * {
+    visibility: visible;
+  }
+  #ngo-contract-printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   DESIGN STUDIO ESTILO CANVA & ELEMENTOS VISUAIS / STICKERS
+   ========================================================================== */
+
+/* Selos e Figuras nos Cards de Pets */
+.pet-card-stamp {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pet-card:hover .pet-card-stamp {
+  transform: scale(1.05);
+}
+
+.pet-card-paw-stamp,
+.pet-card-heart-stamp {
+  pointer-events: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+.pet-card:hover .pet-card-paw-stamp {
+  transform: translateY(-2px) rotate(4deg);
+}
+
+.pet-card:hover .pet-card-heart-stamp {
+  transform: translateY(-2px) scale(1.1);
+}
+
+/* Painel Lateral / Modal Estilo Canva */
+.canva-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.85rem 0.5rem;
+  border-radius: 0.875rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.canva-tab-btn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.canva-tab-btn.active {
+  background-color: #020617;
+  color: #007E82;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Seletor de Paleta / Swatch */
+.color-swatch-btn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.color-swatch-btn:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch-btn.active {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 2px #ffffff, 0 4px 6px -1px rgb(0 0 0 / 0.2);
+}
+
+/* Card de Pré-visualização de Tema */
+.preset-theme-card {
+  border: 2px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #020617;
+}
+
+.preset-theme-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.preset-theme-card.active {
+  border-color: #007E82;
+  background-color: #faf5ff;
+  box-shadow: 0 0 0 2px rgba(0, 126, 130, 0.2);
+}
+
+/* ==========================================================================
+   BARRA AO VIVO (COR OFICIAL #007E82)
+   ========================================================================== */
+#live-activity-ticker {
+  background-color: #007E82 !important;
+  color: #ffffff !important;
+  border-bottom: 2.5px solid #005e61 !important;
+  box-shadow: 0 2px 8px -2px rgba(0, 126, 130, 0.35) !important;
+}
+
+#live-activity-ticker-content {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+#live-activity-ticker .badge-ao-vivo {
+  background-color: #ffffff !important;
+  color: #007E82 !important;
+  font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   BANNER VITRINE - "FAÇA UM QUIZ" (MESMO PLANO DE FUNDO DO PERFIL DOS ANIMAIS)
+   ========================================================================== */
+.quiz-hero-bg-section {
+  background-color: #F7EFE4 !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-attachment: fixed !important;
+  border-bottom: 2px solid #e8ddcf !important;
+}
+
+#custom-vitrine-banner {
+  background-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E") !important;
+  border: 3px solid #007E82 !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 126, 130, 0.22), 0 6px 16px -2px rgba(209, 152, 100, 0.18) !important;
+  border-radius: 2rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease;
+}
+
+#quiz-modal .modal-content {
+  background-color: #F7EFE4 !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E") !important;
+  opacity: 1 !important;
+  border: 3px solid #007E82 !important;
+}
+
+.btn-quiz-cta {
+  background-color: #D19864 !important;
+  color: #020617 !important;
+  border: 2.5px solid #b87e4c !important;
+  font-weight: 900 !important;
+  font-family: 'Fredoka', 'Nunito', sans-serif !important;
+  box-shadow: 0 8px 24px -4px rgba(209, 152, 100, 0.5) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-quiz-cta:hover {
+  background-color: #b87e4c !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 12px 28px -4px rgba(209, 152, 100, 0.65) !important;
+}
+
+/* ==========================================================================
+   MODAL DO QUIZ (FUNDO SÓLIDO, HARMONIOSO E NÃO TRANSPARENTE)
+   ========================================================================== */
+#quiz-modal .modal-content {
+  background-color: #F7EFE4 !important;
+  opacity: 1 !important;
+  border: 3px solid #007E82 !important;
+  border-radius: 1.75rem !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 126, 130, 0.2) !important;
+  color: #020617 !important;
+  font-family: 'Fredoka', 'Nunito', system-ui, sans-serif !important;
+}
+
+.quiz-q-card {
+  background-color: #ffffff !important;
+  border: 1.5px solid #e8ddcf !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.04) !important;
+  color: #020617 !important;
+}
+
+.quiz-opt-btn {
+  background-color: #fdfbf7 !important;
+  border: 1.5px solid #e8ddcf !important;
+  border-radius: 0.875rem !important;
+  color: #020617 !important;
+  transition: all 0.18s ease-in-out !important;
+}
+
+.quiz-opt-btn:hover {
+  background-color: #e6f4f5 !important;
+  border-color: #007E82 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 8px -2px rgba(0, 126, 130, 0.15) !important;
+}
+
+.quiz-opt-btn input[type="radio"]:checked ~ span,
+.quiz-opt-btn:has(input[type="radio"]:checked) {
+  background-color: #e6f4f5 !important;
+  border-color: #007E82 !important;
+  color: #004245 !important;
+}
+
+
+/* ============================================================
+   SISTEMA DE CORES: TONS PASTÉIS & CORES CHAMATIVAS (Pata Certa)
+   ============================================================ */
+
+/* Badges em Tons Pastéis Suaves */
+.badge-pastel-purple {
+  background-color: #e6f4f5;
+  color: #6b21a8;
+  border: 1px solid #e9d5ff;
+}
+
+.badge-pastel-mint {
+  background-color: #f0fdfa;
+  color: #0f766e;
+  border: 1px solid #99f6e4;
+}
+
+.badge-pastel-amber {
+  background-color: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.badge-pastel-rose {
+  background-color: #fff1f2;
+  color: #9f1239;
+  border: 1px solid #fecdd3;
+}
+
+.badge-pastel-sky {
+  background-color: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+/* Badges em Cores Chamativas para Alertas e Ações Críticas */
+.badge-chamativo-rose {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  color: #020617;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-chamativo-amber {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #020617;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-chamativo-teal {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: #020617;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-chamativo-purple {
+  background: linear-gradient(135deg, #007E82, #007E82);
+  color: #020617;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(0, 126, 130, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Selo de Contrato Oficial */
+.contract-seal {
+  border: 2px solid #0d9488;
+  background-color: #f0fdfa;
+  color: #0f766e;
+}
+
+/* ============================================================
+   ESTILOS EXATOS DO MOCKUP PATA CERTA (Fidelidade Visual 100%)
+   ============================================================ */
+
+/* Fundo com Doodles de Animais Suaves nas Margens */
+.mockup-doodles-bg {
+  background-color: #F7EFE4;
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045' fill-rule='evenodd'%3E%3C!-- Pata 1 --%3E%3Cellipse cx='28' cy='28' rx='7' ry='6'/%3E%3Ccircle cx='18' cy='18' r='3.5'/%3E%3Ccircle cx='27' cy='14' r='3.5'/%3E%3Ccircle cx='37' cy='18' r='3.5'/%3E%3Ccircle cx='12' cy='26' r='2.8'/%3E%3C!-- Coracao 1 --%3E%3Cpath d='M120 30c-4-6-12-6-16 0-4-6-12-6-16 0-4 6 0 14 16 24 16-10 20-18 16-24z'/%3E%3C!-- Pata 2 --%3E%3Cellipse cx='135' cy='125' rx='7.5' ry='6.5'/%3E%3Ccircle cx='124' cy='115' r='3.5'/%3E%3Ccircle cx='134' cy='110' r='3.5'/%3E%3Ccircle cx='144' cy='115' r='3.5'/%3E%3Ccircle cx='149' cy='123' r='2.8'/%3E%3C!-- Coracao 2 --%3E%3Cpath d='M45 125c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Moldura Roxa em Degradê Luminoso da Foto no Card */
+.pet-card-brand-frame, .pet-card-purple-frame {
+  background: linear-gradient(135deg, #00383b 0%, #005c60 50%, #007E82 100%);
+  padding: 0.625rem;
+  border-radius: 1.75rem;
+  box-shadow: 0 6px 18px rgba(0, 126, 130, 0.25), 0 2px 6px rgba(0, 56, 59, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+.pet-card:hover .pet-card-brand-frame, .pet-card-purple-frame {
+  background: linear-gradient(135deg, #002e30 0%, #005659 50%, #007E82 100%);
+  box-shadow: 0 10px 28px rgba(0, 126, 130, 0.35), 0 4px 12px rgba(0, 56, 59, 0.25);
+}
+
+.pet-card-brand-frame, .pet-card-purple-frame img {
+  border-radius: 1.25rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Barra de Busca Flutuante Sobreposta em Pílula com Degradê Nobre e Violeta */
+.hero-search-pill {
+  background: linear-gradient(135deg, #00383b 0%, #005c60 50%, #007E82 100%);
+  padding: 0.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 20px 35px -5px rgba(0, 126, 130, 0.3), 0 8px 16px -2px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 20;
+  border: 1px solid rgba(0, 126, 130, 0.2);
+}
+
+.hero-search-pill input {
+  background-color: #020617;
+  color: #1e293b;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  width: 100%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.hero-search-pill button.search-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #007E82 0%, #007E82 50%, #D19864 100%);
+  color: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(209, 152, 100, 0.35);
+}
+
+.hero-search-pill button.search-btn:hover {
+  background: linear-gradient(135deg, #004d50 0%, #007E82 50%, #D19864 100%);
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(209, 152, 100, 0.5);
+}
+
+/* Stepper de 5 Passos (Processo de Adoção) */
+.stepper-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.stepper-line {
+  position: absolute;
+  top: 18px;
+  left: 28px;
+  right: 28px;
+  height: 2px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.stepper-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.step-circle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 900;
+  background-color: #020617;
+  border: 2px solid #cbd5e1;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.step-circle.active {
+  background-color: #007E82;
+  border-color: #007E82;
+  color: #020617;
+  box-shadow: 0 4px 10px rgba(0, 126, 130, 0.35);
+}
+
+.step-circle.completed {
+  background-color: #004d50;
+  border-color: #004d50;
+  color: #020617;
+}
+
+.step-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.step-label.active {
+  color: #007E82;
+  font-weight: 800;
+}
+
+/* Círculos de Favoritos / Stories */
+.story-pet-ring {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: 2.5px solid #007E82;
+  padding: 2.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: white;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.story-pet-ring:hover {
+  transform: scale(1.08);
+}
+
+.story-pet-ring img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+/* Cartões de Candidaturas em Verde Pastel */
+.candidatura-status-card {
+  background-color: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 1.25rem;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.candidatura-status-card:hover {
+  background-color: #dcfce7;
+  border-color: #86efac;
+  transform: translateY(-2px);
+}
+
+/* Barra de Navegação Inferior Flutuante (Bottom Dock) */
+.floating-bottom-dock {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 126, 130, 0.2);
+  border-radius: 9999px;
+  padding: 0.4rem 0.85rem;
+  box-shadow: 0 12px 32px rgba(0, 126, 130, 0.25), 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dock-item:hover, .dock-item.active {
+  color: #007E82;
+  background-color: #e6f4f5;
+}
+
+.dock-item.active {
+  font-weight: 800;
+}
+
+.dock-item-primary {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #007E82 0%, #007E82 50%, #D19864 100%);
+  color: #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 126, 130, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 0 0.25rem;
+}
+
+.dock-item-primary:hover {
+  background: linear-gradient(135deg, #004245 0%, #005c60 50%, #D19864 100%);
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(209, 152, 100, 0.4);
+}
+
+/* ==========================================================================
+   UTILITÁRIOS DE DEGRADÊ PARA BOTÕES, BADGES E COMPONENTES
+   ========================================================================== */
+.btn-gradient-adopt {
+  background: linear-gradient(135deg, #007E82 0%, #007E82 50%, #D19864 100%);
+  color: #020617;
+  box-shadow: 0 4px 14px rgba(0, 126, 130, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-gradient-adopt:hover {
+  background: linear-gradient(135deg, #004245 0%, #005c60 50%, #D19864 100%);
+  box-shadow: 0 8px 22px rgba(209, 152, 100, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gradient-outline {
+  background: linear-gradient(135deg, #ffffff 0%, #F7EFE4 100%);
+  border: 1.5px solid #007E82;
+  color: #00686c;
+  box-shadow: 0 2px 6px rgba(0, 126, 130, 0.08);
+  transition: all 0.25s ease;
+}
+
+.btn-gradient-outline:hover {
+  background: linear-gradient(135deg, #e6f4f5 0%, #d4eef0 100%);
+  border-color: #00686c;
+  color: #007E82;
+  box-shadow: 0 4px 12px rgba(0, 126, 130, 0.18);
+  transform: translateY(-1px);
+}
+
+.badge-gradient-vaccine {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 100%);
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-gradient-castrated {
+  background: linear-gradient(135deg, #F7EFE4 0%, #e6f4f5 100%);
+  color: #86198f;
+  border: 1px solid #fbcfe8;
+}
+
+.badge-gradient-breed {
+  background: linear-gradient(135deg, #e6f4f5 0%, #F7EFE4 100%);
+  color: #004d50;
+  border: 1px solid #b2dedf;
+}
+
+.story-gradient-box {
+  background: linear-gradient(135deg, rgba(247, 239, 228, 0.95) 0%, rgba(247, 239, 228, 0.8) 50%, rgba(255, 251, 235, 0.6) 100%);
+  border: 1px solid rgba(0, 126, 130, 0.2);
+}
+
+/* ==========================================================================
+   ILUSTRAÇÕES EM LINE ART (ESTILO DA MARCA)
+   ========================================================================== */
+.line-art-svg {
+  stroke: #007E82;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 126, 130, 0.04));
+}
+
+.line-art-svg:hover {
+  stroke: #004d50;
+  transform: scale(1.06);
+}
+
+.catalog-line-art-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+  opacity: 0.85;
+}
+
+/* Emblemas de palco para o Showcase */
+.stage-watermark-tr, .stage-watermark-br {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ==========================================================================
+   MATCHPET BRAND PALETTE: #007E82 (Teal) | #D19864 (Caramel) | #F7EFE4 (Cream)
+   ========================================================================== */
+
+/* Canvas & Backgrounds */
+.bg-matchpet-cream, body {
+  background-color: #F7EFE4 !important;
+}
+
+.bg-matchpet-teal {
+  background-color: #007E82 !important;
+}
+
+.bg-matchpet-caramel {
+  background-color: #D19864 !important;
+}
+
+.text-matchpet-teal {
+  color: #007E82 !important;
+}
+
+.text-matchpet-caramel {
+  color: #D19864 !important;
+}
+
+.border-matchpet-teal {
+  border-color: #007E82 !important;
+}
+
+.border-matchpet-caramel {
+  border-color: #D19864 !important;
+}
+
+.border-matchpet-cream {
+  border-color: #e8ddcf !important;
+}
+
+/* Comprehensive Purple Overrides: Redirect all purple tokens to MatchPet palette */
+.bg-purple-950, .bg-purple-900 {
+  background-color: #003e40 !important;
+}
+
+.bg-purple-800, .bg-purple-700, .bg-purple-600, .bg-purple-500 {
+  background-color: #007E82 !important;
+}
+
+.bg-purple-100 {
+  background-color: #e6f4f5 !important;
+}
+
+.bg-purple-50, .bg-purple-50\/70, .bg-purple-50\/80, .bg-purple-50\/90 {
+  background-color: #F7EFE4 !important;
+}
+
+.hover\:bg-purple-100:hover {
+  background-color: #d4eef0 !important;
+}
+
+.hover\:bg-purple-50:hover {
+  background-color: #faeee3 !important;
+}
+
+.hover\:bg-purple-700:hover, .hover\:bg-purple-800:hover {
+  background-color: #00686c !important;
+}
+
+.text-purple-950, .text-purple-900 {
+  color: #003e40 !important;
+}
+
+.text-purple-800, .text-purple-700, .text-purple-600 {
+  color: #007E82 !important;
+}
+
+.text-purple-300, .text-purple-200, .text-purple-100 {
+  color: #b8e2e4 !important;
+}
+
+.hover\:text-purple-900:hover, .hover\:text-purple-700:hover {
+  color: #004d50 !important;
+}
+
+.border-purple-800, .border-purple-800\/40, .border-purple-700, .border-purple-600, .border-purple-500 {
+  border-color: #007E82 !important;
+}
+
+.border-purple-300, .border-purple-200, .border-purple-200\/80, .border-purple-200\/90, .border-purple-200\/60, .border-purple-100, .border-purple-100\/80, .border-purple-100\/90 {
+  border-color: #e8ddcf !important;
+}
+
+.focus\:ring-purple-500:focus, .focus\:ring-purple-600:focus {
+  --tw-ring-color: #007E82 !important;
+}
+
+/* Warm Caramel CTAs */
+.btn-cta-caramel, .bg-orange-600, .bg-orange-500 {
+  background-color: #D19864 !important;
+  color: #020617 !important;
+}
+
+.hover\:bg-orange-700:hover, .hover\:bg-orange-600:hover {
+  background-color: #b97e4a !important;
+}
+
+.text-orange-600, .text-orange-500 {
+  color: #D19864 !important;
+}
+
+.border-orange-500, .border-orange-600 {
+  border-color: #D19864 !important;
+}
+
+.bg-orange-50, .bg-orange-100 {
+  background-color: #faeee3 !important;
+}
+
+/* Gradients with Teal and Caramel */
+.from-purple-950 {
+  --tw-gradient-from: #003a3d var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(0 58 61 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.via-\[\#371954\], .via-\[\#3e1d5f\] {
+  --tw-gradient-to: rgb(0 92 96 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #005c60 var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.to-indigo-950, .to-purple-700 {
+  --tw-gradient-to: #007E82 var(--tw-gradient-to-position) !important;
+}
+/* ==========================================================================
+   USER PREFERENCE: BLACK TYPOGRAPHY & HARMONIC PALETTE
+   ========================================================================== */
+.text-white {
+  color: #ffffff !important;
+}
+
+.hover\:text-white:hover {
+  color: #ffffff !important;
+}
+
+.fill-white {
+  fill: #ffffff !important;
+}
+
+/* Primary CTAs in Warm Caramel with Black Text */
+.btn-cta-caramel, .btn-gradient-adopt, .dock-item-primary {
+  background-color: #D19864 !important;
+  color: #020617 !important;
+  font-weight: 900 !important;
+}
+
+/* Nav & Segment Tabs */
+.nav-tab-btn.active, .portal-segment-tab.active {
+  background-color: #D19864 !important;
+  color: #020617 !important;
+  font-weight: 900 !important;
+  border: 1.5px solid #b87e4c !important;
+}
+
+/* Badges on active tabs */
+.portal-segment-tab.active span[id^="panel-badge-"] {
+  background-color: #F7EFE4 !important;
+  color: #020617 !important;
+  font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   MATCHPET CUTE & HARMONIC BRANDING (FONTE FOFA & PALETA LOGO)
+   ========================================================================== */
+.font-cute {
+  font-family: 'Fredoka', 'Nunito', -apple-system, sans-serif !important;
+}
+
+.logo-brand-match {
+  font-family: 'Fredoka', 'Nunito', sans-serif !important;
+  color: #007E82 !important;
+  font-weight: 800 !important;
+}
+
+.logo-brand-pet {
+  font-family: 'Fredoka', 'Nunito', sans-serif !important;
+  color: #D19864 !important;
+  font-weight: 800 !important;
+}
+
+/* Gestão de Animais - Expansão de Tela Completa & Espaçamento Confortável */
+.admin-full-canvas {
+  max-width: 1720px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.admin-crud-layout-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr) !important;
+  gap: 2rem !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+@media (max-width: 1100px) {
+  .admin-crud-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.admin-crud-layout-grid.mode-form .admin-form-pane {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  width: 100% !important;
+}
+.admin-crud-layout-grid.mode-form .admin-list-pane {
+  display: none !important;
+}
+
+.admin-crud-layout-grid.mode-list .admin-form-pane {
+  display: none !important;
+}
+.admin-crud-layout-grid.mode-list .admin-list-pane {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+.admin-crud-layout-grid.mode-split .admin-form-pane,
+.admin-crud-layout-grid.mode-split .admin-list-pane {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Sub-grades internas do formulário */
+.admin-form-row-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-form-row-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Modal de Gestão da ONG no Index - Tela Ampla e Normal */
+.ong-modal-wide {
+  max-width: 94vw !important;
+  width: 1440px !important;
+}
+
+.ong-pets-wide-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+  gap: 1.25rem !important;
+}
+
+/* Animações Fofas Adicionais para os Componentes de Fundo */
+@keyframes cute-wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes cute-bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.cute-sticker-wiggle {
+  animation: cute-wiggle 6s ease-in-out infinite alternate;
+}
+
+.cute-sticker-bounce {
+  animation: cute-bounce-soft 5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   CARDS DE IMPACTO E ESTATÍSTICAS (FUNDOS 100% SÓLIDOS, NUNCA TRANSPARENTES)
+   ========================================================================== */
+.impact-stat-card {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  border-radius: 1rem !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.impact-card-pets,
+#stat-card-pets {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: 2px solid #007E82 !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 126, 130, 0.16) !important;
+  opacity: 1 !important;
+}
+
+.impact-card-pets:hover,
+#stat-card-pets:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px -4px rgba(0, 126, 130, 0.26) !important;
+}
+
+/* ==========================================================================
+   BADGES DE ESPÉCIE & SEXO (CORES CHAMATIVAS & FUNDOS 100% SÓLIDOS)
+   ========================================================================== */
+.modal-badge-solid {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Espécie Chamativa: Caramelo Vibrante da Marca (#D19864) */
+.badge-specie-chamativa {
+  background-color: #D19864 !important;
+  background: #D19864 !important;
+  color: #020617 !important;
+  border: 1.5px solid #b87e4c !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(209, 152, 100, 0.45) !important;
+}
+
+/* Fêmea Chamativa: Rosa / Coral Vibrante */
+.badge-sexo-femea-chamativa {
+  background-color: #ff3366 !important;
+  background: #ff3366 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #cc0033 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(255, 51, 102, 0.45) !important;
+}
+
+/* Macho Chamativo: Deep Teal Vibrante Oficial (#007E82) */
+.badge-sexo-macho-chamativa {
+  background-color: #007E82 !important;
+  background: #007E82 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #005659 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(0, 126, 130, 0.45) !important;
+}
+
+/* Raça Chamativa no Modal: Fundo Branco Puro Sólido */
+.modal-badge-raca-chamativa {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #020617 !important;
+  border: 1.5px solid #007E82 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Status Disponível no Modal: Verde / Teal Chamativo */
+.modal-badge-status-disponivel {
+  background-color: #007E82 !important;
+  background: #007E82 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #004d50 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+}
+
+.modal-badge-status-adotado {
+  background-color: #475569 !important;
+  background: #475569 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #334155 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+}
+
+.modal-badge-status-processo {
+  background-color: #ea580c !important;
+  background: #ea580c !important;
+  color: #ffffff !important;
+  border: 1.5px solid #c2410c !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   TAGS DE ADOÇÃO E VÍDEO (100% SÓLIDAS & TOTALMENTE SEM TRANSPARÊNCIA)
+   ========================================================================== */
+.badge-tag-adocao-solid {
+  background-color: #007E82 !important;
+  background: #007E82 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #005659 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 3px 10px rgba(0, 126, 130, 0.45) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  white-space: nowrap !important;
+}
+
+.badge-tag-video-solid {
+  background-color: #D19864 !important;
+  background: #D19864 !important;
+  color: #020617 !important;
+  border: 1.5px solid #b87e4c !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 3px 10px rgba(209, 152, 100, 0.45) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================================
+   SEÇÃO HISTÓRIAS QUE INSPIRAM & DICA DIÁRIA (100% SÓLIDOS & NÃO TRANSPARENTES)
+   ========================================================================== */
+#historias-inspiram-container {
+  background-color: #F7EFE4 !important;
+  background: #F7EFE4 !important;
+  opacity: 1 !important;
+  border: 3px solid #007E82 !important;
+  box-shadow: 0 16px 40px -8px rgba(0, 126, 130, 0.18) !important;
+}
+
+.historia-card-solid {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  border: 2px solid #007E82 !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 126, 130, 0.12) !important;
+}
+
+.daily-tutor-tip-solid {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+  border: 2px solid #D19864 !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 4px 14px -2px rgba(209, 152, 100, 0.18) !important;
+}
+
+/* ==========================================================================
+   DIRETIVA GLOBAL: REMOVER QUAISQUER TRANSPARÊNCIAS NA PLATAFORMA
+   ========================================================================== */
+header.sticky {
+  background-color: #F7EFE4 !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Todos os modais possuem conteúdo 100% sólido */
+.modal-content {
+  opacity: 1 !important;
+}
+
+/* Prevenção universal de desbotamento por blur de transparência */
+.backdrop-blur-md,
+.backdrop-blur-sm,
+.backdrop-blur-xs,
+.backdrop-blur-lg {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ==========================================================================
+   SEÇÃO CONHEÇA A ONG: CONTROLE DE TAMANHO DE FOTOS & LAYOUT LATERALIZADO
+   ========================================================================== */
+.ong-hero-photo-container {
+  height: 250px !important;
+  max-height: 250px !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  border-radius: 1.25rem !important;
+  position: relative !important;
+}
+
+.ong-hero-photo-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.ong-mini-photo-card {
+  height: 105px !important;
+  max-height: 105px !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  border-radius: 0.85rem !important;
+  position: relative !important;
+}
+
+.ong-mini-photo-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.ong-lateral-story-photo {
+  height: 155px !important;
+  max-height: 155px !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  border-radius: 1rem !important;
+  position: relative !important;
+}
+
+.ong-lateral-story-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.ong-facility-card {
+  height: 180px !important;
+  max-height: 180px !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  border-radius: 1rem !important;
+  position: relative !important;
+}
+
+.ong-facility-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.ong-caregiver-avatar {
+  width: 88px !important;
+  height: 88px !important;
+  min-width: 88px !important;
+  min-height: 88px !important;
+  max-width: 88px !important;
+  max-height: 88px !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+}
+
+.ong-caregiver-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.btn-whatsapp-solid {
+  background-color: #059669 !important;
+  background: #059669 !important;
+  color: #ffffff !important;
+  border: 1px solid #047857 !important;
+}
+
+.btn-whatsapp-solid:hover {
+  background-color: #047857 !important;
+  background: #047857 !important;
+}
+
+.btn-pix-copy-solid {
+  background-color: #007E82 !important;
+  background: #007E82 !important;
+  color: #ffffff !important;
+  border: 1px solid #005c5f !important;
+}
+
+.btn-pix-copy-solid:hover {
+  background-color: #00686c !important;
+  background: #00686c !important;
+}
+

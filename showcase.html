@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatchPet • Vitrine Oficial de Apresentação (Showcase)</title>
+  
+  <!-- Favicon Oficial MatchPet (Logo Nova da Guia do Navegador) -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/matchpet-icon.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png?v=2">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/matchpet-icon.png?v=2">
+
+  <!-- Google Fonts: Fredoka & Nunito (Fofas e Arredondadas) + Plus Jakarta Sans (Interface Nítida) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos Globais MatchPet & Badges Sólidos -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#007E82',
+              tealDark: '#005c60',
+              tealDeep: '#003e40',
+              caramel: '#D19864',
+              caramelDark: '#b87e4c',
+              cream: '#F7EFE4',
+              creamDark: '#e8ddcf'
+            }
+          },
+          fontFamily: {
+            cute: ['"Fredoka"', '"Nunito"', 'sans-serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Palco Harmônico com Paleta Oficial: #F7EFE4, #007E82, #D19864 */
+    body {
+      background-color: #F7EFE4;
+      background-image: 
+        radial-gradient(circle at 12% 15%, rgba(0, 126, 130, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 88% 85%, rgba(209, 152, 100, 0.16) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' opacity='0.04'%3E%3Cpath d='M40 46c-4.4 0-8-3.6-8-8 0-5.8 8-13.3 8-13.3s8 7.5 8 13.3c0 4.4-3.6 8-8 8zm-10.6-10.6c-2.2 0-4-1.8-4-4 0-2.9 4-6.6 4-6.6s4 3.7 4 6.6c0 2.2-1.8 4-4 4zm21.2 0c-2.2 0-4-1.8-4-4 0-2.9 4-6.6 4-6.6s4 3.7 4 6.6c0 2.2-1.8 4-4 4z' fill='%23007E82'/%3E%3C/svg%3E");
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0f172a;
+      min-height: 100vh;
+    }
+
+    .font-cute {
+      font-family: 'Fredoka', 'Nunito', sans-serif;
+    }
+
+    /* Moldura Sólida com Paleta da Logo */
+    .showcase-window {
+      background: #ffffff;
+      border: 2px solid #007E82;
+      box-shadow: 0 20px 40px -15px rgba(0, 126, 130, 0.2), 0 8px 16px -4px rgba(209, 152, 100, 0.15);
+    }
+
+    .mobile-mockup-frame {
+      background: #ffffff;
+      border: 3px solid #007E82;
+      border-radius: 2.25rem;
+      box-shadow: 0 16px 32px -8px rgba(0, 126, 130, 0.25);
+      overflow: hidden;
+    }
+
+    .pet-card-frame {
+      border: 2px solid #e8ddcf;
+      transition: all 0.3s ease;
+    }
+    .pet-card-frame:hover {
+      border-color: #007E82;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px -6px rgba(0, 126, 130, 0.15);
+    }
+
+    /* Floating Bottom Dock */
+    .showcase-dock {
+      background: #ffffff;
+      border: 2px solid #007E82;
+      border-radius: 9999px;
+      padding: 0.45rem 1rem;
+      box-shadow: 0 10px 25px -3px rgba(0, 126, 130, 0.25);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D19864;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F7EFE4;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-5 lg:p-7 relative select-none">
+
+  <!-- =========================================================================
+       TOP BAR DE APRESENTAÇÃO DO TRABALHO
+       ========================================================================= -->
+  <header class="max-w-[1720px] mx-auto mb-5 p-4 sm:p-5 bg-white rounded-3xl border-2 border-[#007E82] shadow-md flex flex-wrap items-center justify-between gap-4">
+    <!-- Identidade Visual & Tipografia Fofa da Marca -->
+    <div class="flex items-center gap-3.5">
+      <div class="w-12 h-12 rounded-2xl bg-[#F7EFE4] border-2 border-[#007E82] flex items-center justify-center shadow-xs">
+        <img src="img/matchpet-icon.png" alt="MatchPet" class="h-8 w-auto">
+      </div>
+      <div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <h1 class="font-cute text-2xl sm:text-3xl font-extrabold text-[#007E82] tracking-tight flex items-center gap-2">
+            <span>MatchPet</span>
+            <span class="text-xs font-bold font-sans uppercase tracking-wider bg-[#D19864] text-slate-950 px-2.5 py-0.5 rounded-full border border-[#b87e4c]">
+              Showcase Oficial
+            </span>
+          </h1>
+          <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-[#F7EFE4] text-[#007E82] border border-[#e8ddcf]">
+            Paleta Harmonizada: #007E82 • #D19864 • #F7EFE4
+          </span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">
+          Apresentação Multi-Telas de Alta Fidelidade: Catálogo de Adoção, Única ONG Oficial, Feirinhas &amp; Rifas com Fotos e Quiz Interativo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Botões de Acesso Rápido às Aplicações Reais -->
+    <div class="flex items-center gap-2.5 flex-wrap">
+      <a 
+        href="index.html" 
+        target="_blank"
+        class="px-5 py-2.5 rounded-2xl bg-[#007E82] hover:bg-[#005c60] text-white font-extrabold text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2 hover:scale-105 cursor-pointer"
+        title="Abrir a Plataforma Principal em tela cheia"
+      >
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+        <span>Abrir Plataforma (index.html)</span>
+      </a>
+
+      <a 
+        href="admin.html" 
+        target="_blank"
+        class="px-5 py-2.5 rounded-2xl bg-[#D19864] hover:bg-[#b87e4c] text-slate-950 font-black text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2 hover:scale-105 border border-[#b87e4c] cursor-pointer"
+        title="Abrir o Painel do Administrador & Moderador"
+      >
+        <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <span>Painel Admin (admin.html)</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       PALCO PRINCIPAL: DESKTOP (ESQUERDA 60%) + 3 TELAS MOBILE (DIREITA 40%)
+       ========================================================================= -->
+  <main class="max-w-[1720px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+
+    <!-- =======================================================================
+         COLUNA ESQUERDA (7/12): VISÃO DESKTOP COMPLETA DO PORTAL
+         ======================================================================= -->
+    <div class="xl:col-span-7 showcase-window rounded-3xl overflow-hidden flex flex-col">
+      
+      <!-- Barra de Janela do Navegador (Mockup Desktop) -->
+      <div class="px-5 py-3 bg-[#F7EFE4] border-b border-[#e8ddcf] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-rose-400"></div>
+          <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+          <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+          <span class="ml-2 text-xs font-bold text-slate-500 font-mono">matchpet.org.br/portal-adocao-df</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-bold text-[#007E82]">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Brasília &amp; Entorno • DF</span>
+        </div>
+      </div>
+
+      <!-- Header Oficial do App Dentro do Desktop -->
+      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-white">
+        <div class="flex items-center gap-3">
+          <img src="img/matchpet-icon.png" alt="Logo" class="h-9 w-auto">
+          <div>
+            <span class="font-cute text-2xl font-black text-[#007E82] leading-none block">MatchPet</span>
+            <span class="text-[10px] font-extrabold text-[#D19864] uppercase tracking-widest">Adoção Responsável</span>
+          </div>
+        </div>
+
+        <!-- Abas do Portal (4 Módulos Principais) -->
+        <nav class="hidden md:flex items-center gap-1.5 p-1 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] text-xs">
+          <span class="px-3.5 py-1.5 rounded-xl bg-[#007E82] text-white font-black shadow-xs flex items-center gap-1.5">
+            <i data-lucide="paw-print" class="w-3.5 h-3.5"></i>
+            <span>Animais</span>
+            <span class="px-1.5 py-0.2 bg-white text-slate-950 font-black rounded-full text-[10px]">540+</span>
+          </span>
+          <span class="px-3.5 py-1.5 rounded-xl text-slate-700 font-bold hover:text-[#007E82] flex items-center gap-1.5">
+            <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+            <span>Conheça a ONG</span>
+            <span class="px-1.5 py-0.2 bg-white text-slate-950 font-bold rounded-full text-[10px]">1</span>
+          </span>
+          <span class="px-3.5 py-1.5 rounded-xl text-slate-700 font-bold hover:text-[#007E82] flex items-center gap-1.5">
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            <span>Histórias &amp; Blog</span>
+          </span>
+          <span class="px-3.5 py-1.5 rounded-xl text-slate-700 font-bold hover:text-[#007E82] flex items-center gap-1.5">
+            <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
+            <span>Feirinhas &amp; Rifas</span>
+          </span>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1.5 rounded-xl bg-[#F7EFE4] text-[#007E82] font-black text-xs border border-[#e8ddcf] flex items-center gap-1.5">
+            <i data-lucide="user" class="w-3.5 h-3.5"></i>
+            <span>Modo Anônimo</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Hero Section do Desktop: Comunicado Ticker + Colagem de Fotos + Barra de Busca Flutuante -->
+      <div class="p-5 sm:p-6 bg-slate-50 border-b border-slate-200 space-y-4">
+        
+        <!-- Comunicado Solidário em Fundo Sólido #F7EFE4 -->
+        <div class="p-3 bg-[#F7EFE4] rounded-2xl border-2 border-[#007E82] flex items-center justify-between gap-3 text-xs font-bold text-slate-900 shadow-xs">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-full bg-[#007E82] text-white font-black text-[10px] uppercase">Ao Vivo</span>
+            <span class="line-clamp-1">❤️ 540+ Pets Acolhidos no DF • Prestação de Contas 100% Aberta com a Associação ProAnima DF!</span>
+          </div>
+          <span class="text-[11px] text-[#007E82] font-black underline flex-shrink-0 cursor-pointer">Ver Prestação</span>
+        </div>
+
+        <!-- 3 Fotos Hero em Colagem Harmoniosa -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-200 shadow-xs border border-slate-200 relative group">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80" alt="Resgatados" class="w-full h-full object-cover">
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white text-slate-950 text-[10px] font-black shadow-xs">🐶 Thor &amp; Amigos</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-200 shadow-xs border border-slate-200 relative group">
+            <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?auto=format&fit=crop&w=600&q=80" alt="Adoção Feliz" class="w-full h-full object-cover">
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white text-slate-950 text-[10px] font-black shadow-xs">🐾 Lares de Amor</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-200 shadow-xs border border-slate-200 relative group">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Gatinhos DF" class="w-full h-full object-cover">
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-white text-slate-950 text-[10px] font-black shadow-xs">🐱 Pipoca &amp; Resgates</span>
+          </div>
+        </div>
+
+        <!-- Barra de Busca Flutuante na Paleta Oficial -->
+        <div class="p-2 bg-[#007E82] rounded-2xl shadow-md flex items-center gap-2">
+          <div class="flex-1 flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
+            <span class="text-xs text-slate-700 font-semibold">Encontre seu novo amigo por nome, porte, idade...</span>
+          </div>
+          <div class="px-4 py-2 bg-[#D19864] text-slate-950 font-black text-xs rounded-xl flex items-center gap-1.5 cursor-pointer shadow-xs border border-[#b87e4c]">
+            <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+            <span>Filtros Rápidos</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Vitrine dos Cards de Pets (3 Exemplos com Badges Chamativos & Não Transparentes) -->
+      <div class="p-5 sm:p-6 bg-white space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-cute text-2xl font-black text-slate-950">Peludinhos Disponíveis no DF</h2>
+            <p class="text-xs text-slate-600 font-medium">Animais castrados, vacinados e vermifugados aguardando um tutor amoroso:</p>
+          </div>
+          <span class="text-xs font-black text-[#007E82] bg-[#F7EFE4] px-3 py-1 rounded-full border border-[#e8ddcf]">
+            3 de 540 Exibidos
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          
+          <!-- CARD 1: THOR -->
+          <div class="pet-card-frame bg-white rounded-3xl p-3.5 flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3 shadow-xs">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Thor" class="w-full h-full object-cover">
+                <!-- Badges Chamativos Sólidos -->
+                <div class="absolute top-2 left-2 flex flex-col gap-1">
+                  <div class="flex items-center gap-1">
+                    <span class="badge-tag-adocao-solid text-[9.5px]">
+                      🏷️ Adoção
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-white text-slate-950 shadow-xs border border-slate-200">
+                      🐶 Cão • Macho
+                    </span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#D19864] text-slate-950 shadow-xs">
+                    Porte Médio
+                  </span>
+                </div>
+                <!-- Badge Vídeo 100% Sólido -->
+                <div class="absolute bottom-2 right-2">
+                  <span class="badge-tag-video-solid text-[9.5px]">
+                    ▶️ Vídeo
+                  </span>
+                </div>
+                <div class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white text-rose-600 flex items-center justify-center shadow-xs">
+                  <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-600"></i>
+                </div>
+              </div>
+
+              <div class="flex items-baseline justify-between mb-1">
+                <h3 class="font-cute text-xl font-black text-slate-950">Thor</h3>
+                <span class="text-xs font-black text-[#007E82] bg-[#F7EFE4] px-2 py-0.5 rounded-full border border-[#e8ddcf]">2 anos</span>
+              </div>
+              <p class="text-[11px] text-slate-600 font-bold mb-2">Vira-lata Caramelo • Brasília / DF</p>
+
+              <!-- Tags de Saúde -->
+              <div class="flex flex-wrap gap-1 mb-2.5 text-[10px] font-bold">
+                <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-950 border border-emerald-300">💉 Vacinas em dia</span>
+                <span class="px-2 py-0.5 rounded-md bg-teal-100 text-teal-950 border border-teal-300">✂️ Castrado</span>
+              </div>
+            </div>
+
+            <!-- Botões Duplos -->
+            <div class="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100">
+              <button class="py-2 px-1 rounded-xl bg-[#F7EFE4] hover:bg-slate-200 text-[#007E82] font-black text-[11px] text-center border border-[#e8ddcf]">
+                Visualizar Ficha
+              </button>
+              <button class="py-2 px-1 rounded-xl bg-[#007E82] text-white font-black text-[11px] text-center shadow-xs">
+                Adotar 🐾
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 2: PIPOCA -->
+          <div class="pet-card-frame bg-white rounded-3xl p-3.5 flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3 shadow-xs">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80" alt="Pipoca" class="w-full h-full object-cover">
+                <!-- Badges Chamativos Sólidos -->
+                <div class="absolute top-2 left-2 flex flex-col gap-1">
+                  <div class="flex items-center gap-1">
+                    <span class="badge-tag-adocao-solid text-[9.5px]">
+                      🏷️ Adoção
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-white text-slate-950 shadow-xs border border-slate-200">
+                      🐱 Gato • Fêmea
+                    </span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#D19864] text-slate-950 shadow-xs">
+                    Porte Pequeno
+                  </span>
+                </div>
+                <!-- Badge Vídeo 100% Sólido -->
+                <div class="absolute bottom-2 right-2">
+                  <span class="badge-tag-video-solid text-[9.5px]">
+                    ▶️ Vídeo
+                  </span>
+                </div>
+                <div class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white text-rose-600 flex items-center justify-center shadow-xs">
+                  <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-600"></i>
+                </div>
+              </div>
+
+              <div class="flex items-baseline justify-between mb-1">
+                <h3 class="font-cute text-xl font-black text-slate-950">Pipoca</h3>
+                <span class="text-xs font-black text-[#007E82] bg-[#F7EFE4] px-2 py-0.5 rounded-full border border-[#e8ddcf]">1 ano</span>
+              </div>
+              <p class="text-[11px] text-slate-600 font-bold mb-2">Gata Rajadinha • Ceilândia / DF</p>
+
+              <!-- Tags de Saúde -->
+              <div class="flex flex-wrap gap-1 mb-2.5 text-[10px] font-bold">
+                <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-950 border border-emerald-300">💉 Vacinas em dia</span>
+                <span class="px-2 py-0.5 rounded-md bg-teal-100 text-teal-950 border border-teal-300">✂️ Castrada</span>
+              </div>
+            </div>
+
+            <!-- Botões Duplos -->
+            <div class="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100">
+              <button class="py-2 px-1 rounded-xl bg-[#F7EFE4] hover:bg-slate-200 text-[#007E82] font-black text-[11px] text-center border border-[#e8ddcf]">
+                Visualizar Ficha
+              </button>
+              <button class="py-2 px-1 rounded-xl bg-[#007E82] text-white font-black text-[11px] text-center shadow-xs">
+                Adotar 🐾
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 3: LUNA -->
+          <div class="pet-card-frame bg-white rounded-3xl p-3.5 flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3 shadow-xs">
+                <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80" alt="Luna" class="w-full h-full object-cover">
+                <!-- Badges Chamativos Sólidos -->
+                <div class="absolute top-2 left-2 flex flex-col gap-1">
+                  <div class="flex items-center gap-1">
+                    <span class="badge-tag-adocao-solid text-[9.5px]">
+                      🏷️ Adoção
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-white text-slate-950 shadow-xs border border-slate-200">
+                      🐶 Cachorro • Fêmea
+                    </span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-[#D19864] text-slate-950 shadow-xs">
+                    Porte Médio
+                  </span>
+                </div>
+                <div class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white text-rose-600 flex items-center justify-center shadow-xs">
+                  <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-600"></i>
+                </div>
+              </div>
+
+              <div class="flex items-baseline justify-between mb-1">
+                <h3 class="font-cute text-xl font-black text-slate-950">Luna</h3>
+                <span class="text-xs font-black text-[#007E82] bg-[#F7EFE4] px-2 py-0.5 rounded-full border border-[#e8ddcf]">1.5 anos</span>
+              </div>
+              <p class="text-[11px] text-slate-600 font-bold mb-2">Vira-lata SRD • Taguatinga / DF</p>
+
+              <!-- Tags de Saúde -->
+              <div class="flex flex-wrap gap-1 mb-2.5 text-[10px] font-bold">
+                <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-950 border border-emerald-300">💉 Vacinas em dia</span>
+                <span class="px-2 py-0.5 rounded-md bg-teal-100 text-teal-950 border border-teal-300">✂️ Castrada</span>
+              </div>
+            </div>
+
+            <!-- Botões Duplos -->
+            <div class="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-100">
+              <button class="py-2 px-1 rounded-xl bg-[#F7EFE4] hover:bg-slate-200 text-[#007E82] font-black text-[11px] text-center border border-[#e8ddcf]">
+                Visualizar Ficha
+              </button>
+              <button class="py-2 px-1 rounded-xl bg-[#007E82] text-white font-black text-[11px] text-center shadow-xs">
+                Adotar 🐾
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         COLUNA DIREITA (5/12): 3 MOCKUPS MOBILE (TELAS ESPECÍFICAS DO SISTEMA)
+         ======================================================================= -->
+    <div class="xl:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      
+      <!-- =====================================================================
+           TELA MOBILE 1: FICHA DETALHADA DO ANIMAL (#pet-modal)
+           ===================================================================== -->
+      <div class="mobile-mockup-frame p-3.5 space-y-3 bg-white">
+        <!-- Barra de Status Mobile -->
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100 text-xs">
+          <span class="font-cute font-black text-[#007E82]">MatchPet Mobile</span>
+          <span class="text-[10px] font-bold text-slate-400">9:41 • 100%</span>
+        </div>
+
+        <!-- Foto Principal + Badges Sólidos Chamativos -->
+        <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 shadow-xs">
+          <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Thor Ficha" class="w-full h-full object-cover">
+          <div class="absolute top-2 left-2 flex items-center gap-1 flex-wrap">
+            <span class="badge-tag-adocao-solid text-[9.5px]">
+              🏷️ Adoção Disponível
+            </span>
+            <span class="badge-tag-video-solid text-[9.5px]">
+              ▶️ Vídeo
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[9.5px] font-black bg-white text-slate-950 shadow-xs border border-slate-200">
+              🐶 Cão • Macho
+            </span>
+          </div>
+          <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-white text-slate-900 text-[10px] font-black shadow-xs">
+            Foto 1 de 3
+          </span>
+        </div>
+
+        <!-- Nome e Dados Principais -->
+        <div>
+          <div class="flex items-center justify-between">
+            <h3 class="font-cute text-2xl font-black text-slate-950">Thor</h3>
+            <span class="text-xs font-black text-[#007E82] bg-[#F7EFE4] px-2.5 py-0.5 rounded-full border border-[#e8ddcf]">
+              2 anos
+            </span>
+          </div>
+          <p class="text-xs text-slate-600 font-bold">Associação ProAnima DF • Verificada ✓</p>
+        </div>
+
+        <!-- Chips de Métricas (Idade, Porte, Vacinas) -->
+        <div class="grid grid-cols-3 gap-1.5 p-2 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] text-center text-xs">
+          <div>
+            <span class="text-[9px] font-bold text-slate-500 uppercase block">Idade</span>
+            <span class="font-black text-slate-950">2 Anos</span>
+          </div>
+          <div class="border-x border-[#e8ddcf]">
+            <span class="text-[9px] font-bold text-slate-500 uppercase block">Porte</span>
+            <span class="font-black text-slate-950">Médio</span>
+          </div>
+          <div>
+            <span class="text-[9px] font-bold text-slate-500 uppercase block">Saúde</span>
+            <span class="font-black text-teal-800">100% Ok</span>
+          </div>
+        </div>
+
+        <!-- História Resumida -->
+        <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed font-medium">
+          "Thor é extremamente dócil, brincalhão e adora correr em parques. Já está castrado e vermifugado."
+        </div>
+
+        <!-- Botão Principal de Contato com ONG -->
+        <button class="w-full py-2.5 rounded-xl bg-[#007E82] text-white font-black text-xs flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>Quero Adotar o Thor</span>
+        </button>
+      </div>
+
+      <!-- =====================================================================
+           TELA MOBILE 2: QUIZ DE COMPATIBILIDADE (#quiz-modal)
+           ===================================================================== -->
+      <div class="mobile-mockup-frame p-3.5 space-y-3 bg-white">
+        <!-- Barra de Status Mobile -->
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100 text-xs">
+          <span class="font-cute font-black text-[#D19864]">MatchPet Quiz</span>
+          <span class="text-[10px] font-bold text-slate-400">9:41 • 100%</span>
+        </div>
+
+        <!-- Cabeçalho do Quiz com Paleta Sólida -->
+        <div class="p-3 bg-[#F7EFE4] rounded-2xl border-2 border-[#D19864] space-y-1">
+          <span class="px-2 py-0.5 rounded-full bg-[#D19864] text-slate-950 font-black text-[9px] uppercase">
+            Passo 2 de 5
+          </span>
+          <h4 class="font-cute text-base font-black text-slate-950">
+            Qual seu tipo de moradia?
+          </h4>
+          <p class="text-[11px] text-slate-600 font-medium">
+            Avaliamos o espaço para sugerir o pet ideal para você.
+          </p>
+        </div>
+
+        <!-- Opções de Resposta em Fundo Sólido e Alto Contraste -->
+        <div class="space-y-2 text-xs">
+          <div class="p-2.5 bg-[#F7EFE4] border-2 border-[#007E82] rounded-xl font-black text-slate-950 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <i data-lucide="building" class="w-4 h-4 text-[#007E82]"></i>
+              <span>Apartamento com Telas</span>
+            </span>
+            <span class="w-4 h-4 rounded-full bg-[#007E82] text-white flex items-center justify-center text-[10px]">✓</span>
+          </div>
+
+          <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <i data-lucide="home" class="w-4 h-4 text-slate-400"></i>
+              <span>Casa com Quintal Murado</span>
+            </span>
+            <span class="w-4 h-4 rounded-full border border-slate-300"></span>
+          </div>
+
+          <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <i data-lucide="trees" class="w-4 h-4 text-slate-400"></i>
+              <span>Chácara / Área Rural no DF</span>
+            </span>
+            <span class="w-4 h-4 rounded-full border border-slate-300"></span>
+          </div>
+        </div>
+
+        <!-- Resultado Calculado com Badge Fofo -->
+        <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-300 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-900 flex items-center justify-center font-black text-xs">
+            98%
+          </div>
+          <div>
+            <span class="text-[11px] font-black text-emerald-950 block">Compatibilidade Elevada!</span>
+            <span class="text-[10px] text-emerald-800 font-medium">Recomendamos pets de porte pequeno a médio.</span>
+          </div>
+        </div>
+
+        <!-- Botão Próxima Pergunta -->
+        <button class="w-full py-2.5 rounded-xl bg-[#D19864] text-slate-950 font-black text-xs shadow-xs border border-[#b87e4c] cursor-pointer">
+          Avançar Pergunta (3/5) →
+        </button>
+      </div>
+
+      <!-- =====================================================================
+           TELA MOBILE 3: AÇÕES SOLIDÁRIAS (RIFAS & FEIRINHAS COM FOTOS)
+           ===================================================================== -->
+      <div class="mobile-mockup-frame p-3.5 space-y-3 bg-white sm:col-span-2">
+        <!-- Barra de Status Mobile -->
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100 text-xs">
+          <span class="font-cute font-black text-[#007E82]">Solidariedade • DF</span>
+          <span class="text-[10px] font-bold text-slate-400">9:41 • 100%</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <!-- Card Rifa Solidária com Tema Caramelo da Paleta (#D19864) -->
+          <div class="p-3 bg-white rounded-2xl border border-slate-200 border-t-4 border-t-[#D19864] shadow-xs space-y-2">
+            <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" alt="Rifa Thor" class="w-full h-full object-cover">
+              <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-[#D19864] text-slate-950 shadow-xs border border-white/40">
+                🎟️ Rifa Beneficente
+              </span>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-lg text-[9px] font-black bg-white text-slate-950 border-2 border-[#D19864] shadow-xs flex items-center gap-1">
+                <span class="p-0.5 rounded bg-[#D19864] text-slate-950"><i data-lucide="calendar" class="w-2.5 h-2.5"></i></span> Sorteio: 30 de Outubro
+              </span>
+            </div>
+            <div>
+              <h5 class="font-cute text-sm font-black text-slate-950 line-clamp-1">Cirurgia Ortopédica do Thor</h5>
+              <span class="text-[10px] text-[#965c28] font-bold">Associação ProAnima DF</span>
+            </div>
+            <!-- Bloco de Destaque da Data do Sorteio -->
+            <div class="p-1.5 bg-[#fdf5eb] rounded-xl border-2 border-[#D19864] flex items-center justify-between text-[10px]">
+              <span class="font-black text-slate-950 flex items-center gap-1">
+                <i data-lucide="calendar-heart" class="w-3 h-3 text-[#D19864]"></i> Sorteio: 30 de Outubro
+              </span>
+              <span class="px-1.5 py-0.5 rounded-md bg-white border border-[#D19864]/40 font-black text-[#965c28] text-[9px]">R$ 15/bilhete</span>
+            </div>
+            <!-- Barra de Progresso com Cor da Paleta -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] font-bold">
+                <span class="text-slate-900">R$ 1.950 / R$ 2.500</span>
+                <span class="text-[#965c28] font-black">78%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200">
+                <div class="h-full bg-[#D19864] rounded-full" style="width: 78%"></div>
+              </div>
+            </div>
+            <div class="p-2 bg-[#F7EFE4] rounded-xl border border-[#D19864] flex items-center justify-between text-[10px]">
+              <span class="font-mono font-black text-slate-950 truncate">contato@proanimadf.org.br</span>
+              <span class="px-2 py-0.5 bg-[#007E82] text-white font-black rounded-md">Pix</span>
+            </div>
+          </div>
+
+          <!-- Card Feirinha de Adoção com Tema Verde Petróleo da Paleta (#007E82) -->
+          <div class="p-3 bg-white rounded-2xl border border-slate-200 border-t-4 border-t-[#007E82] shadow-xs space-y-2">
+            <div class="relative h-28 rounded-xl overflow-hidden bg-slate-100">
+              <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80" alt="Feirinha" class="w-full h-full object-cover">
+              <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-[#007E82] text-white shadow-xs border border-white/40">
+                🎪 Feira Central
+              </span>
+              <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-lg text-[9px] font-black bg-white text-slate-950 border-2 border-[#007E82] shadow-sm flex items-center gap-1">
+                <span class="p-0.5 rounded bg-[#007E82] text-white"><i data-lucide="calendar" class="w-2.5 h-2.5"></i></span> 26 de Setembro de 2026
+              </span>
+            </div>
+            <div>
+              <h5 class="font-cute text-sm font-black text-slate-950 line-clamp-1">Feirinha de Adoção no Parque</h5>
+              <span class="text-[10px] text-slate-500 font-bold flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-3 h-3 text-[#D19864]"></i>
+                Parque da Cidade • Estacionamento 10
+              </span>
+            </div>
+            <!-- Bloco de Destaque da Data do Evento -->
+            <div class="p-1.5 bg-[#e6f4f5] rounded-xl border-2 border-[#007E82] flex items-center justify-between text-[10px] font-black text-slate-950">
+              <span class="flex items-center gap-1"><i data-lucide="calendar-check-2" class="w-3 h-3 text-[#007E82]"></i> 26 de Setembro de 2026</span>
+              <span class="px-1.5 py-0.5 rounded-md bg-white text-[#007E82] text-[9px] border border-[#007E82]/30 font-bold">09h às 17h</span>
+            </div>
+            <p class="text-[10.5px] text-slate-600 line-clamp-2 font-medium">
+              Mais de 30 cães e gatos castrados e vacinados esperando por você!
+            </p>
+            <button class="w-full py-1.5 rounded-xl bg-[#007E82] text-white font-black text-[11px] flex items-center justify-center gap-1">
+              <i data-lucide="map" class="w-3 h-3"></i>
+              <span>Ver no Google Maps</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER INFORMATIVO PARA A APRESENTAÇÃO
+       ========================================================================= -->
+  <footer class="max-w-[1720px] mx-auto mt-6 p-4 bg-white rounded-3xl border border-[#e8ddcf] flex flex-wrap items-center justify-between gap-4 text-xs font-bold text-slate-600">
+    <div class="flex items-center gap-2">
+      <span class="text-base">🐾</span>
+      <span>Projeto MatchPet • Sistema Integrado de Adoção Responsável no Distrito Federal</span>
+    </div>
+    <div class="flex items-center gap-4 text-slate-500 font-medium">
+      <span>Design System Sólido (Sem Transparência)</span>
+      <span>•</span>
+      <span>Fontes Fofas (Fredoka &amp; Nunito)</span>
+      <span>•</span>
+      <span>Paleta Harmonizada (#007E82 / #D19864 / #F7EFE4)</span>
+    </div>
+  </footer>
+
+  <script>
+    if (window.lucide && lucide.createIcons) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

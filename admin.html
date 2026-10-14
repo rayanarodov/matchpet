@@ -1,0 +1,2880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatchPet - Painel Administrativo | Gestão de Animais & Fichas Médicas</title>
+  
+  <!-- Favicon Oficial MatchPet (Logo Nova da Guia do Navegador) -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/matchpet-icon.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png?v=2">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/matchpet-icon.png?v=2">
+
+  <!-- Preconnect Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="css/tailwind.compiled.css">
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  
+</head>
+<body class="min-h-screen flex flex-col bg-[#F7EFE4] text-slate-800 font-sans relative">
+
+  <!-- Elementos Decorativos Fofos no Plano de Fundo do Admin -->
+  <div class="cute-bg-sticker hidden md:block" style="top: 12%; left: 1.5%;" aria-hidden="true">
+    <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="54" rx="34" ry="28" fill="#007E82" fill-opacity="0.08"/>
+      <polygon points="24,42 30,16 44,32" fill="#007E82" fill-opacity="0.10"/>
+      <polygon points="76,42 70,16 56,32" fill="#007E82" fill-opacity="0.10"/>
+      <circle cx="40" cy="50" r="3.5" fill="#007E82" fill-opacity="0.2"/>
+      <circle cx="60" cy="50" r="3.5" fill="#007E82" fill-opacity="0.2"/>
+      <path d="M47 57 L53 57 L50 61 Z" fill="#D19864" fill-opacity="0.25"/>
+      <path d="M45 62 Q50 67 55 62" stroke="#007E82" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity="0.2"/>
+    </svg>
+  </div>
+
+  <div class="cute-bg-sticker-reverse hidden md:block" style="top: 20%; right: 1.5%;" aria-hidden="true">
+    <svg width="68" height="68" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="52" rx="32" ry="28" fill="#D19864" fill-opacity="0.08"/>
+      <ellipse cx="22" cy="46" rx="9" ry="18" transform="rotate(15 22 46)" fill="#D19864" fill-opacity="0.12"/>
+      <ellipse cx="78" cy="46" rx="9" ry="18" transform="rotate(-15 78 46)" fill="#D19864" fill-opacity="0.12"/>
+      <circle cx="41" cy="47" r="3.5" fill="#007E82" fill-opacity="0.2"/>
+      <circle cx="59" cy="47" r="3.5" fill="#007E82" fill-opacity="0.2"/>
+      <ellipse cx="50" cy="56" rx="5" ry="3.5" fill="#007E82" fill-opacity="0.25"/>
+      <path d="M44 63 Q50 71 56 63" stroke="#007E82" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity="0.2"/>
+      <path d="M50 18 C47 14 41 14 38 18 C35 22 38 27 50 34 C62 27 65 22 62 18 C59 14 53 14 50 18 Z" fill="#D19864" fill-opacity="0.2"/>
+    </svg>
+  </div>
+
+  <div class="cute-bg-sticker hidden xl:block" style="top: 52%; right: 1.5%;" aria-hidden="true">
+    <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28 42 C22 36 12 40 14 50 C12 60 22 64 28 58 L72 58 C78 64 88 60 86 50 C88 40 78 36 72 42 Z" fill="#D19864" fill-opacity="0.10"/>
+      <circle cx="20" cy="42" r="7" fill="#D19864" fill-opacity="0.12"/>
+      <circle cx="20" cy="58" r="7" fill="#D19864" fill-opacity="0.12"/>
+      <circle cx="80" cy="42" r="7" fill="#D19864" fill-opacity="0.12"/>
+      <circle cx="80" cy="58" r="7" fill="#D19864" fill-opacity="0.12"/>
+      <path d="M50 46 C47 42 41 42 38 46 C35 50 38 55 50 62 C62 55 65 50 62 46 C59 42 53 42 50 46 Z" fill="#007E82" fill-opacity="0.20"/>
+    </svg>
+  </div>
+
+  <div class="cute-bg-sticker-reverse hidden xl:block" style="top: 75%; left: 1.5%;" aria-hidden="true">
+    <svg width="68" height="68" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="56" rx="30" ry="24" fill="#007E82" fill-opacity="0.08"/>
+      <polygon points="28,42 32,24 44,36" fill="#007E82" fill-opacity="0.10"/>
+      <polygon points="56,36 68,24 72,42" fill="#007E82" fill-opacity="0.10"/>
+      <path d="M36 50 Q42 44 48 50" stroke="#007E82" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity="0.20"/>
+      <path d="M52 50 Q58 44 64 50" stroke="#007E82" stroke-width="2" stroke-linecap="round" fill="none" stroke-opacity="0.20"/>
+      <ellipse cx="50" cy="56" rx="2.5" ry="2" fill="#D19864" fill-opacity="0.25"/>
+      <path d="M78 62 C88 64 88 48 80 44" stroke="#007E82" stroke-width="2.5" stroke-linecap="round" fill="none" stroke-opacity="0.15"/>
+      <text x="66" y="28" font-family="'Fredoka', sans-serif" font-weight="bold" font-size="12" fill="#D19864" fill-opacity="0.30">z</text>
+      <text x="74" y="20" font-family="'Fredoka', sans-serif" font-weight="bold" font-size="15" fill="#D19864" fill-opacity="0.40">Z</text>
+    </svg>
+  </div>
+
+  <!-- Topo do Painel Administrativo Oficial -->
+  <header class="bg-[#F7EFE4] shadow-xs border-b-2 border-[#e8ddcf] sticky top-0 z-30 shadow-xs">
+    <div class="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 py-2 sm:py-3 flex items-center justify-between min-h-[5.5rem] sm:min-h-[6.5rem]">
+      <div class="flex items-center gap-3.5">
+        <a href="index.html" class="flex items-center group py-0.5" title="Ir para a Página Inicial do MatchPet">
+          <div class="relative flex items-center justify-center p-2 rounded-2xl bg-white border-2 border-[#007E82]/30 group-hover:scale-105 group-hover:border-[#007E82] transition-all duration-300 shadow-sm">
+            <img src="img/matchpet-icon.png" alt="MatchPet" class="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-xs transition-all duration-300">
+          </div>
+        </a>
+        <div class="flex flex-col justify-center">
+          <div class="flex items-center gap-2.5">
+            <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-2xl sm:text-3xl font-extrabold tracking-normal leading-none select-none">
+              <span class="text-[#007E82]">Match</span><span class="text-[#D19864]">Pet</span>
+            </span>
+            <span class="text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full bg-[#007E82] text-slate-950 font-black border border-[#007E82]/40 uppercase tracking-wider">
+              Painel Administrativo
+            </span>
+          </div>
+          <p style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xs sm:text-[13px] font-bold text-slate-700 tracking-wide mt-1 flex items-center gap-1.5 select-none">
+            <span>Gestão Completa de Animais, Fichas Médicas &amp; Adoções</span>
+            <span class="text-sm">🐾</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Botão Canva Design Studio -->
+        <button onclick="DesignStudio.open()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e8ddcf] bg-[#F7EFE4] hover:bg-[#e6f4f5] text-xs font-semibold text-[#004245] transition-colors shadow-xs" title="Estúdio de Design Visual (Estilo Canva)">
+          <i data-lucide="palette" class="w-3.5 h-3.5 text-[#007E82]"></i>
+          <span class="hidden md:inline">Design Studio</span>
+        </button>
+
+        <!-- Botão de Configuração do Cloudinary -->
+        <button onclick="openCloudinaryModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-sky-200 bg-sky-50 hover:bg-sky-100 text-xs font-semibold text-sky-800 transition-colors shadow-xs" title="Configurar Cloudinary para upload na nuvem">
+          <i data-lucide="cloud" class="w-3.5 h-3.5 text-sky-600"></i>
+          <span>Cloudinary</span>
+          <span id="cloudinary-status-dot" class="w-2 h-2 rounded-full bg-slate-300"></span>
+        </button>
+
+        <button onclick="exportData()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors shadow-xs">
+          <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i> Exportar
+        </button>
+        <label class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors cursor-pointer shadow-xs">
+          <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-500"></i> Importar
+          <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="importData(event)">
+        </label>
+        <a href="index.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-slate-950 text-xs font-bold transition-all shadow-sm">
+          <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Catálogo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Barra de Navegação em Abas do Moderador -->
+  <div class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-2xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <button 
+          id="tab-btn-crud" 
+          onclick="switchAdminTab('crud')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-slate-950 shadow-sm shadow-[#007E82]/20 transition-all"
+        >
+          <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+          <span>Gestão de Animais (CRUD)</span>
+        </button>
+        <button 
+          id="tab-btn-solidarity" 
+          onclick="switchAdminTab('solidarity')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F7EFE4] transition-all border border-transparent"
+        >
+          <i data-lucide="gift" class="w-4 h-4 text-teal-600"></i>
+          <span>Feirinhas, Rifas & ONG</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-teal-100 text-teal-800 font-extrabold tracking-wide uppercase border border-teal-200">Solidário</span>
+        </button>
+        <button 
+          id="tab-btn-analytics" 
+          onclick="switchAdminTab('analytics')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F7EFE4] transition-all border border-transparent"
+        >
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#007E82]"></i>
+          <span>Métricas & Pesquisa (Analytics)</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-[#e6f4f5] text-[#004d50] font-extrabold tracking-wide uppercase border border-[#e8ddcf]">Exclusivo Moderador</span>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+        <!-- Seletor de ONG Ativa para Gestão -->
+        <div class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs shadow-2xs">
+          <i data-lucide="building-2" class="w-3.5 h-3.5 text-[#007E82]"></i>
+          <label for="admin-active-ong-select" class="font-bold text-slate-700 hidden lg:inline">ONG Ativa:</label>
+          <select id="admin-active-ong-select" onchange="onAdminActiveOngChange(this.value)" class="bg-transparent font-bold text-slate-800 text-xs focus:outline-none cursor-pointer max-w-[150px] sm:max-w-[200px] truncate">
+            <!-- Preenchido dinamicamente via admin.js -->
+          </select>
+        </div>
+
+        <!-- Badge Dinâmico de Conformidade Jurídica do Contrato -->
+        <div id="ngo-header-contract-status" class="flex items-center">
+          <!-- Renderizado dinamicamente por updateNgoContractBadgeUI() -->
+        </div>
+
+        <span class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#F7EFE4] border border-slate-200 text-slate-600 font-semibold">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-600"></i>
+          <span>Moderador Geral</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo Principal em Tamanho Normal e Tela Cheia -->
+  <main class="flex-1 max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 py-8 w-full space-y-8 admin-full-canvas">
+    
+    <!-- SEÇÃO 1: CRUD GESTÃO DE ANIMAIS -->
+    <div id="tab-content-crud" class="space-y-8">
+    
+    <!-- Estatísticas Rápidas do CRUD -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center font-bold">
+          <i data-lucide="paw-print" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-xs text-slate-500 font-medium block">Total Cadastrados</span>
+          <span id="stat-total" class="text-2xl font-black text-slate-900">0</span>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center font-bold">
+          <i data-lucide="video" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-xs text-slate-500 font-medium block">Com Vídeo</span>
+          <span id="stat-videos" class="text-2xl font-black text-slate-900">0</span>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-xs text-slate-500 font-medium block">Castrados</span>
+          <span id="stat-castrados" class="text-2xl font-black text-slate-900">0</span>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+          <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-xs text-slate-500 font-medium block">Com Cuidados Extras</span>
+          <span id="stat-enfermidades" class="text-2xl font-black text-slate-900">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Controle de Visualização da Gestão de Animais (Tela Cheia & Espaçamento Perfeito) -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-white rounded-2xl border border-slate-200 shadow-xs">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#007E82] animate-pulse"></span>
+        <h3 class="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wider font-brand">Gestão de Animais em Tamanho Normal (Tela Cheia)</h3>
+        <span class="text-xs text-slate-500 hidden md:inline">• Espaço amplo e confortável para cadastrar, editar e gerenciar</span>
+      </div>
+      <div class="flex items-center gap-1.5 self-start sm:self-auto flex-wrap">
+        <button type="button" onclick="setCrudLayout('split')" id="btn-layout-split" class="px-3.5 py-1.5 rounded-xl text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-xs flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="columns" class="w-3.5 h-3.5"></i>
+          <span>Lado a Lado (Tela Cheia)</span>
+        </button>
+        <button type="button" onclick="setCrudLayout('form')" id="btn-layout-form" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="file-plus" class="w-3.5 h-3.5"></i>
+          <span>Apenas Formulário</span>
+        </button>
+        <button type="button" onclick="setCrudLayout('list')" id="btn-layout-list" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="table" class="w-3.5 h-3.5"></i>
+          <span>Apenas Listagem</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Layout Dividido: Formulário de Gestão (Esquerda) e Tabela/Listagem de Animais (Direita) em Tela Cheia Normal -->
+    <div id="admin-crud-main-grid" class="admin-crud-layout-grid mode-split">
+      
+      <!-- Formulário Completo de Cadastro / Edição -->
+      <div id="form-container" class="admin-form-pane bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-6">
+        
+        <!-- Cabeçalho do Formulário -->
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 id="form-title" class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="plus-circle" class="w-5 h-5 text-[#007E82]"></i>
+              Cadastrar Novo Animal
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">Preencha os dados, mídias e a ficha médica básica do animal.</p>
+          </div>
+          <button id="btn-cancel-edit" type="button" onclick="cancelEdit()" class="hidden px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition-colors">
+            Cancelar Edição
+          </button>
+        </div>
+
+        <form id="pet-form" onsubmit="handleSavePet(event)" class="space-y-6">
+          <input type="hidden" id="pet-id">
+
+          <!-- BLOCO 1: Identificação Básica -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <i data-lucide="tag" class="w-4 h-4 text-[#007E82]"></i> 1. Identificação Básica
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="pet-nome" class="block text-xs font-bold text-slate-700 mb-1">Nome do Animal *</label>
+                <input type="text" id="pet-nome" required placeholder="Ex: Rex, Mel, Thor..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label for="pet-especie" class="block text-xs font-bold text-slate-700 mb-1">Espécie *</label>
+                <select id="pet-especie" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                  <option value="cachorro">Cachorro 🐶</option>
+                  <option value="gato">Gato 🐱</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label for="pet-raca" class="block text-xs font-bold text-slate-700 mb-1">Raça</label>
+                <input type="text" id="pet-raca" placeholder="Ex: Vira-lata (SRD)" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label for="pet-idade" class="block text-xs font-bold text-slate-700 mb-1">Idade Aprox. *</label>
+                <input type="text" id="pet-idade" required placeholder="Ex: 2 anos, 4 meses" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label for="pet-sexo" class="block text-xs font-bold text-slate-700 mb-1">Sexo *</label>
+                <select id="pet-sexo" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                  <option value="macho">Macho</option>
+                  <option value="femea">Fêmea</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="pet-cidade" class="block text-xs font-bold text-slate-700 mb-1">Cidade - UF</label>
+                <input type="text" id="pet-cidade" placeholder="Ex: São Paulo - SP" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label for="pet-whatsapp" class="block text-xs font-bold text-slate-700 mb-1">WhatsApp para Adoção</label>
+                <input type="text" id="pet-whatsapp" placeholder="Ex: 5511999998888" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCO 2: Porte & Características Físicas -->
+          <div class="space-y-3 pt-3 border-t border-slate-100">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <i data-lucide="maximize-2" class="w-4 h-4 text-blue-500"></i> 2. Porte & Características Físicas
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label for="pet-porte" class="block text-xs font-bold text-slate-700 mb-1">Porte do Animal *</label>
+                <select id="pet-porte" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                  <option value="mini">Mini (até 5kg)</option>
+                  <option value="pequeno">Pequeno (5kg a 10kg)</option>
+                  <option value="medio" selected>Médio (10kg a 25kg)</option>
+                  <option value="grande">Grande (25kg a 45kg)</option>
+                  <option value="gigante">Gigante (+45kg)</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="pet-peso" class="block text-xs font-bold text-slate-700 mb-1">Peso Estimado</label>
+                <input type="text" id="pet-peso" placeholder="Ex: 14 kg" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+
+              <div>
+                <label for="pet-pelagem" class="block text-xs font-bold text-slate-700 mb-1">Pelagem / Cor</label>
+                <input type="text" id="pet-pelagem" placeholder="Ex: Curta, Caramelo" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCO 3: Upload de Fotos e Vídeos (Cloudinary / Local) -->
+          <div class="space-y-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <i data-lucide="image" class="w-4 h-4 text-[#007E82]"></i> 3. Fotos & Vídeos (Upload e Web)
+              </div>
+              <span id="upload-mode-indicator" class="text-[11px] text-slate-500 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-slate-400 inline-block"></span> Armazenamento Local (IndexedDB)
+              </span>
+            </div>
+
+            <!-- Upload de Fotos -->
+            <div class="p-4 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] space-y-3">
+              <span class="text-xs font-bold text-[#004245] flex items-center justify-between">
+                <span class="flex items-center gap-1.5"><i data-lucide="camera" class="w-4 h-4 text-[#007E82]"></i> Fotos do Animal</span>
+                <span class="text-[11px] font-normal text-[#007E82]">A 1ª foto será a capa principal</span>
+              </span>
+
+              <!-- Zona de Dropzone para Fotos -->
+              <div 
+                id="photo-dropzone" 
+                onclick="document.getElementById('photo-file-input').click()"
+                class="dropzone group hover:border-[#007E82] hover:bg-[#F7EFE4]"
+              >
+                <i data-lucide="upload-cloud" class="w-8 h-8 text-[#007E82] mx-auto mb-1 group-hover:scale-110 transition-transform"></i>
+                <p class="text-xs font-bold text-slate-700">Clique para selecionar ou arraste fotos aqui</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">JPG, PNG, WebP do seu computador</p>
+                <input type="file" id="photo-file-input" multiple accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+              </div>
+
+              <!-- Barra de Progresso de Upload Cloudinary -->
+              <div id="photo-upload-progress" class="hidden flex items-center gap-2 p-2 bg-[#e6f4f5] rounded-xl text-xs text-[#004245]">
+                <i data-lucide="loader" class="w-4 h-4 animate-spin text-[#007E82]"></i>
+                <span id="photo-upload-status">Enviando fotos para a nuvem...</span>
+              </div>
+
+              <!-- Grade de Previews de Fotos -->
+              <div id="photo-preview-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1">
+                <!-- Miniaturas são inseridas dinamicamente aqui -->
+              </div>
+
+              <!-- Campo alternativo de URLs de fotos -->
+              <details class="text-xs text-[#004245] cursor-pointer pt-1">
+                <summary class="font-semibold hover:underline">Ou adicionar fotos por links da web (URLs)...</summary>
+                <div class="pt-2">
+                  <textarea id="pet-fotos-urls" rows="2" placeholder="https://exemplo.com/foto1.jpg&#10;https://exemplo.com/foto2.jpg" class="w-full px-3 py-2 bg-white border border-[#e8ddcf] rounded-xl text-xs font-mono focus:ring-2 focus:ring-[#007E82] focus:outline-none"></textarea>
+                  <button type="button" onclick="addPhotosFromUrls()" class="mt-1.5 px-3 py-1 bg-[#007E82] hover:bg-[#00686c] text-slate-950 rounded-lg text-xs font-bold transition-all">
+                    Adicionar Links
+                  </button>
+                </div>
+              </details>
+            </div>
+
+            <!-- Upload de Vídeo -->
+            <div class="p-4 bg-orange-50 rounded-2xl border border-orange-100 space-y-3">
+              <span class="text-xs font-bold text-orange-950 flex items-center justify-between">
+                <span class="flex items-center gap-1.5"><i data-lucide="video" class="w-4 h-4 text-orange-600"></i> Vídeo do Animal (Upload ou YouTube)</span>
+                <span class="text-[11px] font-normal text-orange-700">Vídeos aumentam muito as chances de adoção!</span>
+              </span>
+
+              <!-- Zona de Dropzone para Vídeo -->
+              <div 
+                id="video-dropzone" 
+                onclick="document.getElementById('video-file-input').click()"
+                class="dropzone group hover:border-orange-500 hover:bg-orange-50"
+              >
+                <i data-lucide="film" class="w-8 h-8 text-orange-500 mx-auto mb-1 group-hover:scale-110 transition-transform"></i>
+                <p class="text-xs font-bold text-slate-700">Clique para enviar um arquivo de vídeo</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">MP4, WebM ou MOV direto do seu computador</p>
+                <input type="file" id="video-file-input" accept="video/*" class="hidden" onchange="handleVideoUpload(event)">
+              </div>
+
+              <!-- Barra de Progresso de Upload de Vídeo -->
+              <div id="video-upload-progress" class="hidden flex items-center gap-2 p-2 bg-orange-100 rounded-xl text-xs text-orange-900">
+                <i data-lucide="loader" class="w-4 h-4 animate-spin text-orange-600"></i>
+                <span id="video-upload-status">Enviando vídeo para a nuvem...</span>
+              </div>
+
+              <!-- Pré-visualização do Vídeo Selecionado -->
+              <div id="video-preview-container" class="hidden space-y-2">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-slate-700 flex items-center gap-1">
+                    <i data-lucide="play-circle" class="w-3.5 h-3.5 text-orange-500"></i> Pré-visualização do Vídeo:
+                  </span>
+                  <button type="button" onclick="removeActiveVideo()" class="text-rose-600 hover:underline font-bold text-xs flex items-center gap-1">
+                    <i data-lucide="trash-2" class="w-3 h-3"></i> Remover Vídeo
+                  </button>
+                </div>
+                <div class="video-responsive-wrapper shadow-sm border border-slate-200">
+                  <div id="video-preview-target"></div>
+                </div>
+              </div>
+
+              <!-- Link alternativo de Vídeo (YouTube / URL direta) -->
+              <div>
+                <label for="pet-video-url" class="block text-xs font-medium text-slate-700 mb-1">
+                  Ou cole o link do YouTube / Link de vídeo web:
+                </label>
+                <div class="flex gap-2">
+                  <input type="text" id="pet-video-url" placeholder="https://youtube.com/watch?v=... ou https://exemplo.com/video.mp4" class="flex-1 px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                  <button type="button" onclick="applyVideoUrl()" class="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 text-slate-950 rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+                    <i data-lucide="check" class="w-3.5 h-3.5"></i> Aplicar Link
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BLOCO 4: Ficha Médica Básica (OBRIGATÓRIA) & Enfermidades/Cuidados Extras (OPCIONAL) -->
+          <div class="space-y-4 pt-3 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
+                <i data-lucide="stethoscope" class="w-4 h-4 text-teal-600"></i> 4. Ficha Médica Veterinária (Obrigatória)
+              </div>
+              <span class="text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
+                Dados Básicos Essenciais
+              </span>
+            </div>
+
+            <!-- Ficha Médica Essencial (Sempre visível) -->
+            <div class="p-4 bg-teal-50 rounded-2xl border border-teal-100 space-y-4">
+              
+              <!-- Castração e Vermifugação -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-3 border-b border-teal-100">
+                <div class="space-y-2">
+                  <label class="inline-flex items-center gap-2 text-xs font-bold text-slate-800 cursor-pointer">
+                    <input type="checkbox" id="pet-castrado" class="rounded text-teal-600 focus:ring-teal-500 w-4 h-4">
+                    <span>Animal já é castrado?</span>
+                  </label>
+                  <input type="text" id="pet-castracao-obs" placeholder="Obs / Data (Ex: Castrado em 2025 pela ONG)" class="w-full px-3 py-1.5 bg-white border border-teal-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+
+                <div class="space-y-2">
+                  <label class="inline-flex items-center gap-2 text-xs font-bold text-slate-800 cursor-pointer">
+                    <input type="checkbox" id="pet-vermifugado" checked class="rounded text-teal-600 focus:ring-teal-500 w-4 h-4">
+                    <span>Vermifugação em dia?</span>
+                  </label>
+                  <input type="text" id="pet-vermifugo-obs" placeholder="Última dose / Produto (Ex: Aplicado há 2 meses)" class="w-full px-3 py-1.5 bg-white border border-teal-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+              </div>
+
+              <!-- Cartela de Vacinas Essenciais -->
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                    <i data-lucide="syringe" class="w-3.5 h-3.5 text-teal-600"></i> Cartela de Vacinas do Animal
+                  </label>
+                  <span class="text-[11px] text-slate-500">Clique para adicionar:</span>
+                </div>
+
+                <div class="flex flex-wrap gap-1.5">
+                  <button type="button" onclick="quickAddVaccine('Antirrábica')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ Antirrábica</button>
+                  <button type="button" onclick="quickAddVaccine('V10 Canina')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ V10 Canina</button>
+                  <button type="button" onclick="quickAddVaccine('V8 Canina')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ V8 Canina</button>
+                  <button type="button" onclick="quickAddVaccine('Gripe Canina')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ Gripe Canina</button>
+                  <button type="button" onclick="quickAddVaccine('Giárdia')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ Giárdia</button>
+                  <button type="button" onclick="quickAddVaccine('V4 Felina')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ V4 Felina</button>
+                  <button type="button" onclick="quickAddVaccine('V5 Felina')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-teal-100 border border-teal-200 text-xs font-semibold text-teal-800 transition-colors">+ V5 Felina</button>
+                </div>
+
+                <div class="flex gap-2 pt-1">
+                  <input type="text" id="custom-vaccine-input" placeholder="Outra vacina / reforço anual..." class="flex-1 px-3 py-1.5 bg-white border border-teal-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  <button type="button" onclick="addCustomVaccine()" class="px-3.5 py-1.5 bg-teal-600 hover:bg-teal-700 text-slate-950 rounded-xl text-xs font-bold transition-all">
+                    Adicionar
+                  </button>
+                </div>
+
+                <div id="active-vaccines-container" class="flex flex-wrap gap-2 pt-2 min-h-[32px]">
+                  <!-- Chips de vacina -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SEÇÃO OPCIONAL: Doenças, Enfermidades ou Cuidados Extras -->
+            <div class="p-4 sm:p-5 rounded-2xl cuidados-extras-alert-box space-y-3 transition-all">
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center font-bold flex-shrink-0 shadow-2xs">
+                    <i data-lucide="heart-pulse" class="w-5 h-5 text-amber-800"></i>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <label for="toggle-enfermidades" class="text-xs sm:text-sm font-extrabold text-slate-900 cursor-pointer block">
+                        O animal possui alguma doença, enfermidade ou necessita de cuidados extras?
+                      </label>
+                      <span class="text-[10px] uppercase tracking-wider font-black px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 shadow-2xs">
+                        Atenção Especial
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-slate-600 mt-0.5">
+                      <strong>Opcional:</strong> Ative apenas se o animal tiver alguma condição crônica, alergia alimentar, deficiência ou precisar de medicação contínua.
+                    </p>
+                  </div>
+                </div>
+
+                <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                  <input type="checkbox" id="toggle-enfermidades" class="sr-only peer" onchange="toggleEnfermidadesSection()">
+                  <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                </label>
+              </div>
+
+              <!-- Campos de Enfermidades (Expandido somente quando a ONG ativar) -->
+              <div id="enfermidades-fields-wrapper" class="hidden mt-3 pt-3 border-t border-amber-200/80 space-y-3">
+                <div>
+                  <label for="pet-enfermidade-desc" class="block text-xs font-bold text-amber-950 mb-1">
+                    Descrição da Doença / Condição Crônica / Necessidade Especial
+                  </label>
+                  <textarea id="pet-enfermidade-desc" rows="2" placeholder="Ex: Portador de leishmaniose tratada e estável, alergia severa a frango, cegueira parcial, sequela motora..." class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label for="pet-medicamentos" class="block text-xs font-bold text-amber-950 mb-1">
+                      Medicamentos de Uso Contínuo (se houver)
+                    </label>
+                    <input type="text" id="pet-medicamentos" placeholder="Ex: Colírio lubrificante 2x ao dia, Alopurinol diário" class="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  </div>
+
+                  <div>
+                    <label for="pet-cuidados-extras" class="block text-xs font-bold text-amber-950 mb-1">
+                      Cuidados Extras & Recomendações da ONG
+                    </label>
+                    <input type="text" id="pet-cuidados-extras" placeholder="Ex: Ração hipoalergênica, evitar escadas, acompanhamento semestral" class="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BLOCO 5: Temperamento, História & Status -->
+          <div class="space-y-3 pt-3 border-t border-slate-100">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <i data-lucide="smile" class="w-4 h-4 text-amber-500"></i> 5. Temperamento, História & Status
+            </div>
+
+            <div>
+              <label for="pet-temperamento" class="block text-xs font-bold text-slate-700 mb-1">
+                Temperamento (separados por vírgula)
+              </label>
+              <input type="text" id="pet-temperamento" placeholder="Ex: Dócil, Brincalhão, Calmo, Convive com outros cães, Sociável com crianças" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <div>
+              <label for="pet-historia-resgate" class="block text-xs font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+                História de Resgate & Cuidados (Como foi achado e acolhido)
+                <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">Destaque de Emoção</span>
+              </label>
+              <textarea id="pet-historia-resgate" rows="3" placeholder="Conte de forma comovente como o animal foi achado (vulnerabilidade, abandono, chuva) e todos os cuidados e carinho que a ONG deu para ele renascer. Essa história aparece em destaque nos resultados de compatibilidade para tocar o coração dos adotantes..." class="w-full px-3.5 py-2.5 bg-amber-50 border border-amber-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none"></textarea>
+            </div>
+
+            <div>
+              <label for="pet-descricao" class="block text-xs font-bold text-slate-700 mb-1">
+                Descrição Geral & Personalidade
+              </label>
+              <textarea id="pet-descricao" rows="2" placeholder="Descreva a personalidade, brincadeiras favoritas e jeitinho no dia a dia..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="pet-status" class="block text-xs font-bold text-slate-700 mb-1">Status de Adoção</label>
+                <select id="pet-status" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                  <option value="disponivel">Disponível para Adoção 🟢</option>
+                  <option value="em_processo">Em Processo de Adoção 🟡</option>
+                  <option value="adotado">Já Adotado! 🎉</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="pet-ong-id" class="block text-xs font-bold text-slate-700 mb-1">ONG Responsável</label>
+                <select id="pet-ong-id" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                  <option value="ong-001">Associação ProAnima DF (PROANIMA)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCO 6: Critérios de Compatibilidade para o Quiz (Algoritmo de Afinidade) -->
+          <div class="space-y-4 pt-4 border-t-2 border-[#007E82]/30">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#007E82]">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#007E82]"></i> 6. Perfil de Compatibilidade para o Quiz
+              </div>
+              <span class="text-[11px] font-black text-slate-900 bg-[#F7EFE4] border border-[#D19864] px-2.5 py-0.5 rounded-full shadow-2xs">
+                🎯 Match Inteligente
+              </span>
+            </div>
+            <p class="text-xs text-slate-600 font-medium">
+              Defina as características comportamentais e de moradia para que o <strong>Quiz de Compatibilidade</strong> recomende este animal aos tutores mais compatíveis:
+            </p>
+
+            <!-- Card 1: Energia & Espaço Residencial -->
+            <div class="p-4 bg-[#F7EFE4] rounded-2xl border-2 border-[#007E82]/30 space-y-3.5">
+              <span class="text-xs font-black text-[#007E82] uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-4 h-4 text-[#007E82]"></i> Energia & Tipo de Domicílio
+              </span>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label for="pet-energia" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>🛋️</span>
+                    <span>Esse animal possui baixa energia? (Nível de Energia) *</span>
+                  </label>
+                  <select id="pet-energia" required class="w-full px-3.5 py-2.5 bg-white border-2 border-[#007E82]/40 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="baixa">🛋️ Baixa Energia (Calmo, tranquilo, caminhadas breves)</option>
+                    <option value="moderada" selected>🚶 Energia Moderada (Passeios normais, ritmo regular)</option>
+                    <option value="alta">🏃 Alta Energia / Muito Ativo (Brincalhão, vigoroso, corre bastante)</option>
+                  </select>
+                  <span class="text-[10px] text-slate-600 font-semibold block mt-1">Cães calmos e gatos pontuam alto para adotantes com pouco tempo livre.</span>
+                </div>
+
+                <div>
+                  <label for="pet-domicilio" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>🏡</span>
+                    <span>Esse animal pode viver em qual tipo de domicílio? Casa, apartamento ou precisa de um espaço maior? *</span>
+                  </label>
+                  <select id="pet-domicilio" required class="w-full px-3.5 py-2.5 bg-white border-2 border-[#007E82]/40 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="qualquer" selected>✨ Adaptável a qualquer domicílio (Apartamento ou Casa)</option>
+                    <option value="apartamento">🏢 Apartamento (Adapta-se muito bem a espaço compacto)</option>
+                    <option value="casa">🏠 Casa com quintal fechado / murado</option>
+                    <option value="espaco_amplo">🌳 Precisa de espaço maior (Sítio, chácara ou quintal amplo)</option>
+                  </select>
+                  <span class="text-[10px] text-slate-600 font-semibold block mt-1">Se indicar "Espaço maior", não será sugerido para apartamentos pequenos.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Rotina de Solidão & Convivência com Família / Outros Pets -->
+            <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-3.5">
+              <span class="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="users" class="w-4 h-4 text-[#D19864]"></i> Rotina & Convivência Familiar
+              </span>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label for="pet-tempo-sozinho" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>⏱️</span>
+                    <span>Tolerância a ficar sozinho no dia a dia: *</span>
+                  </label>
+                  <select id="pet-tempo-sozinho" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="independente" selected>⏱️ Independente (Tolera 4 a 8h no horário comercial)</option>
+                    <option value="companhia_frequente">👥 Demanda companhia frequente (Até 4h ou alguém em casa)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="pet-criancas" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>👶</span>
+                    <span>Convivência com crianças (até 10 anos): *</span>
+                  </label>
+                  <select id="pet-criancas" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="sim" selected>👶 Dócil, paciente e carinhoso com crianças</option>
+                    <option value="supervisao">⚠️ Requer supervisão e adaptação cautelosa</option>
+                    <option value="nao">🚫 Não recomendado para lares com crianças pequenas</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                <div>
+                  <label for="pet-outros-caes" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>🐕</span>
+                    <span>Sociável com outros cães: *</span>
+                  </label>
+                  <select id="pet-outros-caes" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="sim" selected>🐕 Sociável e amigável com cães</option>
+                    <option value="adaptacao">🔄 Requer adaptação progressiva</option>
+                    <option value="nao">⛔ Preferível ser filho único (sem cães)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="pet-gatos" class="block text-xs font-black text-slate-900 mb-1 flex items-center gap-1">
+                    <span>🐈</span>
+                    <span>Sociável com gatos: *</span>
+                  </label>
+                  <select id="pet-gatos" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#007E82] focus:outline-none">
+                    <option value="sim" selected>🐈 Convive pacificamente com gatos</option>
+                    <option value="adaptacao">🔄 Requer adaptação progressiva</option>
+                    <option value="nao">⛔ Não tolera convívio com gatos</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botões de Ação do Formulário -->
+          <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+            <button type="button" onclick="cancelEdit()" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-[#F7EFE4] text-slate-700 text-xs font-bold transition-all">
+              Limpar / Cancelar
+            </button>
+            <button type="submit" id="btn-submit" class="px-7 py-2.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-slate-950 text-xs font-bold transition-all shadow-md shadow-[#007E82]/20 flex items-center gap-2">
+              <i data-lucide="save" class="w-4 h-4"></i> Salvar Animal
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Tabela & Listagem de Animais (Read, Update, Delete) -->
+      <div id="list-container" class="admin-list-pane space-y-4">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+          
+          <!-- Cabeçalho da Listagem com Busca Rápida -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
+            <div>
+              <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="list" class="w-5 h-5 text-[#007E82]"></i>
+                Animais Cadastrados
+              </h3>
+              <p class="text-xs text-slate-500">Gerencie, edite fichas ou exclua registros</p>
+            </div>
+
+            <button onclick="restoreDefaults()" class="text-xs text-slate-500 hover:text-[#007E82] transition-colors flex items-center gap-1 font-semibold self-start sm:self-auto">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Restaurar Exemplo
+            </button>
+          </div>
+
+          <!-- Barra de Filtros Interna da Tabela -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input 
+                type="text" 
+                id="admin-search-input" 
+                placeholder="Filtrar por nome ou raça..." 
+                oninput="filterAdminList()" 
+                class="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+              >
+            </div>
+
+            <select id="admin-porte-filter" onchange="filterAdminList()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none">
+              <option value="todos">Todos os Portes</option>
+              <option value="mini">Porte Mini</option>
+              <option value="pequeno">Porte Pequeno</option>
+              <option value="medio">Porte Médio</option>
+              <option value="grande">Porte Grande</option>
+              <option value="gigante">Porte Gigante</option>
+            </select>
+          </div>
+
+          <!-- Container da Lista de Animais -->
+          <div id="admin-pet-list" class="space-y-3 max-h-[750px] overflow-y-auto pr-1">
+            <div class="text-center py-10 text-slate-400">
+              <i data-lucide="loader" class="w-8 h-8 animate-spin mx-auto mb-2 text-[#007E82]"></i>
+              <p class="text-xs">Carregando animais do banco de dados...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    </div> <!-- Fim de tab-content-crud -->
+
+    <!-- SEÇÃO: FEIRINHAS, RIFAS & GESTÃO DE ONGs (MODERADOR) -->
+    <div id="tab-content-solidarity" class="space-y-8 hidden">
+
+      <!-- Cabeçalho do Módulo Solidário -->
+      <div class="bg-[#F7EFE4] rounded-3xl p-6 sm:p-8 text-slate-950 border-2 border-[#007E82] shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-950 text-xs font-black uppercase tracking-wider">
+            <i data-lucide="gift" class="w-3.5 h-3.5 text-[#007E82]"></i> Gestão de Solidariedade & Parceria
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black">
+            Feirinhas de Adoção, Rifas & ONG Parceira
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            Painel do moderador para gerenciar datas de feirinhas presenciais, criar rifas beneficentes ou campanhas de ração, e manter os números de animais, história, fotos e vídeos do abrigo sempre atualizados.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="openEditOngModal('ong-001')" class="px-4 py-2.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-white text-xs font-black transition-all shadow-md flex items-center gap-1.5 cursor-pointer hover:scale-[1.02]">
+            <i data-lucide="building-2" class="w-4 h-4"></i> Editar ONG & Abrigo
+          </button>
+          <button onclick="openNewEventoModal()" class="px-4 py-2.5 rounded-xl bg-white text-teal-800 hover:bg-teal-50 text-xs font-black transition-all shadow-md flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="calendar-plus" class="w-4 h-4 text-teal-600"></i> + Nova Feirinha
+          </button>
+          <button onclick="openNewRifaModal()" class="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 text-xs font-black transition-all shadow-md flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="ticket" class="w-4 h-4"></i> + Nova Rifa/Campanha
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-SEÇÃO 1: NÚMEROS & PERFIL DA ONG PARCEIRA -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="building-2" class="w-5 h-5 text-orange-500"></i>
+              ONG Parceira Oficial (História, Fotos/Vídeos do Abrigo & Métricas)
+            </h3>
+            <p class="text-xs text-slate-500">Edite a história, galeria de fotos das instalações, vídeos da rotina e métricas da instituição de proteção parceira</p>
+          </div>
+          <button 
+            type="button" 
+            onclick="openEditOngModal('ong-001')" 
+            class="px-4 py-2.5 rounded-xl bg-[#D19864] hover:bg-[#b87e4c] text-slate-950 text-xs font-black transition-all shadow-sm flex items-center gap-2 cursor-pointer self-start sm:self-auto hover:scale-[1.02]"
+          >
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+            <span>✏️ Editar História, Fotos & Vídeos da ONG</span>
+          </button>
+        </div>
+
+        <div id="admin-ongs-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Renderizado dinamicamente via admin.js -->
+        </div>
+      </div>
+
+      <!-- SUB-SEÇÃO 2: FEIRINHAS DE ADOÇÃO AGENDADAS -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
+              Feirinhas de Adoção Agendadas
+            </h3>
+            <p class="text-xs text-slate-500">Eventos que aparecem na aba pública para os adotantes visitarem presencialmente</p>
+          </div>
+          <button onclick="openNewEventoModal()" class="px-3.5 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 text-xs font-bold border border-teal-200 transition-colors flex items-center gap-1">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Adicionar Feirinha
+          </button>
+        </div>
+
+        <div id="admin-eventos-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Renderizado dinamicamente via admin.js -->
+        </div>
+      </div>
+
+      <!-- SUB-SEÇÃO 3: RIFAS & CAMPANHAS DE ARRECADAÇÃO DE RAÇÃO -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="gift" class="w-5 h-5 text-amber-500"></i>
+              Rifas Solidárias & Campanhas de Ração
+            </h3>
+            <p class="text-xs text-slate-500">Gerencie metas, registre doações recebidas via Pix e acompanhe o percentual arrecadado</p>
+          </div>
+          <button onclick="openNewRifaModal()" class="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-bold border border-amber-200 transition-colors flex items-center gap-1">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Nova Rifa / Campanha
+          </button>
+        </div>
+
+        <div id="admin-rifas-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Renderizado dinamicamente via admin.js -->
+        </div>
+      </div>
+
+      <!-- SUB-SEÇÃO 4: AUDITORIA DE CONTRATOS & CESSÃO DE IMAGENS DAS ONGS PARCEIRAS -->
+      <div id="admin-contracts-audit-card" class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-4 gap-3">
+          <div>
+            <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="file-check-2" class="w-5 h-5 text-teal-600"></i>
+              <span>Auditoria de Contratos de Parceria & Cessão de Imagens</span>
+              <span id="badge-total-contracts" class="px-2.5 py-0.5 rounded-full text-xs bg-teal-50 text-teal-800 font-bold border border-teal-200">Auditando...</span>
+            </h3>
+            <p class="text-xs text-slate-500">
+              Contratos formais de participação, cessão gratuita de fotos/vídeos e autorização de tratamento de dados assinados pelos administradores das ONGs (Resguardo Jurídico e LGPD).
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+            <button type="button" onclick="confirmDeleteAllContracts()" class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer hover:scale-[1.01]" title="Excluir todos os contratos existentes">
+              <i data-lucide="trash-2" class="w-4 h-4 text-rose-600"></i>
+              <span>Excluir Todos os Contratos</span>
+            </button>
+            <button type="button" onclick="openNgoContractModal(currentActiveOngId)" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer hover:scale-[1.01]">
+              <i data-lucide="file-signature" class="w-4 h-4"></i>
+              <span>Assinar / Atualizar Contrato</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabela de Contratos -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-black uppercase text-slate-500 tracking-wider">
+                <th class="py-3 px-4">ONG Parceira / CNPJ</th>
+                <th class="py-3 px-4">Representante Legal / Cargo</th>
+                <th class="py-3 px-4">CPF / Contato</th>
+                <th class="py-3 px-4">Data do Aceite</th>
+                <th class="py-3 px-4">Protocolo Jurídico</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4 text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="ngo-contracts-audit-tbody" class="divide-y divide-slate-100 text-xs">
+              <!-- Renderizado dinamicamente via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SEÇÃO 2: ANALYTICS & PESQUISA DE EXTENSÃO (EXCLUSIVO DO MODERADOR) -->
+    <div id="tab-content-analytics" class="space-y-8 hidden">
+      
+      <!-- Cabeçalho do Analytics & Barra de Ações de Pesquisa -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-7 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="space-y-1">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center font-bold shadow-xs flex-shrink-0">
+              <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                <span>Painel de Métricas & Pesquisa</span>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#e6f4f5] text-[#004d50] font-bold border border-[#e8ddcf]">Exclusivo Moderador</span>
+              </h2>
+              <p class="text-xs text-slate-500">Métricas reais de visitação, notas de compatibilidade do teste, conversão para o WhatsApp e dados para pesquisa e extensão.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botões de Ação para Pesquisa -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button 
+            onclick="exportAnalyticsCSV()" 
+            class="px-3.5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-slate-950 text-xs font-bold transition-all shadow-sm flex items-center gap-2"
+            title="Exportar dados estruturados para análise em Excel, SPSS ou R"
+          >
+            <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+            <span>Exportar CSV (Pesquisa)</span>
+          </button>
+
+          <button 
+            onclick="exportAnalyticsJSON()" 
+            class="px-3.5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all shadow-xs flex items-center gap-2"
+            title="Exportar backup completo em JSON"
+          >
+            <i data-lucide="download" class="w-4 h-4 text-slate-500"></i>
+            <span>Backup JSON</span>
+          </button>
+
+          <button 
+            onclick="handleSeedAnalyticsDemo()" 
+            class="px-3.5 py-2.5 rounded-xl bg-[#F7EFE4] hover:bg-[#e6f4f5] border border-[#e8ddcf] text-[#007E82] text-xs font-bold transition-all shadow-xs flex items-center gap-2"
+            title="Simular 40+ questionários e 100+ visitas para demonstração imediata"
+          >
+            <i data-lucide="sparkles" class="w-4 h-4 text-[#007E82]"></i>
+            <span>Simular Dados Demo</span>
+          </button>
+
+          <button 
+            onclick="handleClearAnalytics()" 
+            class="px-3 py-2.5 rounded-xl border border-rose-200 hover:bg-rose-50 text-rose-600 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
+            title="Zerar todos os dados analíticos"
+          >
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+            <span>Zerar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPIs Analíticos Principais com Separação Anônimo vs Identificado -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Visitas a Fichas -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold flex-shrink-0">
+            <i data-lucide="eye" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block">Visitas a Fichas</span>
+            <span id="kpi-total-views" class="text-2xl sm:text-3xl font-black text-slate-900">0</span>
+            <span class="text-[11px] text-slate-400 block">Cliques em "Ficha & Mídias"</span>
+          </div>
+        </div>
+
+        <!-- Questionários Preenchidos -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold flex-shrink-0">
+            <i data-lucide="clipboard-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block">Questionários Feitos</span>
+            <span id="kpi-total-quizzes" class="text-2xl sm:text-3xl font-black text-slate-900">0</span>
+            <span id="kpi-anon-badge" class="text-[11px] text-slate-500 font-medium block">0 anônimos</span>
+          </div>
+        </div>
+
+        <!-- Adotantes Identificados (Login / Perfil) -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold flex-shrink-0">
+            <i data-lucide="user-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block">Adotantes Identificados</span>
+            <span id="kpi-total-identified" class="text-2xl sm:text-3xl font-black text-teal-700">0</span>
+            <span class="text-[11px] text-teal-600 font-medium block">Nome + Tel informados</span>
+          </div>
+        </div>
+
+        <!-- Contatos WhatsApp (Adoção) -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold flex-shrink-0">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block">Contatos com a ONG</span>
+            <span id="kpi-total-whatsapp" class="text-2xl sm:text-3xl font-black text-slate-900">0</span>
+            <span class="text-[11px] text-slate-400 block">Cliques no WhatsApp</span>
+          </div>
+        </div>
+
+        <!-- Taxa de Conversão -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center font-bold flex-shrink-0">
+            <i data-lucide="trending-up" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs text-slate-500 font-semibold block">Taxa de Interesse</span>
+            <span id="kpi-conversion-rate" class="text-2xl sm:text-3xl font-black text-[#007E82]">0.0%</span>
+            <span class="text-[11px] text-slate-400 block">WhatsApp ÷ Visitas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela Analítica: Desempenho e Interesse Individual por Animal -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+              <i data-lucide="list-ordered" class="w-5 h-5 text-orange-500"></i>
+              <span>Desempenho & Interesse Individual por Animal</span>
+            </h3>
+            <p class="text-xs text-slate-500">Métricas consolidadas de visitas, frequência no topo do algoritmo e interesse real de adoção</p>
+          </div>
+
+          <div class="relative w-full sm:w-64">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="analytics-pet-search" 
+              placeholder="Buscar animal nas métricas..." 
+              oninput="filterAnalyticsPetsTable()" 
+              class="w-full pl-9 pr-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            >
+          </div>
+        </div>
+
+        <!-- Tabela Responsiva -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-black text-slate-600 uppercase tracking-wider">
+                <th class="py-3.5 px-4">Animal</th>
+                <th class="py-3.5 px-3">Espécie / Porte</th>
+                <th class="py-3.5 px-3 text-center">Visitas à Ficha</th>
+                <th class="py-3.5 px-3 text-center">Top 1 Match</th>
+                <th class="py-3.5 px-3 text-center">Top 5 Geral</th>
+                <th class="py-3.5 px-3 text-center">Afinidade Média</th>
+                <th class="py-3.5 px-3 text-center">Contatos WhatsApp</th>
+                <th class="py-3.5 px-4 text-center">Taxa de Conversão</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-pet-tbody" class="divide-y divide-slate-100 text-xs">
+              <!-- Renderizado dinamicamente via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABELA DE ADOTANTES INTERESSADOS IDENTIFICADOS (LEADS DE ADOÇÃO) -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden space-y-4">
+        <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse"></span>
+              <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                <i data-lucide="user-check" class="w-5 h-5 text-teal-600"></i>
+                <span>Adotantes Interessados Identificados (Leads para a ONG)</span>
+              </h3>
+            </div>
+            <p class="text-xs text-slate-500">Adotantes que informaram Nome, Sobrenome e Telefone ao demonstrar interesse em adotar</p>
+          </div>
+          <span id="badge-total-leads" class="self-start sm:self-auto px-3 py-1 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl text-xs font-bold">
+            0 Interessados
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wider font-extrabold border-b border-slate-200">
+                <th class="py-3 px-4">Data / Hora</th>
+                <th class="py-3 px-4">Nome do Adotante</th>
+                <th class="py-3 px-4">Telefone / WhatsApp</th>
+                <th class="py-3 px-4">Animal de Interesse</th>
+                <th class="py-3 px-4">Afinidade Quiz</th>
+                <th class="py-3 px-4">Origem</th>
+                <th class="py-3 px-4 text-center">Ação Rápida</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-leads-tbody" class="divide-y divide-slate-100 text-xs">
+              <!-- Renderizado dinamicamente via admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PAINEL ESTATÍSTICO DE PESQUISA & EXTENSÃO (DADOS DEMOGRÁFICOS) -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-5 h-5 text-[#007E82]"></i>
+              <span>Dados Demográficos & Perfil dos Adotantes (Pesquisa Científica & Extensão)</span>
+            </h3>
+            <p class="text-xs text-slate-500">Distribuição estatística calculada a partir de todos os questionários submetidos</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Card 1: Tipo de Moradia -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="home" class="w-4 h-4 text-blue-500"></i> Tipo de Moradia
+            </h4>
+            <div id="demo-moradia-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+
+          <!-- Card 2: Horas do Pet Sozinho -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="clock" class="w-4 h-4 text-amber-500"></i> Tempo do Pet Sozinho / Dia
+            </h4>
+            <div id="demo-tempo-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+
+          <!-- Card 3: Nível de Energia do Adotante -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="zap" class="w-4 h-4 text-teal-600"></i> Nível de Energia Demandado
+            </h4>
+            <div id="demo-energia-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+
+          <!-- Card 4: Convivência com Crianças -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="smile" class="w-4 h-4 text-pink-500"></i> Presença de Crianças
+            </h4>
+            <div id="demo-criancas-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+
+          <!-- Card 5: Cuidados Médicos Especiais -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="heart-pulse" class="w-4 h-4 text-rose-500"></i> Disposição Médica / Saúde
+            </h4>
+            <div id="demo-medico-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+
+          <!-- Card 6: Funil de Elegibilidade -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
+              <i data-lucide="shield-alert" class="w-4 h-4 text-[#007E82]"></i> Elegibilidade vs Impeditivos
+            </h4>
+            <div id="demo-elegibilidade-chart" class="space-y-2 text-xs">
+              <!-- Dinâmico -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal de Configuração do Cloudinary -->
+  <div id="cloudinary-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal-backdrop bg-slate-900/70 shadow-xs transition-opacity duration-200">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-6 space-y-5 modal-content transform scale-95 transition-all">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold">
+            <i data-lucide="cloud" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900">Configurar Cloudinary</h3>
+            <p class="text-xs text-slate-500">Armazene fotos e vídeos na nuvem com CDN ultrarrápido</p>
+          </div>
+        </div>
+        <button onclick="closeCloudinaryModal()" class="w-8 h-8 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Formulário do Cloudinary -->
+      <div class="space-y-3.5">
+        <div>
+          <label for="cloudinary-cloud-name" class="block text-xs font-bold text-slate-700 mb-1">
+            Cloud Name *
+          </label>
+          <input type="text" id="cloudinary-cloud-name" placeholder="Ex: meu-projeto-ong" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          <p class="text-[10px] text-slate-400 mt-1">Nome da sua nuvem exibido no Dashboard do Cloudinary.</p>
+        </div>
+
+        <div>
+          <label for="cloudinary-upload-preset" class="block text-xs font-bold text-slate-700 mb-1">
+            Upload Preset (Unsigned) *
+          </label>
+          <input type="text" id="cloudinary-upload-preset" placeholder="Ex: adocao_pets_preset" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-sky-500 focus:outline-none">
+          <p class="text-[10px] text-slate-400 mt-1">Preset configurado como "Unsigned" no painel do Cloudinary.</p>
+        </div>
+
+        <!-- Instruções Rápidas -->
+        <details class="text-xs text-sky-950 bg-sky-50 p-3 rounded-2xl border border-sky-100 cursor-pointer">
+          <summary class="font-bold flex items-center gap-1">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-sky-600"></i> Como criar um Upload Preset gratuito no Cloudinary?
+          </summary>
+          <ol class="list-decimal pl-5 mt-2 space-y-1 text-[11px] text-slate-600 leading-relaxed">
+            <li>Crie sua conta gratuita em <a href="https://cloudinary.com" target="_blank" class="text-sky-600 underline font-bold">cloudinary.com</a>.</li>
+            <li>No Cloudinary, clique no ícone de engrenagem <strong>(Settings)</strong> no canto inferior esquerdo.</li>
+            <li>Vá na aba <strong>Upload</strong> e role até a seção <strong>Upload Presets</strong>.</li>
+            <li>Clique em <strong>Add upload preset</strong>.</li>
+            <li>Defina o <strong>Signing Mode</strong> para <strong>Unsigned</strong> e salve.</li>
+            <li>Copie o <strong>Cloud Name</strong> e o nome do <strong>Preset</strong> gerado e cole nos campos acima!</li>
+          </ol>
+        </details>
+      </div>
+
+      <!-- Feedback de Teste -->
+      <div id="cloudinary-test-feedback" class="hidden text-xs p-2.5 rounded-xl"></div>
+
+      <!-- Botões do Modal -->
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+        <button type="button" onclick="testCloudinaryConnection()" class="px-3.5 py-2 rounded-xl bg-[#F7EFE4] hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5">
+          <i data-lucide="activity" class="w-3.5 h-3.5 text-sky-600"></i> Testar Conexão
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="closeCloudinaryModal()" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-[#F7EFE4] text-slate-700 text-xs font-bold transition-all">
+            Fechar
+          </button>
+          <button type="button" onclick="saveCloudinarySettings()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i> Salvar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: EDITAR DADOS DA ONG -->
+  <div id="modal-edit-ong" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <i data-lucide="building-2" class="w-5 h-5 text-orange-600"></i>
+          <span id="modal-ong-title">Editar Perfil & Métricas da ONG</span>
+        </h3>
+        <button onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="form-edit-ong" onsubmit="handleSaveOng(event)" class="space-y-4">
+        <input type="hidden" id="ong-edit-id">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nome da Instituição</label>
+            <input type="text" id="ong-edit-nome" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Sigla / Apelido</label>
+            <input type="text" id="ong-edit-sigla" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Cidade - Estado</label>
+            <input type="text" id="ong-edit-cidade" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Bairro / Região</label>
+            <input type="text" id="ong-edit-regiao" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Destaque dos Números Obrigatórios -->
+        <div class="p-3.5 bg-gradient-to-r from-teal-50 to-orange-50 rounded-2xl border border-teal-200 space-y-3">
+          <span class="text-xs font-black text-slate-900 block flex items-center gap-1.5">
+            <i data-lucide="scale" class="w-4 h-4 text-teal-600"></i> Métricas Principais (Exibidas no Perfil da ONG)
+          </span>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-teal-900 mb-1">Total de Animais Adotados</label>
+              <input type="number" id="ong-edit-total-adotados" min="0" required class="w-full px-3 py-2 bg-white border border-teal-300 rounded-xl text-xs font-bold text-teal-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+              <span class="text-[10px] text-teal-700">Contagem de vidas salvas</span>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-orange-900 mb-1">Animais Disponíveis (Base)</label>
+              <input type="number" id="ong-edit-base-disponiveis" min="0" required class="w-full px-3 py-2 bg-white border border-orange-300 rounded-xl text-xs font-bold text-orange-900 focus:ring-2 focus:ring-orange-500 focus:outline-none">
+              <span class="text-[10px] text-orange-700">Ou dinâmico do catálogo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Chave Pix Oficial</label>
+            <input type="text" id="ong-edit-chave-pix" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-amber-950 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp (com DDD)</label>
+            <input type="text" id="ong-edit-whatsapp" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">URL da Foto de Capa / Abrigo</label>
+          <input type="url" id="ong-edit-foto" placeholder="https://..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Descrição Curta / Missão da ONG</label>
+          <textarea id="ong-edit-descricao" rows="2" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">História Completa da Instituição (Exibida no Perfil Oficial)</label>
+          <textarea id="ong-edit-historia" rows="5" placeholder="Conte a história detalhada da fundação, desafios, resgates e vitórias da instituição..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none"></textarea>
+        </div>
+
+        <!-- Gerenciador de Fotos do Abrigo -->
+        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="image" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              Fotos das Instalações do Abrigo (Canis, Gatis, Solários)
+            </label>
+            <button type="button" onclick="adminAddShelterPhotoField()" class="px-2.5 py-1 rounded-lg bg-[#007E82] text-white text-[11px] font-black hover:bg-[#00686c] transition-colors cursor-pointer">
+              + Adicionar Foto
+            </button>
+          </div>
+          <div id="admin-shelter-photos-container" class="space-y-2">
+            <!-- Lista dinâmica de fotos -->
+          </div>
+        </div>
+
+        <!-- Gerenciador de Vídeos do Abrigo -->
+        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="video" class="w-3.5 h-3.5 text-[#D19864]"></i>
+              Vídeos do Abrigo (.mp4 / links diretos)
+            </label>
+            <button type="button" onclick="adminAddShelterVideoField()" class="px-2.5 py-1 rounded-lg bg-[#D19864] text-slate-950 text-[11px] font-black hover:bg-[#b87e4c] transition-colors cursor-pointer">
+              + Adicionar Vídeo
+            </button>
+          </div>
+          <div id="admin-shelter-videos-container" class="space-y-2">
+            <!-- Lista dinâmica de vídeos -->
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalEditOng()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+            Cancelar
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-slate-950 text-xs font-black shadow-md">
+            Salvar Alterações da ONG &amp; Abrigo
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: NOVA / EDITAR FEIRINHA DE ADOÇÃO -->
+  <div id="modal-edit-evento" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
+          <span id="modal-evento-title">Adicionar Feirinha de Adoção</span>
+        </h3>
+        <button onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="form-edit-evento" onsubmit="handleSaveEvento(event)" class="space-y-4">
+        <input type="hidden" id="evento-edit-id">
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Título do Evento</label>
+          <input type="text" id="evento-edit-titulo" required placeholder="Ex: Feirinha Especial de Adoção de Outubro" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Data (AAAA-MM-DD)</label>
+            <input type="date" id="evento-edit-data" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Horário</label>
+            <input type="text" id="evento-edit-horario" placeholder="Ex: 10:00 às 16:00" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Data por Extenso</label>
+          <input type="text" id="evento-edit-data-extenso" placeholder="Ex: Sábado, 12 de Outubro de 2026" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Local / Ponto de Referência</label>
+            <input type="text" id="evento-edit-local" placeholder="Ex: Parque Ibirapuera - Praça dos Cães" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ONG Organizadora</label>
+            <select id="evento-edit-ong-id" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+              <!-- Populado dinamicamente -->
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Endereço Completo</label>
+          <input type="text" id="evento-edit-endereco" placeholder="Av. ..., Bairro, Cidade - UF" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Link do Google Maps</label>
+            <input type="url" id="evento-edit-link-maps" placeholder="https://maps.google.com/..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">URL da Foto de Capa</label>
+            <input type="url" id="evento-edit-foto" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nomes dos Animais Presentes (separados por vírgula)</label>
+          <input type="text" id="evento-edit-animais" placeholder="Pipoca, Thor, Mel, Luna" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Descrição do Evento</label>
+          <textarea id="evento-edit-descricao" rows="2" placeholder="Conte o que haverá na feirinha: veterinários voluntários, brindes, etc." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalEditEvento()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+            Cancelar
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-slate-950 text-xs font-black shadow-md">
+            Salvar Feirinha
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: NOVA / EDITAR RIFA OU CAMPANHA DE RAÇÃO -->
+  <div id="modal-edit-rifa" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <i data-lucide="ticket" class="w-5 h-5 text-amber-500"></i>
+          <span id="modal-rifa-title">Adicionar Rifa / Campanha Solidária</span>
+        </h3>
+        <button onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="form-edit-rifa" onsubmit="handleSaveRifa(event)" class="space-y-4">
+        <input type="hidden" id="rifa-edit-id">
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Título da Campanha</label>
+          <input type="text" id="rifa-edit-titulo" required placeholder="Ex: Rifa Solidária: Cirurgia do Thor" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tipo de Campanha</label>
+            <select id="rifa-edit-tipo" onchange="toggleRifaTypeFields()" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+              <option value="dinheiro">🎟️ Rifa Beneficente (Dinheiro/Cirurgias)</option>
+              <option value="racao">🥣 Campanha de Ração (Kg)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ONG Beneficiada</label>
+            <select id="rifa-edit-ong-id" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+              <!-- Populado dinamicamente -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-amber-50 rounded-2xl border border-amber-200/80">
+          <div>
+            <label id="label-rifa-meta" class="block text-[11px] font-bold text-amber-900 mb-1">Meta Total (R$)</label>
+            <input type="number" id="rifa-edit-meta" min="1" required class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs font-bold focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          </div>
+          <div>
+            <label id="label-rifa-arrecadado" class="block text-[11px] font-bold text-amber-900 mb-1">Já Arrecadado</label>
+            <input type="number" id="rifa-edit-arrecadado" min="0" required class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs font-bold focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div id="fields-rifa-dinheiro" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Valor do Bilhete (R$)</label>
+            <input type="number" id="rifa-edit-valor-bilhete" min="1" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Total de Bilhetes</label>
+            <input type="number" id="rifa-edit-total-bilhetes" min="1" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Bilhetes Vendidos</label>
+            <input type="number" id="rifa-edit-bilhetes-vendidos" min="0" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label id="label-rifa-premio" class="block text-xs font-bold text-slate-700 mb-1">Prêmio ou Destino</label>
+          <input type="text" id="rifa-edit-premio" placeholder="Ex: Cesta Pet Premium com brinquedos e ração premium" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Chave Pix para Pagamento</label>
+            <input type="text" id="rifa-edit-chave-pix" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-amber-950 focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp para Comprovantes</label>
+            <input type="text" id="rifa-edit-whatsapp" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Data do Sorteio ou Encerramento</label>
+            <input type="text" id="rifa-edit-data-sorteio" placeholder="Ex: 30 de Outubro de 2026" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">URL da Foto de Capa</label>
+            <input type="url" id="rifa-edit-foto" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Descrição da Campanha</label>
+          <textarea id="rifa-edit-descricao" rows="2" placeholder="Explique para onde irão os recursos e o impacto positivo para os animais." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalEditRifa()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+            Cancelar
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-slate-950 text-xs font-black shadow-md">
+            Salvar Campanha
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE ONBOARDING JURÍDICO & ASSINATURA DIGITAL DO CONTRATO DA ONG (GATEKEEPER) -->
+  <div id="ngo-contract-gatekeeper-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-950/85 shadow-xs transition-opacity">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto modal-content transform scale-95 transition-all p-6 sm:p-8 space-y-6 border border-amber-300">
+      
+      <!-- Cabeçalho do Modal de Contrato -->
+      <div class="flex items-start justify-between pb-4 border-b border-slate-200 gap-4">
+        <div class="flex items-start gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center font-black shadow-md flex-shrink-0">
+            <i data-lucide="scale" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-200">
+                Bloqueio Mandatório Pré-Operação
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-100 text-teal-800 border border-teal-200">
+                Resguardo Jurídico & LGPD
+              </span>
+            </div>
+            <h2 class="text-lg sm:text-2xl font-black text-slate-900 mt-1">
+              Contrato de Parceria, Fornecimento de Dados & Cessão Gratuita de Imagens
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Obrigatório para o(a) administrador(a) da ONG antes de cadastrar animais, gerenciar rifas ou utilizar o painel.
+            </p>
+          </div>
+        </div>
+
+        <!-- Botão de Fechar Apenas Permitido se Já Assinado (caso seja abertura voluntária) -->
+        <button id="btn-close-contract-modal" onclick="closeNgoContractModal()" class="w-9 h-9 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors flex-shrink-0 hidden" title="Fechar (já assinado)">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Aviso Explicativo para o Administrador da ONG -->
+      <div class="p-4 bg-gradient-to-r from-[#e6f4f5] via-white to-[#F7EFE4] rounded-2xl border border-[#e8ddcf] text-[#004245] space-y-1 text-xs sm:text-sm shadow-2xs">
+        <div class="font-black flex items-center gap-2 text-[#004245]">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-[#007E82]"></i>
+          <span>Por que este contrato formal é indispensável antes de iniciar?</span>
+        </div>
+        <p class="text-slate-700 leading-relaxed text-xs">
+          Para que a coordenação da <strong>Plataforma MatchPet</strong> possa divulgar com total segurança jurídica as fotos, vídeos, histórias de resgate e dados dos animais cuidados pela sua ONG no catálogo público, redes sociais e relatórios de pesquisa acadêmica, é necessária a concordância formal de cessão gratuita de imagem e autorização de tratamento de dados, garantindo que o projeto não sofra nenhum questionamento institucional, autoral ou político no futuro.
+        </p>
+      </div>
+
+      <!-- ÁREA DE LEITURA DO TEXTO JURÍDICO INTEGRAL -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="book-open" class="w-4 h-4 text-[#007E82]"></i>
+            Instrumento Particular de Parceria e Licenciamento (Leitura Obrigatória):
+          </span>
+          <span class="text-slate-400 font-normal text-[11px]">Role a caixa para ler todas as cláusulas</span>
+        </div>
+
+        <div class="contract-scroll-box text-slate-800 text-xs sm:text-[13px] leading-relaxed space-y-4">
+          <div class="p-3 bg-white rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold shadow-2xs">
+            ⚖️ <strong>Fundamentação Legal:</strong> Lei Federal nº 9.610/1998 (Direitos Autorais e Imagem), Lei Federal nº 13.709/2018 (Lei Geral de Proteção de Dados - LGPD), Lei Federal nº 12.965/2014 (Marco Civil da Internet), Medida Provisória nº 2.200-2/2001 e Lei Federal nº 14.063/2020 (Validade Jurídica das Assinaturas Eletrônicas).
+          </div>
+
+          <h4 class="font-black text-slate-900 uppercase text-xs sm:text-sm tracking-wide border-b border-slate-300 pb-1.5 text-center">
+            INSTRUMENTO PARTICULAR DE TERMO DE PARCERIA INSTITUCIONAL, LICENCIAMENTO E CESSÃO GRATUITA DE DIREITOS DE IMAGEM E VOZ, E AUTORIZAÇÃO PARA TRATAMENTO DE DADOS
+          </h4>
+
+          <p>
+            Pelo presente instrumento, de um lado, a <strong>PLATAFORMA MATCHPET</strong> (atuando como projeto de tecnologia social, pesquisa científica e extensão universitária voltado à promoção da adoção responsável de animais), doravante denominada simplesmente <strong>PLATAFORMA / PESQUISA</strong>; e, de outro lado, a <strong>ENTIDADE / ONG PARCEIRA</strong> devidamente qualificada no formulário eletrônico anexo, por intermédio de seu(sua) <strong>REPRESENTANTE LEGAL OU ADMINISTRADOR(A) RESPONSÁVEL</strong>, doravante denominado(a) <strong>ADMINISTRADOR(A) DA ENTIDADE</strong>;
+          </p>
+
+          <p>
+            Têm, entre si, justo, contratado e acordado o presente Termo, que se regerá pelas seguintes cláusulas e condições:
+          </p>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-[#007E82] uppercase text-xs">CLÁUSULA PRIMEIRA – DO OBJETO DA COOPERAÇÃO E PARTICIPAÇÃO</h5>
+            <p>
+              1.1. O presente instrumento tem por objeto a adesão formal, voluntária e não onerosa da <strong>ENTIDADE</strong> à <strong>PLATAFORMA MATCHPET</strong>, viabilizando a divulgação pública, catalogação digital e intermediação da adoção responsável de cães e gatos acolhidos pela entidade, bem como a sua integração aos algoritmos de cálculo de compatibilidade tutor-animal e estudos de extensão acadêmica.
+            </p>
+            <p>
+              1.2. A participação da ENTIDADE não envolve qualquer contraprestação pecuniária, taxa de intermediação ou comissão, sendo todo o ecossistema tecnológico disponibilizado de forma estritamente gratuita e beneficente.
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-[#007E82] uppercase text-xs">CLÁUSULA SEGUNDA – DA CESSÃO GRATUITA E LICENCIAMENTO DE DIREITOS DE IMAGEM, VÍDEOS E HISTÓRIAS</h5>
+            <p>
+              2.1. A <strong>ENTIDADE</strong>, por meio de seu(sua) Representante Legal, <strong>CEDE E LICENCIA À PLATAFORMA MATCHPET</strong>, a título inteiramente <strong>GRATUITO, UNIVERSAL, IRREVOGÁVEL, IRRETRATÁVEL E SEM EXCLUSIVIDADE</strong>, o direito de uso, publicação, reprodução, adaptação de formato, exibição pública e veiculação de todas as <strong>fotografias, vídeos, nomes, áudios, relatos de resgate, histórico de superação e dados biográficos</strong> de todos os animais cadastrados pela ENTIDADE na plataforma.
+            </p>
+            <p>
+              2.2. A presente autorização abrange a utilização das imagens e conteúdos: (a) no site oficial e catálogo digital da plataforma; (b) em perfis oficiais de redes sociais vinculados ao projeto; (c) em relatórios acadêmicos, apresentações científicas, congressos universitários e artigos de pesquisa e extensão; (d) em cartazes de divulgação de feirinhas presenciais e rifas solidárias.
+            </p>
+            <p>
+              2.3. A ENTIDADE declara e garante sob as penas civis e criminais da lei que: (a) detém a legítima posse e guarda protetiva dos animais cadastrados; (b) possui expressa autorização de voluntários, fotógrafos ou colaboradores para a veiculação das imagens enviadas; (c) a utilização das imagens pela PLATAFORMA não viola direitos autorais de terceiros, direito de imagem ou de propriedade intelectual, isentando a PLATAFORMA de qualquer responsabilidade ou litígio futuro nesse sentido.
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-[#007E82] uppercase text-xs">CLÁUSULA TERCEIRA – DO FORNECIMENTO, TRATAMENTO E DISPONIBILIZAÇÃO DE DADOS (LGPD)</h5>
+            <p>
+              3.1. A ENTIDADE autoriza a coleta, armazenamento em banco de dados e tratamento dos dados públicos da organização (Nome institucional, Razão Social, CNPJ, WhatsApp de contato, chaves Pix institucionais e redes sociais) e dados técnicos dos animais (porte, sexo, idade, temperamento, prontuário médico e necessidades especiais).
+            </p>
+            <p>
+              3.2. Os dados fornecidos serão utilizados estritamente para: (a) conectar adotantes interessados à ONG parceira; (b) permitir a aplicação das fórmulas de cálculo de afinidade e compatibilidade ponderada; (c) alimentar estatísticas anônimas de pesquisa acadêmica (número de visitas, conversões e preferências demográficas) nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-[#007E82] uppercase text-xs">CLÁUSULA QUARTA – DA VERACIDADE SANITÁRIA E RESPONSABILIDADE PELA TRIAGEM</h5>
+            <p>
+              4.1. O(A) ADMINISTRADOR(A) DA ENTIDADE atesta que todas as informações clínicas e comportamentais dos animais fornecidas na Ficha Médica (vacinação, castração, vermifugação e cuidados especiais) são estritamente verídicas e condizentes com a realidade veterinária do animal.
+            </p>
+            <p>
+              4.2. A PLATAFORMA MATCHPET atua como facilitadora tecnológica e ponte de contato. A realização da entrevista presencial, vistoria de segurança do imóvel, aprovação definitiva do adotante e assinatura do Termo Oficial de Guarda Responsável permanecem sob exclusiva discricionariedade e responsabilidade da ENTIDADE.
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-[#007E82] uppercase text-xs">CLÁUSULA QUINTA – DA INDEPENDÊNCIA POLÍTICA, INSTITUCIONAL E ISENÇÃO DE RESPONSABILIDADE SOLIDÁRIA</h5>
+            <p>
+              5.1. A PLATAFORMA MATCHPET declara total <strong>neutralidade e independência institucional, partidária, ideológica e eleitoral</strong>. A celebração deste termo não constitui sociedade, associação civil formal, representação jurídica, mandato, solidariedade cível ou vínculo de subordinação/empregatício entre as partes.
+            </p>
+            <p>
+              5.2. A ENTIDADE obriga-se a não vincular o nome da PLATAFORMA ou de seus moderadores e pesquisadores a disputas políticas, campanhas eleitorais, denúncias partidárias ou polarizações institucionais externas. Cada entidade responde de forma única, individual e exclusiva por seus atos, manifestações públicas e gestão interna.
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-orange-700 uppercase text-xs">CLÁUSULA SEXTA – DA ASSINATURA ELETRÔNICA, REGISTRO DE EVIDÊNCIAS E VALIDADE JURÍDICA</h5>
+            <p>
+              6.1. As partes reconhecem expressamente a plena validade, higidez e eficácia probatória jurídica da manifestação de vontade e assinatura eletrônica exarada neste instrumento, em consonância com o Artigo 10, § 2º da Medida Provisória nº 2.200-2/2001 e com a Lei Federal nº 14.063/2020.
+            </p>
+            <p>
+              6.2. Para fins de auditoria e segurança pericial, o aceite digital registra em arquivo criptográfico indelével: (a) Data e horário de aceite (timestamp oficial); (b) Endereço IP do dispositivo signatário; (c) Identificador de Navegador/Sistema (User-Agent); (d) Nome civil completo, CPF e cargo do representante; (e) Código Hash unívoco e irrevogável de autenticidade (Protocolo de Integridade).
+            </p>
+          </div>
+
+          <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+            <h5 class="font-black text-orange-700 uppercase text-xs">CLÁUSULA SÉTIMA – DO FORO E DISPOSIÇÕES FINAIS</h5>
+            <p>
+              7.1. Este contrato entra em vigor na data de sua confirmação eletrônica, vigorando por prazo indeterminado enquanto a ENTIDADE mantiver animais ou campanhas cadastradas na plataforma. Qualquer alteração estatutária ou de diretoria deverá ser comunicada para emissão de aditivo contratual.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULÁRIO DE QUALIFICAÇÃO DO REPRESENTANTE & ASSINATURA DIGITAL -->
+      <form id="ngo-contract-form" onsubmit="handleNgoContractSubmit(event)" class="space-y-6 pt-2">
+        
+        <div class="space-y-3">
+          <h4 class="font-black text-slate-900 text-sm flex items-center gap-2 border-b border-slate-200 pb-2">
+            <i data-lucide="user-check" class="w-4 h-4 text-teal-600"></i>
+            <span>Qualificação do(a) Administrador(a) / Representante Legal Signatário(a):</span>
+          </h4>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <!-- ONG Representada -->
+            <div class="sm:col-span-2 lg:col-span-1">
+              <label class="block font-bold text-slate-700 mb-1">ONG / Entidade Representada *</label>
+              <select id="contract-form-ong-id" required onchange="onContractModalOngChange(this.value)" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                <!-- Preenchido dinamicamente via admin.js -->
+              </select>
+            </div>
+
+            <!-- CNPJ da Entidade -->
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">CNPJ da Entidade *</label>
+              <input type="text" id="contract-form-ong-cnpj" required oninput="applyCnpjMask(this)" placeholder="00.000.000/0001-00" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Cargo / Função -->
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Cargo / Função na Entidade *</label>
+              <input type="text" id="contract-form-rep-cargo" required placeholder="Ex: Presidente, Coordenador Geral" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Nome Completo do Representante -->
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">Nome Completo do(a) Representante Legal *</label>
+              <input type="text" id="contract-form-rep-nome" required placeholder="Nome e Sobrenome por extenso" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- CPF do Representante -->
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">CPF do Representante *</label>
+              <input type="text" id="contract-form-rep-cpf" required oninput="applyCpfMask(this)" placeholder="000.000.000-00" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- E-mail Institucional -->
+            <div class="sm:col-span-2 lg:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">E-mail Institucional / Oficial *</label>
+              <input type="email" id="contract-form-rep-email" required placeholder="contato@ong.org.br" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- WhatsApp / Telefone -->
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Telefone / WhatsApp com DDD *</label>
+              <input type="tel" id="contract-form-rep-telefone" required oninput="applyPhoneMask(this)" placeholder="(11) 99999-8888" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 DECLARAÇÕES MANDATÓRIAS DE CONSENTIMENTO EXCLUSIVO -->
+        <div class="space-y-2.5 pt-2">
+          <h4 class="font-black text-slate-900 text-sm flex items-center gap-2">
+            <i data-lucide="check-square" class="w-4 h-4 text-orange-600"></i>
+            <span>Declarações Obrigatórias de Consentimento e Responsabilidade (Marque todas):</span>
+          </h4>
+
+          <div class="space-y-2 text-xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+              <input type="checkbox" id="contract-check-imagens" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
+              <div class="leading-snug">
+                <strong class="text-slate-900 block font-black">1. Licenciamento e Cessão Gratuita de Imagens e Vídeos (Lei nº 9.610/98)</strong>
+                <span class="text-slate-600 text-[11px]">Cedo gratuitamente à Plataforma MatchPet o direito de uso das fotos, vídeos e histórias dos animais cadastrados para divulgação no site, redes sociais e relatórios de extensão/pesquisa acadêmica.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+              <input type="checkbox" id="contract-check-dados" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
+              <div class="leading-snug">
+                <strong class="text-slate-900 block font-black">2. Fornecimento de Dados Técnicos e Tratamento para Pesquisa (LGPD nº 13.709/18)</strong>
+                <span class="text-slate-600 text-[11px]">Autorizo o armazenamento, indexação e tratamento dos dados públicos da entidade e prontuários dos animais para cálculo de afinidade e estudos estatísticos do projeto.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+              <input type="checkbox" id="contract-check-veracidade" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
+              <div class="leading-snug">
+                <strong class="text-slate-900 block font-black">3. Fidedignidade das Informações Clínicas & Responsabilidade de Triagem</strong>
+                <span class="text-slate-600 text-[11px]">Atesto a veracidade dos dados veterinários informados (castração, vacinas, vermífugos) e declaro ciência de que a triagem e termo final de adoção com o tutor cabem exclusivamente à ONG.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+              <input type="checkbox" id="contract-check-independencia" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
+              <div class="leading-snug">
+                <strong class="text-slate-900 block font-black">4. Independência Política, Partidária e Ausência de Solidariedade</strong>
+                <span class="text-slate-600 text-[11px]">Declaro ciência da neutralidade institucional da plataforma, isentando o projeto e seus moderadores de qualquer litígio, polêmica ou manifestação política externa da entidade.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- ASSINATURA ELETRÔNICA POR EXTENSO -->
+        <div class="p-4 bg-teal-50 rounded-2xl border border-teal-200 space-y-2 text-xs">
+          <div class="flex items-center justify-between">
+            <label class="font-black text-teal-950 flex items-center gap-1.5">
+              <i data-lucide="feather" class="w-4 h-4 text-teal-700"></i>
+              <span>Assinatura Digital Formal (Digite seu Nome Completo): *</span>
+            </label>
+            <span class="text-[10px] font-bold text-teal-700 bg-teal-100 px-2 py-0.5 rounded-md">
+              MP 2.200-2/01 • Lei 14.063/20
+            </span>
+          </div>
+          <input 
+            type="text" 
+            id="contract-form-signature" 
+            required 
+            placeholder="Digite exatamente seu Nome Completo como assinatura digital" 
+            class="w-full px-3.5 py-2.5 bg-white border border-teal-300 rounded-xl font-bold text-slate-900 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"
+          >
+          <p class="text-[11px] text-teal-800 leading-tight">
+            Ao clicar no botão abaixo, sua assinatura eletrônica será consolidada com gravação de data/hora, hash de integridade e protocolo unívoco de auditoria.
+          </p>
+        </div>
+
+        <!-- Mensagem de Erro Integrada -->
+        <div id="contract-form-error-msg" class="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 font-bold text-xs flex items-center gap-2 hidden">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600 flex-shrink-0"></i>
+          <span id="contract-form-error-text">Por favor, preencha todos os campos e marque as declarações.</span>
+        </div>
+
+        <!-- Botões de Ação do Contrato -->
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200">
+          <div class="text-[11px] text-slate-500 flex items-center gap-1.5">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>Ambiente Seguro • Registro Auditável em Banco de Dados</span>
+          </div>
+
+          <button 
+            type="submit" 
+            id="btn-submit-ngo-contract"
+            class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-slate-950 font-black text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 hover:scale-[1.01]"
+          >
+            <i data-lucide="file-check-2" class="w-5 h-5"></i>
+            <span>Assinar Contrato Digitalmente & Liberar Painel</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE VISUALIZAÇÃO E IMPRESSÃO DO CONTRATO ASSINADO (LAYOUT TIMBRADO / PDF) -->
+  <div id="ngo-contract-view-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/80 shadow-xs transition-opacity">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[95vh] overflow-y-auto modal-content transform scale-95 transition-all p-6 sm:p-8 space-y-6 border border-slate-200">
+      
+      <!-- Barra Superior do Modal (Oculta na Impressão) -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 no-print">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-slate-900">Comprovante do Contrato Assinado</h3>
+            <p class="text-xs text-slate-500">Documento timbrado com validade jurídica digital</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="printSignedContract()" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-slate-950 text-xs font-black transition-all shadow-xs flex items-center gap-1.5 hover:scale-105">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span>Imprimir / Salvar PDF</span>
+          </button>
+          <button onclick="closeSignedContractView()" class="w-9 h-9 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ÁREA TIMBRADA OFICIAL DO CONTRATO (IMPRESSÃO / PDF) -->
+      <div id="ngo-contract-printable-area" class="p-6 sm:p-8 bg-white rounded-2xl border border-slate-300 space-y-6 text-slate-900 text-xs sm:text-sm leading-relaxed">
+        
+        <!-- Cabeçalho Timbrado -->
+        <div class="border-b-2 border-slate-900 pb-4 text-center space-y-1">
+          <span class="text-[10px] font-black tracking-widest uppercase text-slate-500 block">
+            REPÚBLICA FEDERATIVA DO BRASIL • PROJETO DE EXTENSÃO & PESQUISA UNIVERSITÁRIA
+          </span>
+          <h2 class="text-base sm:text-xl font-black uppercase text-slate-950 tracking-tight">
+            PLATAFORMA MATCHPET DE ADOÇÃO RESPONSÁVEL
+          </h2>
+          <p class="text-xs font-bold text-slate-600">
+            TERMO DE PARCERIA INSTITUCIONAL, CESSÃO GRATUITA DE IMAGENS E FORNECIMENTO DE DADOS
+          </p>
+          <div class="pt-2 flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono text-slate-700">
+            <span><strong>Protocolo Oficial:</strong> <code id="print-contract-protocolo">PATA-...</code></span>
+            <span><strong>Data de Emissão:</strong> <span id="print-contract-data">...</span></span>
+            <span><strong>Status:</strong> <span class="text-teal-700 font-bold">ASSINADO E VÁLIDO</span></span>
+          </div>
+        </div>
+
+        <!-- Qualificação das Partes Preenchida -->
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+          <div class="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200 pb-1">
+            Qualificação Cadastral das Partes Contratantes:
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-800">
+            <div><strong>Entidade / ONG:</strong> <span id="print-contract-ong-nome">...</span></div>
+            <div><strong>CNPJ da Entidade:</strong> <span id="print-contract-ong-cnpj">...</span></div>
+            <div><strong>Representante Legal:</strong> <span id="print-contract-rep-nome">...</span></div>
+            <div><strong>CPF do Representante:</strong> <span id="print-contract-rep-cpf">...</span></div>
+            <div><strong>Cargo / Função:</strong> <span id="print-contract-rep-cargo">...</span></div>
+            <div><strong>Contato Oficial:</strong> <span id="print-contract-rep-contato">...</span></div>
+          </div>
+        </div>
+
+        <!-- Resumo das Cláusulas Contratuais -->
+        <div class="space-y-3 text-justify text-xs leading-relaxed text-slate-800">
+          <p>
+            <strong>CLÁUSULA 1ª (DO OBJETO):</strong> A ENTIDADE adere formalmente e a título gratuito à PLATAFORMA MATCHPET para fins de catalogação digital e divulgação de animais aptos para adoção responsável e participação no projeto de pesquisa e extensão de compatibilidade tutor-animal.
+          </p>
+          <p>
+            <strong>CLÁUSULA 2ª (DA CESSÃO DE IMAGENS E VÍDEOS):</strong> A ENTIDADE CEDE E LICENCIA À PLATAFORMA MATCHPET, de forma GRATUITA, UNIVERSAL, IRREVOGÁVEL E IRRETRATÁVEL (Lei Federal nº 9.610/1998), o direito de uso, publicação e veiculação de todas as fotografias, vídeos e histórias de resgate dos animais cadastrados para exibição no site, redes sociais e artigos acadêmicos, atestando deter a titularidade autoral e a posse legal dos animais.
+          </p>
+          <p>
+            <strong>CLÁUSULA 3ª (DO FORNECIMENTO E TRATAMENTO DE DADOS):</strong> A ENTIDADE autoriza o tratamento dos dados públicos da entidade e dos animais cadastrados para fins de bem-estar animal e geração de métricas de pesquisa nos estritos termos da LGPD (Lei Federal nº 13.709/2018).
+          </p>
+          <p>
+            <strong>CLÁUSULA 4ª (DA VERACIDADE SANITÁRIA):</strong> O(A) Administrador(a) atesta a fidedignidade dos prontuários médicos (castração, vacinas e cuidados clínicos) e assume a responsabilidade pela triagem final e assinatura do termo de guarda com o adotante.
+          </p>
+          <p>
+            <strong>CLÁUSULA 5ª (DA INDEPENDÊNCIA POLÍTICA):</strong> As partes declaram total neutralidade e independência político-partidária, não havendo responsabilidade solidária, vínculo associativo formal ou subordinação entre a Plataforma MatchPet e a Entidade.
+          </p>
+          <p>
+            <strong>CLÁUSULA 6ª (DA VALIDADE ELETRÔNICA):</strong> O presente instrumento possui eficácia jurídica plena com fulcro no Art. 10, § 2º da Medida Provisória nº 2.200-2/2001 e na Lei Federal nº 14.063/2020.
+          </p>
+        </div>
+
+        <!-- Carimbo de Certificação Digital e Assinatura Eletrônica -->
+        <div class="contract-seal space-y-2 mt-6">
+          <div class="flex items-center justify-between border-b border-teal-300 pb-2">
+            <span class="font-black text-teal-950 uppercase text-xs flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-teal-700"></i>
+              Certificado de Assinatura Eletrônica Avançada
+            </span>
+            <span class="font-mono text-[10px] text-teal-800 bg-teal-100 px-2 py-0.5 rounded font-bold">
+              REGISTRO AUDITÁVEL
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-teal-950 pt-1">
+            <div>
+              <span class="text-[10px] font-bold text-teal-800 block uppercase">Signatário(a) Autorizado(a):</span>
+              <span id="print-signature-nome" class="font-black text-sm text-slate-900 block font-serif italic">...</span>
+              <span id="print-signature-cargo-entidade" class="text-[11px] text-slate-600 block">...</span>
+            </div>
+            <div class="space-y-0.5 font-mono text-[11px]">
+              <div><strong>Protocolo:</strong> <span id="print-signature-protocolo">...</span></div>
+              <div><strong>Data/Hora:</strong> <span id="print-signature-data">...</span></div>
+              <div class="truncate"><strong>Hash SHA-256:</strong> <span id="print-signature-hash" class="select-all">...</span></div>
+              <div><strong>Endereço de Rede:</strong> <span id="print-signature-ip">...</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rodapé do Documento -->
+        <div class="pt-4 border-t border-slate-200 text-center text-[10px] text-slate-500">
+          Documento digital emitido pela Plataforma MatchPet • Para verificação de autenticidade, consulte o painel de moderação informando o protocolo acima.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: ESTÚDIO DE DESIGN & PERSONALIZAÇÃO DE LAYOUT (ESTILO CANVA) -->
+  <div id="canva-design-studio-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 shadow-xs opacity-0 pointer-events-none transition-all duration-300">
+    <div class="modal-content w-full max-w-5xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh] scale-95 transition-all duration-300">
+      
+      <!-- Cabeçalho do Estúdio Estilo Canva -->
+      <div class="px-6 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-950 flex items-center justify-between border-b border-slate-700">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-500 flex items-center justify-center shadow-lg text-slate-950">
+            <i data-lucide="palette" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base sm:text-lg font-black tracking-tight">Estúdio de Design & Layout</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500 text-slate-950 text-orange-300 border border-orange-500/40">Estilo Canva</span>
+            </div>
+            <p class="text-xs text-slate-300">Altere fontes, paletas de cores, cartões, figuras decorativas, selos e o banner vitrine</p>
+          </div>
+        </div>
+
+        <button onclick="DesignStudio.close()" class="w-9 h-9 rounded-xl bg-white hover:bg-white text-slate-300 hover:text-slate-950 flex items-center justify-center transition-all" title="Fechar Estúdio">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Corpo do Estúdio: Menu Lateral + Conteúdo Ativo + Painel de Pré-visualização -->
+      <div class="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
+        
+        <!-- Barra de Ferramentas Lateral (Abas Estilo Canva) -->
+        <div class="w-full md:w-48 bg-slate-50 p-2 sm:p-3 border-b md:border-b-0 md:border-r border-slate-200 flex md:flex-col gap-1 overflow-x-auto md:overflow-y-auto flex-shrink-0">
+          <button type="button" data-tab="fontes" onclick="DesignStudio.switchTab('fontes')" class="canva-tab-btn active">
+            <i data-lucide="type" class="w-5 h-5 mb-1 text-orange-500"></i>
+            <span>Tipografia</span>
+          </button>
+          
+          <button type="button" data-tab="cores" onclick="DesignStudio.switchTab('cores')" class="canva-tab-btn">
+            <i data-lucide="droplet" class="w-5 h-5 mb-1 text-[#007E82]"></i>
+            <span>Cores & Tema</span>
+          </button>
+
+          <button type="button" data-tab="cards" onclick="DesignStudio.switchTab('cards')" class="canva-tab-btn">
+            <i data-lucide="layout-grid" class="w-5 h-5 mb-1 text-blue-500"></i>
+            <span>Estilo Cards</span>
+          </button>
+
+          <button type="button" data-tab="figuras" onclick="DesignStudio.switchTab('figuras')" class="canva-tab-btn">
+            <i data-lucide="sparkles" class="w-5 h-5 mb-1 text-amber-500"></i>
+            <span>Figuras & Selos</span>
+          </button>
+
+          <button type="button" data-tab="banner" onclick="DesignStudio.switchTab('banner')" class="canva-tab-btn">
+            <i data-lucide="flag" class="w-5 h-5 mb-1 text-teal-500"></i>
+            <span>Banner Vitrine</span>
+          </button>
+
+          <button type="button" data-tab="modelos" onclick="DesignStudio.switchTab('modelos')" class="canva-tab-btn">
+            <i data-lucide="wand-2" class="w-5 h-5 mb-1 text-rose-500"></i>
+            <span>Modelos Prontos</span>
+          </button>
+        </div>
+
+        <!-- Painel Central com as Opções da Ferramenta Selecionada -->
+        <div class="flex-1 p-4 sm:p-6 overflow-y-auto min-h-[360px]">
+          
+          <!-- ABA 1: FONTES & TIPOGRAFIA -->
+          <div id="canva-pane-fontes" class="canva-tab-pane space-y-4">
+            <div>
+              <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                <i data-lucide="type" class="w-4 h-4 text-orange-500"></i> Escolha a Família Tipográfica Principal
+              </h4>
+              <p class="text-xs text-slate-500">A fonte escolhida será aplicada em tempo real em títulos, botões e descrições de todo o app.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              <button type="button" data-font="Outfit" onclick="DesignStudio.setFont('Outfit')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-[#007E82] transition-all font-brand">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Outfit', sans-serif;">Outfit</span>
+                  <span class="text-[11px] text-[#007E82] font-semibold">Oficial MatchPet (Moderna &amp; Geométrica)</span>
+                </div>
+                <span class="text-lg font-bold" style="font-family: 'Outfit', sans-serif;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Plus Jakarta Sans" onclick="DesignStudio.setFont('Plus Jakarta Sans')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-[#007E82] transition-all font-sans">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800">Plus Jakarta Sans</span>
+                  <span class="text-[11px] text-slate-500">Moderna, amigável e legível</span>
+                </div>
+                <span class="text-lg">Aa</span>
+              </button>
+
+              <button type="button" data-font="Poppins" onclick="DesignStudio.setFont('Poppins')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all font-sans">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Poppins', sans-serif;">Poppins</span>
+                  <span class="text-[11px] text-slate-500">Suave, redonda e marcante</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Poppins', sans-serif;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Fredoka" onclick="DesignStudio.setFont('Fredoka')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Fredoka', cursive;">Fredoka</span>
+                  <span class="text-[11px] text-slate-500">Divertida, pet-friendly e fofinha</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Fredoka', cursive;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Montserrat" onclick="DesignStudio.setFont('Montserrat')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all font-sans">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Montserrat', sans-serif;">Montserrat</span>
+                  <span class="text-[11px] text-slate-500">Elegante, profissional e nítida</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Montserrat', sans-serif;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Nunito" onclick="DesignStudio.setFont('Nunito')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all font-sans">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Nunito', sans-serif;">Nunito</span>
+                  <span class="text-[11px] text-slate-500">Super legível, acolhedora e calorosa</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Nunito', sans-serif;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Playfair Display" onclick="DesignStudio.setFont('Playfair Display')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Playfair Display', serif;">Playfair Display</span>
+                  <span class="text-[11px] text-slate-500">Estilo editorial nobre / Serifada</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Playfair Display', serif;">Aa</span>
+              </button>
+
+              <button type="button" data-font="Inter" onclick="DesignStudio.setFont('Inter')" class="canva-font-option p-3 rounded-2xl border text-left flex items-center justify-between hover:border-orange-300 transition-all font-sans">
+                <div>
+                  <span class="block text-sm font-bold text-slate-800" style="font-family: 'Inter', sans-serif;">Inter</span>
+                  <span class="text-[11px] text-slate-500">Clássica UI moderna e minimalista</span>
+                </div>
+                <span class="text-lg" style="font-family: 'Inter', sans-serif;">Aa</span>
+              </button>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Escala de Tamanho dos Textos</label>
+              <select id="canva-font-scale-select" onchange="DesignStudio.setFontScale(this.value)" class="w-full sm:w-64 px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-orange-500">
+                <option value="compact">Compacto (Mais densidade)</option>
+                <option value="normal" selected>Normal (100% equilibrado)</option>
+                <option value="large">Expandido (Acessibilidade & Fácil leitura)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ABA 2: CORES & TEMAS -->
+          <div id="canva-pane-cores" class="canva-tab-pane hidden space-y-5">
+            <div>
+              <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                <i data-lucide="palette" class="w-4 h-4 text-[#007E82]"></i> Paletas de Cores Harmônicas
+              </h4>
+              <p class="text-xs text-slate-500">Escolha uma paleta curada ou personalize a cor de destaque livremente com o conta-gotas.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <button type="button" data-theme="laranja" onclick="DesignStudio.setTheme('laranja')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-orange-400 text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-orange-600 shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Laranja Adote</span>
+                  <span class="text-[10px] text-slate-500">Acolhedor & Vivo</span>
+                </div>
+              </button>
+
+              <button type="button" data-theme="verde" onclick="DesignStudio.setTheme('verde')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-teal-400 text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-teal-600 shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Verde-Água / Menta</span>
+                  <span class="text-[10px] text-slate-500">Harmonia & Saúde</span>
+                </div>
+              </button>
+
+              <button type="button" data-theme="matchpet" onclick="DesignStudio.setTheme('roxo')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-[#007E82] text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-[#007E82] shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Roxo Moderno</span>
+                  <span class="text-[10px] text-slate-500">Vibrante & Fashion</span>
+                </div>
+              </button>
+
+              <button type="button" data-theme="azul" onclick="DesignStudio.setTheme('azul')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-sky-400 text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-sky-600 shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Azul Sereno</span>
+                  <span class="text-[10px] text-slate-500">Confiança & Paz</span>
+                </div>
+              </button>
+
+              <button type="button" data-theme="rosa" onclick="DesignStudio.setTheme('rosa')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-pink-400 text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-pink-600 shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Rosa Afeto</span>
+                  <span class="text-[10px] text-slate-500">Carinho & Resgate</span>
+                </div>
+              </button>
+
+              <button type="button" data-theme="dark" onclick="DesignStudio.setTheme('dark')" class="color-swatch-btn flex items-center gap-2 p-3 rounded-2xl border border-slate-200 hover:border-slate-800 text-left w-full h-auto">
+                <div class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-700 shadow-sm flex-shrink-0"></div>
+                <div>
+                  <span class="block text-xs font-extrabold text-slate-800">Dark Mode</span>
+                  <span class="text-[10px] text-slate-500">Noturno Elegante</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
+              <div>
+                <span class="block text-xs font-bold text-slate-900">Seletor de Cor Customizada (Hex)</span>
+                <span class="text-[11px] text-slate-500">Escolha qualquer tonalidade que preferir para a sua marca ou campanha.</span>
+              </div>
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <input type="color" id="canva-custom-color-input" oninput="DesignStudio.setCustomColor(this.value)" value="#ea580c" class="w-10 h-10 rounded-xl cursor-pointer border border-slate-300 p-0.5 bg-white shadow-xs">
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 3: ESTILO DOS CARDS -->
+          <div id="canva-pane-cards" class="canva-tab-pane hidden space-y-6">
+            <div>
+              <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-blue-500"></i> Geometria e Bordas dos Cards
+              </h4>
+              <p class="text-xs text-slate-500">Ajuste o arredondamento dos cartões dos cães e gatos.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button type="button" data-radius="rounded-xl" onclick="DesignStudio.setCardRadius('rounded-xl')" class="canva-radius-option p-3 rounded-xl border text-center hover:border-orange-400 transition-all">
+                <div class="w-8 h-8 mx-auto mb-1 rounded-xl bg-slate-200 border border-slate-300"></div>
+                <span class="text-xs font-bold text-slate-800 block">Suave</span>
+                <span class="text-[10px] text-slate-500">12px (rounded-xl)</span>
+              </button>
+
+              <button type="button" data-radius="rounded-2xl" onclick="DesignStudio.setCardRadius('rounded-2xl')" class="canva-radius-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                <div class="w-8 h-8 mx-auto mb-1 rounded-2xl bg-slate-200 border border-slate-300"></div>
+                <span class="text-xs font-bold text-slate-800 block">Moderno</span>
+                <span class="text-[10px] text-slate-500">16px (rounded-2xl)</span>
+              </button>
+
+              <button type="button" data-radius="rounded-3xl" onclick="DesignStudio.setCardRadius('rounded-3xl')" class="canva-radius-option p-3 rounded-3xl border text-center hover:border-orange-400 transition-all">
+                <div class="w-8 h-8 mx-auto mb-1 rounded-3xl bg-slate-200 border border-slate-300"></div>
+                <span class="text-xs font-bold text-slate-800 block">Amigável</span>
+                <span class="text-[10px] text-slate-500">24px (rounded-3xl)</span>
+              </button>
+
+              <button type="button" data-radius="rounded-full" onclick="DesignStudio.setCardRadius('rounded-full')" class="canva-radius-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                <div class="w-8 h-8 mx-auto mb-1 rounded-full bg-slate-200 border border-slate-300"></div>
+                <span class="text-xs font-bold text-slate-800 block">Pill / Cápsula</span>
+                <span class="text-[10px] text-slate-500">Ultra curvo</span>
+              </button>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200">
+              <h4 class="text-sm font-extrabold text-slate-900 mb-1 flex items-center gap-1.5">
+                <i data-lucide="layers" class="w-4 h-4 text-slate-600"></i> Sombras e Profundidade (Elevação)
+              </h4>
+              <p class="text-xs text-slate-500 mb-3">Defina o nível de destaque flutuante dos cartões.</p>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" data-shadow="shadow-sm" onclick="DesignStudio.setCardShadow('shadow-sm')" class="canva-shadow-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                  <span class="text-xs font-bold text-slate-800 block">Sutil</span>
+                  <span class="text-[10px] text-slate-500">Clean & Flat</span>
+                </button>
+
+                <button type="button" data-shadow="shadow-md" onclick="DesignStudio.setCardShadow('shadow-md')" class="canva-shadow-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                  <span class="text-xs font-bold text-slate-800 block">Equilibrada</span>
+                  <span class="text-[10px] text-slate-500">Padrão Elegante</span>
+                </button>
+
+                <button type="button" data-shadow="shadow-xl" onclick="DesignStudio.setCardShadow('shadow-xl')" class="canva-shadow-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                  <span class="text-xs font-bold text-slate-800 block">Marcante</span>
+                  <span class="text-[10px] text-slate-500">Flutuante (xl)</span>
+                </button>
+
+                <button type="button" data-shadow="shadow-2xl" onclick="DesignStudio.setCardShadow('shadow-2xl')" class="canva-shadow-option p-3 rounded-2xl border text-center hover:border-orange-400 transition-all">
+                  <span class="text-xs font-bold text-slate-800 block">Profunda</span>
+                  <span class="text-[10px] text-slate-500">Alto Contraste</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 4: FIGURAS & SELOS -->
+          <div id="canva-pane-figuras" class="canva-tab-pane hidden space-y-4">
+            <div>
+              <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> Figuras Decorativas, Carimbos & Selos
+              </h4>
+              <p class="text-xs text-slate-500">Adicione adesivos visuais, carimbos de amor e selos oficiais sobre as fotos dos cães e gatos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-patinhas" onchange="DesignStudio.toggleSticker('patinhas', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    🐾 Carimbo Flutuante de Patinhas
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Adiciona patinhas fofas e animadas no canto da imagem.</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-coracao" onchange="DesignStudio.toggleSticker('coracao', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    ❤️ Carimbo de Coração de Resgate
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Ícone de carinho reforçando o laço afetivo do adotante.</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-selo-adocao" onchange="DesignStudio.toggleSticker('seloAdocao', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    🏷️ Selo Oficial "Adoção Responsável"
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Informa que o processo é 100% gratuito e consciente.</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-fita-resgate" onchange="DesignStudio.toggleSticker('fitaResgate', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    🎗️ Fita "História de Superação"
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Destaca que o animal foi resgatado e cuidado com amor.</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-badge-verificada" onchange="DesignStudio.toggleSticker('badgeVerificada', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    🛡️ Selo de ONG Auditada
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Transmite segurança sobre o cadastro e vacinas do abrigo.</span>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3 p-3 rounded-2xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                <input type="checkbox" id="canva-check-selo-urgente" onchange="DesignStudio.toggleSticker('seloUrgente', this.checked)" class="mt-0.5 w-4 h-4 text-orange-600 rounded">
+                <div>
+                  <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1">
+                    🌟 Selo Pulsante "Lar Urgente"
+                  </span>
+                  <span class="text-[11px] text-slate-500 block">Gera comoção e atenção especial aos animais em espera longa.</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="pt-3 border-t border-slate-200">
+              <label class="block text-xs font-bold text-slate-700 mb-1">Adesivo Customizado por URL de Imagem (Opcional)</label>
+              <input type="url" id="canva-custom-sticker-url" oninput="DesignStudio.setCustomStickerUrl(this.value)" placeholder="https://exemplo.com/adesivo-png-transparente.png" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 focus:ring-2 focus:ring-orange-500">
+            </div>
+          </div>
+
+          <!-- ABA 5: BANNER VITRINE -->
+          <div id="canva-pane-banner" class="canva-tab-pane hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                  <i data-lucide="flag" class="w-4 h-4 text-teal-500"></i> Banner Vitrine Promocional
+                </h4>
+                <p class="text-xs text-slate-500">Personalize o banner principal no topo do catálogo para campanhas sazonais ou feirinhas.</p>
+              </div>
+              <label class="flex items-center gap-2 cursor-pointer bg-[#F7EFE4] px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800">
+                <input type="checkbox" id="canva-banner-enabled" onchange="DesignStudio.updateBanner('enabled', this.checked)" class="w-4 h-4 text-orange-600 rounded">
+                <span>Ativar Banner</span>
+              </label>
+            </div>
+
+            <div class="space-y-3 pt-1">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Tag Superior / Badge</label>
+                <input type="text" id="canva-banner-badge" oninput="DesignStudio.updateBanner('badgeText', this.value)" placeholder="✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Título do Banner</label>
+                <input type="text" id="canva-banner-title" oninput="DesignStudio.updateBanner('title', this.value)" placeholder="Encontre seu melhor amigo de quatro patas" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 font-bold">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Subtítulo / Mensagem Comovente</label>
+                <textarea id="canva-banner-subtitle" oninput="DesignStudio.updateBanner('subtitle', this.value)" rows="2" placeholder="Conectamos você aos animais mais compatíveis com o seu coração através do teste inteligente..." class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Texto do Botão de Ação (CTA)</label>
+                  <input type="text" id="canva-banner-cta" oninput="DesignStudio.updateBanner('ctaText', this.value)" placeholder="Faça o teste e descubra seu novo amigo 🐾" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 font-bold">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Gradiente de Cores do Banner</label>
+                  <select id="canva-banner-gradient" onchange="DesignStudio.updateBanner('gradientPreset', this.value)" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs text-slate-800 font-semibold">
+                    <option value="laranja-amber">Laranja Solar & Âmbar</option>
+                    <option value="verde-esmeralda">Verde-Água & Menta Suave</option>
+                    <option value="roxo-indigo">Roxo Vibrante & Índigo</option>
+                    <option value="azul-ciano">Azul Sereno & Ciano</option>
+                    <option value="rosa-rubi">Rosa Doce & Rubi</option>
+                    <option value="dark-elegance">Noturno Sofisticado (Dark)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 6: MODELOS PRONTOS -->
+          <div id="canva-pane-modelos" class="canva-tab-pane hidden space-y-4">
+            <div>
+              <h4 class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                <i data-lucide="wand-2" class="w-4 h-4 text-rose-500"></i> Modelos Prontos 1-Clique
+              </h4>
+              <p class="text-xs text-slate-500">Aplique instantaneamente uma combinação profissional completa de fontes, cores, cartões e banners.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div data-preset="laranja" onclick="DesignStudio.applyPreset('laranja')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-orange-600 inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Laranja Original</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Plus Jakarta Sans, cards arredondados 3xl, carimbo de patinhas e banner comovente.</p>
+              </div>
+
+              <div data-preset="verde" onclick="DesignStudio.applyPreset('verde')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-teal-600 inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Verde-Água & Menta Suave</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Poppins, selo de ONG auditada, cards modernos 2xl e banner teal de amor animal.</p>
+              </div>
+
+              <div data-preset="roxo" onclick="DesignStudio.applyPreset('roxo')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-[#007E82] inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Roxo Pet Fashion</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Fredoka arredondada, corações de afeto, carimbos duplos e alta energia visual.</p>
+              </div>
+
+              <div data-preset="azul" onclick="DesignStudio.applyPreset('azul')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-sky-600 inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Azul Sereno & Auditado</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Montserrat, selo de responsabilidade oficial, foco em transparência e saúde animal.</p>
+              </div>
+
+              <div data-preset="rosa" onclick="DesignStudio.applyPreset('rosa')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-pink-600 inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Rosa Aconchego & Resgate</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Nunito suave, fita de histórias de superação, corações e cards ultra-acolhedores.</p>
+              </div>
+
+              <div data-preset="dark" onclick="DesignStudio.applyPreset('dark')" class="preset-theme-card">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="w-4 h-4 rounded-full bg-slate-900 border border-slate-600 inline-block"></span>
+                  <span class="text-xs font-extrabold text-slate-900">Noturno Sofisticado (Dark)</span>
+                </div>
+                <p class="text-[11px] text-slate-500">Fonte Inter, tema escuro suave, alto contraste visual e selos de urgência destacados.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Coluna de Pré-visualização Instantânea do Card -->
+        <div class="w-full md:w-80 bg-slate-50 p-4 sm:p-5 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col justify-between flex-shrink-0">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                <i data-lucide="eye" class="w-3.5 h-3.5 text-orange-600"></i> Prévia em Tempo Real
+              </span>
+              <span class="text-[10px] font-bold text-teal-700 bg-teal-100 px-2 py-0.5 rounded-full">Ao Vivo</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-3 leading-tight">
+              Veja como os cards e figuras se comportam instantaneamente com as suas escolhas:
+            </p>
+
+            <div id="canva-mini-preview-container" class="transition-all">
+              <!-- Renderizado dinamicamente por updateLivePreviewMiniCard() -->
+            </div>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-200/80 text-[11px] text-slate-500 flex items-center gap-1.5">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-teal-600 flex-shrink-0"></i>
+            <span>As mudanças são salvas localmente e permanecem ativas na navegação.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Rodapé com Ações -->
+      <div class="px-6 py-3.5 bg-[#F7EFE4] border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="DesignStudio.reset()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors shadow-xs flex items-center gap-1.5" title="Restaurar padrão original">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span>Restaurar Padrão</span>
+          </button>
+
+          <button type="button" onclick="DesignStudio.export()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors shadow-xs flex items-center gap-1.5" title="Exportar para JSON">
+            <i data-lucide="share-2" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span>Exportar JSON</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="DesignStudio.close()" class="px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors">
+            Cancelar
+          </button>
+          
+          <button type="button" onclick="DesignStudio.save()" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-slate-950 text-xs sm:text-sm font-extrabold shadow-md shadow-orange-600/25 transition-all flex items-center gap-2 hover:scale-[1.02]">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Publicar & Salvar Layout</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de Cadastro de Nova ONG com Diretrizes Integradas (Exclusivo Administrador) -->
+  <div id="admin-ong-register-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/80 shadow-xs transition-all duration-300">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[94vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-all border border-orange-200 relative">
+      
+      <!-- Cabeçalho do Modal -->
+      <div class="p-5 sm:p-6 bg-[#F7EFE4] text-slate-950 border-b border-[#007E82]/20 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center text-2xl shadow-inner">
+            🏛️
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 text-orange-200 text-[10px] font-black uppercase tracking-wider border border-amber-600">
+                Adesão &amp; Gestão Administrativa
+              </span>
+              <span class="px-2 py-0.5 rounded-full bg-[#007E82] text-white text-teal-200 text-[10px] font-black uppercase tracking-wider border border-[#005c60]">
+                Lei 9.610/98 &amp; LGPD
+              </span>
+            </div>
+            <h2 class="text-lg sm:text-xl font-black text-slate-950 leading-tight mt-1">
+              Cadastrar Nova ONG / Instituição Parceira
+            </h2>
+            <p class="text-xs text-[#b8e2e4] font-medium">
+              Cadastre a organização com assinatura obrigatória das diretrizes e cessão de direitos de imagem
+            </p>
+          </div>
+        </div>
+        <button onclick="closeAdminNewOngModal()" class="w-9 h-9 rounded-full bg-white hover:bg-white text-slate-950 flex items-center justify-center transition-all cursor-pointer" title="Fechar">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Formulário de Cadastro e Assinatura Integrada -->
+      <form id="admin-ong-register-form" onsubmit="handleAdminNewOngSubmit(event)" class="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6 text-slate-800">
+        
+        <!-- Banner Explicativo da Exigência Legal -->
+        <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50/50 to-[#e6f4f5] border border-amber-200 text-xs text-amber-950 space-y-1.5 shadow-2xs">
+          <div class="font-black text-sm flex items-center gap-2 text-amber-900">
+            <i data-lucide="shield-check" class="w-4 h-4 text-orange-600 flex-shrink-0"></i>
+            <span>Conformidade com a Lei de Direitos Autorais (9.610/98) e LGPD (13.709/18)</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed">
+            Para cadastrar animais na vitrine pública e divulgar imagens dos resgates, é obrigatória a assinatura das diretrizes e da autorização formal de cessão de imagens pelo Representante Legal. Ao salvar, a ONG será ativada e estará liberada para inclusão imediata de pets.
+          </p>
+        </div>
+
+        <!-- ETAPA 1: DADOS INSTITUCIONAIS DA ORGANIZAÇÃO -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-orange-600 text-slate-950 flex items-center justify-center text-xs font-black">1</span>
+              <span>Dados Institucionais da ONG / Protetor(a)</span>
+            </h3>
+            <span class="text-[11px] font-bold text-slate-400">Passo 1 de 2</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+            <!-- Nome da ONG -->
+            <div class="sm:col-span-2">
+              <label for="admin-reg-ong-nome" class="block font-bold text-slate-700 mb-1">Nome Oficial da ONG / Instituto *</label>
+              <input type="text" id="admin-reg-ong-nome" required placeholder="Ex: Instituto Patinhas de Luz, Abrigo São Francisco..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Sigla / Apelido -->
+            <div>
+              <label for="admin-reg-ong-sigla" class="block font-bold text-slate-700 mb-1">Sigla / Nome Curto *</label>
+              <input type="text" id="admin-reg-ong-sigla" required placeholder="Ex: PATINHAS, ABRIGO-DF" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-900 text-xs sm:text-sm uppercase focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- CNPJ ou CPF do Responsável -->
+            <div>
+              <label for="admin-reg-ong-cnpj" class="block font-bold text-slate-700 mb-1">CNPJ da ONG (ou CPF do Protetor) *</label>
+              <input type="text" id="admin-reg-ong-cnpj" required oninput="applyAdminCnpjMask(this)" placeholder="00.000.000/0001-00" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-mono text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Região / Cidade DF -->
+            <div>
+              <label for="admin-reg-ong-regiao" class="block font-bold text-slate-700 mb-1">Região de Atuação (DF) *</label>
+              <select id="admin-reg-ong-regiao" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+                <option value="Brasília / Plano Piloto">Brasília / Plano Piloto</option>
+                <option value="Taguatinga">Taguatinga</option>
+                <option value="Ceilândia">Ceilândia</option>
+                <option value="Águas Claras">Águas Claras</option>
+                <option value="Guará">Guará</option>
+                <option value="Samambaia">Samambaia</option>
+                <option value="Vicente Pires">Vicente Pires</option>
+                <option value="Sobradinho">Sobradinho</option>
+                <option value="Gama">Gama</option>
+                <option value="Santa Maria">Santa Maria</option>
+                <option value="Outra Região DF / Entorno">Outra Região DF / Entorno</option>
+              </select>
+            </div>
+
+            <!-- Telefone / WhatsApp com DDD -->
+            <div>
+              <label for="admin-reg-ong-whatsapp" class="block font-bold text-slate-700 mb-1">WhatsApp Institucional com DDD *</label>
+              <input type="tel" id="admin-reg-ong-whatsapp" required oninput="applyAdminPhoneMask(this)" placeholder="(61) 98765-4321" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Instagram Oficial -->
+            <div>
+              <label for="admin-reg-ong-instagram" class="block font-bold text-slate-700 mb-1">Instagram Oficial (@usuario)</label>
+              <input type="text" id="admin-reg-ong-instagram" placeholder="@ongparceira" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Chave Pix Oficial -->
+            <div class="sm:col-span-2">
+              <label for="admin-reg-ong-chave-pix" class="block font-bold text-slate-700 mb-1">Chave PIX Oficial (para campanhas &amp; apoio)</label>
+              <input type="text" id="admin-reg-ong-chave-pix" placeholder="CNPJ, E-mail, Telefone ou Chave Aleatória" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-mono text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+            </div>
+
+            <!-- Foto / Logotipo da ONG -->
+            <div class="sm:col-span-3">
+              <label for="admin-reg-ong-foto" class="block font-bold text-slate-700 mb-1">URL da Imagem / Logotipo da Instituição</label>
+              <input type="url" id="admin-reg-ong-foto" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-semibold text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none">
+              <div class="flex items-center gap-2 mt-1.5 text-[11px] text-slate-500 flex-wrap">
+                <span>Sugestões rápidas de logotipo:</span>
+                <button type="button" onclick="setAdminSampleOngLogo('rescue')" class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 font-bold hover:bg-orange-100 cursor-pointer">🐶 Resgate &amp; Proteção</button>
+                <button type="button" onclick="setAdminSampleOngLogo('cat')" class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 font-bold hover:bg-orange-100 cursor-pointer">🐱 Acolhimento Felino</button>
+                <button type="button" onclick="setAdminSampleOngLogo('general')" class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-700 font-bold hover:bg-orange-100 cursor-pointer">🐾 Amor &amp; Vida Animal</button>
+              </div>
+            </div>
+
+            <!-- Descrição e História da ONG -->
+            <div class="sm:col-span-3">
+              <label for="admin-reg-ong-descricao" class="block font-bold text-slate-700 mb-1">Sobre a Atuação da ONG / Histórico de Resgates *</label>
+              <textarea id="admin-reg-ong-descricao" rows="2.5" required placeholder="Apresente a história da organização, trabalho de acolhimento, processo de triagem e dedicação à causa animal..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium text-slate-900 text-xs sm:text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white focus:outline-none"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ETAPA 2: DIRETRIZES INSTITUCIONAIS & CESSÃO DE IMAGEM E LOGO (LEI 9.610/98 & LGPD) -->
+        <div class="space-y-4 pt-2 border-t border-slate-200">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h3 class="text-sm font-black text-slate-900 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-teal-600 text-slate-950 flex items-center justify-center text-xs font-black">2</span>
+              <span>Diretrizes Institucionais &amp; Cessão de Direitos de Imagem (Lei 9.610/98 &amp; LGPD)</span>
+            </h3>
+            <span class="text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">Mandatório para Ativação</span>
+          </div>
+
+          <!-- Qualificação do Representante Legal -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="user-check" class="w-3.5 h-3.5 text-teal-600"></i>
+              <span>Qualificação do(a) Representante Legal Signatário(a):</span>
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+              <div>
+                <label for="admin-reg-ong-rep-nome" class="block font-bold text-slate-700 mb-1">Nome Completo *</label>
+                <input type="text" id="admin-reg-ong-rep-nome" required placeholder="Nome do representante legal" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+              </div>
+              <div>
+                <label for="admin-reg-ong-rep-cargo" class="block font-bold text-slate-700 mb-1">Cargo / Função na ONG *</label>
+                <input type="text" id="admin-reg-ong-rep-cargo" required placeholder="Ex: Presidente, Coordenador(a)" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+              </div>
+              <div>
+                <label for="admin-reg-ong-rep-cpf" class="block font-bold text-slate-700 mb-1">CPF do Representante *</label>
+                <input type="text" id="admin-reg-ong-rep-cpf" required oninput="applyAdminCpfMask(this)" placeholder="000.000.000-00" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl font-mono text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+              </div>
+              <div>
+                <label for="admin-reg-ong-rep-email" class="block font-bold text-slate-700 mb-1">E-mail Institucional *</label>
+                <input type="email" id="admin-reg-ong-rep-email" required placeholder="contato@ong.org.br" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl font-semibold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- Cláusulas e Checkboxes Mandatórios -->
+          <div class="space-y-2.5 text-xs text-slate-700">
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-colors">
+              <input type="checkbox" id="admin-reg-ong-check-imagem" required class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300">
+              <span>
+                <strong class="text-slate-900 block">1. Cessão Gratuita e Licenciamento de Imagens, Logotipo e Histórias (Lei nº 9.610/98)</strong>
+                A entidade cede e autoriza gratuitamente o uso, exibição e divulgação de fotografias, vídeos, relatos e logomarcas dos animais resgatados na vitrine pública do MatchPet, redes sociais e relatórios acadêmicos, sem qualquer custo ou ônus.
+              </span>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-colors">
+              <input type="checkbox" id="admin-reg-ong-check-lgpd" required class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300">
+              <span>
+                <strong class="text-slate-900 block">2. Tratamento de Dados Técnicos para Adoção e Pesquisa (LGPD nº 13.709/18)</strong>
+                Autorizo o tratamento de dados públicos de contato (WhatsApp, redes sociais, chave Pix e região) para viabilizar conexões de adoção responsável entre a ONG e os adotantes.
+              </span>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-colors">
+              <input type="checkbox" id="admin-reg-ong-check-sanitario" required class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300">
+              <span>
+                <strong class="text-slate-900 block">3. Veracidade Sanitária das Fichas Médicas &amp; Responsabilidade de Triagem</strong>
+                Atesto que todos os dados clínicos dos animais informados (vacinas, castração e saúde) são estritamente verídicos e de responsabilidade exclusiva da instituição tutora.
+              </span>
+            </label>
+
+            <label class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-colors">
+              <input type="checkbox" id="admin-reg-ong-check-independencia" required class="mt-1 w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300">
+              <span>
+                <strong class="text-slate-900 block">4. Independência Institucional e Ausência de Solidariedade</strong>
+                Declaro ciência de que a plataforma atua como ponte tecnológica e não possui solidariedade civil ou guarda compartilhada dos animais acolhidos.
+              </span>
+            </label>
+          </div>
+
+          <!-- Campo de Assinatura Eletrônica Formal -->
+          <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200/90 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <label for="admin-reg-ong-signature-input" class="text-xs font-black text-teal-950 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="feather" class="w-3.5 h-3.5 text-teal-700"></i>
+                <span>Assinatura Eletrônica Formal por Extenso *</span>
+              </label>
+              <span class="text-[11px] text-teal-800 font-medium">Digite o nome idêntico ao do(a) Representante</span>
+            </div>
+            <input 
+              type="text" 
+              id="admin-reg-ong-signature-input" 
+              required 
+              placeholder="Digite o nome completo do Representante Legal para assinar digitalmente"
+              class="w-full px-4 py-3 bg-white border border-teal-300 rounded-xl font-serif text-teal-950 text-sm font-bold tracking-wide focus:ring-2 focus:ring-teal-600 focus:outline-none placeholder:font-sans placeholder:text-slate-400 placeholder:text-xs"
+            >
+            <p class="text-[11px] text-teal-900 leading-tight">
+              🔒 Ao clicar em "Salvar ONG &amp; Validar Diretrizes", um protocolo criptográfico (hash SHA-256) será registrado com data e hora oficiais para resguardo jurídico mútuo.
+            </p>
+          </div>
+
+          <!-- Mensagem de Erro Dinâmica -->
+          <div id="admin-reg-ong-error-box" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs font-bold text-rose-700 flex items-center gap-2">
+            <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600 flex-shrink-0"></i>
+            <span id="admin-reg-ong-error-text">Preencha todos os campos obrigatórios e marque os consentimentos.</span>
+          </div>
+
+        </div>
+
+        <!-- Rodapé de Ações do Formulário -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeAdminNewOngModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-[#F7EFE4] transition-colors cursor-pointer">
+            Cancelar
+          </button>
+          
+          <button 
+            type="submit" 
+            id="admin-reg-ong-submit-btn" 
+            class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-teal-600 hover:from-orange-700 hover:to-teal-700 text-slate-950 text-xs sm:text-sm font-black shadow-md shadow-orange-950/20 transition-all flex items-center gap-2 hover:scale-[1.02] cursor-pointer"
+          >
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Salvar ONG &amp; Validar Diretrizes</span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast de Notificação -->
+  <div id="toast-notification" class="translate-y-24 opacity-0 pointer-events-none flex items-center gap-2.5 px-4 py-3 bg-slate-900 text-slate-950 rounded-2xl shadow-xl text-xs font-bold border border-slate-700">
+    <i id="toast-icon" data-lucide="check-circle" class="w-4 h-4 text-teal-400"></i>
+    <span id="toast-message">Mensagem de aviso</span>
+  </div>
+
+  <!-- Scripts: Banco de Dados IndexedDB, Cloudinary, Analytics, Storage e Lógica do CRUD -->
+  <script src="js/lucide.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/design-studio.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    function setCrudLayout(mode) {
+      const grid = document.getElementById('admin-crud-main-grid');
+      const btnSplit = document.getElementById('btn-layout-split');
+      const btnForm = document.getElementById('btn-layout-form');
+      const btnList = document.getElementById('btn-layout-list');
+
+      const activeClass = 'px-3.5 py-1.5 rounded-xl text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-xs flex items-center gap-1.5 cursor-pointer';
+      const inactiveClass = 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer';
+
+      if (btnSplit) btnSplit.className = (mode === 'split') ? activeClass : inactiveClass;
+      if (btnForm) btnForm.className = (mode === 'form') ? activeClass : inactiveClass;
+      if (btnList) btnList.className = (mode === 'list') ? activeClass : inactiveClass;
+
+      if (!grid) return;
+      grid.classList.remove('mode-split', 'mode-form', 'mode-list');
+      grid.classList.add(`mode-${mode}`);
+    }
+    lucide.createIcons();
+  </script>
+</body>
+</html>
