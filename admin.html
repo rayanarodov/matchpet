@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>MatchPet - Painel Administrativo | Gestão de Animais & Fichas Médicas</title>
   
   <!-- Favicon Oficial MatchPet (Logo Nova da Guia do Navegador) -->
@@ -128,11 +128,11 @@
   <!-- Barra de Navegação em Abas do Moderador -->
   <div class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-2xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 max-w-full">
         <button 
           id="tab-btn-crud" 
           onclick="switchAdminTab('crud')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-slate-950 shadow-sm shadow-[#007E82]/20 transition-all"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-slate-950 shadow-sm shadow-[#007E82]/20 transition-all flex-shrink-0 whitespace-nowrap"
         >
           <i data-lucide="clipboard-list" class="w-4 h-4"></i>
           <span>Gestão de Animais (CRUD)</span>
@@ -140,7 +140,7 @@
         <button 
           id="tab-btn-solidarity" 
           onclick="switchAdminTab('solidarity')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap"
         >
           <i data-lucide="gift" class="w-4 h-4 text-teal-600"></i>
           <span>Feirinhas, Rifas & ONG</span>
@@ -149,7 +149,7 @@
         <button 
           id="tab-btn-analytics" 
           onclick="switchAdminTab('analytics')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap"
         >
           <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#007E82]"></i>
           <span>Métricas & Pesquisa (Analytics)</span>

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>MatchPet - Plataforma de Adoção | Encontre seu Pet Ideal</title>
   
   <!-- Favicon Oficial MatchPet (Logo Nova da Guia do Navegador) -->
@@ -238,7 +238,7 @@
           <!-- Painel Suspenso de Login para Admins (Dropdown Card) -->
           <div 
             id="admin-header-dropdown-panel" 
-            class="hidden absolute right-0 mt-2 w-80 sm:w-84 bg-white rounded-3xl shadow-2xl border-2 border-[#007E82] p-5 z-50 text-left transition-all"
+            class="hidden absolute right-0 mt-2 w-80 sm:w-84 max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border-2 border-[#007E82] p-4 sm:p-5 z-50 text-left transition-all"
             style="box-shadow: 0 15px 35px -5px rgba(0, 126, 130, 0.25);"
           >
             <!-- Visão 1: Formulário de Login (Quando NÃO Autenticado) -->
@@ -388,7 +388,7 @@
 
   <!-- Barra de Atividades em Tempo Real (Cor Oficial da Marca #007E82) -->
   <div id="live-activity-ticker" class="text-white text-xs py-2 sm:py-2.5 px-3 sm:px-4 border-b-2 border-[#005e61] shadow-sm overflow-hidden font-cute" style="background-color: #007E82 !important;">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 min-w-0">
       <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
         <span class="badge-ao-vivo inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full bg-white font-black text-[10px] sm:text-[11px] uppercase tracking-wider border border-white shadow-xs" style="color: #007E82 !important; background-color: #ffffff !important;">
           <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#D19864] animate-pulse"></span>
@@ -396,7 +396,7 @@
         </span>
         <span class="text-white text-xs hidden sm:inline font-black">Comunidade MatchPet:</span>
       </div>
-      <div id="live-activity-ticker-content" class="flex-1 truncate text-[11px] sm:text-sm text-white font-extrabold tracking-wide transition-all duration-300">
+      <div id="live-activity-ticker-content" class="flex-1 min-w-0 truncate text-[11px] sm:text-sm text-white font-extrabold tracking-wide transition-all duration-300">
         🐾 <strong>Luna</strong> foi adotada com sucesso em Águas Claras há 15 minutos! Parabéns à nova família! 🎉
       </div>
       <div class="hidden lg:flex items-center gap-3 text-[11.5px] text-white flex-shrink-0 font-bold">

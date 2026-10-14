@@ -1643,10 +1643,46 @@ html, body {
     display: flex !important;
   }
 
-  /* Tipografia equilibrada para telas pequenas */
+  /* Previne zoom automático invasivo do iOS Safari e Android ao focar em inputs e selects */
+  input[type="text"],
+  input[type="password"],
+  input[type="search"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Ticker de atividades ao vivo: contenção estrita de largura e truncamento */
+  #live-activity-ticker {
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+
+  #live-activity-ticker-content {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  /* Tipografia equilibrada para telas pequenas e bloqueio de zoom acidental */
+  html {
+    -webkit-text-size-adjust: 100%;
+    touch-action: pan-y;
+  }
+
   body {
     font-size: 14px;
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
   }
 
   /* Ajustes dos containers no celular */
@@ -1661,29 +1697,67 @@ html, body {
     overflow: hidden !important;
   }
 
-  /* Linha de destaques do banner: flex compacto e organizado */
+  /* Linha de destaques do banner: flexwrap inteligente sem estourar a tela */
   .banner-highlights-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
     flex-direction: row !important;
     justify-content: center !important;
-    gap: 0.5rem !important;
+    gap: 0.35rem !important;
   }
 
   .banner-highlights-row > div {
     flex: 1 1 auto !important;
-    padding: 0.5rem 0.6rem !important;
+    min-width: 85px !important;
+    max-width: 100% !important;
+    padding: 0.4rem 0.5rem !important;
     font-size: 10.5px !important;
+    box-sizing: border-box !important;
   }
 
-  /* Barra de abas do portal (Animais, ONG, Rifas): toque suave e sem quebras */
+  /* Barra de abas do portal (Animais, ONG, Rifas): divisão balanceada e toque suave */
   .portal-segment-tab {
-    padding: 0.5rem 0.65rem !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: 0.5rem 0.35rem !important;
     font-size: 11px !important;
+    gap: 0.25rem !important;
+    box-sizing: border-box !important;
   }
 
-  /* Cards de impacto: grid 2x2 harmonioso */
+  .portal-segment-tab span:not([id^="panel-badge-"]) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Cards de impacto: grid 2x2 com contenção */
   .impact-stat-card {
     padding: 0.65rem 0.75rem !important;
     border-radius: 1rem !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Painel dropdown de Admin no cabeçalho */
+  #admin-header-dropdown-panel {
+    max-width: calc(100vw - 1.5rem) !important;
+    width: min(320px, calc(100vw - 1.5rem)) !important;
+    right: 0 !important;
+    left: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Cards de Pets e Botões com altura de toque amigável */
+  .pet-card {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+
+  .pet-card button,
+  .btn-quiz-cta,
+  #hero-search-container button {
+    touch-action: manipulation;
+    min-height: 42px !important;
   }
 
   /* Modais ocupam tela cheia confortável no mobile */
@@ -1692,12 +1766,41 @@ html, body {
   #quiz-modal .modal-content,
   #ong-management-modal .ong-modal-wide,
   #ong-add-pet-modal .modal-content {
-    width: 95vw !important;
-    max-width: 95vw !important;
+    width: 94vw !important;
+    max-width: 94vw !important;
     margin: 0.5rem auto !important;
-    max-height: 92vh !important;
+    max-height: 90vh !important;
+    padding: 1.25rem 1rem !important;
     border-radius: 1.25rem !important;
     overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box !important;
+  }
+
+  /* Galeria do modal no mobile: foto cheia + thumbnails horizontais roláveis */
+  #pet-modal .grid-cols-12 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  #pet-modal .col-span-9 {
+    width: 100% !important;
+  }
+
+  #pet-modal #modal-thumbnails {
+    width: 100% !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 0.5rem !important;
+    padding-bottom: 0.25rem !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #pet-modal #modal-thumbnails > * {
+    width: 68px !important;
+    height: 52px !important;
+    flex-shrink: 0 !important;
   }
 
   .ong-pets-wide-grid {
@@ -1707,6 +1810,33 @@ html, body {
   /* Otimização de toques e cliques em mobile */
   button, select, input {
     touch-action: manipulation;
+  }
+
+  /* Admin em mobile: padding e scroll horizontal para abas do moderador */
+  .admin-full-canvas {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  #admin-active-ong-select {
+    font-size: 16px !important;
+  }
+}
+
+/* Otimizações ultra-específicas para celulares muito compactos (<= 480px) */
+@media (max-width: 480px) {
+  header img {
+    max-height: 2.25rem !important;
+  }
+
+  .pet-card {
+    padding: 0.875rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  #catalogo {
+    padding-left: 0.625rem !important;
+    padding-right: 0.625rem !important;
   }
 }
 
