@@ -34,7 +34,7 @@
         enabled: true,
         badgeText: "✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨",
         title: "Faça um quiz e encontre o animal mais compatível com você.",
-        subtitle: "Mora em apartamento? Não tem tempo para passeios longos e busca um pet de baixa energia? Nosso sistema pondera cada característica com pesos matemáticos reais de estilo de vida, espaço e rotina para indicar o animal perfeito para a sua família.",
+        subtitle: "Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.",
         bgType: "gradient",
         gradientPreset: "roxo-indigo",
         solidColor: "#007E82",
@@ -618,11 +618,14 @@
 
     bannerEl.classList.remove("hidden");
 
-    bannerEl.className = "relative overflow-hidden rounded-3xl p-7 sm:p-10 border-2 border-[#007E82] shadow-xl text-center space-y-5 transition-all";
+    bannerEl.className = "relative overflow-hidden rounded-2xl sm:rounded-3xl p-3 sm:p-7 border-2 border-[#007E82] shadow-md sm:shadow-xl text-center space-y-1.5 sm:space-y-3.5 transition-all";
     bannerEl.style.cssText = "background: linear-gradient(135deg, #F9F3EA 0%, #faeedf 32%, #e6f4f5 70%, #faeedf 100%) !important;";
 
-    const bannerTitle = b.title || "Descubra o pet que combina com o seu estilo de vida";
-    const bannerSubtitle = b.subtitle || "Responda a perguntas simples sobre sua rotina e espaço para ver instantaneamente os animais mais indicados para você.";
+    const bannerTitle = b.title || "Faça um quiz e encontre o animal mais compatível com você";
+    let bannerSubtitle = b.subtitle || "Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.";
+    if (!bannerSubtitle || bannerSubtitle.includes("Mora em apartamento") || bannerSubtitle.length > 120) {
+      bannerSubtitle = "Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.";
+    }
     let bannerBadge = (b.badgeText || "✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨").trim();
     if (bannerBadge.includes("TESTE DE COMPATIBILIDADE INTELIGENTE")) {
       bannerBadge = "✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨";
@@ -631,49 +634,49 @@
 
     bannerEl.innerHTML = `
       <!-- Efeitos decorativos suaves da marca (#D19864 e #007E82) -->
-      <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-[#D19864]/25 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -left-10 -top-10 w-60 h-60 bg-[#007E82]/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -right-8 -bottom-8 w-40 sm:w-60 h-40 sm:h-60 bg-[#D19864] rounded-full blur-3xl pointer-events-none opacity-30"></div>
+      <div class="absolute -left-8 -top-8 w-40 sm:w-60 h-40 sm:h-60 bg-[#007E82] rounded-full blur-3xl pointer-events-none opacity-30"></div>
       
       <!-- Selo Central Harmônico -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#D19864] text-slate-950 text-xs font-black uppercase tracking-wider shadow-xs mx-auto">
+      <div class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 rounded-full bg-white border border-[#D19864] text-slate-950 text-[9px] sm:text-xs font-black uppercase tracking-wider shadow-2xs mx-auto max-w-full text-center">
         <span>${bannerBadge}</span>
       </div>
 
       <!-- Título Principal em letras pretas nítidas -->
-      <h1 class="text-2xl sm:text-4xl font-black font-brand tracking-tight text-slate-950 leading-tight max-w-2xl mx-auto">
+      <h1 class="text-sm sm:text-2xl md:text-3xl font-black font-brand tracking-tight text-slate-950 leading-snug max-w-xl mx-auto break-words">
         ${bannerTitle}
       </h1>
 
       <!-- Texto enxuto e convidativo -->
-      <p class="text-sm sm:text-base text-slate-800 leading-relaxed font-medium max-w-xl mx-auto">
+      <p class="text-[11px] sm:text-sm text-slate-700 leading-snug font-medium max-w-md mx-auto">
         ${bannerSubtitle}
       </p>
 
       <!-- APENAS A OPÇÃO DE REALIZAR O QUIZ -->
-      <div class="pt-3 flex items-center justify-center">
+      <div class="pt-0.5 sm:pt-1.5 flex items-center justify-center">
         <button 
           type="button" 
           onclick="openQuizModal()" 
-          class="btn-quiz-cta w-full sm:w-auto px-10 py-4 rounded-2xl text-slate-950 font-black text-base sm:text-lg flex items-center justify-center gap-2.5 cursor-pointer"
+          class="btn-quiz-cta w-full sm:w-auto px-5 sm:px-8 py-2 sm:py-3 rounded-xl sm:rounded-2xl text-slate-950 font-black text-xs sm:text-base flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
         >
           <span>${bannerCta}</span>
-          <span class="text-xl">🐾</span>
+          <span class="text-sm sm:text-lg">🐾</span>
         </button>
       </div>
 
-      <!-- 3 destaques harmônicos em letras pretas -->
-      <div class="pt-4 border-t border-[#e8ddcf] grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-950 font-bold max-w-2xl mx-auto">
-        <div class="flex items-center justify-center gap-2 p-2.5 bg-white/70 rounded-xl border border-[#e8ddcf]">
+      <!-- 3 destaques harmônicos em desktop (ocultos no mobile) -->
+      <div class="banner-highlights-row hidden sm:flex pt-2.5 border-t border-[#e8ddcf] flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-950 font-bold max-w-2xl mx-auto">
+        <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
           <span>⚡</span>
-          <span>Rápido (1 minuto)</span>
+          <span class="leading-tight">Rápido (1 minuto)</span>
         </div>
-        <div class="flex items-center justify-center gap-2 p-2.5 bg-white/70 rounded-xl border border-[#e8ddcf]">
+        <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
           <span>🎯</span>
-          <span>Afinidade sob medida</span>
+          <span class="leading-tight">Afinidade sob medida</span>
         </div>
-        <div class="flex items-center justify-center gap-2 p-2.5 bg-white/70 rounded-xl border border-[#e8ddcf]">
+        <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
           <span>🔒</span>
-          <span>100% Gratuito</span>
+          <span class="leading-tight">100% Gratuito</span>
         </div>
       </div>
     `;

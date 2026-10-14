@@ -1710,7 +1710,7 @@ function updateUserSessionUI() {
   if (!container) return;
 
   container.innerHTML = `
-    <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F9F3EA] text-[#007E82] text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
+    <div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F9F3EA] text-[#007E82] text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
       <span class="w-2 h-2 rounded-full bg-[#007E82]"></span>
       <i data-lucide="shield" class="w-3.5 h-3.5 text-[#007E82]"></i>
       <span>Modo Anônimo</span>

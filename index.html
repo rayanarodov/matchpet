@@ -235,9 +235,9 @@
 
       <!-- Sessão do Usuário (Modo Anônimo) & Painel de Login para Admins (Canto Superior Direito) -->
       <div class="flex items-center gap-2 flex-shrink-0">
-        <!-- Modo Anônimo (Visível para Adotantes) -->
-        <div id="user-session-container" class="flex items-center">
-          <div class="hidden sm:inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#F9F3EA] text-[#007E82] text-[11px] sm:text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
+        <!-- Modo Anônimo (Visível para Adotantes em telas >= sm) -->
+        <div id="user-session-container" class="hidden sm:flex items-center">
+          <div class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#F9F3EA] text-[#007E82] text-[11px] sm:text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
             <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#007E82]"></span>
             <i data-lucide="shield" class="w-3 sm:w-3.5 h-3 sm:h-3.5 text-[#007E82]"></i>
             <span>Anônimo</span>
@@ -251,7 +251,7 @@
             type="button"
             id="btn-toggle-admin-panel"
             onclick="toggleAdminHeaderPanel(event)"
-            class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-[11px] sm:text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none"
+            class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none flex-shrink-0"
             title="Acesso de Administrador (Login para Gestão)"
           >
             <i data-lucide="lock" class="w-3.5 h-3.5 text-[#007E82]" id="btn-admin-header-icon"></i>
@@ -401,37 +401,6 @@
       </div>
 
     </div>
-
-    <!-- Barra de Abas Exclusiva para Celular (Visível somente em telas <= 768px) -->
-    <div id="mobile-main-nav" class="mobile-subnav-bar flex md:hidden px-3 pb-2.5 pt-0.5 gap-1.5 items-center justify-between border-t border-[#e8ddcf]/60">
-      <button 
-        type="button" 
-        id="mobile-nav-btn-animais" 
-        onclick="switchMainTab('animais')" 
-        class="mobile-nav-btn active flex-1 py-1.5 px-2 rounded-xl text-xs font-black text-center bg-[#D19864] text-slate-950 border border-[#b87e4c] flex items-center justify-center gap-1 shadow-2xs"
-      >
-        <i data-lucide="search" class="w-3.5 h-3.5"></i>
-        <span>Animais</span>
-      </button>
-      <button 
-        type="button" 
-        id="mobile-nav-btn-ongs" 
-        onclick="switchMainTab('ongs')" 
-        class="mobile-nav-btn flex-1 py-1.5 px-2 rounded-xl text-xs font-bold text-center text-slate-700 bg-white border border-[#e8ddcf] flex items-center justify-center gap-1"
-      >
-        <i data-lucide="building-2" class="w-3.5 h-3.5 text-[#007E82]"></i>
-        <span>A ONG</span>
-      </button>
-      <button 
-        type="button" 
-        id="mobile-nav-btn-blog" 
-        onclick="switchMainTab('blog')" 
-        class="mobile-nav-btn flex-1 py-1.5 px-2 rounded-xl text-xs font-bold text-center text-slate-700 bg-white border border-[#e8ddcf] flex items-center justify-center gap-1"
-      >
-        <i data-lucide="newspaper" class="w-3.5 h-3.5 text-fuchsia-600"></i>
-        <span>Blog</span>
-      </button>
-    </div>
   </header>
 
   <!-- Barra de Atividades em Tempo Real (Cor Oficial da Marca #007E82) -->
@@ -459,51 +428,51 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
       <!-- Banner de Destaque: Teste de Compatibilidade Inteligente no Topo -->
-      <div class="max-w-4xl mx-auto mb-6 sm:mb-8">
-        <div id="custom-vitrine-banner" class="relative overflow-hidden rounded-3xl p-4 sm:p-10 border-2 border-[#007E82] shadow-xl text-center space-y-3.5 sm:space-y-5 transition-all">
+      <div class="max-w-4xl mx-auto mb-3 sm:mb-6">
+        <div id="custom-vitrine-banner" class="relative overflow-hidden rounded-2xl sm:rounded-3xl p-3 sm:p-7 border-2 border-[#007E82] shadow-md sm:shadow-xl text-center space-y-1.5 sm:space-y-3.5 transition-all">
           
           <!-- Efeitos decorativos suaves com as cores da marca (#D19864 e #007E82) -->
-          <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-[#D19864] rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -left-10 -top-10 w-60 h-60 bg-[#007E82] rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -right-8 -bottom-8 w-40 sm:w-60 h-40 sm:h-60 bg-[#D19864] rounded-full blur-3xl pointer-events-none opacity-30"></div>
+          <div class="absolute -left-8 -top-8 w-40 sm:w-60 h-40 sm:h-60 bg-[#007E82] rounded-full blur-3xl pointer-events-none opacity-30"></div>
           
           <!-- Selo Central Harmônico -->
-          <div class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white border border-[#D19864] text-slate-950 text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-xs mx-auto max-w-full text-center">
-            <span class="truncate">✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨</span>
+          <div class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 rounded-full bg-white border border-[#D19864] text-slate-950 text-[9px] sm:text-xs font-black uppercase tracking-wider shadow-2xs mx-auto max-w-full text-center">
+            <span>✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨</span>
           </div>
 
-          <!-- Título Principal em letras pretas nítidas -->
-          <h1 class="text-xl sm:text-3xl md:text-4xl font-black font-brand tracking-tight text-slate-950 leading-tight max-w-2xl mx-auto break-words">
-            Faça um quiz e encontre o animal mais compatível com você.
+          <!-- Título Principal em letras pretas nítidas e escala equilibrada -->
+          <h1 class="text-sm sm:text-2xl md:text-3xl font-black font-brand tracking-tight text-slate-950 leading-snug max-w-xl mx-auto break-words">
+            Faça um quiz e encontre o animal mais compatível com você
           </h1>
 
-          <!-- Texto enxuto e convidativo -->
-          <p class="text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed font-medium max-w-xl mx-auto">
-            Mora em apartamento? Não tem tempo para passeios longos e busca um pet de baixa energia? Nosso sistema pondera cada característica com pesos matemáticos reais de estilo de vida, espaço e rotina para indicar o animal perfeito para a sua família.
+          <!-- Descrição curta e direta (1 a 2 frases objetivas) -->
+          <p class="text-[11px] sm:text-sm text-slate-700 leading-snug font-medium max-w-md mx-auto">
+            Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.
           </p>
 
           <!-- APENAS A OPÇÃO DE REALIZAR O QUIZ -->
-          <div class="pt-1.5 sm:pt-3 flex items-center justify-center">
+          <div class="pt-0.5 sm:pt-1.5 flex items-center justify-center">
             <button 
               type="button" 
               onclick="openQuizModal()" 
-              class="btn-quiz-cta w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 rounded-2xl text-slate-950 font-black text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              class="btn-quiz-cta w-full sm:w-auto px-5 sm:px-8 py-2 sm:py-3 rounded-xl sm:rounded-2xl text-slate-950 font-black text-xs sm:text-base flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
             >
               <span>Realizar o Quiz</span>
-              <span class="text-lg sm:text-xl">🐾</span>
+              <span class="text-sm sm:text-lg">🐾</span>
             </button>
           </div>
 
-          <!-- 3 destaques harmônicos em letras pretas -->
-          <div class="banner-highlights-row pt-3 sm:pt-4 border-t border-[#e8ddcf] flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-slate-950 font-bold max-w-2xl mx-auto">
-            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
+          <!-- Destaques harmônicos em desktop (ocultos em celular para garantir altura <= 35-40% viewport) -->
+          <div class="banner-highlights-row hidden sm:flex pt-2.5 border-t border-[#e8ddcf] flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-950 font-bold max-w-2xl mx-auto">
+            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
               <span>⚡</span>
               <span class="leading-tight">Rápido (1 minuto)</span>
             </div>
-            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
+            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
               <span>🎯</span>
               <span class="leading-tight">Afinidade sob medida</span>
             </div>
-            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
+            <div class="flex items-center justify-center gap-1 sm:gap-1.5 px-3 py-1.5 bg-white rounded-xl border border-[#e8ddcf] text-center shadow-2xs">
               <span>🔒</span>
               <span class="leading-tight">100% Gratuito</span>
             </div>
@@ -708,8 +677,8 @@
       </div>
     </div>
 
-    <!-- Destaque de Impacto & Comunidade Ativa (Design Vivo & Atraente - Fundos 100% Sólidos) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 my-3">
+    <!-- Destaque de Impacto & Comunidade Ativa (Visível em Desktop/Telas Médias) -->
+    <div class="hidden md:grid md:grid-cols-4 gap-3 sm:gap-4 my-3">
       <div id="stat-card-pets" class="impact-stat-card impact-card-pets p-3.5 sm:p-4 rounded-2xl shadow-sm flex items-center gap-3 group hover:shadow-md transition-all" style="background-color: #ffffff !important; opacity: 1 !important; border: 2px solid #007E82 !important;">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#007E82] text-white flex items-center justify-center text-lg shadow-sm flex-shrink-0 group-hover:scale-105 transition-transform">
           🐶
@@ -895,48 +864,8 @@
 
     </div>
 
-    <!-- Banner de Divulgação do Quiz na Vitrine (Atrativo & Direcionado) -->
-    <div id="vitrine-quiz-callout" class="my-4 p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-[#00383b] via-[#005c60] to-[#004245] text-slate-950 shadow-xl border border-[#007E82]/40 relative overflow-hidden transition-all group">
-      <div class="absolute -right-8 -bottom-8 w-48 h-48 hidden rounded-full blur-2xl pointer-events-none"></div>
-      <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-400 via-orange-500 to-amber-500 text-slate-950 flex items-center justify-center font-bold text-2xl shadow-lg shadow-orange-500/20 flex-shrink-0 group-hover:scale-105 transition-transform">
-            ✨
-          </div>
-          <div>
-            <div class="flex flex-wrap items-center gap-2 mb-0.5">
-              <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#D19864] text-slate-950 border border-[#b87e4c] text-[#D19864] border border-[#b87e4c]">
-                Quiz Inteligente
-              </span>
-              <span class="text-[10px] font-bold text-slate-800 flex items-center gap-1">
-                <i data-lucide="clock" class="w-3 h-3 text-[#D19864]"></i> Leva 1 Minuto
-              </span>
-              <span class="text-[10px] font-bold text-emerald-300 flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3 h-3"></i> 100% Grátis
-              </span>
-            </div>
-            <h3 class="text-sm sm:text-base font-black text-slate-950 leading-tight">
-              Dúvida sobre qual pet combina com o seu dia a dia?
-            </h3>
-            <p class="text-xs text-slate-800 font-medium">
-              Faça nosso quiz e veja o catálogo ordenado pelos animais mais compatíveis com seu espaço e rotina!
-            </p>
-          </div>
-        </div>
-
-        <button 
-          type="button" 
-          onclick="openQuizModal()" 
-          class="w-full md:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-black text-xs sm:text-sm shadow-md shadow-orange-500/20 transition-all flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-95 cursor-pointer flex-shrink-0"
-        >
-          <i data-lucide="sparkles" class="w-4 h-4 text-slate-950"></i>
-          <span>Realizar o Quiz</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Grid Principal de Animais -->
-    <div id="pets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 w-full my-4">
+    <!-- Grid Principal de Animais (Fluxo Vertical em Coluna Única no Mobile) -->
+    <div id="pets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 w-full my-4">
       <!-- Cards renderizados dinamicamente -->
     </div>
 
@@ -1391,19 +1320,6 @@
     </div>
 
   </main>
-
-  <!-- Botão Flutuante Inferior para Acesso Rápido ao Quiz no Mobile (Posicionamento Seguro sem Bloquear Conteúdo) -->
-  <div id="mobile-floating-cta" class="fixed bottom-4 right-4 sm:hidden z-30 transition-all duration-300 pointer-events-auto">
-    <button 
-      type="button" 
-      onclick="openQuizModal()" 
-      class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-[#007E82] text-white font-black text-xs shadow-2xl border-2 border-white active:scale-95 transition-all cursor-pointer hover:bg-[#00686c]"
-      title="Fazer Quiz de Compatibilidade"
-    >
-      <span class="text-sm">🐾</span>
-      <span>Fazer Quiz</span>
-    </button>
-  </div>
 
   <!-- Modal Detalhado do Animal - Mobile Screen 1 Exato do Mockup -->
   <div id="pet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-all duration-300">

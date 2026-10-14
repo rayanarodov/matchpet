@@ -589,7 +589,7 @@ const DEFAULT_LAYOUT_DESIGN = {
     enabled: true,
     badgeText: "✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨",
     title: "Faça um quiz e encontre o animal mais compatível com você.",
-    subtitle: "Mora em apartamento? Não tem tempo para passeios longos e busca um pet de baixa energia? Nosso sistema pondera cada característica com pesos matemáticos reais de estilo de vida, espaço e rotina para indicar o animal perfeito para a sua família.",
+    subtitle: "Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.",
     bgType: "gradient", // 'gradient', 'solid', 'image'
     gradientPreset: "roxo-indigo", // 'roxo-indigo', 'laranja-amber', 'verde-esmeralda', 'azul-ciano', 'rosa-rubi', 'dark-elegance'
     solidColor: "#007E82",
@@ -611,9 +611,12 @@ const LayoutDesignStorage = {
           activeStickers: { ...DEFAULT_LAYOUT_DESIGN.activeStickers, ...(parsed.activeStickers || {}) },
           customBanner: { ...DEFAULT_LAYOUT_DESIGN.customBanner, ...(parsed.customBanner || {}) }
         };
-        if (layout.customBanner && layout.customBanner.badgeText) {
-          if (layout.customBanner.badgeText.includes("TESTE DE COMPATIBILIDADE INTELIGENTE")) {
+        if (layout.customBanner) {
+          if (layout.customBanner.badgeText && layout.customBanner.badgeText.includes("TESTE DE COMPATIBILIDADE INTELIGENTE")) {
             layout.customBanner.badgeText = "✨ TESTE DE COMPATIBILIDADE INTELIGENTE ✨";
+          }
+          if (!layout.customBanner.subtitle || layout.customBanner.subtitle.includes("Mora em apartamento") || layout.customBanner.subtitle.length > 120) {
+            layout.customBanner.subtitle = "Responda perguntas rápidas sobre seu espaço e rotina para descobrir o pet perfeito para a sua família.";
           }
         }
         return layout;
