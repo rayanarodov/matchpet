@@ -508,8 +508,8 @@ function resetAllFilters() {
   const btnCachorro = document.getElementById("btn-species-cachorro");
   const btnGato = document.getElementById("btn-species-gato");
   if (btnTodos) btnTodos.className = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-bold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
-  if (btnCachorro) btnCachorro.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F7EFE4] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
-  if (btnGato) btnGato.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F7EFE4] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  if (btnCachorro) btnCachorro.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  if (btnGato) btnGato.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
 
   if (typeof currentMainTab !== "undefined" && currentMainTab !== 'animais') {
     switchMainTab('animais');
@@ -532,7 +532,7 @@ function setSpeciesFilter(species) {
   const btnGato = document.getElementById("btn-species-gato");
 
   const activeClass = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-bold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
-  const inactiveClass = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F7EFE4] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  const inactiveClass = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
 
   if (btnTodos) btnTodos.className = (species === 'todos') ? activeClass : inactiveClass;
   if (btnCachorro) btnCachorro.className = (species === 'cachorro') ? activeClass : inactiveClass;
@@ -664,7 +664,7 @@ function renderPetsGrid(pets) {
     const porteLabels = {
       mini: { label: "Mini", color: "bg-teal-50 text-teal-800 border-teal-200" },
       pequeno: { label: "Pequeno", color: "bg-indigo-50 text-indigo-800 border-indigo-200" },
-      medio: { label: "Médio", color: "bg-[#F7EFE4] text-[#006366] border-[#e8ddcf]" },
+      medio: { label: "Médio", color: "bg-[#F9F3EA] text-[#006366] border-[#e8ddcf]" },
       grande: { label: "Grande", color: "bg-amber-50 text-amber-900 border-amber-200" },
       gigante: { label: "Gigante", color: "bg-rose-50 text-rose-900 border-rose-200" }
     };
@@ -718,7 +718,7 @@ function renderPetsGrid(pets) {
     const tempColorPalette = [
       'bg-emerald-50 text-emerald-800 border-emerald-200',
       'bg-amber-50 text-amber-900 border-amber-200',
-      'bg-[#F7EFE4] text-[#004d50] border-[#e8ddcf]',
+      'bg-[#F9F3EA] text-[#004d50] border-[#e8ddcf]',
       'bg-sky-50 text-sky-900 border-sky-200'
     ];
     const tempHtml = tempTags.map((t, idx) => `
@@ -758,8 +758,8 @@ function renderPetsGrid(pets) {
           <!-- Stickers Decorativos do Studio Canva (se ativos) -->
           ${(stickers.fitaResgate || stickers.badgeVerificada || stickers.seloUrgente) ? `
             <div class="absolute top-11 left-3 flex flex-wrap gap-1 z-10 pointer-events-none">
-              ${stickers.fitaResgate ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F7EFE4] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ''}
-              ${stickers.badgeVerificada ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F7EFE4] text-slate-950 border border-[#007E82] shadow-xs">🛡️ Auditada</span>` : ''}
+              ${stickers.fitaResgate ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F9F3EA] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ''}
+              ${stickers.badgeVerificada ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F9F3EA] text-slate-950 border border-[#007E82] shadow-xs">🛡️ Auditada</span>` : ''}
               ${stickers.seloUrgente ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-xs">🌟 Urgente</span>` : ''}
             </div>
           ` : ''}
@@ -804,7 +804,7 @@ function renderPetsGrid(pets) {
               <h3 class="font-brand text-2xl sm:text-3xl font-black tracking-tight text-slate-900 ${especieTheme.nameHover} transition-colors">
                 ${pet.nome}
               </h3>
-              <span class="text-xs font-extrabold text-[#003e40] bg-[#F7EFE4] px-2.5 py-0.5 rounded-full border border-[#e8ddcf]">${pet.idade}</span>
+              <span class="text-xs font-extrabold text-[#003e40] bg-[#F9F3EA] px-2.5 py-0.5 rounded-full border border-[#e8ddcf]">${pet.idade}</span>
             </div>
 
             <!-- Raça & Localização no DF -->
@@ -825,7 +825,7 @@ function renderPetsGrid(pets) {
             </div>
 
             <!-- ONG Responsável pelo Acolhimento -->
-            <div class="text-[11px] font-medium text-[#004d50] flex items-center gap-1.5 mb-2.5 bg-[#F7EFE4] px-2.5 py-1 rounded-xl border border-[#e8ddcf]">
+            <div class="text-[11px] font-medium text-[#004d50] flex items-center gap-1.5 mb-2.5 bg-[#F9F3EA] px-2.5 py-1 rounded-xl border border-[#e8ddcf]">
               ${getFastIconSvg('building-2', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
               <span class="truncate">Cuidado por: <strong class="font-bold">${ongNome}</strong></span>
             </div>
@@ -847,7 +847,7 @@ function renderPetsGrid(pets) {
             </div>
 
             <!-- História de Vida e Resgate -->
-            <div class="p-3 rounded-2xl bg-[#F7EFE4] border border-[#e8ddcf] text-slate-700">
+            <div class="p-3 rounded-2xl bg-[#F9F3EA] border border-[#e8ddcf] text-slate-700">
               <div class="flex items-center gap-1.5 text-[10px] font-black text-[#003e40] uppercase tracking-wider mb-1">
                 ${getFastIconSvg('book-open', 'w-3.5 h-3.5 text-[#007E82]')}
                 <span>História de Vida</span>
@@ -865,7 +865,7 @@ function renderPetsGrid(pets) {
             <button 
               type="button"
               onclick="openPetModalById('${pet.id}')" 
-              class="w-full py-2.5 px-2 rounded-xl border-2 border-[#e8ddcf] hover:border-[#007E82] bg-[#F7EFE4] hover:bg-[#e6f4f5] text-[#003e40] font-black text-xs shadow-2xs hover:shadow-md transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer"
+              class="w-full py-2.5 px-2 rounded-xl border-2 border-[#e8ddcf] hover:border-[#007E82] bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#003e40] font-black text-xs shadow-2xs hover:shadow-md transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer"
               title="Ler a ficha completa com histórico e exames de ${pet.nome}"
             >
               ${getFastIconSvg('file-text', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
@@ -1548,7 +1548,7 @@ function renderFavoritesModalUI() {
   // Se o usuário ainda não favoritou nenhum animal (Estado Vazio Solicitado)
   if (favPets.length === 0) {
     container.innerHTML = `
-      <div class="text-center py-12 px-4 sm:px-6 space-y-5 bg-gradient-to-b from-[#e6f4f5]/70 to-[#F7EFE4]/50 rounded-3xl border-2 border-dashed border-[#e8ddcf]">
+      <div class="text-center py-12 px-4 sm:px-6 space-y-5 bg-gradient-to-b from-[#e6f4f5]/70 to-[#F9F3EA]/50 rounded-3xl border-2 border-dashed border-[#e8ddcf]">
         <div class="w-16 h-16 rounded-3xl bg-rose-100 text-rose-500 mx-auto flex items-center justify-center text-3xl shadow-inner animate-pulse">
           🐾
         </div>
@@ -1621,7 +1621,7 @@ function renderFavoritesModalUI() {
           <button 
             type="button" 
             onclick="closeFavoritesModal(); openPetModalById('${pet.id}');"
-            class="px-3 py-2 rounded-xl bg-[#F7EFE4] hover:bg-[#e6f4f5] text-[#003e40] font-bold text-xs border border-[#e8ddcf] transition-colors flex items-center gap-1 cursor-pointer"
+            class="px-3 py-2 rounded-xl bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#003e40] font-bold text-xs border border-[#e8ddcf] transition-colors flex items-center gap-1 cursor-pointer"
             title="Ler Ficha Completa"
           >
             <i data-lucide="file-text" class="w-3.5 h-3.5 text-[#007E82]"></i>
@@ -1716,7 +1716,7 @@ function updateUserSessionUI() {
   if (!container) return;
 
   container.innerHTML = `
-    <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F7EFE4] text-[#007E82] text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
+    <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F9F3EA] text-[#007E82] text-xs font-black border border-[#e8ddcf] shadow-2xs select-none" title="Navegação 100% Anônima e Segura">
       <span class="w-2 h-2 rounded-full bg-[#007E82]"></span>
       <i data-lucide="shield" class="w-3.5 h-3.5 text-[#007E82]"></i>
       <span>Modo Anônimo</span>
@@ -2276,15 +2276,33 @@ function switchMainTab(tabName) {
     if (isActive) {
       el.className = "nav-tab-btn active px-4 py-2.5 rounded-full text-slate-950 font-black bg-[#D19864] border border-[#b87e4c] shadow-sm transition-all flex items-center gap-2 cursor-pointer";
     } else {
-      el.className = "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-[#004d50] hover:bg-[#F7EFE4] transition-all flex items-center gap-2 cursor-pointer";
+      el.className = "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all flex items-center gap-2 cursor-pointer";
+    }
+  });
+
+  // 1.1 Atualiza botões da navegação exclusiva para celular
+  const mobileNavTabs = [
+    { id: 'animais', btn: 'mobile-nav-btn-animais' },
+    { id: 'ongs', btn: 'mobile-nav-btn-ongs' },
+    { id: 'blog', btn: 'mobile-nav-btn-blog' }
+  ];
+
+  mobileNavTabs.forEach(t => {
+    const el = document.getElementById(t.btn);
+    if (!el) return;
+    const isActive = t.id === tabName;
+    if (isActive) {
+      el.className = "mobile-nav-btn active flex-1 py-1.5 px-2 rounded-xl text-xs font-black text-center bg-[#D19864] text-slate-950 border border-[#b87e4c] flex items-center justify-center gap-1 shadow-2xs transition-all";
+    } else {
+      el.className = "mobile-nav-btn flex-1 py-1.5 px-2 rounded-xl text-xs font-bold text-center text-slate-700 bg-white hover:bg-[#F9F3EA] border border-[#e8ddcf] flex items-center justify-center gap-1 transition-all";
     }
   });
 
   // 2. Atualiza botões do novo painel posicionado acima da barra de pesquisa (Animais, ONGs, Rifas ou Eventos)
   const portalSegmentTabs = [
-    { id: 'animais', btn: 'portal-tab-animais', badge: 'panel-badge-pets', activeBadgeCls: 'bg-[#F7EFE4] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
-    { id: 'ongs', btn: 'portal-tab-ongs', badge: 'panel-badge-ongs', activeBadgeCls: 'bg-[#F7EFE4] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
-    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: 'panel-badge-rifas-eventos', activeBadgeCls: 'bg-[#F7EFE4] text-slate-950 font-black', inactiveBadgeCls: 'bg-amber-100 text-amber-900 font-bold' }
+    { id: 'animais', btn: 'portal-tab-animais', badge: 'panel-badge-pets', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
+    { id: 'ongs', btn: 'portal-tab-ongs', badge: 'panel-badge-ongs', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
+    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: 'panel-badge-rifas-eventos', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-amber-100 text-amber-900 font-bold' }
   ];
 
   portalSegmentTabs.forEach(t => {
@@ -2298,7 +2316,7 @@ function switchMainTab(tabName) {
         badgeEl.className = `ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.activeBadgeCls}`;
       }
     } else {
-      el.className = "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F7EFE4] transition-all whitespace-nowrap cursor-pointer";
+      el.className = "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
       if (badgeEl) {
         badgeEl.className = `ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.inactiveBadgeCls}`;
       }
@@ -2379,7 +2397,7 @@ function filterRifasEventosSubTab(subTab) {
     if (b.id === subTab) {
       b.el.className = "subtab-re-btn active px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
     } else {
-      b.el.className = "subtab-re-btn px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-[#004d50] hover:bg-[#F7EFE4] transition-all cursor-pointer";
+      b.el.className = "subtab-re-btn px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all cursor-pointer";
     }
   });
 
@@ -2458,7 +2476,7 @@ function filterBlogPosts(category) {
     if (isActive) {
       btn.className = "blog-filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#003e40] transition-all shadow-sm cursor-pointer";
     } else {
-      btn.className = "blog-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#F7EFE4] hover:text-white hover:bg-white transition-all cursor-pointer";
+      btn.className = "blog-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#F9F3EA] hover:text-white hover:bg-white transition-all cursor-pointer";
     }
   });
 
@@ -2498,7 +2516,7 @@ function renderBlogSection(category) {
             loading="lazy"
           >
           <div class="absolute top-3.5 left-3.5">
-            <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wide border shadow-2xs ${post.categoriaBadge || 'bg-[#F7EFE4] text-[#007E82] border-[#e8ddcf]'}">
+            <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wide border shadow-2xs ${post.categoriaBadge || 'bg-[#F9F3EA] text-[#007E82] border-[#e8ddcf]'}">
               ${post.categoria}
             </span>
           </div>
@@ -2536,7 +2554,7 @@ function renderBlogSection(category) {
             <button 
               type="button" 
               onclick="openBlogModal('${post.id}')" 
-              class="px-3.5 py-1.5 rounded-xl bg-[#F7EFE4] hover:bg-gradient-to-r hover:from-[#007E82] hover:to-[#005c60] hover:text-white text-[#003e40] font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs group-hover:bg-[#e6f4f5]"
+              class="px-3.5 py-1.5 rounded-xl bg-[#F9F3EA] hover:bg-gradient-to-r hover:from-[#007E82] hover:to-[#005c60] hover:text-white text-[#003e40] font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs group-hover:bg-[#e6f4f5]"
             >
               <span>Ler Matéria</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -2666,7 +2684,7 @@ async function renderOngsGrid() {
         <div class="lg:col-span-7 space-y-4">
           <!-- Badges Oficiais -->
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#F7EFE4] text-[#007E82] border border-[#e8ddcf] shadow-2xs">
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#F9F3EA] text-[#007E82] border border-[#e8ddcf] shadow-2xs">
               ${activeOng.sigla || 'PROANIMA'} • Fundada em ${activeOng.anoFundacao || '2003'} (23 Anos)
             </span>
             <span class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300 shadow-2xs flex items-center gap-1.5">
@@ -2696,7 +2714,7 @@ async function renderOngsGrid() {
 
           <!-- Métricas Rápidas em Linha -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-            <div class="p-3.5 rounded-2xl bg-[#F7EFE4] border border-[#e8ddcf] flex items-center gap-3">
+            <div class="p-3.5 rounded-2xl bg-[#F9F3EA] border border-[#e8ddcf] flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-teal-100 text-[#007E82] flex items-center justify-center font-black text-xl flex-shrink-0">
                 ❤️
               </div>
@@ -2752,7 +2770,7 @@ async function renderOngsGrid() {
               <a 
                 href="https://instagram.com/${activeOng.instagram.replace('@', '')}" 
                 target="_blank" 
-                class="px-3.5 py-3 rounded-2xl bg-[#F7EFE4] hover:bg-[#faeee3] text-slate-950 font-black text-xs sm:text-sm border border-[#e8ddcf] transition-all flex items-center gap-1.5 cursor-pointer"
+                class="px-3.5 py-3 rounded-2xl bg-[#F9F3EA] hover:bg-[#faeee3] text-slate-950 font-black text-xs sm:text-sm border border-[#e8ddcf] transition-all flex items-center gap-1.5 cursor-pointer"
                 title="Instagram da ONG"
               >
                 <i data-lucide="instagram" class="w-4 h-4 text-[#007E82]"></i>
@@ -2843,7 +2861,7 @@ async function renderOngsGrid() {
         </div>
         
         <div class="flex items-center gap-2">
-          <span class="text-xs text-slate-500 font-bold bg-[#F7EFE4] px-3 py-1.5 rounded-xl border border-[#e8ddcf]">
+          <span class="text-xs text-slate-500 font-bold bg-[#F9F3EA] px-3 py-1.5 rounded-xl border border-[#e8ddcf]">
             ✍️ Conteúdo Institucional Oficial
           </span>
           <button 
@@ -2864,7 +2882,7 @@ async function renderOngsGrid() {
         <!-- Coluna de Texto Expandido da História (7 colunas) -->
         <div class="lg:col-span-7 space-y-5 text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
           ${historia.split('\n\n').map((paragrafo, idx) => `
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F7EFE4]/60 border border-[#e8ddcf] hover:bg-[#F7EFE4] transition-colors">
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#F9F3EA]/60 border border-[#e8ddcf] hover:bg-[#F9F3EA] transition-colors">
               <div class="flex items-start gap-3">
                 <div class="w-7 h-7 rounded-full bg-[#007E82] text-white flex items-center justify-center font-black text-xs flex-shrink-0 mt-0.5">
                   ${idx + 1}
@@ -3005,7 +3023,7 @@ async function renderOngsGrid() {
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             ${videosAbrigo.map((v, i) => `
-              <div class="bg-[#F7EFE4] rounded-3xl p-4 sm:p-5 border-2 border-[#e8ddcf] shadow-sm space-y-3">
+              <div class="bg-[#F9F3EA] rounded-3xl p-4 sm:p-5 border-2 border-[#e8ddcf] shadow-sm space-y-3">
                 <div class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-xs">
                   <video controls preload="metadata" class="w-full h-full object-cover">
                     <source src="${v}" type="video/mp4">
@@ -3362,7 +3380,7 @@ function renderEventosGrid() {
               <h3 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xl font-black text-slate-950 leading-snug">
                 ${evento.titulo}
               </h3>
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F7EFE4] text-slate-900 text-xs font-black border border-[#e8ddcf] mt-1.5">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F9F3EA] text-slate-900 text-xs font-black border border-[#e8ddcf] mt-1.5">
                 <i data-lucide="building-2" class="w-3.5 h-3.5 ${pal.iconColor}"></i>
                 <span>Realização: ${evento.ongNome}</span>
               </div>
@@ -3386,7 +3404,7 @@ function renderEventosGrid() {
             </div>
             
             <!-- Local e Endereço -->
-            <div class="space-y-1 p-3.5 rounded-2xl bg-[#F7EFE4] border border-[#e8ddcf]">
+            <div class="space-y-1 p-3.5 rounded-2xl bg-[#F9F3EA] border border-[#e8ddcf]">
               <div class="text-xs font-black text-slate-950 flex items-center gap-1.5">
                 <i data-lucide="map-pin" class="w-4 h-4 text-[#D19864] flex-shrink-0"></i>
                 <span>${evento.local}</span>
@@ -3403,7 +3421,7 @@ function renderEventosGrid() {
 
             <!-- Peludinhos Confirmados -->
             ${evento.animaisPresentes && evento.animaisPresentes.length > 0 ? `
-              <div class="p-3 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] space-y-1.5">
+              <div class="p-3 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf] space-y-1.5">
                 <span class="text-[10px] font-black uppercase tracking-wider text-slate-900 block flex items-center gap-1">
                   <i data-lucide="heart" class="w-3 h-3 fill-[#007E82] text-[#007E82]"></i> Alguns Peludinhos Confirmados
                 </span>
@@ -3430,7 +3448,7 @@ function renderEventosGrid() {
           <a 
             href="https://wa.me/?text=${encodeURIComponent('🐾 Convite Especial! Vamos na ' + evento.titulo + '? Acontece ' + evento.dataExtenso + ' (' + evento.horario + ') no ' + evento.local + '. Veja no Maps: ' + evento.linkMaps)}" 
             target="_blank" 
-            class="p-2.5 rounded-xl bg-[#F7EFE4] hover:bg-teal-100 text-[#007E82] border border-[#e8ddcf] transition-all flex items-center justify-center cursor-pointer"
+            class="p-2.5 rounded-xl bg-[#F9F3EA] hover:bg-teal-100 text-[#007E82] border border-[#e8ddcf] transition-all flex items-center justify-center cursor-pointer"
             title="Convidar Amigos no WhatsApp"
           >
             <i data-lucide="share-2" class="w-4 h-4"></i>
@@ -3602,7 +3620,7 @@ function renderRifasGrid(filterType = 'todas') {
             </div>
             
             <!-- Barra de Progresso da Meta com Cor Temática -->
-            <div class="space-y-2 p-3.5 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf]">
+            <div class="space-y-2 p-3.5 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf]">
               <div class="flex items-center justify-between text-xs">
                 <span class="font-black text-slate-950">
                   ${isMoney ? `R$ ${rifa.arrecadado.toLocaleString('pt-BR')} arrecadados` : `${rifa.arrecadado.toLocaleString('pt-BR')} kg arrecadados`}
@@ -3659,7 +3677,7 @@ function renderRifasGrid(filterType = 'todas') {
             </div>
 
             <!-- Chave Pix com Copiar em 1 Clique -->
-            <div class="p-3.5 bg-[#F7EFE4] rounded-2xl border-2 ${pal.pixBorder} flex items-center justify-between gap-2 shadow-2xs">
+            <div class="p-3.5 bg-[#F9F3EA] rounded-2xl border-2 ${pal.pixBorder} flex items-center justify-between gap-2 shadow-2xs">
               <div class="truncate">
                 <span class="text-[10.5px] font-black text-slate-800 uppercase block tracking-wider">Chave Pix Oficial ProAnima</span>
                 <code class="text-xs font-mono font-black text-slate-950 truncate block select-all">${rifa.chavePix || 'contato@proanimadf.org.br'}</code>
@@ -4863,16 +4881,158 @@ var adminAuthTargetAction = "admin_panel";
 window.isAdminAuthenticated = isAdminAuthenticated;
 window.adminAuthTargetAction = adminAuthTargetAction;
 
+const PREDEFINED_ADMIN_PASSWORD = "adoção1410";
+
+function isValidAdminPassword(pass) {
+  if (!pass) return false;
+  const clean = pass.trim().toLowerCase();
+  return clean === "adoção1410" || clean === "adocao1410";
+}
+window.isValidAdminPassword = isValidAdminPassword;
+
+function updateAdminHeaderLoginUI() {
+  const isAuth = isAdminAuthenticated || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
+  const btnLabel = document.getElementById("btn-admin-header-label");
+  const btnIcon = document.getElementById("btn-admin-header-icon");
+  const btn = document.getElementById("btn-toggle-admin-panel");
+  const unauthView = document.getElementById("admin-panel-unauth-view");
+  const authView = document.getElementById("admin-panel-auth-view");
+
+  if (isAuth) {
+    if (btnLabel) btnLabel.textContent = "Admin Ativo";
+    if (btn) {
+      btn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 text-xs font-black border-2 border-emerald-500 shadow-xs transition-all cursor-pointer select-none";
+    }
+    if (btnIcon) {
+      btnIcon.setAttribute("data-lucide", "shield-check");
+      btnIcon.className = "w-3.5 h-3.5 text-emerald-600";
+    }
+    if (unauthView) unauthView.classList.add("hidden");
+    if (authView) authView.classList.remove("hidden");
+  } else {
+    if (btnLabel) btnLabel.textContent = "Área Admin";
+    if (btn) {
+      btn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none";
+    }
+    if (btnIcon) {
+      btnIcon.setAttribute("data-lucide", "lock");
+      btnIcon.className = "w-3.5 h-3.5 text-[#007E82]";
+    }
+    if (unauthView) unauthView.classList.remove("hidden");
+    if (authView) authView.classList.add("hidden");
+  }
+
+  if (window.lucide) {
+    if (btn) lucide.createIcons({ root: btn });
+    const panel = document.getElementById("admin-header-dropdown-panel");
+    if (panel) lucide.createIcons({ root: panel });
+  }
+}
+window.updateAdminHeaderLoginUI = updateAdminHeaderLoginUI;
+
+function toggleAdminHeaderPanel(event, forceState) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const panel = document.getElementById("admin-header-dropdown-panel");
+  const chevron = document.getElementById("admin-header-chevron");
+  if (!panel) return;
+
+  const isCurrentlyHidden = panel.classList.contains("hidden");
+  const shouldOpen = (typeof forceState === "boolean") ? forceState : isCurrentlyHidden;
+
+  if (shouldOpen) {
+    panel.classList.remove("hidden");
+    if (chevron) chevron.style.transform = "rotate(180deg)";
+    updateAdminHeaderLoginUI();
+    const passInput = document.getElementById("header-admin-password");
+    if (passInput && !isAdminAuthenticated && sessionStorage.getItem("matchpet_admin_auth") !== "true") {
+      setTimeout(() => passInput.focus(), 150);
+    }
+  } else {
+    panel.classList.add("hidden");
+    if (chevron) chevron.style.transform = "rotate(0deg)";
+    const err = document.getElementById("header-admin-error");
+    if (err) err.classList.add("hidden");
+  }
+}
+window.toggleAdminHeaderPanel = toggleAdminHeaderPanel;
+
+function toggleAdminPassVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const isPass = input.type === "password";
+  input.type = isPass ? "text" : "password";
+  if (btn) {
+    btn.innerHTML = isPass ? '<i data-lucide="eye-off" class="w-4 h-4"></i>' : '<i data-lucide="eye" class="w-4 h-4"></i>';
+    if (window.lucide) lucide.createIcons({ root: btn });
+  }
+}
+window.toggleAdminPassVisibility = toggleAdminPassVisibility;
+
+function handleHeaderAdminLogin(event) {
+  event.preventDefault();
+  const input = document.getElementById("header-admin-password");
+  const err = document.getElementById("header-admin-error");
+  const pass = input ? input.value : "";
+
+  if (isValidAdminPassword(pass)) {
+    isAdminAuthenticated = true;
+    window.isAdminAuthenticated = true;
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.setItem("matchpet_admin_auth", "true");
+    }
+    if (err) err.classList.add("hidden");
+    if (input) input.value = "";
+    
+    renderAdminTopBar();
+    updateAdminHeaderLoginUI();
+    
+    // Alerta suave e feedback visual
+    const notification = document.createElement("div");
+    notification.className = "fixed bottom-5 right-5 z-50 bg-[#007E82] text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-bold transition-all";
+    notification.innerHTML = '<span>🛡️ Modo Administrador ativado com sucesso!</span>';
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 400);
+    }, 3500);
+  } else {
+    if (err) err.classList.remove("hidden");
+    if (input) {
+      input.select();
+      input.focus();
+    }
+  }
+}
+window.handleHeaderAdminLogin = handleHeaderAdminLogin;
+
+// Fecha o painel de login se clicar fora dele
+if (typeof document !== "undefined") {
+  document.addEventListener("click", function(e) {
+    const wrapper = document.getElementById("admin-login-menu-wrapper");
+    const panel = document.getElementById("admin-header-dropdown-panel");
+    if (wrapper && panel && !wrapper.contains(e.target)) {
+      panel.classList.add("hidden");
+      const chevron = document.getElementById("admin-header-chevron");
+      if (chevron) chevron.style.transform = "rotate(0deg)";
+    }
+  });
+}
+
 function renderAdminTopBar() {
   const bar = document.getElementById("admin-top-bar");
-  if (!bar) return;
   const isAuth = (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
-  if (isAuth) {
-    bar.classList.remove("hidden");
-    if (window.lucide) lucide.createIcons({ root: bar });
-  } else {
-    bar.classList.add("hidden");
+  if (bar) {
+    if (isAuth) {
+      bar.classList.remove("hidden");
+      if (window.lucide) lucide.createIcons({ root: bar });
+    } else {
+      bar.classList.add("hidden");
+    }
   }
+  updateAdminHeaderLoginUI();
 }
 window.renderAdminTopBar = renderAdminTopBar;
 
@@ -4883,6 +5043,8 @@ function adminLogout() {
   isAdminAuthenticated = false;
   window.isAdminAuthenticated = false;
   renderAdminTopBar();
+  updateAdminHeaderLoginUI();
+  toggleAdminHeaderPanel(null, false);
   alert("Sessão de Administrador finalizada com sucesso. Você retornou à visualização comum do Adotante.");
 }
 window.adminLogout = adminLogout;
@@ -4912,7 +5074,7 @@ function openAdminAuthModal(targetAction = "admin_panel") {
   if (!modal) return;
   const err = document.getElementById("admin-auth-error");
   if (err) err.classList.add("hidden");
-  const input = document.getElementById("admin-pin-input");
+  const input = document.getElementById("admin-password-input") || document.getElementById("admin-pin-input");
   if (input) input.value = "";
 
   // Adapta textos do modal conforme a ação de destino (Painel Admin vs Canva Studio vs Coletor)
@@ -4926,7 +5088,7 @@ function openAdminAuthModal(targetAction = "admin_panel") {
     if (descEl) descEl.textContent = "Área exclusiva para moderação de ONGs, gestão de pets, contratos e métricas da plataforma. Digite a senha de administrador:";
   } else {
     if (titleEl) titleEl.textContent = "Acesso Restrito ao Administrador";
-    if (descEl) descEl.textContent = "Digite o PIN master de segurança para acessar o Coletor de Dados e Métricas do site:";
+    if (descEl) descEl.textContent = "Digite a senha de administrador (adoção1410) para acessar:";
   }
 
   modal.classList.remove("opacity-0", "pointer-events-none");
@@ -4954,17 +5116,18 @@ function closeAdminAuthModal() {
 
 function handleAdminAuthSubmit(event) {
   event.preventDefault();
-  const input = document.getElementById("admin-pin-input");
+  const input = document.getElementById("admin-password-input") || document.getElementById("admin-pin-input");
   const err = document.getElementById("admin-auth-error");
-  const pin = input ? input.value.trim() : "";
+  const pin = input ? input.value : "";
 
-  if (pin === "admin123" || pin === "admin" || pin === "123456") {
+  if (isValidAdminPassword(pin)) {
     isAdminAuthenticated = true;
     window.isAdminAuthenticated = true;
     if (typeof sessionStorage !== "undefined") {
       sessionStorage.setItem("matchpet_admin_auth", "true");
     }
     renderAdminTopBar();
+    updateAdminHeaderLoginUI();
     closeAdminAuthModal();
 
     if (adminAuthTargetAction === "admin_panel") {
@@ -5074,7 +5237,7 @@ async function refreshAdminCollectorData() {
           ${lead.score ? `<span class="ml-1 text-[10px] text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded font-bold">${lead.score}% afinidade</span>` : ''}
         </td>
         <td class="p-3">
-          <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold ${lead.tipo === 'WhatsApp' ? 'bg-emerald-50 text-emerald-800' : 'bg-[#F7EFE4] text-[#006366]'}">
+          <span class="px-2 py-0.5 rounded-full text-[10.5px] font-bold ${lead.tipo === 'WhatsApp' ? 'bg-emerald-50 text-emerald-800' : 'bg-[#F9F3EA] text-[#006366]'}">
             ${lead.tipo}
           </span>
         </td>

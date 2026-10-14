@@ -1,4 +1,4 @@
-?/**
+/**
  * Studio de Design Visual Estilo Canva (AdoteAmigo Design Studio)
  * Permite personalização interativa de fontes, paleta de cores, estilos de cards,
  * inserção de figuras, selos decorativos e banners promocionais vitrine.
@@ -17,7 +17,7 @@
       customPrimaryColor: "#007E82",
       customPrimaryHover: "#00686c",
       customPrimaryLight: "#e6f4f5",
-      customBgColor: "#F7EFE4",
+      customBgColor: "#F9F3EA",
       cardRadius: "rounded-3xl",
       cardShadow: "shadow-sm",
       activeStickers: {
@@ -585,7 +585,7 @@
             <span class="badge-tag-video-solid text-[9px] px-2 py-0.5">▶️ Vídeo</span>
           </div>
 
-          ${stickers.fitaResgate ? `<span class="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-[#F7EFE4] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ""}
+          ${stickers.fitaResgate ? `<span class="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[9px] font-black bg-[#F9F3EA] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ""}
           ${stickers.patinhas ? `<span class="absolute bottom-2 left-2 text-xs select-none pointer-events-none drop-shadow-xs">🐾</span>` : ""}
         </div>
 
@@ -619,7 +619,7 @@
     bannerEl.classList.remove("hidden");
 
     bannerEl.className = "relative overflow-hidden rounded-3xl p-7 sm:p-10 border-2 border-[#007E82] shadow-xl text-center space-y-5 transition-all";
-    bannerEl.style.cssText = "background: linear-gradient(135deg, #F7EFE4 0%, #faeedf 32%, #e6f4f5 70%, #faeedf 100%) !important;";
+    bannerEl.style.cssText = "background: linear-gradient(135deg, #F9F3EA 0%, #faeedf 32%, #e6f4f5 70%, #faeedf 100%) !important;";
 
     const bannerTitle = b.title || "Descubra o pet que combina com o seu estilo de vida";
     const bannerSubtitle = b.subtitle || "Responda a perguntas simples sobre sua rotina e espaço para ver instantaneamente os animais mais indicados para você.";

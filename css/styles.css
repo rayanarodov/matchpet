@@ -1,3 +1,12 @@
+
+/* Mapeamento de cor de fundo oficial #F9F3EA */
+.bg-\[\#F9F3EA\],
+[class*="bg-[#F9F3EA]"],
+.bg-\[\#F7EFE4\],
+[class*="bg-[#F7EFE4]"] {
+  background-color: #F9F3EA !important;
+}
+
 /* Estilos personalizados para a plataforma de adoção e Painel Administrativo */
 
 :root {
@@ -9,7 +18,7 @@
   --theme-primary-dark: #004d50; /* Exact logo stroke color */
   --theme-primary-vibrant: #007E82; /* Action purple */
   --theme-primary-light: #e6f4f5;
-  --theme-bg: #F7EFE4;
+  --theme-bg: #F9F3EA;
   --theme-secondary: #D19864;
   --theme-secondary-hover: #b97e4a;
   --theme-secondary-light: #faeee3;
@@ -58,7 +67,7 @@
 
 /* Glassmorphism Header */
 .brand-header {
-  background: rgba(247, 239, 228, 0.96);
+  background: rgba(249, 243, 234, 0.96);
   border-bottom: 2px solid #e8ddcf;
 }
 
@@ -68,7 +77,7 @@ html {
 
 body {
   font-family: var(--theme-font);
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
   color: #1e293b;
@@ -510,7 +519,7 @@ body {
    BANNER VITRINE - "FAÇA UM QUIZ" (MESMO PLANO DE FUNDO DO PERFIL DOS ANIMAIS)
    ========================================================================== */
 .quiz-hero-bg-section {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E") !important;
   background-attachment: fixed !important;
   border-bottom: 2px solid #e8ddcf !important;
@@ -528,7 +537,7 @@ body {
 }
 
 #quiz-modal .modal-content {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045'%3E%3C!-- Dog Paw 1 --%3E%3Cellipse cx='36' cy='42' rx='8.5' ry='7.5'/%3E%3Ccircle cx='23' cy='30' r='4'/%3E%3Ccircle cx='34' cy='25' r='4'/%3E%3Ccircle cx='47' cy='30' r='4'/%3E%3Ccircle cx='53' cy='40' r='3.2'/%3E%3C!-- Bone --%3E%3Cpath d='M155 35a4 4 0 0 0-4-4 4 4 0 0 0-3 1.3l-20 12a4 4 0 0 0-5.7-1.3 4 4 0 0 0-6.6 3.7 4 4 0 0 0 1.3 2.7l20-12a4 4 0 0 0 5.7 1.3 4 4 0 0 0 6.6-3.7 4 4 0 0 0-1.3-2.7z'/%3E%3Ccircle cx='120' cy='46' r='3.5'/%3E%3Ccircle cx='124' cy='52' r='3.5'/%3E%3Ccircle cx='154' cy='30' r='3.5'/%3E%3Ccircle cx='158' cy='36' r='3.5'/%3E%3C!-- Cat Face Outline --%3E%3Ccircle cx='195' cy='140' r='13'/%3E%3Cpolygon points='184,133 188,118 195,128'/%3E%3Cpolygon points='206,133 202,118 195,128'/%3E%3C!-- Ball of Yarn --%3E%3Ccircle cx='60' cy='185' r='10'/%3E%3Cpath d='M52 182c4-6 12-6 16 0m-14 6c3 5 11 5 14 0m-12-8c2 4 8 4 10 0' stroke='%23007E82' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3Cpath d='M68 190c6 5 14 3 18-2' stroke='%23007E82' stroke-width='1.2' fill='none' stroke-opacity='0.08'/%3E%3C!-- Little Heart --%3E%3Cpath d='M140 175c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C!-- Fishbone --%3E%3Cpath d='M95 95l20 12m-16-1l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m4 7l-3 5m3-5l3-5m5 8l4-3-4-3z' stroke='%23007E82' stroke-width='1.5' stroke-linecap='round' fill='none' stroke-opacity='0.07'/%3E%3C!-- Cute Paw 2 --%3E%3Cellipse cx='150' cy='105' rx='7.5' ry='6.5'/%3E%3Ccircle cx='139' cy='95' r='3.5'/%3E%3Ccircle cx='149' cy='90' r='3.5'/%3E%3Ccircle cx='159' cy='95' r='3.5'/%3E%3Ccircle cx='164' cy='103' r='2.8'/%3E%3C/g%3E%3Cg fill='%23D19864' fill-opacity='0.045'%3E%3C!-- Caramel Heart Paw --%3E%3Cpath d='M215 45c-2.5-3.5-7-3.5-9.5 0-2.5-3.5-7-3.5-9.5 0-2.5 3.5 0 8.5 9.5 14 9.5-5.5 12-10.5 9.5-14z'/%3E%3Ccircle cx='194' cy='36' r='2.8'/%3E%3Ccircle cx='203' cy='31' r='2.8'/%3E%3Ccircle cx='214' cy='33' r='2.8'/%3E%3C!-- Walking Paws Trail --%3E%3Cellipse cx='28' cy='120' rx='5.5' ry='4.5'/%3E%3Ccircle cx='21' cy='113' r='2.2'/%3E%3Ccircle cx='28' cy='110' r='2.2'/%3E%3Ccircle cx='35' cy='113' r='2.2'/%3E%3Cellipse cx='42' cy='140' rx='5.5' ry='4.5'/%3E%3Ccircle cx='35' cy='133' r='2.2'/%3E%3Ccircle cx='42' cy='130' r='2.2'/%3E%3Ccircle cx='49' cy='133' r='2.2'/%3E%3C/g%3E%3C/svg%3E") !important;
   opacity: 1 !important;
   border: 3px solid #007E82 !important;
@@ -554,7 +563,7 @@ body {
    MODAL DO QUIZ (FUNDO SÓLIDO, HARMONIOSO E NÃO TRANSPARENTE)
    ========================================================================== */
 #quiz-modal .modal-content {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   opacity: 1 !important;
   border: 3px solid #007E82 !important;
   border-radius: 1.75rem !important;
@@ -675,7 +684,7 @@ body {
 
 /* Fundo com Doodles de Animais Suaves nas Margens */
 .mockup-doodles-bg {
-  background-color: #F7EFE4;
+  background-color: #F9F3EA;
   background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23007E82' fill-opacity='0.045' fill-rule='evenodd'%3E%3C!-- Pata 1 --%3E%3Cellipse cx='28' cy='28' rx='7' ry='6'/%3E%3Ccircle cx='18' cy='18' r='3.5'/%3E%3Ccircle cx='27' cy='14' r='3.5'/%3E%3Ccircle cx='37' cy='18' r='3.5'/%3E%3Ccircle cx='12' cy='26' r='2.8'/%3E%3C!-- Coracao 1 --%3E%3Cpath d='M120 30c-4-6-12-6-16 0-4-6-12-6-16 0-4 6 0 14 16 24 16-10 20-18 16-24z'/%3E%3C!-- Pata 2 --%3E%3Cellipse cx='135' cy='125' rx='7.5' ry='6.5'/%3E%3Ccircle cx='124' cy='115' r='3.5'/%3E%3Ccircle cx='134' cy='110' r='3.5'/%3E%3Ccircle cx='144' cy='115' r='3.5'/%3E%3Ccircle cx='149' cy='123' r='2.8'/%3E%3C!-- Coracao 2 --%3E%3Cpath d='M45 125c-3-4.5-9-4.5-12 0-3-4.5-9-4.5-12 0-3 4.5 0 10.5 12 18 12-7.5 15-13.5 12-18z'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat: repeat;
 }
@@ -946,7 +955,7 @@ body {
 }
 
 .btn-gradient-outline {
-  background: linear-gradient(135deg, #ffffff 0%, #F7EFE4 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #F9F3EA 100%);
   border: 1.5px solid #007E82;
   color: #00686c;
   box-shadow: 0 2px 6px rgba(0, 126, 130, 0.08);
@@ -968,19 +977,19 @@ body {
 }
 
 .badge-gradient-castrated {
-  background: linear-gradient(135deg, #F7EFE4 0%, #e6f4f5 100%);
+  background: linear-gradient(135deg, #F9F3EA 0%, #e6f4f5 100%);
   color: #86198f;
   border: 1px solid #fbcfe8;
 }
 
 .badge-gradient-breed {
-  background: linear-gradient(135deg, #e6f4f5 0%, #F7EFE4 100%);
+  background: linear-gradient(135deg, #e6f4f5 0%, #F9F3EA 100%);
   color: #004d50;
   border: 1px solid #b2dedf;
 }
 
 .story-gradient-box {
-  background: linear-gradient(135deg, rgba(247, 239, 228, 0.95) 0%, rgba(247, 239, 228, 0.8) 50%, rgba(255, 251, 235, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(249, 243, 234, 0.95) 0%, rgba(249, 243, 234, 0.8) 50%, rgba(255, 251, 235, 0.6) 100%);
   border: 1px solid rgba(0, 126, 130, 0.2);
 }
 
@@ -1020,12 +1029,12 @@ body {
 }
 
 /* ==========================================================================
-   MATCHPET BRAND PALETTE: #007E82 (Teal) | #D19864 (Caramel) | #F7EFE4 (Cream)
+   MATCHPET BRAND PALETTE: #007E82 (Teal) | #D19864 (Caramel) | #F9F3EA (Cream)
    ========================================================================== */
 
 /* Canvas & Backgrounds */
 .bg-matchpet-cream, body {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
 }
 
 .bg-matchpet-teal {
@@ -1070,7 +1079,7 @@ body {
 }
 
 .bg-purple-50, .bg-purple-50\/70, .bg-purple-50\/80, .bg-purple-50\/90 {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
 }
 
 .hover\:bg-purple-100:hover {
@@ -1182,7 +1191,7 @@ body {
 
 /* Badges on active tabs */
 .portal-segment-tab.active span[id^="panel-badge-"] {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   color: #020617 !important;
   font-weight: 900 !important;
 }
@@ -1266,16 +1275,31 @@ body {
   gap: 0.75rem;
 }
 
-/* Modal de Gestão da ONG no Index - Tela Ampla e Normal */
-.ong-modal-wide {
-  max-width: 94vw !important;
-  width: 1440px !important;
+/* Modal de Gestão da ONG no Index - Tela Ampla no Desktop e Fluida no Mobile */
+@media (min-width: 769px) {
+  .ong-modal-wide {
+    max-width: 94vw !important;
+    width: 1440px !important;
+  }
+
+  .ong-pets-wide-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
 }
 
-.ong-pets-wide-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
-  gap: 1.25rem !important;
+@media (max-width: 768px) {
+  .ong-modal-wide {
+    max-width: 95vw !important;
+    width: 100% !important;
+  }
+
+  .ong-pets-wide-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
 }
 
 /* Animações Fofas Adicionais para os Componentes de Fundo */
@@ -1459,8 +1483,8 @@ body {
    SEÇÃO HISTÓRIAS QUE INSPIRAM & DICA DIÁRIA (100% SÓLIDOS & NÃO TRANSPARENTES)
    ========================================================================== */
 #historias-inspiram-container {
-  background-color: #F7EFE4 !important;
-  background: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
+  background: #F9F3EA !important;
   opacity: 1 !important;
   border: 3px solid #007E82 !important;
   box-shadow: 0 16px 40px -8px rgba(0, 126, 130, 0.18) !important;
@@ -1488,7 +1512,7 @@ body {
    DIRETIVA GLOBAL: REMOVER QUAISQUER TRANSPARÊNCIAS NA PLATAFORMA
    ========================================================================== */
 header.sticky {
-  background-color: #F7EFE4 !important;
+  background-color: #F9F3EA !important;
   opacity: 1 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -1612,4 +1636,124 @@ header.sticky {
   background-color: #00686c !important;
   background: #00686c !important;
 }
+
+/* ==========================================================================
+   OTIMIZAÇÕES EXCLUSIVAS PARA CELULARES & DISPOSITIVOS MÓVEIS (RESPONSIVIDADE)
+   ========================================================================== */
+
+/* Prevenção global de overflow horizontal em qualquer resolução */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative;
+}
+
+/* Suporte a classes utilitárias responsivas ausentes no Tailwind estático */
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* Regras para Desktop e Notebooks (Telas >= 769px):
+   Garante 100% que o layout para PC permaneça idêntico, intocado e perfeito */
+@media (min-width: 769px) {
+  .mobile-subnav-bar,
+  #mobile-main-nav,
+  .md\:hidden {
+    display: none !important;
+  }
+
+  .desktop-nav-header,
+  nav.hidden.md\:flex {
+    display: flex !important;
+  }
+
+  .lg\:block {
+    display: block !important;
+  }
+}
+
+/* Regras EXCLUSIVAS para Dispositivos Móveis / Celulares (Telas <= 768px):
+   Aplicadas SOMENTE em telas de celular, sem alterar absolutamente nada no PC */
+@media (max-width: 768px) {
+  /* Oculta navegação de desktop no celular e exibe a barra mobile amigável ao toque */
+  .desktop-nav-header,
+  nav.hidden.md\:flex {
+    display: none !important;
+  }
+
+  .mobile-subnav-bar,
+  #mobile-main-nav,
+  .md\:hidden {
+    display: flex !important;
+  }
+
+  /* Tipografia equilibrada para telas pequenas */
+  body {
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Ajustes dos containers no celular */
+  .quiz-hero-bg-section {
+    padding-top: 0.875rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  #custom-vitrine-banner {
+    padding: 1.25rem 0.875rem !important;
+    border-radius: 1.5rem !important;
+    overflow: hidden !important;
+  }
+
+  /* Linha de destaques do banner: flex compacto e organizado */
+  .banner-highlights-row {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+  }
+
+  .banner-highlights-row > div {
+    flex: 1 1 auto !important;
+    padding: 0.5rem 0.6rem !important;
+    font-size: 10.5px !important;
+  }
+
+  /* Barra de abas do portal (Animais, ONG, Rifas): toque suave e sem quebras */
+  .portal-segment-tab {
+    padding: 0.5rem 0.65rem !important;
+    font-size: 11px !important;
+  }
+
+  /* Cards de impacto: grid 2x2 harmonioso */
+  .impact-stat-card {
+    padding: 0.65rem 0.75rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Modais ocupam tela cheia confortável no mobile */
+  .modal-content,
+  #pet-modal .modal-content,
+  #quiz-modal .modal-content,
+  #ong-management-modal .ong-modal-wide,
+  #ong-add-pet-modal .modal-content {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 0.5rem auto !important;
+    max-height: 92vh !important;
+    border-radius: 1.25rem !important;
+    overflow-y: auto !important;
+  }
+
+  .ong-pets-wide-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Otimização de toques e cliques em mobile */
+  button, select, input {
+    touch-action: manipulation;
+  }
+}
+
+
 

@@ -1559,13 +1559,13 @@ async function loadAdminOngs() {
               <h4 class="text-lg font-black text-slate-900 mt-1">${ong.nome}</h4>
               <p class="text-xs text-slate-500">${ong.cidade} • ${ong.regiao || 'Sede'}</p>
             </div>
-            <button onclick="openEditOngModal('${ong.id}')" class="p-2.5 rounded-xl bg-[#F7EFE4] hover:bg-[#D19864] text-slate-800 hover:text-slate-950 border border-[#e8ddcf] shadow-2xs transition-all cursor-pointer" title="Editar História, Fotos & Vídeos da ONG">
+            <button onclick="openEditOngModal('${ong.id}')" class="p-2.5 rounded-xl bg-[#F9F3EA] hover:bg-[#D19864] text-slate-800 hover:text-slate-950 border border-[#e8ddcf] shadow-2xs transition-all cursor-pointer" title="Editar História, Fotos & Vídeos da ONG">
               <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
           </div>
 
           <!-- Métricas Obrigatórias em Destaque -->
-          <div class="grid grid-cols-2 gap-2 p-3 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] mb-3">
+          <div class="grid grid-cols-2 gap-2 p-3 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf] mb-3">
             <div>
               <span class="text-xs font-black text-slate-900 block">${ong.nome}</span>
               <span class="text-[11px] text-slate-600 block">${ong.cidade} • ${ong.regiao || 'Sede'}</span>

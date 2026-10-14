@@ -574,7 +574,7 @@ const DEFAULT_LAYOUT_DESIGN = {
   customPrimaryColor: "#007E82",
   customPrimaryHover: "#00686c",
   customPrimaryLight: "#e6f4f5",
-  customBgColor: "#F7EFE4",
+  customBgColor: "#F9F3EA",
   cardRadius: "rounded-3xl", // 'rounded-xl', 'rounded-2xl', 'rounded-3xl', 'rounded-full'
   cardShadow: "shadow-sm", // 'shadow-none', 'shadow-sm', 'shadow-md', 'shadow-xl'
   activeStickers: {
@@ -664,7 +664,7 @@ const LayoutDesignStorage = {
 
     // 2. Mapeamento de Cores por Tema
     const themeColors = {
-      roxo: { primary: "#007E82", hover: "#00686c", light: "#e6f4f5", bg: "#F7EFE4", isDark: false },
+      roxo: { primary: "#007E82", hover: "#00686c", light: "#e6f4f5", bg: "#F9F3EA", isDark: false },
       verde: { primary: "#0d9488", hover: "#0f766e", light: "#ccfbf1", bg: "#f0fdfa", isDark: false },
       laranja: { primary: "#ea580c", hover: "#c2410c", light: "#ffedd5", bg: "#f8fafc", isDark: false },
       azul: { primary: "#0284c7", hover: "#0369a1", light: "#e0f2fe", bg: "#f0f9ff", isDark: false },

@@ -24,7 +24,7 @@
   
   
 </head>
-<body class="min-h-screen flex flex-col bg-[#F7EFE4] text-slate-800 font-sans relative">
+<body class="min-h-screen flex flex-col bg-[#F9F3EA] text-slate-800 font-sans relative">
 
   <!-- Elementos Decorativos Fofos no Plano de Fundo do Admin -->
   <div class="cute-bg-sticker hidden md:block" style="top: 12%; left: 1.5%;" aria-hidden="true">
@@ -78,7 +78,7 @@
   </div>
 
   <!-- Topo do Painel Administrativo Oficial -->
-  <header class="bg-[#F7EFE4] shadow-xs border-b-2 border-[#e8ddcf] sticky top-0 z-30 shadow-xs">
+  <header class="bg-[#F9F3EA] shadow-xs border-b-2 border-[#e8ddcf] sticky top-0 z-30 shadow-xs">
     <div class="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 py-2 sm:py-3 flex items-center justify-between min-h-[5.5rem] sm:min-h-[6.5rem]">
       <div class="flex items-center gap-3.5">
         <a href="index.html" class="flex items-center group py-0.5" title="Ir para a Página Inicial do MatchPet">
@@ -104,7 +104,7 @@
 
       <div class="flex items-center gap-2">
         <!-- Botão Canva Design Studio -->
-        <button onclick="DesignStudio.open()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e8ddcf] bg-[#F7EFE4] hover:bg-[#e6f4f5] text-xs font-semibold text-[#004245] transition-colors shadow-xs" title="Estúdio de Design Visual (Estilo Canva)">
+        <button onclick="DesignStudio.open()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e8ddcf] bg-[#F9F3EA] hover:bg-[#e6f4f5] text-xs font-semibold text-[#004245] transition-colors shadow-xs" title="Estúdio de Design Visual (Estilo Canva)">
           <i data-lucide="palette" class="w-3.5 h-3.5 text-[#007E82]"></i>
           <span class="hidden md:inline">Design Studio</span>
         </button>
@@ -145,7 +145,7 @@
         <button 
           id="tab-btn-solidarity" 
           onclick="switchAdminTab('solidarity')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F7EFE4] transition-all border border-transparent"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent"
         >
           <i data-lucide="gift" class="w-4 h-4 text-teal-600"></i>
           <span>Feirinhas, Rifas & ONG</span>
@@ -154,7 +154,7 @@
         <button 
           id="tab-btn-analytics" 
           onclick="switchAdminTab('analytics')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F7EFE4] transition-all border border-transparent"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-[#F9F3EA] transition-all border border-transparent"
         >
           <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#007E82]"></i>
           <span>Métricas & Pesquisa (Analytics)</span>
@@ -177,7 +177,7 @@
           <!-- Renderizado dinamicamente por updateNgoContractBadgeUI() -->
         </div>
 
-        <span class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#F7EFE4] border border-slate-200 text-slate-600 font-semibold">
+        <span class="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#F9F3EA] border border-slate-200 text-slate-600 font-semibold">
           <i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-600"></i>
           <span>Moderador Geral</span>
         </span>
@@ -376,7 +376,7 @@
             </div>
 
             <!-- Upload de Fotos -->
-            <div class="p-4 bg-[#F7EFE4] rounded-2xl border border-[#e8ddcf] space-y-3">
+            <div class="p-4 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf] space-y-3">
               <span class="text-xs font-bold text-[#004245] flex items-center justify-between">
                 <span class="flex items-center gap-1.5"><i data-lucide="camera" class="w-4 h-4 text-[#007E82]"></i> Fotos do Animal</span>
                 <span class="text-[11px] font-normal text-[#007E82]">A 1ª foto será a capa principal</span>
@@ -386,7 +386,7 @@
               <div 
                 id="photo-dropzone" 
                 onclick="document.getElementById('photo-file-input').click()"
-                class="dropzone group hover:border-[#007E82] hover:bg-[#F7EFE4]"
+                class="dropzone group hover:border-[#007E82] hover:bg-[#F9F3EA]"
               >
                 <i data-lucide="upload-cloud" class="w-8 h-8 text-[#007E82] mx-auto mb-1 group-hover:scale-110 transition-transform"></i>
                 <p class="text-xs font-bold text-slate-700">Clique para selecionar ou arraste fotos aqui</p>
@@ -651,7 +651,7 @@
               <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#007E82]">
                 <i data-lucide="sparkles" class="w-4 h-4 text-[#007E82]"></i> 6. Perfil de Compatibilidade para o Quiz
               </div>
-              <span class="text-[11px] font-black text-slate-900 bg-[#F7EFE4] border border-[#D19864] px-2.5 py-0.5 rounded-full shadow-2xs">
+              <span class="text-[11px] font-black text-slate-900 bg-[#F9F3EA] border border-[#D19864] px-2.5 py-0.5 rounded-full shadow-2xs">
                 🎯 Match Inteligente
               </span>
             </div>
@@ -660,7 +660,7 @@
             </p>
 
             <!-- Card 1: Energia & Espaço Residencial -->
-            <div class="p-4 bg-[#F7EFE4] rounded-2xl border-2 border-[#007E82]/30 space-y-3.5">
+            <div class="p-4 bg-[#F9F3EA] rounded-2xl border-2 border-[#007E82]/30 space-y-3.5">
               <span class="text-xs font-black text-[#007E82] uppercase tracking-wider flex items-center gap-1.5">
                 <i data-lucide="zap" class="w-4 h-4 text-[#007E82]"></i> Energia & Tipo de Domicílio
               </span>
@@ -756,7 +756,7 @@
 
           <!-- Botões de Ação do Formulário -->
           <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-            <button type="button" onclick="cancelEdit()" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-[#F7EFE4] text-slate-700 text-xs font-bold transition-all">
+            <button type="button" onclick="cancelEdit()" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-[#F9F3EA] text-slate-700 text-xs font-bold transition-all">
               Limpar / Cancelar
             </button>
             <button type="submit" id="btn-submit" class="px-7 py-2.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-slate-950 text-xs font-bold transition-all shadow-md shadow-[#007E82]/20 flex items-center gap-2">
@@ -827,7 +827,7 @@
     <div id="tab-content-solidarity" class="space-y-8 hidden">
 
       <!-- Cabeçalho do Módulo Solidário -->
-      <div class="bg-[#F7EFE4] rounded-3xl p-6 sm:p-8 text-slate-950 border-2 border-[#007E82] shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="bg-[#F9F3EA] rounded-3xl p-6 sm:p-8 text-slate-950 border-2 border-[#007E82] shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2 max-w-2xl">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-950 text-xs font-black uppercase tracking-wider">
             <i data-lucide="gift" class="w-3.5 h-3.5 text-[#007E82]"></i> Gestão de Solidariedade & Parceria
@@ -1009,7 +1009,7 @@
 
           <button 
             onclick="handleSeedAnalyticsDemo()" 
-            class="px-3.5 py-2.5 rounded-xl bg-[#F7EFE4] hover:bg-[#e6f4f5] border border-[#e8ddcf] text-[#007E82] text-xs font-bold transition-all shadow-xs flex items-center gap-2"
+            class="px-3.5 py-2.5 rounded-xl bg-[#F9F3EA] hover:bg-[#e6f4f5] border border-[#e8ddcf] text-[#007E82] text-xs font-bold transition-all shadow-xs flex items-center gap-2"
             title="Simular 40+ questionários e 100+ visitas para demonstração imediata"
           >
             <i data-lucide="sparkles" class="w-4 h-4 text-[#007E82]"></i>
@@ -1265,7 +1265,7 @@
             <p class="text-xs text-slate-500">Armazene fotos e vídeos na nuvem com CDN ultrarrápido</p>
           </div>
         </div>
-        <button onclick="closeCloudinaryModal()" class="w-8 h-8 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+        <button onclick="closeCloudinaryModal()" class="w-8 h-8 rounded-full bg-[#F9F3EA] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1309,12 +1309,12 @@
 
       <!-- Botões do Modal -->
       <div class="flex items-center justify-between pt-2 border-t border-slate-100">
-        <button type="button" onclick="testCloudinaryConnection()" class="px-3.5 py-2 rounded-xl bg-[#F7EFE4] hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5">
+        <button type="button" onclick="testCloudinaryConnection()" class="px-3.5 py-2 rounded-xl bg-[#F9F3EA] hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5">
           <i data-lucide="activity" class="w-3.5 h-3.5 text-sky-600"></i> Testar Conexão
         </button>
 
         <div class="flex items-center gap-2">
-          <button type="button" onclick="closeCloudinaryModal()" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-[#F7EFE4] text-slate-700 text-xs font-bold transition-all">
+          <button type="button" onclick="closeCloudinaryModal()" class="px-4 py-2 rounded-xl border border-slate-300 hover:bg-[#F9F3EA] text-slate-700 text-xs font-bold transition-all">
             Fechar
           </button>
           <button type="button" onclick="saveCloudinarySettings()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center gap-1.5">
@@ -1334,7 +1334,7 @@
           <i data-lucide="building-2" class="w-5 h-5 text-orange-600"></i>
           <span id="modal-ong-title">Editar Perfil & Métricas da ONG</span>
         </h3>
-        <button onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1461,7 +1461,7 @@
           <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
           <span id="modal-evento-title">Adicionar Feirinha de Adoção</span>
         </h3>
-        <button onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1549,7 +1549,7 @@
           <i data-lucide="ticket" class="w-5 h-5 text-amber-500"></i>
           <span id="modal-rifa-title">Adicionar Rifa / Campanha Solidária</span>
         </h3>
-        <button onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-[#F7EFE4] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -1677,13 +1677,13 @@
         </div>
 
         <!-- Botão de Fechar Apenas Permitido se Já Assinado (caso seja abertura voluntária) -->
-        <button id="btn-close-contract-modal" onclick="closeNgoContractModal()" class="w-9 h-9 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors flex-shrink-0 hidden" title="Fechar (já assinado)">
+        <button id="btn-close-contract-modal" onclick="closeNgoContractModal()" class="w-9 h-9 rounded-full bg-[#F9F3EA] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors flex-shrink-0 hidden" title="Fechar (já assinado)">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Aviso Explicativo para o Administrador da ONG -->
-      <div class="p-4 bg-gradient-to-r from-[#e6f4f5] via-white to-[#F7EFE4] rounded-2xl border border-[#e8ddcf] text-[#004245] space-y-1 text-xs sm:text-sm shadow-2xs">
+      <div class="p-4 bg-gradient-to-r from-[#e6f4f5] via-white to-[#F9F3EA] rounded-2xl border border-[#e8ddcf] text-[#004245] space-y-1 text-xs sm:text-sm shadow-2xs">
         <div class="font-black flex items-center gap-2 text-[#004245]">
           <i data-lucide="shield-alert" class="w-4 h-4 text-[#007E82]"></i>
           <span>Por que este contrato formal é indispensável antes de iniciar?</span>
@@ -1856,7 +1856,7 @@
           </h4>
 
           <div class="space-y-2 text-xs">
-            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F9F3EA] cursor-pointer transition-colors shadow-2xs">
               <input type="checkbox" id="contract-check-imagens" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
               <div class="leading-snug">
                 <strong class="text-slate-900 block font-black">1. Licenciamento e Cessão Gratuita de Imagens e Vídeos (Lei nº 9.610/98)</strong>
@@ -1864,7 +1864,7 @@
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F9F3EA] cursor-pointer transition-colors shadow-2xs">
               <input type="checkbox" id="contract-check-dados" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
               <div class="leading-snug">
                 <strong class="text-slate-900 block font-black">2. Fornecimento de Dados Técnicos e Tratamento para Pesquisa (LGPD nº 13.709/18)</strong>
@@ -1872,7 +1872,7 @@
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F9F3EA] cursor-pointer transition-colors shadow-2xs">
               <input type="checkbox" id="contract-check-veracidade" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
               <div class="leading-snug">
                 <strong class="text-slate-900 block font-black">3. Fidedignidade das Informações Clínicas & Responsabilidade de Triagem</strong>
@@ -1880,7 +1880,7 @@
               </div>
             </label>
 
-            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F7EFE4] cursor-pointer transition-colors shadow-2xs">
+            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-[#F9F3EA] cursor-pointer transition-colors shadow-2xs">
               <input type="checkbox" id="contract-check-independencia" required class="w-4.5 h-4.5 text-[#007E82] rounded mt-0.5 focus:ring-[#007E82]">
               <div class="leading-snug">
                 <strong class="text-slate-900 block font-black">4. Independência Política, Partidária e Ausência de Solidariedade</strong>
@@ -1960,7 +1960,7 @@
             <i data-lucide="printer" class="w-4 h-4"></i>
             <span>Imprimir / Salvar PDF</span>
           </button>
-          <button onclick="closeSignedContractView()" class="w-9 h-9 rounded-full bg-[#F7EFE4] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+          <button onclick="closeSignedContractView()" class="w-9 h-9 rounded-full bg-[#F9F3EA] hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
@@ -2429,7 +2429,7 @@
                 </h4>
                 <p class="text-xs text-slate-500">Personalize o banner principal no topo do catálogo para campanhas sazonais ou feirinhas.</p>
               </div>
-              <label class="flex items-center gap-2 cursor-pointer bg-[#F7EFE4] px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800">
+              <label class="flex items-center gap-2 cursor-pointer bg-[#F9F3EA] px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800">
                 <input type="checkbox" id="canva-banner-enabled" onchange="DesignStudio.updateBanner('enabled', this.checked)" class="w-4 h-4 text-orange-600 rounded">
                 <span>Ativar Banner</span>
               </label>
@@ -2561,7 +2561,7 @@
       </div>
 
       <!-- Rodapé com Ações -->
-      <div class="px-6 py-3.5 bg-[#F7EFE4] border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+      <div class="px-6 py-3.5 bg-[#F9F3EA] border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <button type="button" onclick="DesignStudio.reset()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors shadow-xs flex items-center gap-1.5" title="Restaurar padrão original">
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-500"></i>
@@ -2594,7 +2594,7 @@
     <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[94vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-all border border-orange-200 relative">
       
       <!-- Cabeçalho do Modal -->
-      <div class="p-5 sm:p-6 bg-[#F7EFE4] text-slate-950 border-b border-[#007E82]/20 flex items-center justify-between flex-shrink-0">
+      <div class="p-5 sm:p-6 bg-[#F9F3EA] text-slate-950 border-b border-[#007E82]/20 flex items-center justify-between flex-shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center text-2xl shadow-inner">
             🏛️
@@ -2822,7 +2822,7 @@
 
         <!-- Rodapé de Ações do Formulário -->
         <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200">
-          <button type="button" onclick="closeAdminNewOngModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-[#F7EFE4] transition-colors cursor-pointer">
+          <button type="button" onclick="closeAdminNewOngModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-[#F9F3EA] transition-colors cursor-pointer">
             Cancelar
           </button>
           
