@@ -706,12 +706,6 @@ async function handleSavePet(event) {
   const conviveCaes = document.getElementById("pet-outros-caes")?.value || "sim";
   const conviveGatos = document.getElementById("pet-gatos")?.value || "sim";
 
-  // Validação Mandatória de Contrato Assinado da ONG
-  if (window.NgoContractStorage && !NgoContractStorage.isContractSigned(ongId)) {
-    alert(`Atenção: A ONG selecionada ("${ongNames[ongId] || ongId}") ainda não possui Contrato de Parceria e Cessão de Imagens assinado. É obrigatório assinar o termo formal antes de cadastrar animais ou publicar imagens.`);
-    openNgoContractModal(ongId, true);
-    return;
-  }
 
   const petData = {
     id: id || ("pet-" + Date.now()),
@@ -1607,14 +1601,10 @@ async function loadAdminOngs() {
             <i data-lucide="sparkles" class="w-4 h-4"></i>
             <span>Editar História, Fotos & Vídeos do Abrigo</span>
           </button>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="adminQuickAddPetForOng('${ong.id}')" class="py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-2xs cursor-pointer">
+          <div class="mt-2">
+            <button type="button" onclick="adminQuickAddPetForOng('${ong.id}')" class="w-full py-2 px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-2xs cursor-pointer">
               <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
-              <span>+ Pet</span>
-            </button>
-            <button type="button" onclick="openNgoContractModal('${ong.id}', false)" class="py-2 px-2.5 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-2xs cursor-pointer">
-              <i data-lucide="file-signature" class="w-3.5 h-3.5 text-teal-600"></i>
-              <span>Diretrizes</span>
+              <span>+ Cadastrar Pet para esta ONG</span>
             </button>
           </div>
         </div>
@@ -2330,14 +2320,7 @@ async function initNgoContractsModule() {
   // Popula os seletores de ONG
   populateAdminOngSelectors(ongs);
 
-  // Atualiza o selo/badge de conformidade na navbar
-  updateNgoContractBadgeUI();
-
-  // Verifica o gatekeeper para a ONG ativa
-  checkNgoContractGatekeeper(currentActiveOngId);
-
-  // Renderiza tabela de auditoria
-  await renderNgoContractsAuditTable();
+  // Módulo de contratos desativado
 }
 
 function populateAdminOngSelectors(ongs) {
@@ -2369,8 +2352,7 @@ function onAdminActiveOngChange(ongId) {
     localStorage.setItem(ACTIVE_ONG_STORAGE_KEY, ongId);
   } catch (e) {}
 
-  updateNgoContractBadgeUI();
-  checkNgoContractGatekeeper(ongId);
+  
   showToast(`ONG Ativa alterada para: ${getOngNameById(ongId)}`, "info");
 }
 
@@ -2384,453 +2366,80 @@ function getOngNameById(ongId) {
 
 function updateNgoContractBadgeUI() {
   const container = document.getElementById("ngo-header-contract-status");
-  if (!container) return;
-
-  const isSigned = window.NgoContractStorage && NgoContractStorage.isContractSigned(currentActiveOngId);
-  const contract = isSigned ? NgoContractStorage.getContractByOngId(currentActiveOngId) : null;
-
-  if (isSigned && contract) {
-    container.innerHTML = `
-      <button 
-        type="button"
-        onclick="openSignedContractView('${currentActiveOngId}')" 
-        class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 font-bold text-xs transition-all shadow-2xs hover:scale-105"
-        title="Contrato de Parceria & Cessão de Imagens assinado e válido. Clique para visualizar ou imprimir a via formal."
-      >
-        <span class="w-2 h-2 rounded-full bg-teal-500 ring-2 ring-teal-300"></span>
-        <span class="inline">Contrato Assinado:</span>
-        <code class="text-[10px] bg-teal-200/70 px-1 py-0.5 rounded font-mono">${contract.protocolo?.slice(0, 14)}...</code>
-        <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-teal-600"></i>
-      </button>
-    `;
-  } else {
-    container.innerHTML = `
-      <button 
-        type="button"
-        onclick="openNgoContractModal('${currentActiveOngId}', false)" 
-        class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 font-bold text-xs transition-all shadow-2xs animate-pulse hover:scale-105"
-        title="Atenção! Esta ONG ainda não assinou o Contrato de Parceria e Cessão de Imagens. Clique para regularizar imediatamente."
-      >
-        <span class="w-2 h-2 rounded-full bg-rose-600"></span>
-        <span>Contrato Pendente</span>
-        <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-rose-600"></i>
-      </button>
-    `;
-  }
-
-  if (window.lucide) lucide.createIcons({ root: container });
+  if (container) container.innerHTML = "";
 }
 
-function checkNgoContractGatekeeper(ongId) {
-  if (!window.NgoContractStorage) return;
-  const isSigned = NgoContractStorage.isContractSigned(ongId);
-  if (!isSigned) {
-    // Abre modal de gatekeeper impeditivo para a ONG ativa
-    openNgoContractModal(ongId, true);
-  }
-}
-
-function openNgoContractModal(ongId = null, isGatekeeper = false) {
-  const targetId = ongId || currentActiveOngId;
-  const modal = document.getElementById("ngo-contract-gatekeeper-modal");
-  if (!modal) return;
-
-  const selectOng = document.getElementById("contract-form-ong-id");
-  if (selectOng && targetId) selectOng.value = targetId;
-
-  // Pré-preenche dados caso já exista contrato assinado
-  const existing = window.NgoContractStorage ? NgoContractStorage.getContractByOngId(targetId) : null;
-  const inputNome = document.getElementById("contract-form-rep-nome");
-  const inputCpf = document.getElementById("contract-form-rep-cpf");
-  const inputCargo = document.getElementById("contract-form-rep-cargo");
-  const inputCnpj = document.getElementById("contract-form-ong-cnpj");
-  const inputEmail = document.getElementById("contract-form-rep-email");
-  const inputTel = document.getElementById("contract-form-rep-telefone");
-  const inputSig = document.getElementById("contract-form-signature");
-  const errBox = document.getElementById("contract-form-error-msg");
-  const btnClose = document.getElementById("btn-close-contract-modal");
-
-  if (errBox) errBox.classList.add("hidden");
-
-  // Se for gatekeeper e não estiver assinado, oculta o botão fechar para bloquear ações prévias
-  if (btnClose) {
-    if (isGatekeeper && (!existing || existing.status !== "ativo")) {
-      btnClose.classList.add("hidden");
-    } else {
-      btnClose.classList.remove("hidden");
-    }
-  }
-
-  const cnpjs = {
-    "ong-001": "12.345.678/0001-90",
-    "ong-002": "23.456.789/0001-01",
-    "ong-003": "34.567.890/0001-12"
-  };
-
-  if (existing) {
-    if (inputNome) inputNome.value = existing.representanteNome || "";
-    if (inputCpf) inputCpf.value = existing.representanteCpf || "";
-    if (inputCargo) inputCargo.value = existing.representanteCargo || "";
-    if (inputCnpj) inputCnpj.value = existing.ongCnpj || cnpjs[targetId] || "";
-    if (inputEmail) inputEmail.value = existing.representanteEmail || "";
-    if (inputTel) inputTel.value = existing.representanteTelefone || "";
-    if (inputSig) inputSig.value = existing.assinaturaPorExtenso || "";
-    
-    document.getElementById("contract-check-imagens").checked = !!existing.termosAceitos?.cessaoImagens;
-    document.getElementById("contract-check-dados").checked = !!existing.termosAceitos?.fornecimentoDados;
-    document.getElementById("contract-check-veracidade").checked = !!existing.termosAceitos?.veracidadeSanitaria;
-    document.getElementById("contract-check-independencia").checked = !!existing.termosAceitos?.independenciaPolitica;
-  } else {
-    if (inputCnpj) inputCnpj.value = cnpjs[targetId] || "12.345.678/0001-90";
-  }
-
-  modal.classList.remove("opacity-0", "pointer-events-none");
-  modal.classList.add("opacity-100");
-  modal.querySelector(".modal-content").classList.remove("scale-95");
-  modal.querySelector(".modal-content").classList.add("scale-100");
-  document.body.style.overflow = "hidden";
-
-  if (window.lucide) lucide.createIcons({ root: modal });
-}
-
-function closeNgoContractModal() {
-  const modal = document.getElementById("ngo-contract-gatekeeper-modal");
-  if (!modal) return;
-  modal.classList.remove("opacity-100");
-  modal.classList.add("opacity-0", "pointer-events-none");
-  modal.querySelector(".modal-content").classList.remove("scale-100");
-  modal.querySelector(".modal-content").classList.add("scale-95");
-  document.body.style.overflow = "";
-}
-
-function onContractModalOngChange(ongId) {
-  const cnpjs = {
-    "ong-001": "12.345.678/0001-90",
-    "ong-002": "23.456.789/0001-01",
-    "ong-003": "34.567.890/0001-12"
-  };
-  const inputCnpj = document.getElementById("contract-form-ong-cnpj");
-  if (inputCnpj) {
-    inputCnpj.value = cnpjs[ongId] || "";
-  }
-}
-
-async function handleNgoContractSubmit(event) {
-  if (event) event.preventDefault();
-
-  let ongId = document.getElementById("contract-form-ong-id")?.value;
-  if (!ongId) ongId = currentActiveOngId || "ong-001";
-  const ongNome = getOngNameById(ongId);
-  const ongCnpj = document.getElementById("contract-form-ong-cnpj")?.value.trim();
-  const repNome = document.getElementById("contract-form-rep-nome")?.value.trim();
-  const repCpf = document.getElementById("contract-form-rep-cpf")?.value.trim();
-  const repCargo = document.getElementById("contract-form-rep-cargo")?.value.trim();
-  const repEmail = document.getElementById("contract-form-rep-email")?.value.trim();
-  const repTelefone = document.getElementById("contract-form-rep-telefone")?.value.trim();
-  const signature = document.getElementById("contract-form-signature")?.value.trim();
-
-  const c1 = document.getElementById("contract-check-imagens")?.checked;
-  const c2 = document.getElementById("contract-check-dados")?.checked;
-  const c3 = document.getElementById("contract-check-veracidade")?.checked;
-  const c4 = document.getElementById("contract-check-independencia")?.checked;
-
-  const errBox = document.getElementById("contract-form-error-msg");
-  const errText = document.getElementById("contract-form-error-text");
-
-  function showError(msg) {
-    if (errBox && errText) {
-      errText.textContent = msg;
-      errBox.classList.remove("hidden");
-    }
-  }
-
-  // Validações
-  if (!repNome || repNome.length < 3) {
-    showError("Por favor, informe o nome completo do representante legal da ONG.");
-    return;
-  }
-  const cleanCpf = repCpf.replace(/\D/g, "");
-  if (cleanCpf.length !== 11) {
-    showError("Por favor, informe um CPF válido com 11 dígitos.");
-    return;
-  }
-  if (!repCargo || repCargo.length < 2) {
-    showError("Por favor, informe o cargo ou função estatutária na entidade.");
-    return;
-  }
-  const cleanCnpj = ongCnpj.replace(/\D/g, "");
-  if (cleanCnpj.length < 14) {
-    showError("Por favor, informe um CNPJ válido da organização.");
-    return;
-  }
-  if (!repEmail || !repEmail.includes("@")) {
-    showError("Por favor, informe um e-mail institucional válido.");
-    return;
-  }
-  const cleanTel = repTelefone.replace(/\D/g, "");
-  if (cleanTel.length < 10) {
-    showError("Por favor, informe um telefone de contato com DDD.");
-    return;
-  }
-  if (!c1 || !c2 || !c3 || !c4) {
-    showError("É obrigatório marcar todas as 4 declarações de consentimento para assinar o contrato.");
-    return;
-  }
-  if (!signature || signature.toLowerCase().trim() !== repNome.toLowerCase().trim()) {
-    showError(`A assinatura eletrônica digitada deve corresponder exatamente ao nome completo do representante ("${repNome}").`);
-    return;
-  }
-
-  if (errBox) errBox.classList.add("hidden");
-
-  // Salva no storage de contratos
-  const contractRecord = {
-    ongId: ongId,
-    ongNome: ongNome,
-    ongCnpj: ongCnpj,
-    representanteNome: repNome,
-    representanteCpf: repCpf,
-    representanteCargo: repCargo,
-    representanteEmail: repEmail,
-    representanteTelefone: repTelefone,
-    termosAceitos: {
-      cessaoImagens: c1,
-      fornecimentoDados: c2,
-      veracidadeSanitaria: c3,
-      independenciaPolitica: c4
-    },
-    assinaturaPorExtenso: signature
-  };
-
-  const saved = NgoContractStorage.saveContract(contractRecord);
-
-  // Fecha o modal de bloqueio
-  closeNgoContractModal();
-
-  // Atualiza a barra superior e a tabela de auditoria
-  updateNgoContractBadgeUI();
-  await renderNgoContractsAuditTable();
-
-  // Feedback de sucesso
-  showToast(`🎉 Contrato assinado com sucesso! Protocolo: ${saved.protocolo}`);
-}
-
-function openSignedContractView(ongId) {
-  const targetId = ongId || currentActiveOngId;
-  const contract = window.NgoContractStorage ? NgoContractStorage.getContractByOngId(targetId) : null;
-  if (!contract) {
-    alert("Nenhum contrato assinado encontrado para esta ONG.");
-    return;
-  }
-
-  const modal = document.getElementById("ngo-contract-view-modal");
-  if (!modal) return;
-
-  const dataAssinatura = new Date(contract.timestampAssinatura).toLocaleString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-  });
-
-  document.getElementById("print-contract-protocolo").textContent = contract.protocolo;
-  document.getElementById("print-contract-data").textContent = dataAssinatura;
-  document.getElementById("print-contract-ong-nome").textContent = contract.ongNome;
-  document.getElementById("print-contract-ong-cnpj").textContent = contract.ongCnpj;
-  document.getElementById("print-contract-rep-nome").textContent = contract.representanteNome;
-  document.getElementById("print-contract-rep-cpf").textContent = contract.representanteCpf;
-  document.getElementById("print-contract-rep-cargo").textContent = contract.representanteCargo;
-  document.getElementById("print-contract-rep-contato").textContent = `${contract.representanteEmail} • ${contract.representanteTelefone}`;
-
-  document.getElementById("print-signature-nome").textContent = contract.assinaturaPorExtenso;
-  document.getElementById("print-signature-cargo-entidade").textContent = `${contract.representanteCargo} - ${contract.ongNome}`;
-  document.getElementById("print-signature-protocolo").textContent = contract.protocolo;
-  document.getElementById("print-signature-data").textContent = dataAssinatura;
-  document.getElementById("print-signature-hash").textContent = contract.hashIntegridade;
-  document.getElementById("print-signature-ip").textContent = contract.ipOrigem || "127.0.0.1 (Local)";
-
-  modal.classList.remove("opacity-0", "pointer-events-none");
-  modal.classList.add("opacity-100");
-  modal.querySelector(".modal-content").classList.remove("scale-95");
-  modal.querySelector(".modal-content").classList.add("scale-100");
-  document.body.style.overflow = "hidden";
-
-  if (window.lucide) lucide.createIcons({ root: modal });
-}
-
-function closeSignedContractView() {
-  const modal = document.getElementById("ngo-contract-view-modal");
-  if (!modal) return;
-  modal.classList.remove("opacity-100");
-  modal.classList.add("opacity-0", "pointer-events-none");
-  modal.querySelector(".modal-content").classList.remove("scale-100");
-  modal.querySelector(".modal-content").classList.add("scale-95");
-  document.body.style.overflow = "";
-}
-
-function printSignedContract() {
-  window.print();
-}
-
-async function renderNgoContractsAuditTable() {
-  const tbody = document.getElementById("ngo-contracts-audit-tbody");
-  const badgeTotal = document.getElementById("badge-total-contracts");
-  if (!tbody) return;
-
-  let ongs = [];
-  try {
-    ongs = await SolidarityStorage.getOngs();
-  } catch (e) {
-    ongs = window.DEFAULT_ONGS || [];
-  }
-
-  const contracts = window.NgoContractStorage ? NgoContractStorage.getAllContracts() : [];
-  const signedCount = ongs.filter(o => NgoContractStorage.isContractSigned(o.id)).length;
-
-  if (badgeTotal) {
-    badgeTotal.textContent = `${signedCount} de ${ongs.length} ONGs com Contrato Válido`;
-    if (signedCount === ongs.length) {
-      badgeTotal.className = "px-2.5 py-0.5 rounded-full text-xs bg-teal-100 text-teal-800 font-bold border border-teal-300";
-    } else {
-      badgeTotal.className = "px-2.5 py-0.5 rounded-full text-xs bg-amber-100 text-amber-900 font-bold border border-amber-300";
-    }
-  }
-
-  tbody.innerHTML = ongs.map(ong => {
-    const contract = contracts.find(c => String(c.ongId) === String(ong.id) && c.status === "ativo");
-    const isSigned = !!contract;
-
-    const dataFormatada = isSigned && contract.timestampAssinatura
-      ? new Date(contract.timestampAssinatura).toLocaleDateString("pt-BR")
-      : "—";
-
-    const cnpj = (contract?.ongCnpj || ong.cnpj || "12.345.678/0001-90");
-
-    return `
-      <tr class="hover:bg-slate-50 transition-colors">
-        <td class="py-3.5 px-4">
-          <span class="font-bold text-slate-900 block">${ong.nome}</span>
-          <span class="text-[11px] font-mono text-slate-500 block">${cnpj}</span>
-        </td>
-        <td class="py-3.5 px-4">
-          ${isSigned ? `
-            <span class="font-bold text-slate-900 block">${contract.representanteNome}</span>
-            <span class="text-[11px] text-slate-500">${contract.representanteCargo}</span>
-          ` : `
-            <span class="text-slate-400 italic">Pendente de Qualificação</span>
-          `}
-        </td>
-        <td class="py-3.5 px-4 font-mono text-slate-700 text-xs">
-          ${isSigned ? `
-            <span class="block">${contract.representanteCpf}</span>
-            <span class="text-[10px] text-slate-500">${contract.representanteTelefone}</span>
-          ` : `
-            <span class="text-slate-400">—</span>
-          `}
-        </td>
-        <td class="py-3.5 px-4 text-slate-700">
-          ${dataFormatada}
-        </td>
-        <td class="py-3.5 px-4 font-mono text-xs">
-          ${isSigned ? `
-            <span class="font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 block truncate max-w-[140px]" title="${contract.protocolo}">
-              ${contract.protocolo}
-            </span>
-          ` : `
-            <span class="text-slate-400">—</span>
-          `}
-        </td>
-        <td class="py-3.5 px-4">
-          ${isSigned ? `
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-black bg-teal-100 text-teal-800 border border-teal-200">
-              <i data-lucide="check-circle" class="w-3.5 h-3.5 text-teal-600"></i> Assinado
-            </span>
-          ` : `
-            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-black bg-rose-100 text-rose-800 border border-rose-200 animate-pulse">
-              <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-rose-600"></i> Pendente
-            </span>
-          `}
-        </td>
-        <td class="py-3.5 px-4 text-center">
-          <div class="inline-flex items-center gap-1.5">
-            ${isSigned ? `
-              <button 
-                type="button" 
-                onclick="openSignedContractView('${ong.id}')" 
-                class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-teal-50 text-slate-700 hover:text-teal-800 border border-slate-200 hover:border-teal-200 text-xs font-bold transition-all shadow-2xs flex items-center gap-1 cursor-pointer"
-                title="Visualizar Contrato Completo"
-              >
-                <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Via
-              </button>
-              <button 
-                type="button" 
-                onclick="openNgoContractModal('${ong.id}', false)" 
-                class="p-1.5 rounded-xl text-slate-400 hover:text-orange-600 hover:bg-orange-50 transition-colors cursor-pointer" 
-                title="Atualizar / Editar Termo"
-              >
-                <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
-              </button>
-              <button 
-                type="button" 
-                onclick="confirmDeleteContract('${ong.id}')" 
-                class="p-1.5 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer" 
-                title="Excluir Contrato desta ONG"
-              >
-                <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-500"></i>
-              </button>
-            ` : `
-              <button 
-                type="button" 
-                onclick="openNgoContractModal('${ong.id}', false)" 
-                class="px-3 py-1.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-black transition-all shadow-xs flex items-center gap-1 cursor-pointer"
-              >
-                <i data-lucide="file-signature" class="w-3.5 h-3.5"></i> Assinar
-              </button>
-            `}
-          </div>
-        </td>
-      </tr>
-    `;
-  }).join("");
-
-  if (window.lucide) lucide.createIcons({ root: tbody });
-}
-
-async function confirmDeleteAllContracts() {
-  if (!confirm("Tem certeza que deseja excluir TODOS os contratos existentes? As ONGs ficarão com status pendente até que um novo termo seja formalmente assinado.")) {
-    return;
-  }
-  if (window.NgoContractStorage) {
-    NgoContractStorage.clearAllContracts();
-  }
-  if (typeof updateNgoContractBadgeUI === "function") updateNgoContractBadgeUI();
-  if (typeof renderNgoContractsAuditTable === "function") await renderNgoContractsAuditTable();
-  if (typeof showToast === "function") {
-    showToast("Todos os contratos foram excluídos com sucesso!");
-  } else {
-    alert("Todos os contratos foram excluídos com sucesso!");
-  }
-}
-
-async function confirmDeleteContract(ongId) {
-  if (!confirm("Deseja realmente excluir o contrato desta ONG parceira?")) {
-    return;
-  }
-  if (window.NgoContractStorage) {
-    NgoContractStorage.deleteContract(ongId);
-  }
-  if (typeof updateNgoContractBadgeUI === "function") updateNgoContractBadgeUI();
-  if (typeof renderNgoContractsAuditTable === "function") await renderNgoContractsAuditTable();
-  if (typeof showToast === "function") {
-    showToast("Contrato excluído com sucesso!");
-  } else {
-    alert("Contrato excluído com sucesso!");
-  }
-}
+function checkNgoContractGatekeeper(ongId) {}
+function openNgoContractModal(ongId = null, isGatekeeper = false) {}
+function closeNgoContractModal() {}
+function onContractModalOngChange(ongId) {}
+async function handleNgoContractSubmit(event) { if (event) event.preventDefault(); }
+function openSignedContractView(ongId) {}
+function closeSignedContractView() {}
+function printSignedContract() {}
+async function renderNgoContractsAuditTable() {}
+async function confirmDeleteAllContracts() {}
+async function confirmDeleteContract(ongId) {}
 
 // Expõe no escopo global
+window.switchAdminTab = switchAdminTab;
+window.renderAnalyticsDashboard = renderAnalyticsDashboard;
+window.renderAnalyticsLeadsTableRows = renderAnalyticsLeadsTableRows;
+
+/* ==========================================================================
+   MÁSCARAS DE ENTRADA (CPF, CNPJ, TELEFONE)
+   ========================================================================== */
+
+function applyCpfMask(input) {
+  if (!input) return;
+  let val = input.value.replace(/\D/g, "");
+  if (val.length > 11) val = val.slice(0, 11);
+  if (val.length > 9) {
+    input.value = `${val.slice(0, 3)}.${val.slice(3, 6)}.${val.slice(6, 9)}-${val.slice(9)}`;
+  } else if (val.length > 6) {
+    input.value = `${val.slice(0, 3)}.${val.slice(3, 6)}.${val.slice(6)}`;
+  } else if (val.length > 3) {
+    input.value = `${val.slice(0, 3)}.${val.slice(3)}`;
+  } else {
+    input.value = val;
+  }
+}
+
+function applyCnpjMask(input) {
+  if (!input) return;
+  let val = input.value.replace(/\D/g, "");
+  if (val.length > 14) val = val.slice(0, 14);
+  if (val.length > 12) {
+    input.value = `${val.slice(0, 2)}.${val.slice(2, 5)}.${val.slice(5, 8)}/${val.slice(8, 12)}-${val.slice(12)}`;
+  } else if (val.length > 8) {
+    input.value = `${val.slice(0, 2)}.${val.slice(2, 5)}.${val.slice(5, 8)}/${val.slice(8)}`;
+  } else if (val.length > 5) {
+    input.value = `${val.slice(0, 2)}.${val.slice(2, 5)}.${val.slice(5)}`;
+  } else if (val.length > 2) {
+    input.value = `${val.slice(0, 2)}.${val.slice(2)}`;
+  } else {
+    input.value = val;
+  }
+}
+
+function applyPhoneMask(input) {
+  if (!input) return;
+  let val = input.value.replace(/\D/g, "");
+  if (val.length > 11) val = val.slice(0, 11);
+  if (val.length > 10) {
+    input.value = `(${val.slice(0, 2)}) ${val.slice(2, 7)}-${val.slice(7)}`;
+  } else if (val.length > 6) {
+    input.value = `(${val.slice(0, 2)}) ${val.slice(2, 6)}-${val.slice(6)}`;
+  } else if (val.length > 2) {
+    input.value = `(${val.slice(0, 2)}) ${val.slice(2)}`;
+  } else if (val.length > 0) {
+    input.value = `(${val}`;
+  } else {
+    input.value = "";
+  }
+}
+
+// Expõe funções no escopo global
 window.applyCpfMask = applyCpfMask;
 window.applyCnpjMask = applyCnpjMask;
 window.applyPhoneMask = applyPhoneMask;

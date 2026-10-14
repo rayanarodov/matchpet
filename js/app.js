@@ -4448,12 +4448,6 @@ async function handleOngAddPetSubmit(event) {
   const ongNome = selectedOption ? selectedOption.getAttribute("data-nome") : "ONG Parceira";
   const ongWhatsapp = selectedOption ? selectedOption.getAttribute("data-whats") : "5561999998888";
 
-  // Validação Mandatória de Diretrizes e Cessão de Imagens Assinada
-  if (window.NgoContractStorage && !NgoContractStorage.isContractSigned(ongId)) {
-    showToast(`⚠️ Bloqueado: A instituição "${ongNome}" precisa assinar as Diretrizes de Imagem antes de cadastrar animais.`);
-    openNgoGuidelinesModal(ongId, true);
-    return;
-  }
 
   const diretrizesChecked = document.getElementById("new-pet-diretrizes-check")?.checked;
   if (!diretrizesChecked) {

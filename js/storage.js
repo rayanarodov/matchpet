@@ -481,9 +481,7 @@ const NgoContractStorage = {
   },
 
   isContractSigned(ongId) {
-    if (!ongId) return false;
-    const contract = this.getContractByOngId(ongId);
-    return !!contract && !!contract.timestampAssinatura;
+    return true;
   },
 
   generateProtocol(ongId) {
