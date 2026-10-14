@@ -515,6 +515,18 @@ body {
 }
 
 /* ==========================================================================
+   CARDS INSTITUCIONAIS COM FUNDO SÓLIDO (100% OPACOS, SEM TRANSPARÊNCIA)
+   ========================================================================== */
+#tab-content-ongs > div:first-child,
+#tab-content-ongs > div:nth-child(2),
+#tab-content-blog > div:first-child,
+#subcontent-eventos > div:first-child,
+#subcontent-rifas > div:first-child {
+  background-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
    MODAL DO QUIZ (FUNDO SÓLIDO, HARMONIOSO E NÃO TRANSPARENTE)
    ========================================================================== */
 #quiz-modal .modal-content {
