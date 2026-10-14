@@ -2296,7 +2296,7 @@ function switchMainTab(tabName) {
   const portalSegmentTabs = [
     { id: 'animais', btn: 'portal-tab-animais', badge: 'panel-badge-pets', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
     { id: 'ongs', btn: 'portal-tab-ongs', badge: 'panel-badge-ongs', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
-    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: 'panel-badge-rifas-eventos', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-amber-100 text-amber-900 font-bold' }
+    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: 'panel-badge-rifas-eventos', activeBadgeCls: 'bg-white text-slate-950 font-black shadow-xs border border-amber-300', inactiveBadgeCls: 'bg-gradient-to-r from-amber-100 to-rose-100 text-rose-900 font-bold border border-amber-300' }
   ];
 
   portalSegmentTabs.forEach(t => {
@@ -2381,17 +2381,32 @@ function filterRifasEventosSubTab(subTab) {
   const contentRifas = document.getElementById('subcontent-rifas');
 
   const buttons = [
-    { id: 'todos', el: btnTodos },
-    { id: 'eventos', el: btnEventos },
-    { id: 'rifas', el: btnRifas }
+    { 
+      id: 'todos', 
+      el: btnTodos, 
+      activeClass: "subtab-gradient-todos",
+      inactiveClass: "text-slate-700 hover:text-indigo-700 hover:bg-indigo-50"
+    },
+    { 
+      id: 'eventos', 
+      el: btnEventos, 
+      activeClass: "subtab-gradient-eventos",
+      inactiveClass: "text-slate-700 hover:text-teal-700 hover:bg-teal-50"
+    },
+    { 
+      id: 'rifas', 
+      el: btnRifas, 
+      activeClass: "subtab-gradient-rifas",
+      inactiveClass: "text-slate-700 hover:text-amber-700 hover:bg-amber-50"
+    }
   ];
 
   buttons.forEach(b => {
     if (!b.el) return;
     if (b.id === subTab) {
-      b.el.className = "subtab-re-btn active px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
+      b.el.className = `subtab-re-btn active px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-black ${b.activeClass} transition-all cursor-pointer`;
     } else {
-      b.el.className = "subtab-re-btn px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all cursor-pointer";
+      b.el.className = `subtab-re-btn px-3.5 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold ${b.inactiveClass} transition-all cursor-pointer`;
     }
   });
 
@@ -3284,60 +3299,93 @@ function renderEventosGrid() {
 
   const EVENTO_PALETTES = [
     {
-      themeName: 'teal',
-      borderTop: 'border-t-4 border-t-[#007E82]',
-      tagBg: 'bg-[#007E82] text-white',
+      themeName: 'teal-emerald',
+      topBar: 'banner-stripe-teal',
+      tagBg: 'banner-badge-teal',
       tagText: '🎪 Grande Feira Central',
-      dateBorder: 'border-[#007E82]',
-      dateIconBg: 'bg-[#007E82] text-white',
-      dateBlockBg: 'bg-[#e6f4f5]',
-      dateBlockBorder: 'border-[#007E82]',
-      dateLabelColor: 'text-[#005c60]',
-      clockColor: 'text-[#007E82]',
-      btnBg: 'bg-[#007E82] hover:bg-[#00686c] text-white',
-      iconColor: 'text-[#007E82]'
+      dateBorder: 'border-teal-500',
+      dateIconBg: 'banner-badge-teal',
+      dateBlockBg: 'bg-teal-50/70',
+      dateBlockBorder: 'border-teal-300',
+      dateLabelColor: 'text-teal-950 font-black',
+      clockColor: 'text-teal-700',
+      btnBg: 'btn-gradient-emerald',
+      iconColor: 'text-teal-600',
+      pinColor: 'text-teal-600'
     },
     {
-      themeName: 'caramelo',
-      borderTop: 'border-t-4 border-t-[#D19864]',
-      tagBg: 'bg-[#D19864] text-slate-950 font-black',
+      themeName: 'purple-indigo',
+      topBar: 'bg-stripe-purple',
+      tagBg: 'banner-badge-purple',
       tagText: '🐾 Abrace um Amigo',
-      dateBorder: 'border-[#D19864]',
-      dateIconBg: 'bg-[#D19864] text-slate-950',
-      dateBlockBg: 'bg-[#fdf5eb]',
-      dateBlockBorder: 'border-[#D19864]',
-      dateLabelColor: 'text-[#965c28]',
-      clockColor: 'text-[#965c28]',
-      btnBg: 'bg-[#D19864] hover:bg-[#b87e4c] text-slate-950 font-black',
-      iconColor: 'text-[#D19864]'
+      dateBorder: 'border-purple-500',
+      dateIconBg: 'banner-badge-purple',
+      dateBlockBg: 'bg-purple-50/70',
+      dateBlockBorder: 'border-purple-300',
+      dateLabelColor: 'text-purple-950 font-black',
+      clockColor: 'text-purple-700',
+      btnBg: 'btn-gradient-purple',
+      iconColor: 'text-purple-600',
+      pinColor: 'text-purple-600'
     },
     {
-      themeName: 'terracota',
-      borderTop: 'border-t-4 border-t-[#C8553D]',
-      tagBg: 'bg-[#C8553D] text-white font-black',
+      themeName: 'coral-rose',
+      topBar: 'banner-stripe-amber',
+      tagBg: 'banner-badge-amber',
       tagText: '❤️ Feira & Conscientização',
-      dateBorder: 'border-[#C8553D]',
-      dateIconBg: 'bg-[#C8553D] text-white',
-      dateBlockBg: 'bg-[#fdf1ee]',
-      dateBlockBorder: 'border-[#C8553D]',
-      dateLabelColor: 'text-[#8c311c]',
-      clockColor: 'text-[#8c311c]',
-      btnBg: 'bg-[#C8553D] hover:bg-[#b04530] text-white font-black',
-      iconColor: 'text-[#C8553D]'
+      dateBorder: 'border-rose-500',
+      dateIconBg: 'banner-badge-amber',
+      dateBlockBg: 'bg-orange-50/70',
+      dateBlockBorder: 'border-rose-300',
+      dateLabelColor: 'text-rose-950 font-black',
+      clockColor: 'text-rose-700',
+      btnBg: 'btn-gradient-coral',
+      iconColor: 'text-rose-600',
+      pinColor: 'text-rose-600'
+    },
+    {
+      themeName: 'blue-cyan',
+      topBar: 'bg-stripe-blue',
+      tagBg: 'banner-badge-blue',
+      tagText: '🎈 Encontro Pet Friendly',
+      dateBorder: 'border-blue-500',
+      dateIconBg: 'banner-badge-blue',
+      dateBlockBg: 'bg-blue-50/70',
+      dateBlockBorder: 'border-blue-300',
+      dateLabelColor: 'text-blue-950 font-black',
+      clockColor: 'text-blue-700',
+      btnBg: 'btn-gradient-blue',
+      iconColor: 'text-blue-600',
+      pinColor: 'text-blue-600'
     }
+  ];
+
+  const PET_TAG_STYLES = [
+    'bg-amber-100 text-amber-950 border-amber-300',
+    'bg-teal-100 text-teal-950 border-teal-300',
+    'bg-purple-100 text-purple-950 border-purple-300',
+    'bg-rose-100 text-rose-950 border-rose-300',
+    'bg-emerald-100 text-emerald-950 border-emerald-300',
+    'bg-sky-100 text-sky-950 border-sky-300'
   ];
 
   const html = eventos.map((evento, idx) => {
     const pal = EVENTO_PALETTES[idx % EVENTO_PALETTES.length];
     const coverPhoto = evento.foto || "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80";
-    const petsPills = (evento.animaisPresentes || []).map(nomePet => `
-      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-2xs">
-        🐾 ${nomePet}
-      </span>
-    `).join("");
+    const petsPills = (evento.animaisPresentes || []).map((nomePet, pIdx) => {
+      const pStyle = PET_TAG_STYLES[pIdx % PET_TAG_STYLES.length];
+      return `
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg ${pStyle} font-black text-xs border shadow-2xs">
+          🐾 ${nomePet}
+        </span>
+      `;
+    }).join("");
 
     return `
-      <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 ${pal.borderTop} shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+      <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group relative">
+        <!-- Barra de Topo com Gradiente Temático -->
+        <div class="w-full h-2.5 ${pal.topBar}"></div>
+
         <div>
           <!-- Capa com Badge da Data com Fundo Sólido e Alto Contraste -->
           <div class="relative h-48 overflow-hidden bg-slate-900 select-none">
@@ -3348,7 +3396,7 @@ function renderEventosGrid() {
               onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80'"
             >
             <div class="absolute top-3 left-3 z-10">
-              <span class="px-3 py-1 rounded-xl text-xs font-black ${pal.tagBg} shadow-md flex items-center gap-1.5 border border-white/30">
+              <span class="px-3.5 py-1.5 rounded-xl text-xs font-black ${pal.tagBg} shadow-lg flex items-center gap-1.5 border border-white/40">
                 ${pal.tagText}
               </span>
             </div>
@@ -3368,7 +3416,7 @@ function renderEventosGrid() {
             </div>
           </div>
 
-          <!-- Corpo do Evento (Fundo Branco Sólido com Texto Preto Nítido) -->
+          <!-- Corpo do Evento (Fundo Branco Sólido com Texto Nítido) -->
           <div class="p-5 space-y-3.5">
             <div>
               <h3 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xl font-black text-slate-950 leading-snug">
@@ -3391,7 +3439,7 @@ function renderEventosGrid() {
                   <span class="text-xs font-black text-slate-950 block truncate">${evento.dataExtenso}</span>
                 </div>
               </div>
-              <div class="px-2.5 py-1 rounded-lg bg-white border ${pal.dateBlockBorder}/30 text-xs font-black ${pal.clockColor} shadow-2xs flex items-center gap-1 flex-shrink-0">
+              <div class="px-2.5 py-1 rounded-lg bg-white border ${pal.dateBlockBorder}/40 text-xs font-black ${pal.clockColor} shadow-2xs flex items-center gap-1 flex-shrink-0">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                 <span>${evento.horario}</span>
               </div>
@@ -3400,7 +3448,7 @@ function renderEventosGrid() {
             <!-- Local e Endereço -->
             <div class="space-y-1 p-3.5 rounded-2xl bg-[#F9F3EA] border border-[#e8ddcf]">
               <div class="text-xs font-black text-slate-950 flex items-center gap-1.5">
-                <i data-lucide="map-pin" class="w-4 h-4 text-[#D19864] flex-shrink-0"></i>
+                <i data-lucide="map-pin" class="w-4 h-4 ${pal.pinColor} flex-shrink-0"></i>
                 <span>${evento.local}</span>
               </div>
               <div class="text-[11px] text-slate-700 font-semibold pl-5">
@@ -3415,9 +3463,9 @@ function renderEventosGrid() {
 
             <!-- Peludinhos Confirmados -->
             ${evento.animaisPresentes && evento.animaisPresentes.length > 0 ? `
-              <div class="p-3 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf] space-y-1.5">
-                <span class="text-[10px] font-black uppercase tracking-wider text-slate-900 block flex items-center gap-1">
-                  <i data-lucide="heart" class="w-3 h-3 fill-[#007E82] text-[#007E82]"></i> Alguns Peludinhos Confirmados
+              <div class="p-3.5 bg-gradient-to-r from-amber-50/50 via-teal-50/40 to-purple-50/50 rounded-2xl border border-slate-200/90 space-y-2">
+                <span class="text-[10.5px] font-black uppercase tracking-wider text-slate-950 block flex items-center gap-1.5">
+                  <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i> Peludinhos Confirmados no Evento
                 </span>
                 <div class="flex flex-wrap gap-1.5">
                   ${petsPills}
@@ -3433,7 +3481,7 @@ function renderEventosGrid() {
           <a 
             href="${evento.linkMaps}" 
             target="_blank" 
-            class="flex-1 py-2.5 px-3 ${pal.btnBg} text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all hover:scale-[1.01]"
+            class="flex-1 py-2.5 px-3 ${pal.btnBg} text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-md transition-all hover:scale-[1.01]"
           >
             <i data-lucide="map" class="w-4 h-4"></i>
             <span>Ver no Google Maps</span>
@@ -3442,7 +3490,7 @@ function renderEventosGrid() {
           <a 
             href="https://wa.me/?text=${encodeURIComponent('🐾 Convite Especial! Vamos na ' + evento.titulo + '? Acontece ' + evento.dataExtenso + ' (' + evento.horario + ') no ' + evento.local + '. Veja no Maps: ' + evento.linkMaps)}" 
             target="_blank" 
-            class="p-2.5 rounded-xl bg-[#F9F3EA] hover:bg-teal-100 text-[#007E82] border border-[#e8ddcf] transition-all flex items-center justify-center cursor-pointer"
+            class="p-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white shadow-md shadow-green-500/20 transition-all flex items-center justify-center cursor-pointer"
             title="Convidar Amigos no WhatsApp"
           >
             <i data-lucide="share-2" class="w-4 h-4"></i>
@@ -3464,18 +3512,33 @@ function filterRifas(type) {
   currentRifaFilter = type;
   
   const buttons = [
-    { id: 'btn-rifa-filter-todas', type: 'todas' },
-    { id: 'btn-rifa-filter-dinheiro', type: 'dinheiro' },
-    { id: 'btn-rifa-filter-racao', type: 'racao' }
+    { 
+      id: 'btn-rifa-filter-todas', 
+      type: 'todas', 
+      activeClass: 'bg-slate-900 text-white border-slate-700 shadow-md', 
+      inactiveClass: 'text-slate-700 bg-white hover:bg-slate-100 hover:text-slate-950 border-slate-200' 
+    },
+    { 
+      id: 'btn-rifa-filter-dinheiro', 
+      type: 'dinheiro', 
+      activeClass: 'btn-gradient-amber', 
+      inactiveClass: 'text-amber-950 bg-white hover:bg-amber-100 hover:text-amber-950 border-amber-200' 
+    },
+    { 
+      id: 'btn-rifa-filter-racao', 
+      type: 'racao', 
+      activeClass: 'btn-gradient-emerald', 
+      inactiveClass: 'text-teal-950 bg-white hover:bg-teal-100 hover:text-teal-950 border-teal-200' 
+    }
   ];
 
   buttons.forEach(b => {
     const btn = document.getElementById(b.id);
     if (!btn) return;
     if (b.type === type) {
-      btn.className = "rifa-filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold bg-[#D19864] text-slate-950 font-black transition-all shadow-xs border border-[#b87e4c]";
+      btn.className = `rifa-filter-btn active px-4 py-2.5 rounded-xl text-xs font-black ${b.activeClass} transition-all border shadow-md cursor-pointer`;
     } else {
-      btn.className = "rifa-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all";
+      btn.className = `rifa-filter-btn px-4 py-2.5 rounded-xl text-xs font-bold ${b.inactiveClass} transition-all border cursor-pointer`;
     }
   });
 
@@ -3496,68 +3559,85 @@ function renderRifasGrid(filterType = 'todas') {
     return;
   }
 
-  const RIFA_PALETTES = [
-    {
-      themeName: 'caramelo',
-      borderTop: 'border-t-4 border-t-[#D19864]',
-      tagBg: 'bg-[#D19864] text-slate-950 font-black',
-      dateBorder: 'border-[#D19864]',
-      dateIconBg: 'bg-[#D19864] text-slate-950',
-      dateBlockBg: 'bg-[#fdf5eb]',
-      dateBlockBorder: 'border-[#D19864]',
-      dateLabelColor: 'text-[#965c28]',
-      progressFill: 'bg-[#D19864]',
-      percentTextColor: 'text-[#965c28]',
-      supportBadge: 'bg-[#fdf5eb] text-slate-950 border border-[#D19864]/40',
-      pixBorder: 'border-[#D19864]',
-      ongColor: 'text-[#965c28]',
-      detailIcon: 'text-[#D19864]',
-      detailLabel: 'text-[#965c28]'
+  const RIFA_PALETTES = {
+    amber: {
+      themeName: 'amber-coral',
+      topBar: 'banner-stripe-amber',
+      tagBg: 'banner-badge-amber',
+      dateBorder: 'border-amber-500',
+      dateIconBg: 'banner-badge-amber',
+      dateBlockBg: 'bg-orange-50/70',
+      dateBlockBorder: 'border-amber-300',
+      dateLabelColor: 'text-amber-950 font-black',
+      progressFill: 'progress-fill-amber',
+      percentTextColor: 'text-orange-600',
+      prizeBg: 'bg-amber-50/70 border-2 border-amber-300/80',
+      prizeBadge: 'btn-gradient-amber',
+      btnAction: 'btn-gradient-amber',
+      pixBorder: 'border-teal-400',
+      ongColor: 'text-amber-800',
+      detailIcon: 'text-amber-600',
+      detailLabel: 'text-amber-950 font-black'
     },
-    {
-      themeName: 'teal',
-      borderTop: 'border-t-4 border-t-[#007E82]',
-      tagBg: 'bg-[#007E82] text-white font-black',
-      dateBorder: 'border-[#007E82]',
-      dateIconBg: 'bg-[#007E82] text-white',
-      dateBlockBg: 'bg-[#e6f4f5]',
-      dateBlockBorder: 'border-[#007E82]',
-      dateLabelColor: 'text-[#005c60]',
-      progressFill: 'bg-[#007E82]',
-      percentTextColor: 'text-[#007E82]',
-      supportBadge: 'bg-[#e6f4f5] text-[#005c60] border border-[#007E82]/30',
-      pixBorder: 'border-[#007E82]',
-      ongColor: 'text-[#007E82]',
-      detailIcon: 'text-[#007E82]',
-      detailLabel: 'text-[#005c60]'
+    emerald: {
+      themeName: 'emerald-teal',
+      topBar: 'banner-stripe-teal',
+      tagBg: 'banner-badge-teal',
+      dateBorder: 'border-emerald-500',
+      dateIconBg: 'banner-badge-teal',
+      dateBlockBg: 'bg-teal-50/70',
+      dateBlockBorder: 'border-emerald-300',
+      dateLabelColor: 'text-emerald-950 font-black',
+      progressFill: 'progress-fill-emerald',
+      percentTextColor: 'text-teal-700',
+      prizeBg: 'bg-teal-50/70 border-2 border-emerald-300/80',
+      prizeBadge: 'btn-gradient-emerald',
+      btnAction: 'btn-gradient-emerald',
+      pixBorder: 'border-teal-400',
+      ongColor: 'text-teal-800',
+      detailIcon: 'text-teal-600',
+      detailLabel: 'text-teal-950 font-black'
     },
-    {
-      themeName: 'dourado',
-      borderTop: 'border-t-4 border-t-[#E6A020]',
-      tagBg: 'bg-[#E6A020] text-slate-950 font-black',
-      dateBorder: 'border-[#E6A020]',
-      dateIconBg: 'bg-[#E6A020] text-slate-950',
-      dateBlockBg: 'bg-[#fef9ed]',
-      dateBlockBorder: 'border-[#E6A020]',
-      dateLabelColor: 'text-[#784906]',
-      progressFill: 'bg-[#E6A020]',
-      percentTextColor: 'text-[#784906]',
-      supportBadge: 'bg-[#fef9ed] text-slate-950 border border-[#E6A020]/40',
-      pixBorder: 'border-[#E6A020]',
-      ongColor: 'text-[#784906]',
-      detailIcon: 'text-[#E6A020]',
-      detailLabel: 'text-[#784906]'
+    purple: {
+      themeName: 'purple-pink',
+      topBar: 'bg-stripe-purple',
+      tagBg: 'banner-badge-purple',
+      dateBorder: 'border-purple-500',
+      dateIconBg: 'banner-badge-purple',
+      dateBlockBg: 'bg-purple-50/70',
+      dateBlockBorder: 'border-purple-300',
+      dateLabelColor: 'text-purple-950 font-black',
+      progressFill: 'progress-fill-purple',
+      percentTextColor: 'text-purple-700',
+      prizeBg: 'bg-purple-50/70 border-2 border-purple-300/80',
+      prizeBadge: 'btn-gradient-purple',
+      btnAction: 'btn-gradient-purple',
+      pixBorder: 'border-teal-400',
+      ongColor: 'text-purple-800',
+      detailIcon: 'text-purple-600',
+      detailLabel: 'text-purple-950 font-black'
     }
-  ];
+  };
 
   const html = rifas.map((rifa, idx) => {
-    const pal = RIFA_PALETTES[idx % RIFA_PALETTES.length];
+    let pal = RIFA_PALETTES.amber;
+    if (rifa.tipo === 'racao') {
+      pal = RIFA_PALETTES.emerald;
+    } else if (rifa.id === 'rifa-003' || idx % 3 === 2) {
+      pal = RIFA_PALETTES.purple;
+    } else if (idx % 3 === 1) {
+      pal = RIFA_PALETTES.emerald;
+    }
+
     const isMoney = rifa.tipo === 'dinheiro';
     const percent = Math.min(100, Math.round(((rifa.arrecadado || 0) / (rifa.meta || 1)) * 100));
     const coverPhoto = rifa.foto || "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80";
 
     return `
-      <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 ${pal.borderTop} shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+      <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-md hover:shadow-xl transition-all flex flex-col justify-between group relative">
+        <!-- Barra Superior com Gradiente Temático -->
+        <div class="w-full h-2.5 ${pal.topBar}"></div>
+
         <div>
           <!-- Capa com Badge de Tipo e Badge da Data do Sorteio -->
           <div class="relative h-48 overflow-hidden bg-slate-900 select-none">
@@ -3581,9 +3661,15 @@ function renderRifasGrid(filterType = 'todas') {
               </span>
             </div>
             <div class="absolute bottom-3 right-3 z-10">
-              <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg border-2 border-slate-200">
-                ${percent}% da meta
-              </span>
+              ${percent >= 75 ? `
+                <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-600 to-amber-500 text-white shadow-lg border-2 border-white flex items-center gap-1">
+                  🔥 ${percent}% arrecadado!
+                </span>
+              ` : `
+                <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg border-2 border-slate-200 flex items-center gap-1">
+                  🎯 ${percent}% da meta
+                </span>
+              `}
             </div>
           </div>
 
@@ -3613,7 +3699,7 @@ function renderRifasGrid(filterType = 'todas') {
               </div>
             </div>
             
-            <!-- Barra de Progresso da Meta com Cor Temática -->
+            <!-- Barra de Progresso da Meta com Gradiente e Fundo Suave -->
             <div class="space-y-2 p-3.5 bg-[#F9F3EA] rounded-2xl border border-[#e8ddcf]">
               <div class="flex items-center justify-between text-xs">
                 <span class="font-black text-slate-950">
@@ -3625,7 +3711,7 @@ function renderRifasGrid(filterType = 'todas') {
               </div>
 
               <!-- Barra de preenchimento -->
-              <div class="w-full bg-white h-3 rounded-full overflow-hidden border border-[#e8ddcf]">
+              <div class="w-full bg-white h-3.5 rounded-full overflow-hidden border border-[#e8ddcf] p-0.5">
                 <div 
                   class="h-full rounded-full transition-all duration-700 ${pal.progressFill}" 
                   style="width: ${percent}%"
@@ -3644,7 +3730,7 @@ function renderRifasGrid(filterType = 'todas') {
             </p>
 
             <!-- Detalhes Específicos (Prêmio / Coleta) -->
-            <div class="p-3.5 bg-white rounded-2xl border border-slate-200 text-xs text-slate-900 space-y-1.5 shadow-2xs">
+            <div class="p-3.5 ${pal.prizeBg} rounded-2xl text-xs text-slate-900 space-y-1.5 shadow-2xs">
               ${isMoney ? `
                 <div class="font-black flex items-center gap-1.5 ${pal.detailLabel}">
                   <i data-lucide="award" class="w-4 h-4 ${pal.detailIcon}"></i>
@@ -3652,7 +3738,7 @@ function renderRifasGrid(filterType = 'todas') {
                 </div>
                 <p class="text-[11.5px] text-slate-800 font-semibold leading-relaxed">${rifa.premio}</p>
                 <div class="pt-1 flex items-center gap-2">
-                  <span class="px-2.5 py-1 rounded-lg ${pal.dateBlockBg} text-slate-950 font-black text-xs border ${pal.dateBlockBorder}/30">
+                  <span class="px-2.5 py-1 rounded-xl ${pal.prizeBadge} font-black text-xs shadow-xs">
                     Valor do Bilhete: R$ ${rifa.valorBilhete},00
                   </span>
                 </div>
@@ -3663,26 +3749,29 @@ function renderRifasGrid(filterType = 'todas') {
                 </div>
                 <p class="text-[11.5px] text-slate-800 font-semibold leading-relaxed">${rifa.pontoColeta || 'Entrega na sede da ONG'}</p>
                 <div class="pt-1 flex items-center gap-2">
-                  <span class="px-2.5 py-1 rounded-lg ${pal.dateBlockBg} text-slate-950 font-black text-xs border ${pal.dateBlockBorder}/30">
+                  <span class="px-2.5 py-1 rounded-xl ${pal.prizeBadge} font-black text-xs shadow-xs">
                     Cota de 1 saco (15kg): R$ ${rifa.precoSaco15kg || 85},00
                   </span>
                 </div>
               `}
             </div>
 
-            <!-- Chave Pix com Copiar em 1 Clique -->
-            <div class="p-3.5 bg-[#F9F3EA] rounded-2xl border-2 ${pal.pixBorder} flex items-center justify-between gap-2 shadow-2xs">
+            <!-- Chave Pix com Copiar em 1 Clique com Cores Pix Modernas -->
+            <div class="p-3.5 bg-gradient-to-r from-teal-50/80 via-emerald-50/70 to-teal-50/80 rounded-2xl border-2 border-teal-400 flex items-center justify-between gap-2 shadow-2xs">
               <div class="truncate">
-                <span class="text-[10.5px] font-black text-slate-800 uppercase block tracking-wider">Chave Pix Oficial ProAnima</span>
+                <div class="flex items-center gap-1.5 mb-0.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="text-[10px] font-black text-teal-950 uppercase tracking-wider block">Chave Pix Oficial ProAnima</span>
+                </div>
                 <code class="text-xs font-mono font-black text-slate-950 truncate block select-all">${rifa.chavePix || 'contato@proanimadf.org.br'}</code>
               </div>
               <button 
                 type="button" 
                 onclick="copyPixKey('${rifa.chavePix || 'contato@proanimadf.org.br'}', this)" 
-                class="px-3 py-1.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-white font-black text-xs flex items-center gap-1.5 shadow-xs transition-all flex-shrink-0 cursor-pointer"
+                class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-black text-xs flex items-center gap-1.5 shadow-sm transition-all flex-shrink-0 cursor-pointer"
                 title="Copiar Chave Pix"
               >
-                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Pix
               </button>
             </div>
 
@@ -3696,7 +3785,7 @@ function renderRifasGrid(filterType = 'todas') {
             <button 
               type="button"
               onclick="contributeSimulatedRifa('${rifa.id}', ${isMoney ? (rifa.valorBilhete || 15) : 15})" 
-              class="flex-1 py-2.5 px-3 ${isMoney ? 'bg-amber-600 hover:bg-amber-700' : 'bg-teal-600 hover:bg-teal-700'} text-white text-xs font-black rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all hover:scale-[1.01]"
+              class="flex-1 py-2.5 px-3 ${pal.btnAction} text-xs font-black rounded-xl flex items-center justify-center gap-1.5 transition-all hover:scale-[1.01]"
               title="${isMoney ? 'Simular compra de bilhete' : 'Simular doação de ração'}"
             >
               <i data-lucide="${isMoney ? 'ticket' : 'plus-circle'}" class="w-4 h-4"></i>
@@ -3707,7 +3796,7 @@ function renderRifasGrid(filterType = 'todas') {
             <a 
               href="https://wa.me/${rifa.whatsapp}?text=${encodeURIComponent('Olá! Acabei de fazer um Pix para a campanha ' + rifa.titulo + ' da ' + rifa.ongNome + ' e gostaria de enviar o comprovante!')}" 
               target="_blank" 
-              class="p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200 transition-all flex items-center justify-center"
+              class="p-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white shadow-md shadow-green-500/20 transition-all flex items-center justify-center cursor-pointer"
               title="Enviar Comprovante de Apoio no WhatsApp"
             >
               <i data-lucide="message-circle" class="w-4 h-4"></i>
@@ -3909,6 +3998,13 @@ function setSamplePhoto(type) {
 let currentManagingOngId = "todas";
 
 async function openOngManagementModal(ongId = null) {
+  const isAuth = isAdminAuthenticated || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
+  if (!isAuth) {
+    toggleAdminHeaderPanel(null, true);
+    showToast("🔐 Acesso restrito: faça login com a senha de administrador/ONG para gerenciar animais.");
+    return;
+  }
+
   const modal = document.getElementById("ong-management-modal");
   if (!modal) return;
 
@@ -4146,19 +4242,6 @@ async function handleOngRegisterSubmit(event) {
   const foto = document.getElementById("reg-ong-foto")?.value?.trim() || "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=600&q=80";
   const descricao = document.getElementById("reg-ong-descricao")?.value?.trim();
 
-  // 2. Dados do Representante Legal e Diretrizes
-  const repNome = document.getElementById("reg-rep-nome")?.value?.trim();
-  const repCargo = document.getElementById("reg-rep-cargo")?.value?.trim();
-  const repCpf = document.getElementById("reg-rep-cpf")?.value?.trim();
-  const repEmail = document.getElementById("reg-rep-email")?.value?.trim();
-  const repTelefone = document.getElementById("reg-rep-telefone")?.value?.trim();
-
-  const checkImagens = document.getElementById("reg-check-imagens")?.checked;
-  const checkDados = document.getElementById("reg-check-dados")?.checked;
-  const checkVeracidade = document.getElementById("reg-check-veracidade")?.checked;
-  const checkIndependencia = document.getElementById("reg-check-independencia")?.checked;
-  const signature = document.getElementById("reg-signature")?.value?.trim();
-
   // Validações
   if (!nome || nome.length < 3) {
     showError("Por favor, informe o nome oficial da ONG / Instituto (mínimo 3 letras).");
@@ -4180,40 +4263,6 @@ async function handleOngRegisterSubmit(event) {
   }
   if (!descricao || descricao.length < 10) {
     showError("Por favor, descreva brevemente a atuação e história de resgates da entidade.");
-    return;
-  }
-
-  // Validações do Representante e Diretrizes
-  if (!repNome || repNome.length < 3) {
-    showError("Por favor, informe o nome completo do representante legal da ONG.");
-    return;
-  }
-  if (!repCargo || repCargo.length < 2) {
-    showError("Por favor, informe o cargo ou função na entidade (ex: Presidente, Coordenador(a)).");
-    return;
-  }
-  const cleanCpf = (repCpf || "").replace(/\D/g, "");
-  if (cleanCpf.length !== 11) {
-    showError("Por favor, informe um CPF válido com 11 dígitos do representante legal.");
-    return;
-  }
-  if (!repEmail || !repEmail.includes("@")) {
-    showError("Por favor, informe um e-mail institucional oficial válido.");
-    return;
-  }
-  const cleanRepTel = (repTelefone || "").replace(/\D/g, "");
-  if (cleanRepTel.length < 10) {
-    showError("Por favor, informe o telefone celular do representante com DDD.");
-    return;
-  }
-
-  if (!checkImagens || !checkDados || !checkVeracidade || !checkIndependencia) {
-    showError("É obrigatório concordar com as 4 declarações legais de cessão de imagem e diretrizes para concluir o cadastro.");
-    return;
-  }
-
-  if (!signature || signature.toLowerCase() !== repNome.toLowerCase()) {
-    showError(`A assinatura digital deve corresponder exatamente ao nome completo do representante legal ("${repNome}").`);
     return;
   }
 
@@ -4241,37 +4290,16 @@ async function handleOngRegisterSubmit(event) {
   // 1. Salvar ONG no SolidarityStorage
   await SolidarityStorage.saveOng(newOng);
 
-  // 2. Salvar Contrato Oficial de Diretrizes & Cessão de Imagem no NgoContractStorage
-  const contractRecord = {
-    ongId: newOngId,
-    ongNome: nome,
-    ongCnpj: cnpj,
-    representanteNome: repNome,
-    representanteCpf: repCpf,
-    representanteCargo: repCargo,
-    representanteEmail: repEmail,
-    representanteTelefone: repTelefone,
-    termosAceitos: {
-      cessaoImagens: true,
-      fornecimentoDados: true,
-      veracidadeSanitaria: true,
-      independenciaPolitica: true
-    },
-    assinaturaPorExtenso: signature
-  };
-
-  const savedContract = NgoContractStorage.saveContract(contractRecord);
-
-  // 3. Fechar modal de cadastro
+  // 2. Fechar modal de cadastro
   closeOngRegisterModal();
 
-  // 4. Atualizar grid de ONGs
+  // 3. Atualizar grid de ONGs
   await renderOngsGrid();
 
-  // 5. Toast comemorativo de sucesso
-  showToast(`🎉 Instituição "${nome}" cadastrada com sucesso e Diretrizes assinadas! (Protocolo: ${savedContract.protocolo}). Agora você já pode adicionar animais!`);
+  // 4. Toast comemorativo de sucesso
+  showToast(`🎉 Instituição "${nome}" cadastrada com sucesso! Agora você já pode adicionar animais!`);
 
-  // 6. Abrir automaticamente o modal para cadastrar o primeiro pet da nova ONG
+  // 5. Abrir automaticamente o modal para cadastrar o primeiro pet da nova ONG
   setTimeout(() => {
     openOngAddPetModal(newOngId);
   }, 400);
@@ -4282,6 +4310,13 @@ async function handleOngRegisterSubmit(event) {
    ========================================================================== */
 
 async function openOngAddPetModal(preferredOngId = null) {
+  const isAuth = isAdminAuthenticated || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
+  if (!isAuth) {
+    toggleAdminHeaderPanel(null, true);
+    showToast("🔐 Acesso restrito: faça login com a senha de administrador/ONG para cadastrar novos animais.");
+    return;
+  }
+
   const modal = document.getElementById("ong-add-pet-modal");
   if (!modal) return;
 
@@ -4338,99 +4373,21 @@ function onNewPetOngChange(ongId) {
 
 function updateOngGuidelinesStatusInAddModal(ongId) {
   const container = document.getElementById("add-pet-guidelines-status-box");
-  if (!container) return;
-  if (!ongId || ongId === "__new__") {
-    const sel = document.getElementById("new-pet-ong");
-    ongId = sel ? sel.value : "ong-001";
-  }
-
-  const isSigned = window.NgoContractStorage && NgoContractStorage.isContractSigned(ongId);
-  const contract = isSigned ? NgoContractStorage.getContractByOngId(ongId) : null;
-
+  if (container) container.innerHTML = "";
   const submitBtn = document.getElementById("btn-submit-ong-add-pet");
   const submitText = document.getElementById("btn-submit-ong-add-pet-text");
   const submitIcon = document.getElementById("btn-submit-ong-add-pet-icon");
-
-  if (isSigned && contract) {
-    container.innerHTML = `
-      <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-between gap-3 text-xs mb-1">
-        <div class="flex items-center gap-2 text-emerald-900 font-semibold">
-          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
-          <div>
-            <div class="font-black text-[12px] text-emerald-950 flex items-center gap-1.5 flex-wrap">
-              <span>Diretrizes de Imagem &amp; Logo Assinadas</span>
-              <span class="text-[10px] bg-emerald-200/80 text-emerald-900 px-1.5 py-0.2 rounded font-mono font-bold">${contract.protocolo}</span>
-            </div>
-            <p class="text-[11px] text-emerald-800">Signatário(a): ${contract.representanteNome} (${contract.representanteCargo || 'Representante Legal'})</p>
-          </div>
-        </div>
-        <button type="button" onclick="openNgoGuidelinesViewModal('${ongId}')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold transition-all shadow-2xs flex items-center gap-1 flex-shrink-0 cursor-pointer">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-          <span>Ver Termo</span>
-        </button>
-      </div>
-    `;
-    const check = document.getElementById("new-pet-diretrizes-check");
-    if (check) check.checked = true;
-
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.className = "px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs sm:text-sm font-black shadow-md transition-all flex items-center gap-2 cursor-pointer";
-    }
-    if (submitText) submitText.textContent = "Salvar e Publicar Animal";
-    if (submitIcon) submitIcon.setAttribute("data-lucide", "check");
-  } else {
-    container.innerHTML = `
-      <div class="p-3.5 bg-rose-50 border-2 border-rose-300 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs mb-1">
-        <div class="flex items-start gap-2.5 text-rose-950">
-          <i data-lucide="shield-alert" class="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5"></i>
-          <div>
-            <div class="font-black text-[12.5px] text-rose-950 flex items-center gap-1.5">
-              <span>⚠️ Bloqueado: Diretrizes &amp; Direitos de Imagem Pendentes</span>
-            </div>
-            <p class="text-[11.5px] text-rose-800 leading-snug mt-0.5">
-              Por exigência da <strong>Lei Federal nº 9.610/98</strong> e <strong>LGPD</strong>, a instituição precisa assinar o termo de cessão de imagem e diretrizes antes de poder adicionar animais à plataforma.
-            </p>
-          </div>
-        </div>
-        <button type="button" onclick="openNgoGuidelinesModal('${ongId}', true)" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-black transition-all shadow-sm flex items-center justify-center gap-1.5 flex-shrink-0 cursor-pointer">
-          <i data-lucide="file-signature" class="w-4 h-4"></i>
-          <span>Assinar Agora para Liberar</span>
-        </button>
-      </div>
-    `;
-    const check = document.getElementById("new-pet-diretrizes-check");
-    if (check) check.checked = false;
-
-    if (submitBtn) {
-      submitBtn.className = "px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-black shadow-md transition-all flex items-center gap-2 cursor-pointer";
-    }
-    if (submitText) submitText.textContent = "⚠️ Assinar Diretrizes p/ Cadastrar";
-    if (submitIcon) submitIcon.setAttribute("data-lucide", "file-signature");
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.className = "px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-slate-950 text-xs sm:text-sm font-black shadow-md transition-all flex items-center gap-2 cursor-pointer";
   }
-  if (window.lucide) lucide.createIcons({ root: container });
+  if (submitText) submitText.textContent = "Salvar e Publicar Animal";
+  if (submitIcon) submitIcon.setAttribute("data-lucide", "check");
   if (submitBtn && window.lucide) lucide.createIcons({ root: submitBtn });
 }
 
 function updateOngManagementGuidelinesStatus(ongId) {
-  const btn = document.getElementById("ong-mgmt-guidelines-btn");
-  const statusSpan = document.getElementById("ong-mgmt-guidelines-status");
-  if (!btn || !statusSpan) return;
-
-  if (!ongId || ongId === "todas") {
-    btn.className = "px-3.5 py-2 rounded-xl border border-teal-300 bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer";
-    statusSpan.textContent = "Diretrizes de Imagem";
-    return;
-  }
-
-  const isSigned = window.NgoContractStorage && NgoContractStorage.isContractSigned(ongId);
-  if (isSigned) {
-    btn.className = "px-3.5 py-2 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer";
-    statusSpan.textContent = "Diretrizes: Assinadas ✓";
-  } else {
-    btn.className = "px-3.5 py-2 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer";
-    statusSpan.textContent = "Diretrizes: Pendente ⚠️";
-  }
+  // Diretrizes institucionais removidas
 }
 
 async function handleOngAddPetSubmit(event) {
@@ -4441,13 +4398,6 @@ async function handleOngAddPetSubmit(event) {
   const ongId = selectOng ? selectOng.value : "ong-001";
   const ongNome = selectedOption ? selectedOption.getAttribute("data-nome") : "ONG Parceira";
   const ongWhatsapp = selectedOption ? selectedOption.getAttribute("data-whats") : "5561999998888";
-
-
-  const diretrizesChecked = document.getElementById("new-pet-diretrizes-check")?.checked;
-  if (!diretrizesChecked) {
-    showToast("⚠️ Por favor, confirme a declaração de autorização de imagens e diretrizes institucionais.");
-    return;
-  }
 
   const nome = document.getElementById("new-pet-nome")?.value?.trim();
   const especie = document.getElementById("new-pet-especie")?.value || "cachorro";
@@ -4530,282 +4480,16 @@ async function handleOngAddPetSubmit(event) {
 }
 
 /* ==========================================================================
-   DIRETRIZES INSTITUCIONAIS, CESSÃO DE IMAGEM & LOGO DAS ONGS (LEI 9.610/98 & LGPD)
+   DIRETRIZES INSTITUCIONAIS & CESSÃO DE IMAGEM (REMOVIDAS)
    ========================================================================== */
 
-async function openNgoGuidelinesModal(ongId = null, isMandatory = false) {
-  const modal = document.getElementById("ngo-guidelines-modal");
-  if (!modal) return;
-
-  const selectOng = document.getElementById("guidelines-form-ong-id");
-  let ongs = [];
-  try {
-    ongs = await SolidarityStorage.getOngs();
-  } catch (e) {
-    ongs = window.DEFAULT_ONGS || [];
-  }
-
-  if (selectOng && ongs.length > 0) {
-    selectOng.innerHTML = ongs.map(o => `<option value="${o.id}">${o.nome} (${o.cidade || 'DF'})</option>`).join("");
-    if (ongId && ongId !== "todas") {
-      selectOng.value = ongId;
-    }
-  }
-
-  const targetId = selectOng ? selectOng.value : (ongId || "ong-001");
-  onGuidelinesModalOngChange(targetId);
-
-  modal.classList.remove("opacity-0", "pointer-events-none");
-  const content = modal.querySelector(".modal-content");
-  if (content) {
-    content.classList.remove("scale-95");
-    content.classList.add("scale-100");
-  }
-  if (window.lucide) lucide.createIcons({ root: modal });
-}
-
-function closeNgoGuidelinesModal() {
-  const modal = document.getElementById("ngo-guidelines-modal");
-  if (!modal) return;
-  modal.classList.add("opacity-0", "pointer-events-none");
-  const content = modal.querySelector(".modal-content");
-  if (content) {
-    content.classList.remove("scale-100");
-    content.classList.add("scale-95");
-  }
-}
-
-function onGuidelinesModalOngChange(ongId) {
-  const cnpjs = {
-    "ong-001": "12.345.678/0001-90",
-    "ong-002": "23.456.789/0001-01",
-    "ong-003": "34.567.890/0001-12",
-    "ong-004": "45.678.901/0001-23",
-    "ong-005": "56.789.012/0001-34",
-    "ong-006": "67.890.123/0001-45"
-  };
-
-  const existing = window.NgoContractStorage ? NgoContractStorage.getContractByOngId(ongId) : null;
-  const inputNome = document.getElementById("guidelines-form-rep-nome");
-  const inputCpf = document.getElementById("guidelines-form-rep-cpf");
-  const inputCargo = document.getElementById("guidelines-form-rep-cargo");
-  const inputCnpj = document.getElementById("guidelines-form-ong-cnpj");
-  const inputEmail = document.getElementById("guidelines-form-rep-email");
-  const inputTel = document.getElementById("guidelines-form-rep-telefone");
-  const inputSig = document.getElementById("guidelines-form-signature");
-  const errBox = document.getElementById("guidelines-form-error-msg");
-
-  if (errBox) errBox.classList.add("hidden");
-
-  if (existing) {
-    if (inputNome) inputNome.value = existing.representanteNome || "";
-    if (inputCpf) inputCpf.value = existing.representanteCpf || "";
-    if (inputCargo) inputCargo.value = existing.representanteCargo || "";
-    if (inputCnpj) inputCnpj.value = existing.ongCnpj || cnpjs[ongId] || "";
-    if (inputEmail) inputEmail.value = existing.representanteEmail || "";
-    if (inputTel) inputTel.value = existing.representanteTelefone || "";
-    if (inputSig) inputSig.value = existing.assinaturaPorExtenso || "";
-
-    const c1 = document.getElementById("guidelines-check-imagens");
-    const c2 = document.getElementById("guidelines-check-dados");
-    const c3 = document.getElementById("guidelines-check-veracidade");
-    const c4 = document.getElementById("guidelines-check-independencia");
-    if (c1) c1.checked = !!existing.termosAceitos?.cessaoImagens;
-    if (c2) c2.checked = !!existing.termosAceitos?.fornecimentoDados;
-    if (c3) c3.checked = !!existing.termosAceitos?.veracidadeSanitaria;
-    if (c4) c4.checked = !!existing.termosAceitos?.independenciaPolitica;
-  } else {
-    if (inputCnpj) inputCnpj.value = cnpjs[ongId] || "12.345.678/0001-90";
-    if (inputNome) inputNome.value = "";
-    if (inputCpf) inputCpf.value = "";
-    if (inputCargo) inputCargo.value = "";
-    if (inputEmail) inputEmail.value = "";
-    if (inputTel) inputTel.value = "";
-    if (inputSig) inputSig.value = "";
-    const c1 = document.getElementById("guidelines-check-imagens");
-    const c2 = document.getElementById("guidelines-check-dados");
-    const c3 = document.getElementById("guidelines-check-veracidade");
-    const c4 = document.getElementById("guidelines-check-independencia");
-    if (c1) c1.checked = false;
-    if (c2) c2.checked = false;
-    if (c3) c3.checked = false;
-    if (c4) c4.checked = false;
-  }
-}
-
-async function handleNgoGuidelinesSubmit(event) {
-  if (event) event.preventDefault();
-
-  const selectOng = document.getElementById("guidelines-form-ong-id");
-  const ongId = selectOng ? selectOng.value : "ong-001";
-  let ongNome = "ONG Parceira";
-  if (selectOng && selectOng.options[selectOng.selectedIndex]) {
-    ongNome = selectOng.options[selectOng.selectedIndex].text.split("(")[0].trim();
-  }
-
-  const ongCnpj = document.getElementById("guidelines-form-ong-cnpj")?.value.trim();
-  const repNome = document.getElementById("guidelines-form-rep-nome")?.value.trim();
-  const repCpf = document.getElementById("guidelines-form-rep-cpf")?.value.trim();
-  const repCargo = document.getElementById("guidelines-form-rep-cargo")?.value.trim();
-  const repEmail = document.getElementById("guidelines-form-rep-email")?.value.trim();
-  const repTelefone = document.getElementById("guidelines-form-rep-telefone")?.value.trim();
-  const signature = document.getElementById("guidelines-form-signature")?.value.trim();
-
-  const c1 = document.getElementById("guidelines-check-imagens")?.checked;
-  const c2 = document.getElementById("guidelines-check-dados")?.checked;
-  const c3 = document.getElementById("guidelines-check-veracidade")?.checked;
-  const c4 = document.getElementById("guidelines-check-independencia")?.checked;
-
-  const errBox = document.getElementById("guidelines-form-error-msg");
-  const errText = document.getElementById("guidelines-form-error-text");
-
-  function showError(msg) {
-    if (errBox && errText) {
-      errText.textContent = msg;
-      errBox.classList.remove("hidden");
-    }
-  }
-
-  if (!repNome || repNome.length < 3) {
-    showError("Por favor, informe o nome completo do representante legal da ONG.");
-    return;
-  }
-  const cleanCpf = (repCpf || "").replace(/\D/g, "");
-  if (cleanCpf.length !== 11) {
-    showError("Por favor, informe um CPF válido com 11 dígitos.");
-    return;
-  }
-  if (!repCargo || repCargo.length < 2) {
-    showError("Por favor, informe o cargo ou função na entidade.");
-    return;
-  }
-  const cleanCnpj = (ongCnpj || "").replace(/\D/g, "");
-  if (cleanCnpj.length < 14) {
-    showError("Por favor, informe um CNPJ válido da organização.");
-    return;
-  }
-  if (!repEmail || !repEmail.includes("@")) {
-    showError("Por favor, informe um e-mail institucional válido.");
-    return;
-  }
-  const cleanTel = (repTelefone || "").replace(/\D/g, "");
-  if (cleanTel.length < 10) {
-    showError("Por favor, informe um telefone de contato com DDD.");
-    return;
-  }
-  if (!c1 || !c2 || !c3 || !c4) {
-    showError("É obrigatório marcar todas as 4 declarações de consentimento para validar as diretrizes.");
-    return;
-  }
-  if (!signature || signature.toLowerCase().trim() !== repNome.toLowerCase().trim()) {
-    showError(`A assinatura eletrônica digitada deve corresponder ao nome completo do representante ("${repNome}").`);
-    return;
-  }
-
-  if (errBox) errBox.classList.add("hidden");
-
-  const contractRecord = {
-    ongId: ongId,
-    ongNome: ongNome,
-    ongCnpj: ongCnpj,
-    representanteNome: repNome,
-    representanteCpf: repCpf,
-    representanteCargo: repCargo,
-    representanteEmail: repEmail,
-    representanteTelefone: repTelefone,
-    termosAceitos: {
-      cessaoImagens: c1,
-      fornecimentoDados: c2,
-      veracidadeSanitaria: c3,
-      independenciaPolitica: c4
-    },
-    assinaturaPorExtenso: signature
-  };
-
-  const saved = NgoContractStorage.saveContract(contractRecord);
-
-  closeNgoGuidelinesModal();
-
-  // Atualiza modal de cadastro de pet se estiver aberto
-  updateOngGuidelinesStatusInAddModal(ongId);
-
-  // Atualiza painel de gestão de ONGs se estiver aberto
-  updateOngManagementGuidelinesStatus(ongId);
-
-  // Atualiza grid de ONGs
-  await renderOngsGrid();
-
-  showToast(`🎉 Diretrizes assinadas com sucesso! Protocolo: ${saved.protocolo}`);
-}
-
-function openNgoGuidelinesViewModal(ongId = null) {
-  const targetId = ongId || document.getElementById("guidelines-form-ong-id")?.value || "ong-001";
-  const contract = window.NgoContractStorage ? NgoContractStorage.getContractByOngId(targetId) : null;
-  if (!contract) {
-    showToast("⚠️ Nenhuma diretriz assinada encontrada para esta instituição.");
-    return;
-  }
-
-  const elProto = document.getElementById("print-contract-protocolo");
-  const elData = document.getElementById("print-contract-data");
-  const elOng = document.getElementById("print-contract-ong-nome");
-  const elCnpj = document.getElementById("print-contract-ong-cnpj");
-  const elRepNome = document.getElementById("print-contract-rep-nome");
-  const elRepCpf = document.getElementById("print-contract-rep-cpf");
-  const elRepCargo = document.getElementById("print-contract-rep-cargo");
-  const elRepContato = document.getElementById("print-contract-rep-contato");
-
-  const elSigNome = document.getElementById("print-signature-nome");
-  const elSigCargo = document.getElementById("print-signature-cargo-entidade");
-  const elSigProto = document.getElementById("print-signature-protocolo");
-  const elSigData = document.getElementById("print-signature-data");
-  const elSigHash = document.getElementById("print-signature-hash");
-
-  const dateFormatted = new Date(contract.timestampAssinatura).toLocaleString("pt-BR", {
-    dateStyle: "full",
-    timeStyle: "medium"
-  });
-
-  if (elProto) elProto.textContent = contract.protocolo;
-  if (elData) elData.textContent = dateFormatted;
-  if (elOng) elOng.textContent = contract.ongNome || "ONG Parceira";
-  if (elCnpj) elCnpj.textContent = contract.ongCnpj || "Não informado";
-  if (elRepNome) elRepNome.textContent = contract.representanteNome;
-  if (elRepCpf) elRepCpf.textContent = contract.representanteCpf;
-  if (elRepCargo) elRepCargo.textContent = contract.representanteCargo;
-  if (elRepContato) elRepContato.textContent = `${contract.representanteEmail} • ${contract.representanteTelefone}`;
-
-  if (elSigNome) elSigNome.textContent = contract.assinaturaPorExtenso || contract.representanteNome;
-  if (elSigCargo) elSigCargo.textContent = `${contract.representanteCargo} - ${contract.ongNome}`;
-  if (elSigProto) elSigProto.textContent = contract.protocolo;
-  if (elSigData) elSigData.textContent = dateFormatted;
-  if (elSigHash) elSigHash.textContent = contract.hashIntegridade || "SHA256-SIM-VALIDATED";
-
-  const modal = document.getElementById("ngo-guidelines-view-modal");
-  if (!modal) return;
-  modal.classList.remove("opacity-0", "pointer-events-none");
-  const content = modal.querySelector(".modal-content");
-  if (content) {
-    content.classList.remove("scale-95");
-    content.classList.add("scale-100");
-  }
-  if (window.lucide) lucide.createIcons({ root: modal });
-}
-
-function closeNgoGuidelinesViewModal() {
-  const modal = document.getElementById("ngo-guidelines-view-modal");
-  if (!modal) return;
-  modal.classList.add("opacity-0", "pointer-events-none");
-  const content = modal.querySelector(".modal-content");
-  if (content) {
-    content.classList.remove("scale-100");
-    content.classList.add("scale-95");
-  }
-}
-
-function printSignedContract() {
-  window.print();
-}
+function openNgoGuidelinesModal() {}
+function closeNgoGuidelinesModal() {}
+function onGuidelinesModalOngChange() {}
+function handleNgoGuidelinesSubmit(event) { if (event) event.preventDefault(); }
+function openNgoGuidelinesViewModal() {}
+function closeNgoGuidelinesViewModal() {}
+function printSignedContract() { window.print(); }
 
 /* ==========================================================================
    MÁSCARAS DE ENTRADA (CPF, CNPJ, TELEFONE)
@@ -4886,6 +4570,26 @@ function updateAdminHeaderLoginUI() {
   const unauthView = document.getElementById("admin-panel-unauth-view");
   const authView = document.getElementById("admin-panel-auth-view");
 
+  // Portal de Gestão de Animais da ONG: visível exclusivamente para quem realizar o login
+  const portalSection = document.getElementById("ong-management-portal-section");
+  const unauthPrompt = document.getElementById("ong-management-unauth-prompt");
+  if (portalSection) {
+    if (isAuth) {
+      portalSection.classList.remove("hidden");
+      portalSection.classList.add("flex");
+    } else {
+      portalSection.classList.add("hidden");
+      portalSection.classList.remove("flex");
+    }
+  }
+  if (unauthPrompt) {
+    if (isAuth) {
+      unauthPrompt.classList.add("hidden");
+    } else {
+      unauthPrompt.classList.remove("hidden");
+    }
+  }
+
   if (isAuth) {
     if (btnLabel) btnLabel.textContent = "Admin Ativo";
     if (btn) {
@@ -4914,6 +4618,8 @@ function updateAdminHeaderLoginUI() {
     if (btn) lucide.createIcons({ root: btn });
     const panel = document.getElementById("admin-header-dropdown-panel");
     if (panel) lucide.createIcons({ root: panel });
+    if (portalSection && isAuth) lucide.createIcons({ root: portalSection });
+    if (unauthPrompt && !isAuth) lucide.createIcons({ root: unauthPrompt });
   }
 }
 window.updateAdminHeaderLoginUI = updateAdminHeaderLoginUI;
