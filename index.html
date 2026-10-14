@@ -151,22 +151,22 @@
   <!-- Navbar Oficial MatchPet: Apenas as 3 opções solicitadas -->
   <!-- Navbar Oficial MatchPet: Apenas as 3 opções solicitadas -->
   <header class="sticky top-0 z-30 bg-[#F9F3EA] shadow-xs border-b-2 border-[#e8ddcf]">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between min-h-[4rem] sm:min-h-[5rem]">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 min-h-[3.75rem] sm:min-h-[5rem]">
       
-      <!-- Brand Logo: Logo Oficial + Tipografia MatchPet Fofa e Harmoniosa -->
-      <a href="index.html" onclick="switchMainTab('animais')" class="flex items-center gap-2 sm:gap-3.5 group py-1" title="MatchPet - Plataforma de Adoção">
-        <div class="relative flex items-center justify-center p-1.5 sm:p-2 rounded-2xl bg-white border-2 border-[#007E82]/30 group-hover:scale-105 group-hover:border-[#007E82] transition-all duration-300 shadow-sm flex-shrink-0">
+      <!-- Brand Logo: Proporcional e Anti-Sobreposição em Telas Pequenas -->
+      <a href="index.html" onclick="switchMainTab('animais')" class="flex items-center gap-2 sm:gap-3 group py-1 min-w-0 flex-shrink" title="MatchPet - Plataforma de Adoção">
+        <div class="relative flex items-center justify-center p-1 sm:p-2 rounded-2xl bg-white border-2 border-[#007E82]/30 group-hover:scale-105 group-hover:border-[#007E82] transition-all duration-300 shadow-sm flex-shrink-0">
           <img
             src="img/matchpet-icon.png"
             alt="MatchPet - Plataforma de Adoção"
-            class="h-9 sm:h-14 w-auto object-contain drop-shadow-xs"
+            class="h-8 sm:h-12 md:h-14 w-auto object-contain drop-shadow-xs"
           >
         </div>
-        <div class="flex flex-col justify-center">
-          <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-2xl sm:text-4xl font-extrabold tracking-normal leading-none select-none">
+        <div class="flex flex-col justify-center min-w-0">
+          <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-normal leading-none select-none truncate">
             <span class="text-[#007E82]">Match</span><span class="text-[#D19864]">Pet</span>
           </span>
-          <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-[10px] sm:text-[13px] font-bold text-slate-700 tracking-wide mt-0.5 sm:mt-1 flex items-center gap-1 select-none">
+          <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="hidden sm:flex text-[10px] sm:text-[13px] font-bold text-slate-700 tracking-wide mt-0.5 sm:mt-1 items-center gap-1 select-none">
             <span>plataforma de adoção</span>
             <span class="text-xs sm:text-sm">🐾</span>
           </span>
@@ -221,13 +221,13 @@
         </div>
 
         <!-- Painel de Login para Admins no Canto Superior Direito -->
-        <div class="relative" id="admin-login-menu-wrapper">
+        <div class="relative flex-shrink-0" id="admin-login-menu-wrapper">
           <!-- Botão para alternar exibição do painel -->
           <button
             type="button"
             id="btn-toggle-admin-panel"
             onclick="toggleAdminHeaderPanel(event)"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none"
+            class="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-[11px] sm:text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none"
             title="Acesso de Administrador (Login para Gestão)"
           >
             <i data-lucide="lock" class="w-3.5 h-3.5 text-[#007E82]" id="btn-admin-header-icon"></i>
@@ -507,140 +507,124 @@
         </div>
       </div>
 
-      <!-- Container da Barra de Pesquisa Integrada -->
-      <div id="hero-search-container" class="bg-white rounded-3xl p-4 sm:p-5 shadow-lg border border-[#e8ddcf] max-w-5xl mx-auto transition-all">
-        <form onsubmit="event.preventDefault(); applyFilters();" class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-center">
+      <!-- Container da Barra de Pesquisa Unificada e Limpa -->
+      <div id="hero-search-container" class="bg-white rounded-3xl p-3.5 sm:p-5 shadow-lg border border-[#e8ddcf] max-w-5xl mx-auto transition-all">
+        <form onsubmit="event.preventDefault(); applyFilters();" class="space-y-3">
           
-          <!-- 1. Campo de Pesquisa: Nome do animal, raça, etc. -->
-          <div class="lg:col-span-5 relative">
-            <label for="hero-search-input" class="block text-[11px] font-black text-[#004245] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <i data-lucide="search" class="w-3.5 h-3.5 text-[#007E82]"></i>
-              <span>Buscar Animal (Nome, Raça, etc.)</span>
-            </label>
-            <div class="relative">
-              <input 
-                type="text" 
-                id="hero-search-input" 
-                oninput="applyFilters()" 
-                placeholder="Ex: Tobi, Vira-lata, Caramelo, dócil..." 
-                class="w-full pl-10 pr-4 py-3 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-[#007E82] rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 outline-none transition-all focus:ring-2 focus:ring-[#007E82]/30"
-                autocomplete="off"
-              >
-              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <!-- Linha 1: Campo de Busca com Localização Integrada -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 sm:gap-3 items-center">
+            
+            <!-- Campo de Busca por Texto -->
+            <div class="md:col-span-7 relative">
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="hero-search-input" 
+                  oninput="applyFilters()" 
+                  placeholder="Buscar por nome, raça, porte ou temperamento..." 
+                  class="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-[#007E82] rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 outline-none transition-all focus:ring-2 focus:ring-[#007E82]/30"
+                  autocomplete="off"
+                >
+                <i data-lucide="search" class="w-4 h-4 text-[#007E82] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              </div>
             </div>
+
+            <!-- Filtro de Localização no DF (Dropdown Integrado e Limpo) -->
+            <div class="md:col-span-5 relative">
+              <div class="relative">
+                <select 
+                  id="region-filter-pill" 
+                  onchange="applyFilters()" 
+                  class="w-full appearance-none pl-9 pr-8 py-2.5 sm:py-3 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-[#007E82] rounded-2xl text-xs sm:text-sm font-bold text-slate-800 outline-none transition-all cursor-pointer focus:ring-2 focus:ring-[#007E82]/30"
+                >
+                  <option value="todos">📍 Todas as Regiões (DF)</option>
+                  <option value="Brasília / Plano Piloto">Brasília / Plano Piloto</option>
+                  <option value="Taguatinga">Taguatinga</option>
+                  <option value="Ceilândia">Ceilândia</option>
+                  <option value="Guará">Guará</option>
+                  <option value="Águas Claras">Águas Claras</option>
+                  <option value="Samambaia">Samambaia</option>
+                  <option value="Vicente Pires">Vicente Pires</option>
+                  <option value="Sudoeste / Octogonal">Sudoeste / Octogonal</option>
+                  <option value="Cruzeiro">Cruzeiro</option>
+                  <option value="Lago Sul">Lago Sul</option>
+                  <option value="Lago Norte">Lago Norte</option>
+                  <option value="Sobradinho">Sobradinho</option>
+                  <option value="Planaltina">Planaltina</option>
+                  <option value="Gama">Gama</option>
+                  <option value="Santa Maria">Santa Maria</option>
+                  <option value="Riacho Fundo">Riacho Fundo</option>
+                  <option value="Recanto das Emas">Recanto das Emas</option>
+                  <option value="São Sebastião">São Sebastião</option>
+                  <option value="Park Way">Park Way</option>
+                  <option value="Núcleo Bandeirante">Núcleo Bandeirante</option>
+                  <option value="Jardim Botânico">Jardim Botânico</option>
+                  <option value="Brazlândia">Brazlândia</option>
+                </select>
+                <i data-lucide="map-pin" class="w-4 h-4 text-[#D19864] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              </div>
+            </div>
+
           </div>
 
-          <!-- 2. Filtro de Localização -->
-          <div class="lg:col-span-4 relative">
-            <label for="region-filter-pill" class="block text-[11px] font-black text-[#004245] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#007E82]"></i>
-              <span>Filtro de Localização</span>
-            </label>
-            <div class="relative">
-              <select 
-                id="region-filter-pill" 
-                onchange="applyFilters()" 
-                class="w-full appearance-none pl-10 pr-9 py-3 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-[#007E82] rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 outline-none transition-all cursor-pointer focus:ring-2 focus:ring-[#007E82]/30"
+          <!-- Linha 2: Chips de Espécie (Unificados sem duplicação) + Ações -->
+          <div class="pt-2.5 border-t border-[#e8ddcf]/80 flex flex-wrap items-center justify-between gap-2.5">
+            
+            <!-- Chips de Espécies -->
+            <div class="inline-flex items-center p-1 bg-slate-100 rounded-2xl gap-1">
+              <button 
+                type="button" 
+                onclick="setSpeciesFilter('todos')" 
+                id="btn-species-todos" 
+                class="species-quick-btn active px-3 py-1.5 rounded-xl text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all cursor-pointer"
               >
-                <option value="todos">Todas as Localizações 📍</option>
-                <option value="Brasília / Plano Piloto">Brasília / Plano Piloto</option>
-                <option value="Taguatinga">Taguatinga</option>
-                <option value="Ceilândia">Ceilândia</option>
-                <option value="Guará">Guará</option>
-                <option value="Águas Claras">Águas Claras</option>
-                <option value="Samambaia">Samambaia</option>
-                <option value="Vicente Pires">Vicente Pires</option>
-                <option value="Sudoeste / Octogonal">Sudoeste / Octogonal</option>
-                <option value="Cruzeiro">Cruzeiro</option>
-                <option value="Lago Sul">Lago Sul</option>
-                <option value="Lago Norte">Lago Norte</option>
-                <option value="Sobradinho">Sobradinho</option>
-                <option value="Planaltina">Planaltina</option>
-                <option value="Gama">Gama</option>
-                <option value="Santa Maria">Santa Maria</option>
-                <option value="Riacho Fundo">Riacho Fundo</option>
-                <option value="Recanto das Emas">Recanto das Emas</option>
-                <option value="São Sebastião">São Sebastião</option>
-                <option value="Park Way">Park Way</option>
-                <option value="Núcleo Bandeirante">Núcleo Bandeirante</option>
-                <option value="Jardim Botânico">Jardim Botânico</option>
-                <option value="Brazlândia">Brazlândia</option>
-              </select>
-              <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                Todos
+              </button>
+              <button 
+                type="button" 
+                onclick="setSpeciesFilter('cachorro')" 
+                id="btn-species-cachorro" 
+                class="species-quick-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1 cursor-pointer"
+              >
+                <span>🐶</span> Cães
+              </button>
+              <button 
+                type="button" 
+                onclick="setSpeciesFilter('gato')" 
+                id="btn-species-gato" 
+                class="species-quick-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1 cursor-pointer"
+              >
+                <span>🐱</span> Gatos
+              </button>
             </div>
-          </div>
 
-          <!-- 3. Filtro de Animal: Cachorro ou Gato -->
-          <div class="lg:col-span-3 relative">
-            <label for="species-filter-pill" class="block text-[11px] font-black text-[#004245] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-              <i data-lucide="paw-print" class="w-3.5 h-3.5 text-[#007E82]"></i>
-              <span>Animal (Cachorro ou Gato)</span>
-            </label>
-            <div class="relative">
-              <select 
-                id="species-filter-pill" 
-                onchange="applyFilters()" 
-                class="w-full appearance-none pl-10 pr-9 py-3 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 focus:border-[#007E82] rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 outline-none transition-all cursor-pointer focus:ring-2 focus:ring-[#007E82]/30"
+            <!-- Select oculto para preservar retrocompatibilidade total com scripts existentes -->
+            <select id="species-filter-pill" class="hidden" onchange="applyFilters()">
+              <option value="todos">todos</option>
+              <option value="cachorro">cachorro</option>
+              <option value="gato">gato</option>
+            </select>
+
+            <!-- Ações: Limpar Filtros & Contador -->
+            <div class="flex items-center gap-2 ml-auto">
+              <button 
+                type="button" 
+                onclick="resetAllFilters()" 
+                class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-[#007E82] hover:bg-slate-50 transition-all flex items-center gap-1 cursor-pointer"
+                title="Limpar todos os filtros"
               >
-                <option value="todos">Todos os Animais 🐾</option>
-                <option value="cachorro">Cachorro 🐶</option>
-                <option value="gato">Gato 🐱</option>
-              </select>
-              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm pointer-events-none">🐾</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                <span>Limpar</span>
+              </button>
+              <div id="pets-count-indicator" class="font-extrabold text-[#007E82] bg-[#e6f4f5] px-3 py-1 rounded-full border border-[#007E82]/20 text-[11px] sm:text-xs">
+                Carregando animais...
+              </div>
             </div>
+
           </div>
 
         </form>
-
-        <!-- Barra Inferior de Atalhos Rápidos & Contador -->
-        <div class="mt-4 pt-3.5 border-t border-[#e8ddcf] flex flex-wrap items-center justify-between gap-3 text-xs">
-          <!-- Atalhos Rápidos: Cachorro ou Gato -->
-          <div class="flex items-center gap-1.5">
-            <span class="text-[11px] font-extrabold text-slate-500 uppercase mr-1">Animal:</span>
-            <button 
-              type="button" 
-              onclick="setSpeciesFilter('todos')" 
-              id="btn-species-todos" 
-              class="species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all cursor-pointer"
-            >
-              Todos
-            </button>
-            <button 
-              type="button" 
-              onclick="setSpeciesFilter('cachorro')" 
-              id="btn-species-cachorro" 
-              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
-            >
-              <span>🐶</span> Cachorros
-            </button>
-            <button 
-              type="button" 
-              onclick="setSpeciesFilter('gato')" 
-              id="btn-species-gato" 
-              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
-            >
-              <span>🐱</span> Gatos
-            </button>
-          </div>
-
-          <!-- Limpar Filtros & Contador -->
-          <div class="flex items-center gap-3">
-            <button 
-              type="button" 
-              onclick="resetAllFilters()" 
-              class="px-3 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:text-[#007E82] hover:bg-[#F9F3EA] border border-slate-200 transition-all flex items-center gap-1 cursor-pointer"
-            >
-              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-400"></i>
-              <span>Limpar filtros</span>
-            </button>
-            <div id="pets-count-indicator" class="font-extrabold text-[#007E82] bg-[#F9F3EA] px-3 py-1.5 rounded-full border border-[#b2dedf]/70 text-xs">
-              Carregando animais...
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>
@@ -649,8 +633,8 @@
 
 
 
-  <!-- Catálogo de Pets (Início Imediato Abaixo dos Filtros do Mockup) -->
-  <main id="catalogo" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full">
+  <!-- Catálogo de Pets (Com espaçamento seguro inferior no mobile) -->
+  <main id="catalogo" class="flex-1 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-28 sm:pb-12 w-full">
     
     <!-- SEÇÃO: ANIMAIS PARA ADOÇÃO -->
     <div id="tab-content-animais" class="space-y-6">
@@ -1295,6 +1279,19 @@
     </div>
 
   </main>
+
+  <!-- Botão Flutuante Inferior para Acesso Rápido ao Quiz no Mobile (Posicionamento Seguro sem Bloquear Conteúdo) -->
+  <div id="mobile-floating-cta" class="fixed bottom-4 right-4 sm:hidden z-30 transition-all duration-300 pointer-events-auto">
+    <button 
+      type="button" 
+      onclick="openQuizModal()" 
+      class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-[#007E82] text-white font-black text-xs shadow-2xl border-2 border-white active:scale-95 transition-all cursor-pointer hover:bg-[#00686c]"
+      title="Fazer Quiz de Compatibilidade"
+    >
+      <span class="text-sm">🐾</span>
+      <span>Fazer Quiz</span>
+    </button>
+  </div>
 
   <!-- Modal Detalhado do Animal - Mobile Screen 1 Exato do Mockup -->
   <div id="pet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-all duration-300">

@@ -1759,17 +1759,40 @@ html, body {
     box-sizing: border-box !important;
   }
 
+  /* Botão flutuante mobile com área segura contra notch/home bar */
+  #mobile-floating-cta {
+    position: fixed !important;
+    bottom: max(1rem, calc(env(safe-area-inset-bottom) + 0.75rem)) !important;
+    right: 1rem !important;
+    z-index: 30 !important;
+  }
+
+  /* Espaçamento seguro no rodapé para nunca cobrir botões dos cards */
+  main#catalogo,
+  #catalogo {
+    padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 6rem)) !important;
+  }
+
+  /* Otimização dos campos de busca e filtros unificados */
+  #hero-search-input,
+  #region-filter-pill {
+    min-height: 44px !important;
+    font-size: 14px !important;
+  }
+
   /* Cards de Pets e Botões com altura de toque amigável */
   .pet-card {
     box-sizing: border-box !important;
     max-width: 100% !important;
+    border: 1px solid #e8ddcf !important;
+    border-top-width: 1px !important;
   }
 
   .pet-card button,
   .btn-quiz-cta,
   #hero-search-container button {
     touch-action: manipulation;
-    min-height: 42px !important;
+    min-height: 44px !important;
   }
 
   /* Modais ocupam tela cheia confortável no mobile */
