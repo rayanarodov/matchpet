@@ -91,7 +91,7 @@
             <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-2xl sm:text-3xl font-extrabold tracking-normal leading-none select-none">
               <span class="text-[#007E82]">Match</span><span class="text-[#D19864]">Pet</span>
             </span>
-            <span class="text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full bg-[#007E82] text-slate-950 font-black border border-[#007E82]/40 uppercase tracking-wider">
+            <span class="text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full bg-[#007E82] text-white font-black border border-[#007E82]/40 uppercase tracking-wider">
               Painel Administrativo
             </span>
           </div>
@@ -118,7 +118,7 @@
           <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-500"></i> Importar
           <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="importData(event)">
         </label>
-        <a href="index.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-slate-950 text-xs font-bold transition-all shadow-sm">
+        <a href="index.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-white text-xs font-bold transition-all shadow-sm">
           <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Catálogo
         </a>
       </div>
@@ -132,7 +132,7 @@
         <button 
           id="tab-btn-crud" 
           onclick="switchAdminTab('crud')" 
-          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-slate-950 shadow-sm shadow-[#007E82]/20 transition-all flex-shrink-0 whitespace-nowrap"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-white shadow-sm shadow-[#007E82]/20 transition-all flex-shrink-0 whitespace-nowrap"
         >
           <i data-lucide="clipboard-list" class="w-4 h-4"></i>
           <span>Gestão de Animais (CRUD)</span>
@@ -401,7 +401,7 @@
                 <summary class="font-semibold hover:underline">Ou adicionar fotos por links da web (URLs)...</summary>
                 <div class="pt-2">
                   <textarea id="pet-fotos-urls" rows="2" placeholder="https://exemplo.com/foto1.jpg&#10;https://exemplo.com/foto2.jpg" class="w-full px-3 py-2 bg-white border border-[#e8ddcf] rounded-xl text-xs font-mono focus:ring-2 focus:ring-[#007E82] focus:outline-none"></textarea>
-                  <button type="button" onclick="addPhotosFromUrls()" class="mt-1.5 px-3 py-1 bg-[#007E82] hover:bg-[#00686c] text-slate-950 rounded-lg text-xs font-bold transition-all">
+                  <button type="button" onclick="addPhotosFromUrls()" class="mt-1.5 px-3 py-1 bg-[#007E82] hover:bg-[#00686c] text-white rounded-lg text-xs font-bold transition-all">
                     Adicionar Links
                   </button>
                 </div>
@@ -750,7 +750,7 @@
             <button type="button" onclick="cancelEdit()" class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-[#F9F3EA] text-slate-700 text-xs font-bold transition-all">
               Limpar / Cancelar
             </button>
-            <button type="submit" id="btn-submit" class="px-7 py-2.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-slate-950 text-xs font-bold transition-all shadow-md shadow-[#007E82]/20 flex items-center gap-2">
+            <button type="submit" id="btn-submit" class="px-7 py-2.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-white text-xs font-bold transition-all shadow-md shadow-[#007E82]/20 flex items-center gap-2">
               <i data-lucide="save" class="w-4 h-4"></i> Salvar Animal
             </button>
           </div>

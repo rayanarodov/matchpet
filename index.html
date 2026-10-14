@@ -110,46 +110,62 @@
 
   <!-- Navbar Oficial MatchPet -->
   <!-- Barra de Ferramentas de Administração (Visível exclusivamente para administradores autenticados) -->
-  <div id="admin-top-bar" class="hidden bg-[#00383b] text-slate-800 border-b border-[#007E82]/30 px-4 py-1.5 text-xs relative z-40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+  <div id="admin-top-bar" class="hidden px-3 sm:px-6 py-2 text-xs relative z-40 transition-all">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
+      <!-- Status e Identificação do Administrador -->
       <div class="flex items-center gap-2">
-        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white text-[#F9F3EA] font-black text-[10px] uppercase tracking-wider border border-white/20">
-          <i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i>
+        <span class="admin-status-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-black text-xs uppercase tracking-wider">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 stroke-[2.5]"></i>
           <span>Admin Ativo</span>
         </span>
-        <span class="text-slate-950 font-bold hidden sm:inline">Modo Administrador Ativo</span>
+        <span class="text-white font-extrabold text-xs hidden sm:inline-flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Modo Administrador Ativo</span>
+        </span>
       </div>
-      <div class="flex items-center gap-2">
+
+      <!-- Botões de Ação Rápida (Cores Vibrantes, Alto Contraste e Máxima Visibilidade) -->
+      <div class="flex flex-wrap items-center gap-2">
+        <!-- 1. Cadastrar Animal (Verde Esmeralda Vibrante) -->
         <button 
           type="button" 
           onclick="openOngAddPetModal()" 
-          class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center gap-1 transition-colors shadow-2xs cursor-pointer"
+          class="btn-admin-action-add px-3.5 py-1.5 rounded-xl font-black text-xs flex items-center gap-1.5 cursor-pointer"
+          title="Cadastrar Novo Animal para Adoção"
         >
-          <i data-lucide="plus-circle" class="w-3 h-3"></i>
+          <i data-lucide="plus-circle" class="w-3.5 h-3.5 stroke-[2.5]"></i>
           <span>Cadastrar Animal</span>
         </button>
+
+        <!-- 2. Gerenciar Animais (Âmbar / Dourado Solar Vibrante) -->
         <button 
           type="button" 
           onclick="openOngManagementModal()" 
-          class="px-2.5 py-1 rounded-lg bg-[#D19864] hover:bg-[#c2844d] text-slate-950 font-bold text-[11px] flex items-center gap-1 transition-colors shadow-2xs cursor-pointer"
+          class="btn-admin-action-manage px-3.5 py-1.5 rounded-xl font-black text-xs flex items-center gap-1.5 cursor-pointer"
+          title="Gerenciar e Editar Animais Acolhidos"
         >
-          <i data-lucide="list-checks" class="w-3 h-3 text-[#007E82]"></i>
+          <i data-lucide="list-checks" class="w-3.5 h-3.5 stroke-[2.5]"></i>
           <span>Gerenciar Animais</span>
         </button>
+
+        <!-- 3. Painel de Gestão (Ciano Elétrico / Alta Nitidez) -->
         <a 
           href="admin.html" 
-          class="px-2.5 py-1 rounded-lg bg-[#007E82] hover:bg-[#00686c] text-white font-bold text-[11px] flex items-center gap-1 transition-colors shadow-2xs"
+          class="btn-admin-action-dashboard px-3.5 py-1.5 rounded-xl font-black text-xs flex items-center gap-1.5 cursor-pointer"
+          title="Abrir Painel Completo de Gestão Administrativa"
         >
-          <i data-lucide="layout-dashboard" class="w-3 h-3"></i>
+          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 stroke-[2.5]"></i>
           <span>Painel de Gestão</span>
         </a>
+
+        <!-- 4. Sair (Vermelho Carmim / Rosa Intenso de Destaque) -->
         <button
           type="button"
           onclick="adminLogout()"
-          class="px-2 py-1 rounded-lg hover:bg-rose-900 text-rose-300 hover:text-rose-200 font-bold text-[11px] flex items-center gap-1 transition-colors cursor-pointer ml-1"
-          title="Encerrar sessão de Administrador"
+          class="btn-admin-action-logout px-3.5 py-1.5 rounded-xl font-black text-xs flex items-center gap-1.5 cursor-pointer ml-1"
+          title="Encerrar Sessão de Administrador"
         >
-          <i data-lucide="log-out" class="w-3 h-3"></i>
+          <i data-lucide="log-out" class="w-3.5 h-3.5 stroke-[2.5]"></i>
           <span>Sair</span>
         </button>
       </div>
@@ -303,7 +319,7 @@
 
                 <button 
                   type="submit" 
-                  class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004d50] text-slate-950 font-black text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                  class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004d50] text-white font-black text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
                 >
                   <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
                   <span>Acessar Painel Admin</span>
@@ -2258,7 +2274,7 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full bg-[#007E82] text-slate-950 text-[10.5px] font-black uppercase tracking-wider">
+              <span class="px-2.5 py-0.5 rounded-full bg-[#007E82] text-white text-[10.5px] font-black uppercase tracking-wider">
                 Painel do Moderador
               </span>
               <span class="text-xs text-slate-600 font-bold hidden sm:inline">• Edição Oficial</span>

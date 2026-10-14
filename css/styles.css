@@ -1991,3 +1991,73 @@ html, body {
   background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%) !important;
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   Barra de Administração (#admin-top-bar) - Cores Vibrantes e Alto Contraste
+   ========================================================================== */
+#admin-top-bar {
+  background-color: #09131e !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #10b981 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+#admin-top-bar .admin-status-badge {
+  background-color: #10b981 !important;
+  color: #020617 !important;
+  border: 1px solid #34d399 !important;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35) !important;
+}
+
+#admin-top-bar .btn-admin-action-add {
+  background-color: #10b981 !important;
+  color: #020617 !important;
+  border: 1px solid #34d399 !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+#admin-top-bar .btn-admin-action-add:hover {
+  background-color: #34d399 !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5) !important;
+}
+
+#admin-top-bar .btn-admin-action-manage {
+  background-color: #f59e0b !important;
+  color: #020617 !important;
+  border: 1px solid #fbbf24 !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+#admin-top-bar .btn-admin-action-manage:hover {
+  background-color: #fbbf24 !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5) !important;
+}
+
+#admin-top-bar .btn-admin-action-dashboard {
+  background-color: #06b6d4 !important;
+  color: #020617 !important;
+  border: 1px solid #67e8f9 !important;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+#admin-top-bar .btn-admin-action-dashboard:hover {
+  background-color: #22d3ee !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.5) !important;
+}
+
+#admin-top-bar .btn-admin-action-logout {
+  background-color: #e11d48 !important;
+  color: #ffffff !important;
+  border: 1px solid #f43f5e !important;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+#admin-top-bar .btn-admin-action-logout:hover {
+  background-color: #f43f5e !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.5) !important;
+}
+
