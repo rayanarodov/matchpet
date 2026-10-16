@@ -19,6 +19,12 @@ function debounce(fn, delay = 180) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialTab = urlParams.get('tab') || window.location.hash.replace('#', '');
+  if (initialTab && ['solidarity', 'analytics', 'crud'].includes(initialTab)) {
+    switchAdminTab(initialTab);
+  }
+
   setupDragAndDrop();
   updateCloudinaryStatusUI();
   await initNgoContractsModule();
@@ -1517,9 +1523,9 @@ window.deleteAdminRifa = deleteAdminRifa;
    ========================================================================== */
 
 async function renderAdminSolidarity() {
-  await loadAdminOngs();
   loadAdminEventos();
   loadAdminRifas();
+  await loadAdminOngs();
   await renderNgoContractsAuditTable();
 }
 
@@ -1848,10 +1854,10 @@ function loadAdminEventos() {
     return `
       <div class="p-4 bg-white rounded-2xl border border-slate-200 ${pal.borderTop} shadow-xs flex flex-col justify-between space-y-3 overflow-hidden">
         <div>
-          <div class="relative h-32 -mx-4 -mt-4 mb-3 overflow-hidden bg-slate-100 rounded-t-2xl">
+          <div class="relative h-20 admin-feirinha-card-cover -mx-4 -mt-4 mb-3 overflow-hidden bg-slate-100 rounded-t-2xl">
             <img src="${coverPhoto}" alt="${ev.titulo}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=600&q=80'">
-            <div class="absolute top-2.5 left-2.5">
-              <span class="px-2.5 py-1 rounded-lg text-[10px] font-black bg-white text-slate-950 border-2 ${pal.dateBorder} shadow-sm flex items-center gap-1">
+            <div class="absolute top-2 left-2">
+              <span class="px-2 py-0.5 rounded-lg text-[10px] font-black bg-white/95 text-slate-950 border ${pal.dateBorder} shadow-2xs flex items-center gap-1">
                 <span class="p-0.5 rounded ${pal.dateIconBg}"><i data-lucide="calendar" class="w-2.5 h-2.5"></i></span>
                 <span>${ev.dataExtenso}</span>
               </span>
@@ -2027,15 +2033,15 @@ function loadAdminRifas() {
     return `
       <div class="p-4 bg-white rounded-2xl border border-slate-200 ${pal.borderTop} shadow-xs flex flex-col justify-between space-y-3 overflow-hidden">
         <div>
-          <div class="relative h-36 -mx-4 -mt-4 mb-3 overflow-hidden bg-slate-100 rounded-t-2xl">
+          <div class="relative h-20 admin-rifa-card-cover -mx-4 -mt-4 mb-3 overflow-hidden bg-slate-100 rounded-t-2xl">
             <img src="${coverPhoto}" alt="${rifa.titulo}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80'">
-            <div class="absolute top-2.5 left-2.5">
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-black shadow-xs ${pal.tagBg}">
-                ${isMoney ? (rifa.id === 'rifa-003' ? '✨ Rifa do Bem / Filhotes' : '🎟️ Rifa Beneficente') : '🥣 Campanha Ração'}
+            <div class="absolute top-2 left-2">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black shadow-xs ${pal.tagBg}">
+                ${isMoney ? (rifa.id === 'rifa-003' ? '✨ Filhotes' : '🎟️ Rifa') : '🥣 Ração'}
               </span>
             </div>
-            <div class="absolute bottom-2.5 left-2.5">
-              <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-black bg-white text-slate-950 border-2 ${pal.dateBorder} shadow-xs flex items-center gap-1">
+            <div class="absolute top-2 right-2">
+              <span class="px-2 py-0.5 rounded-lg text-[10px] font-black bg-white/95 text-slate-950 border ${pal.dateBorder} shadow-2xs flex items-center gap-1">
                 <span class="p-0.5 rounded ${pal.dateIconBg}"><i data-lucide="calendar" class="w-2.5 h-2.5"></i></span>
                 <span>${isMoney ? 'Sorteio: ' : 'Vigência: '}${rifa.dataSorteio || 'A definir'}</span>
               </span>

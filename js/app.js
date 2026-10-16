@@ -3476,30 +3476,30 @@ function renderEventosGrid() {
         <div class="w-full h-2.5 ${pal.topBar}"></div>
 
         <div>
-          <!-- Capa com Badge da Data com Fundo Sólido e Alto Contraste -->
-          <div class="relative h-48 overflow-hidden bg-slate-900 select-none">
+          <!-- Capa com Badge da Data com Fundo Sólido e Alto Contraste (Altura Reduzida h-32) -->
+          <div class="relative h-32 feirinha-card-cover overflow-hidden bg-slate-900 select-none">
             <img 
               src="${coverPhoto}" 
               alt="${evento.titulo}" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80'"
             >
-            <div class="absolute top-3 left-3 z-10">
-              <span class="px-3.5 py-1.5 rounded-xl text-xs font-black ${pal.tagBg} shadow-lg flex items-center gap-1.5 border border-white/40">
+            <div class="absolute top-2.5 left-2.5 z-10">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black ${pal.tagBg} shadow-md flex items-center gap-1.5 border border-white/40">
                 ${pal.tagText}
               </span>
             </div>
-            <div class="absolute bottom-3 left-3 z-10">
-              <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg flex items-center gap-2 border-2 ${pal.dateBorder}">
-                <span class="p-1 rounded-lg ${pal.dateIconBg} flex items-center justify-center shadow-2xs">
-                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <div class="absolute bottom-2.5 left-2.5 z-10">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md flex items-center gap-1.5 border-2 ${pal.dateBorder}">
+                <span class="p-0.5 rounded ${pal.dateIconBg} flex items-center justify-center shadow-2xs">
+                  <i data-lucide="calendar" class="w-3 h-3"></i>
                 </span>
                 <span class="tracking-tight">${evento.dataExtenso}</span>
               </span>
             </div>
-            <div class="absolute bottom-3 right-3 z-10">
-              <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg border-2 border-slate-200 flex items-center gap-1.5">
-                <i data-lucide="clock" class="w-3.5 h-3.5 ${pal.clockColor}"></i>
+            <div class="absolute bottom-2.5 right-2.5 z-10">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md border-2 border-slate-200 flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 ${pal.clockColor}"></i>
                 <span>${evento.horario}</span>
               </span>
             </div>
@@ -3728,34 +3728,34 @@ function renderRifasGrid(filterType = 'todas') {
         <div class="w-full h-2.5 ${pal.topBar}"></div>
 
         <div>
-          <!-- Capa com Badge de Tipo e Badge da Data do Sorteio -->
-          <div class="relative h-48 overflow-hidden bg-slate-900 select-none">
+          <!-- Capa com Badge de Tipo e Badge da Data do Sorteio (Altura Reduzida h-32) -->
+          <div class="relative h-32 rifa-card-cover overflow-hidden bg-slate-900 select-none">
             <img 
               src="${coverPhoto}" 
               alt="${rifa.titulo}" 
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               onerror="this.src='https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80'"
             >
-            <div class="absolute top-3.5 left-3.5 z-10">
-              <span class="px-3.5 py-1.5 rounded-xl text-xs font-black ${pal.tagBg} shadow-lg flex items-center gap-1.5 border border-white/40">
+            <div class="absolute top-2.5 left-2.5 z-10">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black ${pal.tagBg} shadow-md flex items-center gap-1.5 border border-white/40">
                 ${isMoney ? (rifa.id === 'rifa-003' ? '✨ Rifa do Bem / Filhotes' : '🎟️ Rifa Beneficente') : '🥣 Campanha de Ração'}
               </span>
             </div>
-            <div class="absolute bottom-3 left-3 z-10">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg border-2 ${pal.dateBorder}">
-                <span class="p-1 rounded-lg ${pal.dateIconBg} flex items-center justify-center shadow-2xs">
-                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+            <div class="absolute bottom-2.5 left-2.5 z-10">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md border-2 ${pal.dateBorder}">
+                <span class="p-0.5 rounded ${pal.dateIconBg} flex items-center justify-center shadow-2xs">
+                  <i data-lucide="calendar" class="w-3 h-3"></i>
                 </span>
                 <span class="tracking-tight">${isMoney ? 'Sorteio: ' : 'Vigência: '}${rifa.dataSorteio}</span>
               </span>
             </div>
-            <div class="absolute bottom-3 right-3 z-10">
+            <div class="absolute bottom-2.5 right-2.5 z-10">
               ${percent >= 75 ? `
-                <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-600 to-amber-500 text-white shadow-lg border-2 border-white flex items-center gap-1">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-gradient-to-r from-rose-600 to-amber-500 text-white shadow-md border-2 border-white flex items-center gap-1">
                   🔥 ${percent}% arrecadado!
                 </span>
               ` : `
-                <span class="px-3 py-1.5 rounded-xl text-xs font-black bg-white text-slate-950 shadow-lg border-2 border-slate-200 flex items-center gap-1">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md border-2 border-slate-200 flex items-center gap-1">
                   🎯 ${percent}% da meta
                 </span>
               `}
