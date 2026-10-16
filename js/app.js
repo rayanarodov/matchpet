@@ -729,9 +729,9 @@ function renderPetsGrid(pets) {
     `).join("");
 
     return `
-      <div class="pet-card bg-white rounded-3xl p-3.5 sm:p-5 shadow-sm hover:shadow-xl border border-[#e8ddcf] transition-all flex flex-col justify-between group relative">
-        <!-- Moldura da Foto (.pet-card-brand-frame) -->
-        <div class="pet-card-brand-frame mb-3 relative aspect-[4/3] rounded-2xl overflow-hidden select-none bg-slate-100">
+      <div class="pet-card bg-white rounded-3xl p-3.5 sm:p-5 shadow-sm hover:shadow-xl border border-[#e8ddcf] md:${especieTheme.cardAccent} transition-all flex flex-col justify-between group relative">
+        <!-- Moldura com Degradê da Foto (.pet-card-brand-frame) -->
+        <div class="pet-card-brand-frame mb-3.5 relative aspect-[4/3] overflow-hidden select-none">
           <img 
             id="card-photo-${pet.id}"
             data-photo-idx="0"
@@ -742,49 +742,52 @@ function renderPetsGrid(pets) {
             class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
           >
 
-          <!-- Selos Sutis de Espécie & Sexo -->
-          <div class="absolute top-2.5 left-2.5 pointer-events-none z-10 flex items-center gap-1.5 flex-wrap">
+          <!-- Selos Coloridos Sobrepostos: Espécie & Sexo & Adoção (Totalmente Restaurados) -->
+          <div class="absolute top-3 left-3 pointer-events-none z-10 flex items-center gap-1.5 flex-wrap">
             <span class="px-2.5 py-1 rounded-full text-[11px] font-black ${especieBadgeStyle}">
-              ${pet.especie === 'gato' ? '🐱 Gato' : pet.especie === 'outro' ? '🐰 Outro' : '🐶 Cão'}
+              ${pet.especie === 'gato' ? '🐱 Gato' : pet.especie === 'outro' ? '🐰 Outro' : '🐶 Cachorro'}
             </span>
             <span class="px-2.5 py-1 rounded-full text-[11px] font-black ${sexoBadgeStyle}">
               ${pet.sexo === 'femea' ? '♀️ Fêmea' : '♂️ Macho'}
+            </span>
+            <span class="badge-tag-adocao-solid text-[10.5px]">
+              🏷️ Adoção
             </span>
           </div>
 
           <!-- Stickers Decorativos do Studio Canva (se ativos) -->
           ${(stickers.fitaResgate || stickers.badgeVerificada || stickers.seloUrgente) ? `
-            <div class="absolute top-10 left-2.5 flex flex-wrap gap-1 z-10 pointer-events-none">
-              ${stickers.fitaResgate ? `<span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-[#F9F3EA] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ''}
-              ${stickers.badgeVerificada ? `<span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-[#F9F3EA] text-slate-950 border border-[#007E82] shadow-xs">🛡️ Auditada</span>` : ''}
-              ${stickers.seloUrgente ? `<span class="px-2 py-0.5 rounded-full text-[9px] font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-xs">🌟 Urgente</span>` : ''}
+            <div class="absolute top-11 left-3 flex flex-wrap gap-1 z-10 pointer-events-none">
+              ${stickers.fitaResgate ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F9F3EA] text-slate-950 border border-[#D19864] shadow-xs">🎗️ Resgate</span>` : ''}
+              ${stickers.badgeVerificada ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#F9F3EA] text-slate-950 border border-[#007E82] shadow-xs">🛡️ Auditada</span>` : ''}
+              ${stickers.seloUrgente ? `<span class="px-2.5 py-0.5 rounded-full text-[9.5px] font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-xs">🌟 Urgente</span>` : ''}
             </div>
           ` : ''}
-          ${stickers.patinhas ? `<span class="absolute top-2.5 right-11 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Patinhas">🐾</span>` : ''}
-          ${stickers.coracao ? `<span class="absolute bottom-2.5 right-11 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Amor">❤️</span>` : ''}
+          ${stickers.patinhas ? `<span class="absolute top-3 right-12 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Patinhas">🐾</span>` : ''}
+          ${stickers.coracao ? `<span class="absolute bottom-3 right-12 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Amor">❤️</span>` : ''}
 
           <!-- Botão de Favorito (Coração) no Topo Direito -->
           <button 
             type="button"
             onclick="toggleFavoritePet('${pet.id}', event)"
             title="${isFav ? 'Remover dos Favoritos' : 'Salvar nos Meus Favoritos'}"
-            class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 hover:bg-white text-rose-500 flex items-center justify-center shadow-md transition-all hover:scale-110 z-10 cursor-pointer pointer-events-auto"
+            class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white hover:bg-white text-rose-500 flex items-center justify-center shadow-md transition-all hover:scale-110 z-10 cursor-pointer pointer-events-auto"
           >
             ${getFastIconSvg('heart', `w-4 h-4 ${isFav ? 'fill-rose-500 text-rose-500' : 'text-slate-400'}`)}
           </button>
 
-          <!-- Badge de Vídeo -->
+          <!-- Badge de Vídeo (100% Sólido e sem Transparência) -->
           ${hasVideo ? `
-            <div class="absolute bottom-2.5 right-2.5 z-10 pointer-events-auto">
+            <div class="absolute bottom-3 right-3 z-10 pointer-events-auto">
               <span class="badge-tag-video-solid">
                 ${getFastIconSvg('play', 'w-3 h-3 fill-slate-950')} Vídeo
               </span>
             </div>
           ` : ''}
 
-          <!-- Badge de Compatibilidade Calculada -->
+          <!-- Badge de Compatibilidade Calculada (se realizou o teste) -->
           ${compat ? `
-            <div class="absolute bottom-2.5 left-2.5 flex flex-col items-start gap-1 pointer-events-none z-10">
+            <div class="absolute bottom-3 left-3 flex flex-col items-start gap-1 pointer-events-none z-10">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-black shadow-md border ${compat.badgeBorder}">
                 ${getFastIconSvg(compat.isDisqualified ? 'shield-alert' : 'sparkles', 'w-3 h-3')}
                 <span>${compat.isDisqualified ? 'Atenção' : `${compat.score}% Afinidade`}</span>
@@ -793,8 +796,94 @@ function renderPetsGrid(pets) {
           ` : ''}
         </div>
 
-        <!-- Conteúdo Textual com Hierarquia Limpa e Sem Sobrecarga -->
-        <div class="flex-1 flex flex-col justify-between">
+        <!-- CONTEÚDO DO CARD PARA DESKTOP (Layout Completo, Rico e com Fundo Nobre) -->
+        <div class="hidden md:flex flex-col justify-between flex-1 space-y-3">
+          <div>
+            <!-- Nome e Idade -->
+            <div class="flex items-baseline justify-between mb-1.5">
+              <h3 class="font-brand text-2xl sm:text-3xl font-black tracking-tight text-slate-900 ${especieTheme.nameHover} transition-colors truncate">
+                ${pet.nome}
+              </h3>
+              <span class="text-xs font-extrabold text-[#003e40] bg-[#F9F3EA] px-2.5 py-0.5 rounded-full border border-[#e8ddcf] flex-shrink-0">${pet.idade}</span>
+            </div>
+
+            <!-- Raça & Localização no DF -->
+            <div class="flex flex-wrap items-center justify-between gap-1.5 text-xs mb-1.5">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-black ${especieTheme.racaBadge} border">
+                ${getFastIconSvg('award', 'w-3.5 h-3.5 text-[#007E82]')}
+                <span class="truncate max-w-[180px]">${racaText}</span>
+              </span>
+              <span class="text-xs font-semibold text-slate-500 flex items-center gap-1 truncate max-w-[150px]">
+                ${getFastIconSvg('map-pin', 'w-3 h-3 text-slate-400')}
+                <span>${localidade}</span>
+              </span>
+            </div>
+
+            <!-- Tags Coloridas de Temperamento -->
+            <div class="flex flex-wrap gap-1 mb-2">
+              ${tempHtml}
+            </div>
+
+            <!-- ONG Responsável pelo Acolhimento -->
+            <div class="text-[11px] font-medium text-[#004d50] flex items-center gap-1.5 mb-2.5 bg-[#F9F3EA] px-2.5 py-1 rounded-xl border border-[#e8ddcf]">
+              ${getFastIconSvg('building-2', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
+              <span class="truncate">Cuidado por: <strong class="font-bold">${ongNome}</strong></span>
+            </div>
+
+            <!-- Painel de Saúde Explicativo: Castrado ou Não, Vacinas e Porte -->
+            <div class="grid grid-cols-2 gap-1.5 mb-2.5">
+              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${isCastrado ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-amber-50 text-amber-900 border border-amber-200'}" title="Condição de Castração">
+                ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3.5 h-3.5 ${isCastrado ? 'text-emerald-600' : 'text-amber-600'} flex-shrink-0`)}
+                <span class="truncate">${castradoLabel}</span>
+              </div>
+              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${hasVacinas ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-amber-50 text-amber-900 border border-amber-200'}" title="Situação Vacinal">
+                ${getFastIconSvg('shield-check', `w-3.5 h-3.5 ${hasVacinas ? 'text-cyan-600' : 'text-amber-600'} flex-shrink-0`)}
+                <span class="truncate">${vacinaLabel}</span>
+              </div>
+              <div class="col-span-2 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-medium ${porteInfo.color} border">
+                ${getFastIconSvg('maximize-2', 'w-3 h-3 text-current flex-shrink-0 opacity-70')}
+                <span>Porte: <strong class="font-bold">${porteInfo.label}</strong> ${pet.peso ? `(${pet.peso})` : ''}</span>
+              </div>
+            </div>
+
+            <!-- História de Vida e Resgate -->
+            <div class="p-3 rounded-2xl bg-[#F9F3EA] border border-[#e8ddcf] text-slate-700">
+              <div class="flex items-center gap-1.5 text-[10px] font-black text-[#003e40] uppercase tracking-wider mb-1">
+                ${getFastIconSvg('book-open', 'w-3.5 h-3.5 text-[#007E82]')}
+                <span>História de Vida</span>
+              </div>
+              <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-3">
+                "${historiaText}"
+              </p>
+            </div>
+          </div>
+
+          <!-- Ações no Desktop: Ler Ficha Completa + Quero Adotar -->
+          <div class="grid grid-cols-2 gap-2 pt-2 mt-auto">
+            <button 
+              type="button"
+              onclick="openPetModalById('${pet.id}')" 
+              class="w-full py-2.5 px-2 rounded-xl border-2 border-[#e8ddcf] hover:border-[#007E82] bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#003e40] font-black text-xs shadow-2xs hover:shadow-md transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer"
+              title="Ler a ficha completa com histórico e exames de ${pet.nome}"
+            >
+              ${getFastIconSvg('file-text', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
+              <span class="truncate">Ler Ficha Completa</span>
+            </button>
+
+            <button 
+              type="button" 
+              onclick="handleCardAdoptClick('${pet.id}')" 
+              class="w-full py-2.5 px-2 rounded-xl bg-[#D19864] hover:bg-[#c2844d] text-slate-950 font-black text-xs shadow-md shadow-[#D19864]/25 hover:shadow-lg transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer border border-[#b87e4c]"
+              title="Entrar em contato direto para adotar ${pet.nome}"
+            >
+              ${getFastIconSvg('heart', 'w-3.5 h-3.5 fill-slate-950 text-white flex-shrink-0')}
+              <span>Quero Adotar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CONTEÚDO DO CARD PARA CELULAR (Mobile-first, Enxuto e Ergonômico) -->
+        <div class="flex md:hidden flex-col justify-between flex-1">
           <div>
             <!-- Nome e Idade -->
             <div class="flex items-baseline justify-between gap-2 mb-0.5">
