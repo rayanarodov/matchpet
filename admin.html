@@ -780,17 +780,17 @@
           <!-- Barra de Filtros Interna da Tabela -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div class="relative">
-              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
               <input 
                 type="text" 
                 id="admin-search-input" 
                 placeholder="Filtrar por nome ou raça..." 
                 oninput="filterAdminList()" 
-                class="w-full pl-9 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+                class="w-full pl-10 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
               >
             </div>
 
-            <select id="admin-porte-filter" onchange="filterAdminList()" class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none">
+            <select id="admin-porte-filter" onchange="filterAdminList()" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none">
               <option value="todos">Todos os Portes</option>
               <option value="mini">Porte Mini</option>
               <option value="pequeno">Porte Pequeno</option>
@@ -1047,13 +1047,13 @@
           </div>
 
           <div class="relative w-full sm:w-64">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
             <input 
               type="text" 
               id="analytics-pet-search" 
               placeholder="Buscar animal nas métricas..." 
               oninput="filterAnalyticsPetsTable()" 
-              class="w-full pl-9 pr-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              class="w-full pl-10 pr-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:outline-none"
             >
           </div>
         </div>

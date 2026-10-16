@@ -1458,6 +1458,8 @@ body {
 .right-3 { right: 0.75rem !important; }
 .bottom-3 { bottom: 0.75rem !important; }
 .right-12 { right: 3rem !important; }
+.pl-9 { padding-left: 2.25rem !important; }
+.pl-10 { padding-left: 2.5rem !important; }
 
 /* ==========================================================================
    SEÇÃO HISTÓRIAS QUE INSPIRAM & DICA DIÁRIA (100% SÓLIDOS & NÃO TRANSPARENTES)
