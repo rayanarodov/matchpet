@@ -5130,11 +5130,11 @@ async function exportAdminLeadsCSV() {
 }
 
 async function simulateTrafficAndLeads() {
-  if (!window.AdoteAnalytics || typeof AdoteAnalytics.seedDemoInteractions !== "function") return;
+  if (!window.AdoteAnalytics || typeof AdoteAnalytics.seedDemoData !== "function") return;
   const allPets = await PetStorage.getAll();
-  await AdoteAnalytics.seedDemoInteractions(allPets);
+  await AdoteAnalytics.seedDemoData(allPets);
   await refreshAdminCollectorData();
-  showToast("⚡ +25 visitas, cliques e pessoas interessadas geradas com sucesso!");
+  showToast("⚡ Visitas e interações simuladas geradas com sucesso!");
 }
 
 /* ==========================================================================

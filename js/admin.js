@@ -1093,7 +1093,7 @@ async function renderAnalyticsDashboard() {
 
     if (elViews) elViews.textContent = report.totalViews;
     if (elQuizzes) elQuizzes.textContent = report.totalQuizzes;
-    if (elAnonBadge) elAnonBadge.textContent = `${report.totalAnonymousQuizzes || 0} anônimos`;
+    if (elAnonBadge) elAnonBadge.textContent = "Testes de afinidade";
     if (elIdentified) elIdentified.textContent = report.totalIdentifiedQuizzes || 0;
     if (elWhatsApp) elWhatsApp.textContent = report.totalWhatsApp;
     if (elConv) elConv.textContent = `${report.globalConversionRate}%`;

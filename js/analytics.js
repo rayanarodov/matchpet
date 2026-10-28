@@ -690,26 +690,13 @@ const AdoteAnalytics = {
     const sampleEspecies = ["indiferente", "cachorro", "gato"];
     const samplePortes = ["indiferente", "pequeno", "medio", "grande"];
 
-    const sampleAdopters = [
-      { nome: "Mariana", sobrenome: "Ribeiro", telefone: "(11) 98765-4321" },
-      { nome: "Carlos", sobrenome: "Eduardo Santos", telefone: "(11) 99123-4567" },
-      { nome: "Beatriz", sobrenome: "Lima", telefone: "(19) 98234-5678" },
-      { nome: "Rodrigo", sobrenome: "Menezes", telefone: "(21) 99456-7890" },
-      { nome: "Camila", sobrenome: "Albuquerque", telefone: "(11) 97654-3210" },
-      { nome: "Felipe", sobrenome: "Cavalcanti", telefone: "(31) 98877-6655" },
-      { nome: "Juliana", sobrenome: "Ferreira", telefone: "(11) 98111-2233" },
-      { nome: "Lucas", sobrenome: "Martins", telefone: "(41) 99222-3344" }
-    ];
-
-    // 1. Simula 42 Questionários respondidos (mistura de anônimos e identificados)
+    // 1. Simula 42 Questionários respondidos
     const totalSimQuizzes = 42;
     const quizzesToInsert = [];
     const eventsToInsert = [];
 
     for (let i = 0; i < totalSimQuizzes; i++) {
       const isDesqualificado = i % 14 === 0; // alguns poucos desqualificados para estatística real
-      const isIdentified = i % 3 === 0; // aprox 33% identificados, 67% anônimos
-      const adopter = isIdentified ? sampleAdopters[i % sampleAdopters.length] : null;
 
       const answers = {
         idade: isDesqualificado ? "menor_21" : "maior_21",
@@ -744,10 +731,10 @@ const AdoteAnalytics = {
 
       quizzesToInsert.push({
         timestamp: answers.respondidoEm,
-        isAnonymous: !isIdentified,
-        adopterNome: adopter?.nome || "",
-        adopterSobrenome: adopter?.sobrenome || "",
-        adopterTelefone: adopter?.telefone || "",
+        isAnonymous: true,
+        adopterNome: "",
+        adopterSobrenome: "",
+        adopterTelefone: "",
         answers: answers,
         topMatch: ranked[0] || null,
         top5: ranked.slice(0, 5),
@@ -756,10 +743,10 @@ const AdoteAnalytics = {
 
       eventsToInsert.push({
         type: "quiz_completed",
-        isAnonymous: !isIdentified,
-        adopterNome: adopter?.nome || "",
-        adopterSobrenome: adopter?.sobrenome || "",
-        adopterTelefone: adopter?.telefone || "",
+        isAnonymous: true,
+        adopterNome: "",
+        adopterSobrenome: "",
+        adopterTelefone: "",
         topMatchPetId: ranked[0]?.id || null,
         topMatchPetName: ranked[0]?.nome || null,
         topMatchScore: ranked[0]?.score || null,
@@ -767,7 +754,7 @@ const AdoteAnalytics = {
       });
     }
 
-    // 2. Simula Visitas, Leads de Interesse e Contatos WhatsApp com distribuição realista
+    // 2. Simula Visitas e Contatos WhatsApp com distribuição realista
     for (let idx = 0; idx < catalogPets.length; idx++) {
       const pet = catalogPets[idx];
       const baseViews = (catalogPets.length - idx) * 12 + Math.floor(Math.random() * 15) + 8;
@@ -785,36 +772,18 @@ const AdoteAnalytics = {
       }
 
       for (let w = 0; w < whatsappClicks; w++) {
-        const isIdentifiedLead = w % 2 === 0;
-        const lead = isIdentifiedLead ? sampleAdopters[(idx + w) % sampleAdopters.length] : null;
-
         eventsToInsert.push({
           type: "whatsapp_contact",
           petId: String(pet.id),
           petName: pet.nome,
-          isAnonymous: !isIdentifiedLead,
-          adopterNome: lead?.nome || "",
-          adopterSobrenome: lead?.sobrenome || "",
-          adopterTelefone: lead?.telefone || "",
+          isAnonymous: true,
+          adopterNome: "",
+          adopterSobrenome: "",
+          adopterTelefone: "",
           score: 80 + Math.floor(Math.random() * 21),
           rank: (w % 5) + 1,
           timestamp: Date.now() - Math.floor(Math.random() * 86400000 * 5)
         });
-
-        // Simula evento explícito de interesse do adotante identificado
-        if (isIdentifiedLead) {
-          eventsToInsert.push({
-            type: "adopter_interest",
-            petId: String(pet.id),
-            petName: pet.nome,
-            adopterNome: lead.nome,
-            adopterSobrenome: lead.sobrenome,
-            adopterTelefone: lead.telefone,
-            score: 80 + Math.floor(Math.random() * 21),
-            rank: (w % 5) + 1,
-            timestamp: Date.now() - Math.floor(Math.random() * 86400000 * 5)
-          });
-        }
       }
     }
 
