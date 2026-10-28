@@ -166,6 +166,19 @@
           <i data-lucide="newspaper" class="w-4 h-4 text-fuchsia-600"></i>
           <span>Blog Atualizado</span>
         </button>
+        
+        <!-- 4. Meus Favoritos -->
+        <button 
+          type="button" 
+          id="nav-btn-favoritos" 
+          onclick="switchMainTab('favoritos')" 
+          class="nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-rose-600 hover:bg-rose-50 transition-all flex items-center gap-1.5 cursor-pointer"
+          title="Ver apenas meus animais favoritos"
+        >
+          <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+          <span>Favoritos</span>
+          <span id="nav-fav-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-rose-100 text-rose-700 font-black border border-rose-200">0</span>
+        </button>
       </nav>
 
       <!-- Sessão do Usuário (Modo Anônimo) & Painel de Login para Admins (Canto Superior Direito) -->
@@ -178,6 +191,19 @@
             <span>Anônimo</span>
           </div>
         </div>
+        
+        <!-- Botão Rápido de Favoritos no Cabeçalho -->
+        <button
+          type="button"
+          id="btn-header-favorites"
+          onclick="openFavoritesModal()"
+          class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-white hover:bg-rose-50 text-rose-600 hover:text-rose-700 text-xs font-black border-2 border-rose-200 hover:border-rose-300 shadow-2xs transition-all cursor-pointer select-none flex-shrink-0"
+          title="Ver meus animais favoritos"
+        >
+          <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+          <span class="hidden sm:inline">Favoritos</span>
+          <span id="header-fav-badge" class="px-1.5 py-0.2 rounded-full bg-rose-600 text-white text-[10px] font-black leading-tight">0</span>
+        </button>
 
         <!-- Painel de Login para Admins no Canto Superior Direito -->
         <div class="relative flex-shrink-0" id="admin-login-menu-wrapper">
@@ -446,6 +472,19 @@
             <span id="panel-badge-rifas-eventos" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-gradient-to-r from-amber-100 to-rose-100 text-rose-900 font-black border border-amber-300">6<span class="hidden sm:inline"> ações</span></span>
           </button>
 
+          <!-- Aba 4: Meus Favoritos -->
+          <button 
+            type="button" 
+            id="portal-tab-favoritos" 
+            onclick="switchMainTab('favoritos')" 
+            class="portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer"
+            title="Exibir apenas seus animais favoritos"
+          >
+            <span class="text-xs sm:text-lg">❤️</span>
+            <span>Favoritos</span>
+            <span id="panel-badge-favoritos" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-rose-100 text-rose-800 font-bold border border-rose-200">0</span>
+          </button>
+
         </div>
       </div>
 
@@ -574,6 +613,18 @@
             >
               <span>🐰</span> Outros
             </button>
+            
+            <button 
+              type="button" 
+              onclick="toggleFavoritesOnlyFilter()" 
+              id="btn-filter-favoritos" 
+              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-rose-50 hover:text-rose-900 hover:border-rose-300 text-rose-700 border border-[#e8ddcf] transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Exibir somente os animais que você favoritou"
+            >
+              <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+              <span>Apenas Favoritos</span>
+              <span id="quick-fav-count" class="px-1.5 py-0.2 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-200">0</span>
+            </button>
           </div>
 
           <!-- Limpar Filtros & Contador -->
@@ -605,6 +656,42 @@
     
     <!-- SEÇÃO: ANIMAIS PARA ADOÇÃO -->
     <div id="tab-content-animais" class="space-y-6">
+      
+      <!-- Banner de Apenas Favoritos Ativo -->
+      <div id="favorites-active-banner" class="hidden mb-6 p-4 sm:p-5 favorites-banner-gradient text-white rounded-3xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center flex-shrink-0 text-white shadow-sm border border-white/30 text-2xl">
+            ❤️
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base font-black leading-tight">Exibindo Apenas Seus Favoritos</h3>
+              <span id="favorites-banner-count" class="px-2.5 py-0.5 rounded-full favorites-badge-pill text-xs font-black shadow-xs">0 pets</span>
+            </div>
+            <p class="text-xs text-rose-100 mt-0.5 font-medium">
+              Estes são os peludinhos que você guardou com carinho para adoção responsável no Distrito Federal.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto justify-end">
+          <button 
+            type="button" 
+            onclick="openFavoritesModal()" 
+            class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-black text-xs border border-white/40 transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+            title="Abrir painel detalhado de favoritos"
+          >
+            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            <span>Painel Detalhado</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="setFavoritesOnlyFilter(false)" 
+            class="px-4 py-2 rounded-xl bg-white hover:bg-rose-50 text-rose-700 font-black text-xs shadow-md transition-all cursor-pointer hover:scale-[1.02]"
+          >
+            Ver Todos os Animais 🐾
+          </button>
+        </div>
+      </div>
       
       <!-- Banner de Quiz Ativo -->
       <div id="quiz-active-banner" class="hidden mb-6 p-4 bg-gradient-to-r from-[#005c60] via-[#007E82] to-[#D19864] text-slate-950 rounded-2xl shadow-md flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -1657,9 +1744,15 @@
           <i data-lucide="info" class="w-3.5 h-3.5 text-[#007E82]"></i>
           Toque no animal para falar diretamente com a ONG parceira
         </span>
-        <button onclick="closeFavoritesModal()" class="px-4 py-2 bg-white hover:bg-slate-200 text-slate-700 font-bold rounded-xl border border-slate-300 transition-colors cursor-pointer">
-          Fechar
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeFavoritesModal(); setFavoritesOnlyFilter(true); document.getElementById('catalogo')?.scrollIntoView({behavior: 'smooth'})" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs shadow-xs transition-colors cursor-pointer flex items-center gap-1.5">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            <span>Ver no Catálogo</span>
+          </button>
+          <button onclick="closeFavoritesModal()" class="px-4 py-2 bg-white hover:bg-slate-200 text-slate-700 font-bold rounded-xl border border-slate-300 transition-colors cursor-pointer">
+            Fechar
+          </button>
+        </div>
       </div>
 
     </div>

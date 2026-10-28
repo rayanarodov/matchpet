@@ -1345,6 +1345,27 @@ body {
   }
 }
 
+/* ==========================================================================
+   BANNER DE ANIMAIS FAVORITOS (MATCHPET)
+   ========================================================================== */
+.favorites-banner-gradient {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 60%, #9f1239 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #fda4af !important;
+}
+
+.favorites-banner-gradient h3,
+.favorites-banner-gradient p,
+.favorites-banner-gradient span {
+  color: #ffffff !important;
+}
+
+.favorites-banner-gradient .favorites-badge-pill {
+  background-color: #ffffff !important;
+  color: #be123c !important;
+  font-weight: 900 !important;
+}
+
 /* Modal de Gestão da ONG no Index - Tela Ampla no Desktop e Fluida no Mobile */
 @media (min-width: 769px) {
   .ong-modal-wide {
