@@ -1869,66 +1869,87 @@ html, body {
     max-width: 100vw !important;
   }
 
-  /* Ajustes dos containers no celular */
+  /* Ajustes dos containers no celular - Espaçamento Amplo Inspirado em Sites de Adoção de Referência */
   .quiz-hero-bg-section {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.75rem !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.5rem !important;
   }
 
-  /* Card do Quiz compacto (máx. 35% a 40% da viewport no mobile) */
+  /* Card do Quiz Confortável e Arejado */
   #custom-vitrine-banner {
-    padding: 0.75rem 0.875rem !important;
-    border-radius: 1.25rem !important;
-    max-height: 38vh !important;
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    max-height: none !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    gap: 0.35rem !important;
+    gap: 0.65rem !important;
+    margin-bottom: 1.25rem !important;
     box-sizing: border-box !important;
+    box-shadow: 0 8px 24px -4px rgba(0, 126, 130, 0.12), 0 2px 8px -1px rgba(209, 152, 100, 0.1) !important;
   }
 
   #custom-vitrine-banner h1 {
-    font-size: 1.05rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 0 !important;
+    font-size: 1.15rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.15rem !important;
   }
 
   #custom-vitrine-banner p {
-    font-size: 0.78rem !important;
-    line-height: 1.3 !important;
-    margin-bottom: 0 !important;
+    font-size: 0.825rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 0.25rem !important;
   }
 
   #custom-vitrine-banner .btn-quiz-cta {
-    padding: 0.5rem 1.25rem !important;
-    font-size: 0.875rem !important;
-    border-radius: 0.75rem !important;
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.9rem !important;
+    border-radius: 1rem !important;
+    min-height: 46px !important;
   }
 
-  /* Linha de destaques do banner: ocultada no mobile para manter quiz card compacto (<= 35% da viewport) */
+  /* Linha de destaques do banner: ocultada no mobile para manter foco e leveza */
   .banner-highlights-row {
     display: none !important;
   }
 
-  /* Barra de abas do portal (Animais, ONG, Rifas): divisão balanceada e toque suave */
+  /* Barra de abas do portal (Animais, ONG, Rifas, Favoritos): respiro e toque suave */
   .portal-segment-tab {
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    padding: 0.5rem 0.35rem !important;
-    font-size: 11px !important;
-    gap: 0.25rem !important;
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+    padding: 0.6rem 0.95rem !important;
+    font-size: 12px !important;
+    gap: 0.45rem !important;
+    border-radius: 9999px !important;
     box-sizing: border-box !important;
   }
 
-  .portal-segment-tab span:not([id^="panel-badge-"]) {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  /* Container de Busca e Filtros com Respiro */
+  #hero-search-container {
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03) !important;
   }
 
-  /* Cards de impacto: grid 2x2 com contenção */
+  #hero-search-container form {
+    gap: 0.85rem !important;
+  }
+
+  /* Atalhos Rápidos e Contadores da Pesquisa */
+  .species-quick-btn {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 12px !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+  }
+
+  /* Cards de impacto: grid 2x2 com contenção e respiro */
   .impact-stat-card {
-    padding: 0.65rem 0.75rem !important;
-    border-radius: 1rem !important;
+    padding: 0.85rem 1rem !important;
+    border-radius: 1.15rem !important;
     min-width: 0 !important;
     overflow: hidden !important;
   }
@@ -1942,43 +1963,82 @@ html, body {
     box-sizing: border-box !important;
   }
 
-  /* Espaçamento limpo e seguro no rodapé */
+  /* Espaçamento do catálogo no mobile */
   main#catalogo,
   #catalogo {
-    padding-bottom: max(2.5rem, calc(env(safe-area-inset-bottom) + 1.5rem)) !important;
+    padding-top: 1.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: max(3.5rem, calc(env(safe-area-inset-bottom) + 2rem)) !important;
   }
 
   /* Otimização dos campos de busca e filtros unificados */
   #hero-search-input,
-  #region-filter-pill {
-    min-height: 44px !important;
-    font-size: 14px !important;
+  #region-filter-pill,
+  #species-filter-pill {
+    min-height: 46px !important;
+    font-size: 14.5px !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    border-radius: 1rem !important;
   }
 
-  /* Grid de Animais em Coluna Única (100% width, respiro lateral e fluxo vertical) */
+  /* Grid de Animais em Coluna Única com Afastamento Generoso */
   #pets-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     width: 100% !important;
-    gap: 1.25rem !important;
-    margin-top: 0.75rem !important;
-    margin-bottom: 1.5rem !important;
+    gap: 2rem !important; /* Afastamento amplo entre cards (32px) como nos maiores sites de adoção */
+    margin-top: 1.25rem !important;
+    margin-bottom: 2.5rem !important;
   }
 
-  /* Cards de Pets ocupando 100% da largura da coluna */
+  /* Cards de Pets - Design Arejado, Confortável e Acolhedor */
   .pet-card {
     box-sizing: border-box !important;
     max-width: 100% !important;
     width: 100% !important;
-    border: 1px solid #e8ddcf !important;
-    border-top-width: 1px !important;
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    border: 1.5px solid #e8ddcf !important;
+    box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03) !important;
+    margin-bottom: 0 !important;
   }
 
+  .pet-card .pet-card-brand-frame {
+    margin-bottom: 1rem !important;
+    border-radius: 1.15rem !important;
+    overflow: hidden !important;
+  }
+
+  /* Botões de Ação do Card */
   .pet-card button,
   .btn-quiz-cta,
   #hero-search-container button {
     touch-action: manipulation;
-    min-height: 44px !important;
+    min-height: 46px !important;
+  }
+
+  /* Seção de Conheça a ONG no celular */
+  #tab-content-ongs > div:first-child {
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    gap: 1.25rem !important;
+  }
+
+  #ong-story-section {
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Banner de Favoritos Ativo */
+  #favorites-active-banner {
+    padding: 1.25rem 1.15rem !important;
+    border-radius: 1.5rem !important;
+    margin-bottom: 1.75rem !important;
+    gap: 1rem !important;
   }
 
   /* Modais ocupam tela cheia confortável no mobile */
@@ -2045,20 +2105,25 @@ html, body {
   }
 }
 
-/* Otimizações ultra-específicas para celulares muito compactos (<= 480px) */
+/* Otimizações para celulares compactos (<= 480px): Mantendo respiro e conforto visual */
 @media (max-width: 480px) {
   header img {
     max-height: 2.25rem !important;
   }
 
   .pet-card {
-    padding: 0.875rem !important;
-    border-radius: 1.25rem !important;
+    padding: 1.15rem 1.1rem 1.25rem 1.1rem !important;
+    border-radius: 1.5rem !important;
   }
 
   #catalogo {
-    padding-left: 0.625rem !important;
-    padding-right: 0.625rem !important;
+    padding-left: 1rem !important; /* 16px de respiro lateral para não colar nas bordas do aparelho */
+    padding-right: 1rem !important;
+    padding-top: 1.5rem !important;
+  }
+
+  #pets-grid {
+    gap: 1.85rem !important; /* 30px de separação entre animais */
   }
 }
 

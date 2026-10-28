@@ -980,7 +980,7 @@ function renderPetsGrid(pets) {
         <div class="flex md:hidden flex-col justify-between flex-1">
           <div>
             <!-- Nome e Idade -->
-            <div class="flex items-baseline justify-between gap-2 mb-0.5">
+            <div class="flex items-baseline justify-between gap-2 mb-1.5">
               <h3 class="font-brand text-2xl font-black tracking-tight text-slate-900 ${especieTheme.nameHover} transition-colors truncate">
                 ${pet.nome}
               </h3>
@@ -989,8 +989,8 @@ function renderPetsGrid(pets) {
               </span>
             </div>
 
-            <!-- Raça & Localização (Tipografia Limpa sem Caixas Pesadas) -->
-            <div class="text-xs text-slate-600 font-medium flex items-center gap-1.5 mb-2.5 truncate">
+            <!-- Raça & Localização (Tipografia Limpa com Respiro) -->
+            <div class="text-xs text-slate-600 font-medium flex items-center gap-1.5 mb-3 truncate">
               <span class="font-bold text-slate-800">${racaText}</span>
               <span class="text-slate-300">•</span>
               <span class="flex items-center gap-1 text-slate-500 truncate">
@@ -999,8 +999,8 @@ function renderPetsGrid(pets) {
               </span>
             </div>
 
-            <!-- Agrupamento Sutil de Características & Saúde -->
-            <div class="flex flex-wrap gap-1.5 mb-2">
+            <!-- Agrupamento de Características & Saúde -->
+            <div class="flex flex-wrap gap-1.5 mb-3">
               <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-black ${isCastrado ? 'bg-emerald-100 text-emerald-950 border border-emerald-300' : 'bg-amber-100 text-amber-950 border border-amber-300'} shadow-2xs">
                 ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3 h-3 ${isCastrado ? 'text-emerald-700' : 'text-amber-700'}`)}
                 <span>${isCastrado ? 'Castrado(a)' : 'Não castrado'}</span>
@@ -1016,28 +1016,28 @@ function renderPetsGrid(pets) {
             </div>
 
             <!-- Tags de Temperamento Coloridas no Celular -->
-            <div class="flex flex-wrap gap-1 mb-2">
+            <div class="flex flex-wrap gap-1.5 mb-3">
               ${tempTags.map((t, idx) => `
-                <span class="px-2 py-0.5 rounded-md text-[10.5px] font-black border ${tempColorPalette[idx % tempColorPalette.length]} shadow-2xs">
+                <span class="px-2.5 py-0.5 rounded-md text-[10.5px] font-black border ${tempColorPalette[idx % tempColorPalette.length]} shadow-2xs">
                   ${t}
                 </span>
               `).join("")}
             </div>
 
             <!-- ONG Acolhedora -->
-            <div class="text-[11px] text-[#004d50] font-medium flex items-center gap-1.5 mb-2 bg-teal-50/80 border border-teal-200 px-2 py-0.5 rounded-lg">
+            <div class="text-[11.5px] text-[#004d50] font-medium flex items-center gap-1.5 mb-3 bg-teal-50/80 border border-teal-200 px-2.5 py-1 rounded-lg">
               ${getFastIconSvg('building-2', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
               <span class="truncate">Acolhido por: <strong class="font-bold text-slate-800">${ongNome}</strong></span>
             </div>
 
             <!-- História de Vida (Citação com Linha Lateral Suave) -->
-            <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-2 pl-2.5 border-l-4 ${especieTheme.historiaBorder} p-2 rounded-r-xl mb-3">
+            <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-2 pl-2.5 border-l-4 ${especieTheme.historiaBorder} p-2 rounded-r-xl mb-3.5">
               "${historiaText}"
             </p>
           </div>
 
-          <!-- Ações: Ficha Completa + Falar no WhatsApp (Toque Seguro & Ergonômico) -->
-          <div class="grid grid-cols-2 gap-2 pt-2 mt-auto border-t border-slate-100">
+          <!-- Ações: Ficha Completa + Falar no WhatsApp (Espaçamento e Toque Ergonômico) -->
+          <div class="grid grid-cols-2 gap-2.5 pt-3 mt-auto border-t border-slate-100">
             <!-- 1. Ficha Completa -->
             <button 
               type="button"
