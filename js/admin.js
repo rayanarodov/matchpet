@@ -263,7 +263,7 @@ function renderAdminPets(pets) {
             </div>
 
             <p class="text-xs text-slate-500 truncate">
-              ${pet.especie === 'gato' ? '🐱 Gato' : '🐶 Cão'} • ${pet.raca || 'SRD'} • ${pet.idade} • ${pet.sexo === 'femea' ? 'Fêmea' : 'Macho'}
+              ${pet.especie === 'gato' ? '🐱 Gato' : pet.especie === 'outro' ? '🐰 Outro' : '🐶 Cão'} • ${pet.raca || 'SRD'} • ${pet.idade} • ${pet.sexo === 'femea' ? 'Fêmea' : 'Macho'}
             </p>
 
             <!-- Ficha Médica Básica & Enfermidades -->
@@ -1247,7 +1247,7 @@ function renderAnalyticsPetTableRows(petList) {
         </td>
         <td class="py-3 px-3 capitalize text-slate-700 font-medium">
           <span class="inline-flex items-center gap-1">
-            ${pet.especie === 'gato' ? '🐱 Gato' : '🐶 Cão'} • ${pet.porte || 'médio'}
+            ${pet.especie === 'gato' ? '🐱 Gato' : pet.especie === 'outro' ? '🐰 Outro' : '🐶 Cão'} • ${pet.porte || 'médio'}
           </span>
         </td>
         <td class="py-3 px-3 text-center">

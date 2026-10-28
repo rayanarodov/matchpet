@@ -123,12 +123,73 @@ body {
 .pet-card {
   transform: translateZ(0);
   backface-visibility: hidden;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background 0.25s ease;
 }
 
 .pet-card:hover {
   transform: translateY(-4px) translateZ(0);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   CORES DINÂMICAS & HOVER EXPRESSIVO POR ESPÉCIE (CÃES, GATOS & OUTROS)
+   ========================================================================== */
+
+/* 1. CÃES (Cachorro) - Tom Quente de Dourado / Caramelo (#D19864) */
+.pet-card.pet-card-cachorro:hover,
+.pet-card-cachorro:hover,
+.pet-card-cachorro.hover-preview {
+  transform: translateY(-5px) translateZ(0);
+  border-color: #D19864 !important;
+  box-shadow: 0 20px 32px -5px rgba(209, 152, 100, 0.38), 0 10px 18px -6px rgba(209, 152, 100, 0.2) !important;
+  background: linear-gradient(180deg, rgba(254, 243, 199, 0.25) 0%, #ffffff 42%) !important;
+}
+
+.pet-card.pet-card-cachorro:hover .pet-card-brand-frame,
+.pet-card-cachorro:hover .pet-card-frame-cachorro,
+.pet-card-cachorro.hover-preview .pet-card-brand-frame,
+.pet-card-cachorro.hover-preview .pet-card-frame-cachorro {
+  background: linear-gradient(135deg, #00383b 0%, #005c60 50%, #D19864 100%) !important;
+  box-shadow: 0 10px 28px rgba(209, 152, 100, 0.4), 0 4px 12px rgba(0, 56, 59, 0.25) !important;
+}
+
+/* 2. GATOS (Gato) - Tom Nobre e Vibrante de Roxo / Violeta Real (#8b5cf6 / #7c3aed) */
+.pet-card.pet-card-gato:hover,
+.pet-card-gato:hover,
+.pet-card-gato.hover-preview {
+  transform: translateY(-5px) translateZ(0);
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 20px 32px -5px rgba(139, 92, 246, 0.4), 0 10px 18px -6px rgba(139, 92, 246, 0.22) !important;
+  background: linear-gradient(180deg, rgba(243, 232, 255, 0.3) 0%, #ffffff 42%) !important;
+}
+
+.pet-card.pet-card-gato:hover .pet-card-brand-frame,
+.pet-card-gato:hover .pet-card-frame-gato,
+.pet-card-gato.hover-preview .pet-card-brand-frame,
+.pet-card-gato.hover-preview .pet-card-frame-gato {
+  background: linear-gradient(135deg, #2e1065 0%, #581c87 50%, #8b5cf6 100%) !important;
+  box-shadow: 0 10px 28px rgba(139, 92, 246, 0.45), 0 4px 12px rgba(46, 16, 101, 0.3) !important;
+}
+
+/* 3. OUTROS (Outro / Roedores / Aves) - Tom Marcante de Magenta / Fuchsia (#d946ef / #c026d3) */
+.pet-card.pet-card-outro:hover,
+.pet-card-outro:hover,
+.pet-card-outro.hover-preview {
+  transform: translateY(-5px) translateZ(0);
+  border-color: #d946ef !important;
+  box-shadow: 0 20px 32px -5px rgba(217, 70, 239, 0.4), 0 10px 18px -6px rgba(217, 70, 239, 0.22) !important;
+  background: linear-gradient(180deg, rgba(253, 232, 255, 0.3) 0%, #ffffff 42%) !important;
+}
+
+.pet-card.pet-card-outro:hover .pet-card-brand-frame,
+.pet-card-outro:hover .pet-card-frame-outro,
+.pet-card-outro.hover-preview .pet-card-brand-frame,
+.pet-card-outro.hover-preview .pet-card-frame-outro {
+  background: linear-gradient(135deg, #4a044e 0%, #701a75 50%, #d946ef 100%) !important;
+  box-shadow: 0 10px 28px rgba(217, 70, 239, 0.45), 0 4px 12px rgba(74, 4, 78, 0.3) !important;
 }
 
 /* Grid smooth containment */

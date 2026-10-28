@@ -526,6 +526,7 @@
                 <option value="todos">Todos os Animais 🐾</option>
                 <option value="cachorro">Cachorro 🐶</option>
                 <option value="gato">Gato 🐱</option>
+                <option value="outro">Outro (Coelho / Roedor) 🐰</option>
               </select>
               <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm pointer-events-none">🐾</span>
               <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
@@ -536,8 +537,8 @@
 
         <!-- Barra Inferior de Atalhos Rápidos & Contador -->
         <div class="mt-4 pt-3.5 border-t border-[#e8ddcf] flex flex-wrap items-center justify-between gap-3 text-xs">
-          <!-- Atalhos Rápidos: Cachorro ou Gato -->
-          <div class="flex items-center gap-1.5">
+          <!-- Atalhos Rápidos: Cachorro, Gato ou Outros -->
+          <div class="flex items-center gap-1.5 flex-wrap">
             <span class="text-[11px] font-extrabold text-slate-500 uppercase mr-1">Animal:</span>
             <button 
               type="button" 
@@ -551,7 +552,7 @@
               type="button" 
               onclick="setSpeciesFilter('cachorro')" 
               id="btn-species-cachorro" 
-              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
+              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-amber-50 hover:text-amber-900 hover:border-amber-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
             >
               <span>🐶</span> Cachorros
             </button>
@@ -559,9 +560,17 @@
               type="button" 
               onclick="setSpeciesFilter('gato')" 
               id="btn-species-gato" 
-              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
+              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-purple-50 hover:text-purple-900 hover:border-purple-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
             >
               <span>🐱</span> Gatos
+            </button>
+            <button 
+              type="button" 
+              onclick="setSpeciesFilter('outro')" 
+              id="btn-species-outro" 
+              class="species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-fuchsia-50 hover:text-fuchsia-900 hover:border-fuchsia-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer"
+            >
+              <span>🐰</span> Outros
             </button>
           </div>
 
@@ -685,9 +694,10 @@
             id="species-filter" 
             class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#007E82] focus:bg-white transition-all"
           >
-            <option value="todos">Todos (Cachorros & Gatos)</option>
+            <option value="todos">Todos (Cachorros, Gatos & Outros)</option>
             <option value="cachorro">Somente Cachorros 🐶</option>
             <option value="gato">Somente Gatos 🐱</option>
+            <option value="outro">Outros Animais 🐰</option>
           </select>
         </div>
 

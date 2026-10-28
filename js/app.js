@@ -507,9 +507,11 @@ function resetAllFilters() {
   const btnTodos = document.getElementById("btn-species-todos");
   const btnCachorro = document.getElementById("btn-species-cachorro");
   const btnGato = document.getElementById("btn-species-gato");
-  if (btnTodos) btnTodos.className = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-bold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
-  if (btnCachorro) btnCachorro.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
-  if (btnGato) btnGato.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  const btnOutro = document.getElementById("btn-species-outro");
+  if (btnTodos) btnTodos.className = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
+  if (btnCachorro) btnCachorro.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-amber-50 hover:text-amber-900 hover:border-amber-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  if (btnGato) btnGato.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-purple-50 hover:text-purple-900 hover:border-purple-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  if (btnOutro) btnOutro.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-fuchsia-50 hover:text-fuchsia-900 hover:border-fuchsia-300 text-[#004245] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
 
   if (typeof currentMainTab !== "undefined" && currentMainTab !== 'animais') {
     switchMainTab('animais');
@@ -530,13 +532,30 @@ function setSpeciesFilter(species) {
   const btnTodos = document.getElementById("btn-species-todos");
   const btnCachorro = document.getElementById("btn-species-cachorro");
   const btnGato = document.getElementById("btn-species-gato");
+  const btnOutro = document.getElementById("btn-species-outro");
 
-  const activeClass = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-bold bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-2xs transition-all cursor-pointer";
-  const inactiveClass = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-[#e6f4f5] text-slate-900 border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
+  const baseInactive = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] border border-[#e8ddcf] transition-all flex items-center gap-1 cursor-pointer";
 
-  if (btnTodos) btnTodos.className = (species === 'todos') ? activeClass : inactiveClass;
-  if (btnCachorro) btnCachorro.className = (species === 'cachorro') ? activeClass : inactiveClass;
-  if (btnGato) btnGato.className = (species === 'gato') ? activeClass : inactiveClass;
+  if (btnTodos) {
+    btnTodos.className = (species === 'todos') 
+      ? "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all cursor-pointer"
+      : baseInactive + " text-slate-900 hover:bg-[#e6f4f5]";
+  }
+  if (btnCachorro) {
+    btnCachorro.className = (species === 'cachorro')
+      ? "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
+      : baseInactive + " text-[#004245] hover:bg-amber-50 hover:text-amber-900 hover:border-amber-300";
+  }
+  if (btnGato) {
+    btnGato.className = (species === 'gato')
+      ? "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-purple-600 text-white border border-purple-500 shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
+      : baseInactive + " text-[#004245] hover:bg-purple-50 hover:text-purple-900 hover:border-purple-300";
+  }
+  if (btnOutro) {
+    btnOutro.className = (species === 'outro')
+      ? "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-fuchsia-600 text-white border border-fuchsia-500 shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
+      : baseInactive + " text-[#004245] hover:bg-fuchsia-50 hover:text-fuchsia-900 hover:border-fuchsia-300";
+  }
 
   if (typeof currentMainTab !== "undefined" && currentMainTab !== 'animais') {
     switchMainTab('animais');
@@ -685,26 +704,38 @@ function renderPetsGrid(pets) {
     const ongNome = pet.ongNome || "Lar dos Anjos";
     const localidade = pet.regiaoDF || pet.cidade || "Brasília - DF";
 
-    // Paleta de cores dinâmica e expressiva para destacar os perfis
+    // Paleta de cores dinâmica e expressiva para destacar os perfis por espécie
     const especieTheme = pet.especie === 'gato'
       ? { 
+          cardClass: 'pet-card-gato',
+          frameClass: 'pet-card-frame-gato',
           badge: 'bg-purple-600 text-white font-black border border-purple-500 shadow-xs', 
-          cardAccent: 'border-t-4 border-t-purple-400',
+          cardAccent: 'border-t-4 border-t-purple-500',
           racaBadge: 'bg-purple-50 text-purple-950 border-purple-200',
-          nameHover: 'group-hover:text-purple-700'
+          nameHover: 'group-hover:text-purple-700',
+          btnFicha: 'hover:border-purple-400 hover:bg-purple-50 hover:text-purple-900',
+          historiaBorder: 'border-purple-400 bg-purple-50/60'
         }
       : pet.especie === 'outro'
       ? { 
-          badge: 'bg-rose-600 text-white font-black border border-rose-500 shadow-xs', 
-          cardAccent: 'border-t-4 border-t-rose-400',
-          racaBadge: 'bg-rose-50 text-rose-950 border-rose-200',
-          nameHover: 'group-hover:text-rose-700'
+          cardClass: 'pet-card-outro',
+          frameClass: 'pet-card-frame-outro',
+          badge: 'bg-fuchsia-600 text-white font-black border border-fuchsia-500 shadow-xs', 
+          cardAccent: 'border-t-4 border-t-fuchsia-500',
+          racaBadge: 'bg-fuchsia-50 text-fuchsia-950 border-fuchsia-200',
+          nameHover: 'group-hover:text-fuchsia-700',
+          btnFicha: 'hover:border-fuchsia-400 hover:bg-fuchsia-50 hover:text-fuchsia-900',
+          historiaBorder: 'border-fuchsia-400 bg-fuchsia-50/60'
         }
       : { 
+          cardClass: 'pet-card-cachorro',
+          frameClass: 'pet-card-frame-cachorro',
           badge: 'bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-xs', 
-          cardAccent: 'border-t-4 border-t-amber-400',
+          cardAccent: 'border-t-4 border-t-[#D19864]',
           racaBadge: 'bg-amber-50 text-amber-950 border-amber-200',
-          nameHover: 'group-hover:text-amber-700'
+          nameHover: 'group-hover:text-amber-700',
+          btnFicha: 'hover:border-[#D19864] hover:bg-amber-50 hover:text-amber-950',
+          historiaBorder: 'border-[#D19864] bg-amber-50/60'
         };
 
     const especieBadgeStyle = pet.especie === 'gato'
@@ -739,9 +770,9 @@ function renderPetsGrid(pets) {
     `).join("");
 
     return `
-      <div class="pet-card bg-white rounded-3xl p-3.5 sm:p-5 shadow-sm hover:shadow-xl border border-[#e8ddcf] md:${especieTheme.cardAccent} transition-all flex flex-col justify-between group relative">
+      <div class="pet-card ${especieTheme.cardClass} bg-white rounded-3xl p-3.5 sm:p-5 shadow-sm hover:shadow-xl border border-[#e8ddcf] md:${especieTheme.cardAccent} transition-all flex flex-col justify-between group relative">
         <!-- Moldura com Degradê da Foto (.pet-card-brand-frame) -->
-        <div class="pet-card-brand-frame mb-3.5 relative aspect-[4/3] overflow-hidden select-none">
+        <div class="pet-card-brand-frame ${especieTheme.frameClass} mb-3.5 relative aspect-[4/3] overflow-hidden select-none">
           <img 
             id="card-photo-${pet.id}"
             data-photo-idx="0"
@@ -883,7 +914,7 @@ function renderPetsGrid(pets) {
             <button 
               type="button"
               onclick="openPetModalById('${pet.id}')" 
-              class="w-full py-2.5 px-2 rounded-xl border-2 border-[#e8ddcf] hover:border-[#007E82] bg-[#F9F3EA] hover:bg-[#e6f4f5] text-[#003e40] font-black text-xs shadow-2xs hover:shadow-md transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer"
+              class="w-full py-2.5 px-2 rounded-xl border-2 border-[#e8ddcf] ${especieTheme.btnFicha} bg-[#F9F3EA] text-[#003e40] font-black text-xs shadow-2xs hover:shadow-md transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer"
               title="Ler a ficha completa com histórico e exames de ${pet.nome}"
             >
               ${getFastIconSvg('file-text', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
@@ -957,7 +988,7 @@ function renderPetsGrid(pets) {
             </div>
 
             <!-- História de Vida (Citação com Linha Lateral Suave) -->
-            <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-2 pl-2.5 border-l-4 border-[#D19864] bg-amber-50/60 p-2 rounded-r-xl mb-3">
+            <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-2 pl-2.5 border-l-4 ${especieTheme.historiaBorder} p-2 rounded-r-xl mb-3">
               "${historiaText}"
             </p>
           </div>
@@ -4480,7 +4511,7 @@ async function renderOngPetsList(ongId = "todas") {
               </span>
             </div>
             <p class="text-[11px] text-slate-500 font-medium mt-0.5">
-              ${pet.especie === 'cachorro' ? '🐶 Cão' : (pet.especie === 'gato' ? '🐱 Gato' : '🐰 Pet')} • ${pet.porte || 'Médio'} • ${pet.idade || 'Idade n/d'} • ${pet.ongNome || 'ONG'}
+              ${pet.especie === 'cachorro' ? '🐶 Cão' : (pet.especie === 'gato' ? '🐱 Gato' : '🐰 Outro')} • ${pet.porte || 'Médio'} • ${pet.idade || 'Idade n/d'} • ${pet.ongNome || 'ONG'}
             </p>
           </div>
         </div>
