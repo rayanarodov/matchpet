@@ -4998,7 +4998,7 @@ function updateAdminHeaderLoginUI() {
     if (unauthView) unauthView.classList.add("hidden");
     if (authView) authView.classList.remove("hidden");
   } else {
-    if (btnLabel) btnLabel.textContent = "Área Admin";
+    if (btnLabel) btnLabel.textContent = "Login Admin";
     if (btn) {
       btn.className = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#F9F3EA] text-slate-900 hover:text-[#007E82] text-xs font-black border-2 border-[#007E82]/30 hover:border-[#007E82] shadow-xs transition-all cursor-pointer select-none";
     }
@@ -5014,8 +5014,7 @@ function updateAdminHeaderLoginUI() {
     if (btn) lucide.createIcons({ root: btn });
     const panel = document.getElementById("admin-header-dropdown-panel");
     if (panel) lucide.createIcons({ root: panel });
-    if (portalSection && isAuth) lucide.createIcons({ root: portalSection });
-    if (unauthPrompt && !isAuth) lucide.createIcons({ root: unauthPrompt });
+
   }
 }
 window.updateAdminHeaderLoginUI = updateAdminHeaderLoginUI;

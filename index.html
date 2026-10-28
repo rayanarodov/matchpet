@@ -190,41 +190,41 @@
             title="Acesso de Administrador (Login para Gestão)"
           >
             <i data-lucide="lock" class="w-3.5 h-3.5 text-[#007E82]" id="btn-admin-header-icon"></i>
-            <span id="btn-admin-header-label">Área Admin</span>
+            <span id="btn-admin-header-label">Login Admin</span>
             <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform" id="admin-header-chevron"></i>
           </button>
 
-          <!-- Painel Suspenso de Login para Admins (Dropdown Card) -->
+          <!-- Painel Suspenso de Login para Admins (Dropdown Card - Aumentado e com Alto Contraste) -->
           <div 
             id="admin-header-dropdown-panel" 
-            class="hidden absolute right-0 mt-2 w-80 sm:w-84 max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border-2 border-[#007E82] p-4 sm:p-5 z-50 text-left transition-all"
-            style="box-shadow: 0 15px 35px -5px rgba(0, 126, 130, 0.25);"
+            class="hidden absolute right-0 mt-2 w-96 sm:w-[26rem] max-w-[calc(100vw-1.5rem)] bg-white rounded-3xl shadow-2xl border-2 border-[#007E82] p-5 sm:p-6 z-50 text-left transition-all"
+            style="box-shadow: 0 20px 40px -5px rgba(0, 126, 130, 0.3);"
           >
             <!-- Visão 1: Formulário de Login (Quando NÃO Autenticado) -->
             <div id="admin-panel-unauth-view">
-              <div class="flex items-center justify-between pb-3 mb-3 border-b border-[#e8ddcf]">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center text-sm font-black shadow-2xs">
+              <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-[#e8ddcf]">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-10 h-10 rounded-2xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center text-lg font-black shadow-2xs border border-teal-200">
                     🔐
                   </div>
                   <div>
-                    <h4 class="text-xs font-black text-slate-900 leading-tight">Painel Admin MatchPet</h4>
-                    <span class="text-[10px] text-slate-500 font-medium">Acesso restrito para gestão</span>
+                    <h4 class="text-sm font-black text-slate-900 leading-tight">Painel Admin MatchPet</h4>
+                    <span class="text-xs text-slate-500 font-medium">Acesso restrito para gestão</span>
                   </div>
                 </div>
                 <button 
                   type="button" 
                   onclick="toggleAdminHeaderPanel(event, false)" 
-                  class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs transition-colors cursor-pointer"
+                  class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs transition-colors cursor-pointer"
                   title="Fechar"
                 >
                   ✕
                 </button>
               </div>
 
-              <form onsubmit="handleHeaderAdminLogin(event)" class="space-y-3">
+              <form onsubmit="handleHeaderAdminLogin(event)" class="space-y-3.5">
                 <div>
-                  <label for="header-admin-password" class="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                  <label for="header-admin-password" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1.5">
                     Senha de Administrador
                   </label>
                   <div class="relative">
@@ -234,30 +234,39 @@
                       placeholder="Digite a senha predefinida..." 
                       required 
                       autocomplete="current-password"
-                      class="w-full pl-3 pr-10 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#007E82] rounded-xl text-xs font-semibold text-slate-800 outline-none transition-all focus:ring-2 focus:ring-[#007E82]/30"
+                      class="w-full pl-3.5 pr-11 py-3 bg-slate-50 border-2 border-slate-200 focus:border-[#007E82] rounded-xl text-xs sm:text-sm font-semibold text-slate-800 outline-none transition-all focus:ring-2 focus:ring-[#007E82]/30 focus:bg-white"
                     >
                     <button 
                       type="button" 
                       onclick="toggleAdminPassVisibility('header-admin-password', this)"
-                      class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                      class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1.5 cursor-pointer rounded-lg hover:bg-slate-100 transition-colors"
                       title="Ver/Ocultar Senha"
                     >
                       <i data-lucide="eye" class="w-4 h-4"></i>
                     </button>
                   </div>
+
+                  <!-- Caixa de Destaque com Senha Predefinida -->
+                  <div class="mt-2.5 p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 flex items-center justify-between text-xs font-bold shadow-2xs">
+                    <span class="flex items-center gap-1.5">
+                      <i data-lucide="key-round" class="w-3.5 h-3.5 text-amber-700 flex-shrink-0"></i>
+                      <span>Senha predefinida:</span>
+                    </span>
+                    <code class="px-2.5 py-0.5 rounded-lg bg-white text-slate-950 font-black border border-amber-400 font-mono text-xs">adoção1410</code>
+                  </div>
                 </div>
 
-                <div id="header-admin-error" class="hidden p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-[11px] font-bold flex items-center gap-1.5">
+                <div id="header-admin-error" class="hidden p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-1.5">
                   <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
                   <span>Senha incorreta! Tente novamente.</span>
                 </div>
 
                 <button 
                   type="submit" 
-                  class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004d50] text-white font-black text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                  class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-[#007E82] hover:from-emerald-700 hover:to-[#005c60] text-white font-black text-xs sm:text-sm shadow-md shadow-emerald-950/20 hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 border border-emerald-400"
                 >
-                  <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-                  <span>Acessar Painel Admin</span>
+                  <i data-lucide="log-in" class="w-4 h-4 text-white flex-shrink-0"></i>
+                  <span class="text-white font-black">Entrar / Fazer Login</span>
                 </button>
               </form>
             </div>
@@ -2725,41 +2734,66 @@
 
 
   <!-- ==========================================================================
-       MODAL DE AUTENTICAÇÃO EXCLUSIVA DO ADMINISTRADOR
+       MODAL DE AUTENTICAÇÃO EXCLUSIVA DO ADMINISTRADOR (AMPLIADO E DE ALTO CONTRASTE)
        ========================================================================== -->
   <div id="admin-auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none bg-slate-900/80 shadow-xs transition-all duration-300">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 sm:p-7 border border-[#e8ddcf] modal-content transform scale-95 transition-all relative">
-      <button onclick="closeAdminAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md sm:max-w-lg w-full p-7 sm:p-9 border-2 border-[#007E82]/30 modal-content transform scale-95 transition-all relative">
+      <button onclick="closeAdminAuthModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer" title="Fechar">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
       <div class="text-center space-y-3 mb-6">
-        <div class="w-14 h-14 rounded-2xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center mx-auto text-2xl shadow-inner">
+        <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#e6f4f5] to-teal-100/70 text-[#007E82] flex items-center justify-center mx-auto text-3xl shadow-sm border border-teal-200">
           🔐
         </div>
-        <h3 id="admin-auth-modal-title" class="text-xl font-black text-slate-900 leading-tight">Acesso de Administrador</h3>
-        <p class="text-xs text-slate-500">Informe a senha administrativa para acessar as ferramentas de gestão.</p>
+        <h3 id="admin-auth-modal-title" class="text-2xl font-black text-slate-900 leading-tight">Acesso de Administrador • Login</h3>
+        <p id="admin-auth-modal-desc" class="text-xs sm:text-sm text-slate-600 font-medium">Informe a senha administrativa predefinida para acessar as ferramentas de gestão.</p>
       </div>
 
       <form id="admin-auth-form" onsubmit="handleAdminAuthSubmit(event)" class="space-y-4">
         <div>
-          <label for="admin-password-input" class="block text-xs font-bold text-slate-700 mb-1">Senha de Acesso</label>
-          <input type="password" id="admin-password-input" placeholder="••••••••" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none font-mono">
-          <span class="text-[10px] text-slate-400 mt-1 block">Senha predefinida: <code class="font-bold text-[#007E82]">adoção1410</code></span>
+          <label for="admin-password-input" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1.5">Senha de Acesso Master</label>
+          <div class="relative">
+            <input 
+              type="password" 
+              id="admin-password-input" 
+              placeholder="Digite a senha predefinida..." 
+              required 
+              autocomplete="current-password"
+              class="w-full pl-4 pr-12 py-3.5 bg-slate-50 border-2 border-slate-200 focus:border-[#007E82] rounded-2xl text-sm font-semibold text-slate-900 outline-none transition-all focus:ring-4 focus:ring-[#007E82]/20 font-mono tracking-wider focus:bg-white shadow-2xs"
+            >
+            <button 
+              type="button" 
+              onclick="toggleAdminPassVisibility('admin-password-input', this)"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1.5 cursor-pointer rounded-xl hover:bg-slate-100 transition-colors"
+              title="Ver/Ocultar Senha"
+            >
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Caixa de Destaque com Senha Predefinida -->
+          <div class="mt-3 p-3 rounded-2xl bg-amber-50/90 border border-amber-300 text-amber-950 flex items-center justify-between text-xs font-bold shadow-2xs">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="key-round" class="w-4 h-4 text-amber-700 flex-shrink-0"></i>
+              <span>Senha predefinida:</span>
+            </span>
+            <code class="px-3 py-1 rounded-xl bg-white text-slate-950 font-black border border-amber-400 font-mono text-xs shadow-2xs tracking-wider">adoção1410</code>
+          </div>
         </div>
 
-        <div id="admin-auth-error" class="hidden p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-1.5">
-          <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
-          <span>Senha incorreta. Tente novamente.</span>
+        <div id="admin-auth-error" class="hidden p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-2">
+          <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
+          <span>Senha incorreta. Tente novamente com "adoção1410".</span>
         </div>
 
-        <div class="pt-2 flex items-center gap-2">
-          <button type="button" onclick="closeAdminAuthModal()" class="flex-1 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition-colors cursor-pointer">
+        <div class="pt-3 flex items-center gap-3">
+          <button type="button" onclick="closeAdminAuthModal()" class="flex-1 py-3.5 rounded-2xl border-2 border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 text-xs sm:text-sm font-bold transition-all cursor-pointer">
             Cancelar
           </button>
-          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004d50] text-slate-950 text-xs font-black shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-            <span>Acessar</span>
+          <button type="submit" class="flex-1 py-3.5 px-5 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-[#007E82] hover:from-emerald-700 hover:to-[#005c60] text-white font-black text-xs sm:text-sm shadow-md shadow-emerald-950/20 hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400 active:scale-95">
+            <i data-lucide="log-in" class="w-4 h-4 text-white flex-shrink-0"></i>
+            <span class="text-white font-black">Entrar / Fazer Login</span>
           </button>
         </div>
       </form>
