@@ -3545,23 +3545,26 @@ function renderEventosGrid() {
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80'"
             >
-            <div class="absolute top-2.5 left-2.5 z-10">
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black ${pal.tagBg} shadow-md flex items-center gap-1.5 border border-white/40">
+            <!-- Tag da Feira (Top-Left) -->
+            <div class="absolute top-2.5 left-2.5 z-10 max-w-[58%]">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black ${pal.tagBg} shadow-md flex items-center gap-1.5 border border-white/40 truncate">
                 ${pal.tagText}
               </span>
             </div>
-            <div class="absolute bottom-2.5 left-2.5 z-10">
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md flex items-center gap-1.5 border-2 ${pal.dateBorder}">
-                <span class="p-0.5 rounded ${pal.dateIconBg} flex items-center justify-center shadow-2xs">
-                  <i data-lucide="calendar" class="w-3 h-3"></i>
-                </span>
-                <span class="tracking-tight">${evento.dataExtenso}</span>
-              </span>
-            </div>
-            <div class="absolute bottom-2.5 right-2.5 z-10">
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white text-slate-950 shadow-md border-2 border-slate-200 flex items-center gap-1">
+            <!-- Horário da Feira (Top-Right - Posição Separada da Data, Sem Sobreposição) -->
+            <div class="absolute top-2.5 right-2.5 z-10">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-black bg-white/95 text-slate-950 shadow-md border-2 border-slate-200 flex items-center gap-1.5 backdrop-blur-xs">
                 <i data-lucide="clock" class="w-3 h-3 ${pal.clockColor}"></i>
                 <span>${evento.horario}</span>
+              </span>
+            </div>
+            <!-- Data da Feira (Bottom-Left - Linha Exclusiva Livre) -->
+            <div class="absolute bottom-2.5 left-2.5 z-10 max-w-[calc(100%-1.25rem)]">
+              <span class="inline-flex px-2.5 py-1 rounded-lg text-[11px] font-black bg-white/95 text-slate-950 shadow-md items-center gap-1.5 border-2 ${pal.dateBorder} backdrop-blur-xs">
+                <span class="p-0.5 rounded ${pal.dateIconBg} flex items-center justify-center shadow-2xs flex-shrink-0">
+                  <i data-lucide="calendar" class="w-3 h-3"></i>
+                </span>
+                <span class="tracking-tight truncate">${evento.dataExtenso}</span>
               </span>
             </div>
           </div>
@@ -3579,17 +3582,17 @@ function renderEventosGrid() {
             </div>
 
             <!-- Bloco de Destaque da Data do Evento com Cores Variadas da Paleta -->
-            <div class="p-3 ${pal.dateBlockBg} rounded-2xl border-2 ${pal.dateBlockBorder} flex items-center justify-between gap-2 shadow-2xs">
-              <div class="flex items-center gap-2.5 min-w-0">
+            <div class="p-3 ${pal.dateBlockBg} rounded-2xl border-2 ${pal.dateBlockBorder} flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 shadow-2xs">
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <div class="w-9 h-9 rounded-xl ${pal.dateIconBg} flex items-center justify-center flex-shrink-0 shadow-xs">
                   <i data-lucide="calendar-check-2" class="w-4 h-4"></i>
                 </div>
                 <div class="min-w-0">
                   <span class="text-[10px] font-black uppercase tracking-wider ${pal.dateLabelColor} block">Data do Evento</span>
-                  <span class="text-xs font-black text-slate-950 block truncate">${evento.dataExtenso}</span>
+                  <span class="text-xs font-black text-slate-950 block">${evento.dataExtenso}</span>
                 </div>
               </div>
-              <div class="px-2.5 py-1 rounded-lg bg-white border ${pal.dateBlockBorder}/40 text-xs font-black ${pal.clockColor} shadow-2xs flex items-center gap-1 flex-shrink-0">
+              <div class="px-2.5 py-1.5 rounded-lg bg-white border ${pal.dateBlockBorder}/40 text-xs font-black ${pal.clockColor} shadow-2xs flex items-center gap-1.5 flex-shrink-0">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
                 <span>${evento.horario}</span>
               </div>

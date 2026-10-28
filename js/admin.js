@@ -1878,9 +1878,9 @@ function loadAdminEventos() {
           </div>
           
           <!-- Bloco de Destaque da Data do Evento com Cor da Paleta -->
-          <div class="my-1.5 p-2 ${pal.dateBlockBg} rounded-xl border ${pal.dateBlockBorder} text-xs font-black text-slate-950 flex items-center justify-between">
-            <span class="flex items-center gap-1.5"><i data-lucide="calendar-check-2" class="w-3.5 h-3.5 text-slate-900"></i> ${ev.dataExtenso}</span>
-            <span class="px-1.5 py-0.5 rounded-md bg-white ${pal.clockColor} text-[10px] border border-slate-200 font-bold">${ev.horario}</span>
+          <div class="my-1.5 p-2 ${pal.dateBlockBg} rounded-xl border ${pal.dateBlockBorder} text-xs font-black text-slate-950 flex items-center justify-between gap-1.5 flex-wrap">
+            <span class="flex items-center gap-1.5 min-w-0"><i data-lucide="calendar-check-2" class="w-3.5 h-3.5 text-slate-900 flex-shrink-0"></i> ${ev.dataExtenso}</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-white ${pal.clockColor} text-[10px] border border-slate-200 font-bold flex-shrink-0">${ev.horario}</span>
           </div>
 
           <p class="text-xs text-slate-700 flex items-center gap-1 mt-0.5 font-bold"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#D19864]"></i> ${ev.local}</p>
