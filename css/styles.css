@@ -531,6 +531,32 @@ body {
   font-weight: 900 !important;
 }
 
+#live-activity-ticker .badge-ao-vivo-dot {
+  width: 7.5px;
+  height: 7.5px;
+  background-color: #ef4444 !important;
+  border-radius: 9999px;
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: liveBadgePulse 1.8s infinite;
+}
+
+@keyframes liveBadgePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.75);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
 /* ==========================================================================
    BANNER VITRINE - "FAÇA UM QUIZ" (MESMO PLANO DE FUNDO DO PERFIL DOS ANIMAIS)
    ========================================================================== */
