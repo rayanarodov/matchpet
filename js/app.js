@@ -2614,6 +2614,30 @@ function openPetMediaLightboxById(petId, event) {
 }
 window.openPetMediaLightboxById = openPetMediaLightboxById;
 
+function openShelterMediaLightbox(startIndex = 0) {
+  const ongs = (typeof getOngsListSafe === "function" ? getOngsListSafe() : window.SOLIDARITY_ONGS) || [];
+  const activeOng = ongs.find(o => o.id === window.currentFeaturedOngId) || ongs[0];
+  if (!activeOng) return;
+
+  const fotos = Array.isArray(activeOng.fotosAbrigo) && activeOng.fotosAbrigo.length > 0 
+    ? activeOng.fotosAbrigo 
+    : [
+        "https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=800&q=80"
+      ];
+
+  const items = fotos.map(url => ({ type: 'image', url: url }));
+  if (items.length > 0 && typeof openMediaLightbox === "function") {
+    openMediaLightbox(items, startIndex, `${activeOng.nome} • Instalações & Resgates`);
+  }
+}
+window.openShelterMediaLightbox = openShelterMediaLightbox;
+
+
 // Listener global de teclado (Esc, Seta Esquerda, Seta Direita)
 if (typeof document !== "undefined") {
   document.addEventListener("keydown", (e) => {
@@ -3283,66 +3307,254 @@ async function renderOngsGrid() {
       </div>
     </div>
 
-    <!-- SEÇÃO 2: HISTÓRIA EXPANDIDA COM FOTOS LATERALIZADAS AO TEXTO -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border-2 border-[#e8ddcf] shadow-md space-y-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#e8ddcf] pb-5">
-        <div class="space-y-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e6f4f5] text-[#007E82] text-xs font-black uppercase tracking-wider">
-            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
-            <span>Nossa Trajetória &amp; Propósito</span>
+    <!-- SEÇÃO 2: HISTÓRIA EXPANDIDA COM DESIGN EDITORIAL E FOTOS LATERALIZADAS -->
+    <div id="ong-history-section" class="bg-white rounded-[2.5rem] p-6 sm:p-9 md:p-12 border-2 border-[#e8ddcf] shadow-xl shadow-slate-900/5 space-y-10 relative overflow-hidden">
+      
+      <!-- Fundo com gradiente sutil decorativo -->
+      <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-teal-500/5 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-amber-500/5 blur-3xl pointer-events-none"></div>
+
+      <!-- Cabeçalho Editorial com Badges e Marcos -->
+      <div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-[#f0e6da] pb-8">
+        <div class="space-y-3 max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-teal-50 via-[#F9F3EA] to-amber-50 text-[#007E82] text-xs font-black uppercase tracking-wider border border-[#b2dedf]/80 shadow-2xs">
+            <i data-lucide="book-open" class="w-4 h-4 text-[#007E82]"></i>
+            <span>Nossa Trajetória &amp; Memória Viva • 2003 - 2026</span>
           </div>
-          <h3 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-2xl sm:text-3xl font-extrabold text-slate-950">
+          
+          <h3 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
             A História da ${activeOng.nome}
           </h3>
-          <p class="text-xs sm:text-sm text-slate-600">
-            Conheça os 23 anos de atuação ininterrupta na proteção, resgate ético e acolhimento de animais no Distrito Federal.
+          
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+            Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia.
           </p>
-        </div>
-        
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-slate-500 font-bold bg-[#F9F3EA] px-3 py-1.5 rounded-xl border border-[#e8ddcf]">
-            ✍️ Conteúdo Institucional Oficial
-          </span>
 
+          <!-- Fita de Marcos de Impacto -->
+          <div class="flex items-center flex-wrap gap-2 pt-1">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-[#F9F3EA] text-amber-950 border border-[#e8ddcf] shadow-2xs">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-[#D19864]"></i>
+              <span>Fundada em ${activeOng.anoFundacao || '2003'}</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-teal-50 text-teal-900 border border-teal-200 shadow-2xs">
+              <i data-lucide="heart" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span>+1.500 Vidas Salvas no DF</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-slate-100 text-slate-800 border border-slate-200 shadow-2xs">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#D19864]"></i>
+              <span>Atuação em Todo o DF</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-50 text-emerald-900 border border-emerald-200 shadow-2xs">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-700"></i>
+              <span>100% Castrados &amp; Vacinados</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 flex items-center gap-2">
+          <span class="text-xs text-slate-500 font-bold bg-[#F9F3EA] px-3.5 py-2 rounded-2xl border border-[#e8ddcf] flex items-center gap-1.5 shadow-2xs">
+            <i data-lucide="badge-check" class="w-4 h-4 text-[#007E82]"></i>
+            <span>Conteúdo Institucional Auditado</span>
+          </span>
         </div>
       </div>
 
-      <!-- GRID PRINCIPAL COM TEXTO EXPANDIDO E FOTOS LATERALIZADAS -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- GRID PRINCIPAL COM NARRATIVA EDITORIAL E MOSTRUÁRIO LATERAL -->
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         
-        <!-- Coluna de Texto Expandido da História (7 colunas) -->
-        <div class="lg:col-span-7 space-y-5 text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
-          ${historia.split('\n\n').map((paragrafo, idx) => `
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F9F3EA]/60 border border-[#e8ddcf] hover:bg-[#F9F3EA] transition-colors">
-              <div class="flex items-start gap-3">
-                <div class="w-7 h-7 rounded-full bg-[#007E82] text-white flex items-center justify-center font-black text-xs flex-shrink-0 mt-0.5">
-                  ${idx + 1}
+        <!-- Coluna de Narrativa Editorial (7 colunas) -->
+        <div class="lg:col-span-7 space-y-6">
+          ${(() => {
+            const paragraphs = (historia || "").split('\n\n').filter(p => p.trim().length > 0);
+            const defaultChapterMeta = [
+              {
+                number: "01",
+                chapterName: "Capítulo 01",
+                theme: "A Origem do Sonho",
+                title: "O Nascimento de uma Causa • Brasília, 2003",
+                icon: "sparkles",
+                borderColor: "border-[#007E82]",
+                badgeBg: "bg-[#007E82] text-white",
+                pillBg: "bg-teal-50 text-teal-900 border-teal-200",
+                tags: ["Fundação em 2003", "Aliança Veterinária", "Ética & Proteção"],
+                hasDropCap: true
+              },
+              {
+                number: "02",
+                chapterName: "Capítulo 02",
+                theme: "Presença & Atuação",
+                title: "Resgate Humanizado em Todo o Distrito Federal",
+                icon: "map-pin",
+                borderColor: "border-[#D19864]",
+                badgeBg: "bg-[#D19864] text-slate-950",
+                pillBg: "bg-amber-50 text-amber-950 border-amber-200",
+                tags: ["Ceilândia", "Taguatinga", "Samambaia", "Plano Piloto", "Guará", "Sobradinho"],
+                hasDropCap: false
+              },
+              {
+                number: "03",
+                chapterName: "Capítulo 03",
+                theme: "Rigor Clínico & Saúde",
+                title: "Medicina Veterinária Ética & Recuperação Plena",
+                icon: "stethoscope",
+                borderColor: "border-[#007E82]",
+                badgeBg: "bg-[#007E82] text-white",
+                pillBg: "bg-teal-50 text-teal-900 border-teal-200",
+                tags: ["Triagem Sorológica", "Quarentena Monitorada", "Vacinas Polivalentes Importadas"],
+                hasDropCap: false
+              },
+              {
+                number: "04",
+                chapterName: "Capítulo 04",
+                theme: "Nosso Santuário",
+                title: "Estrutura do Abrigo: Solários, Canis & Gatil Enriquecido",
+                icon: "home",
+                borderColor: "border-[#D19864]",
+                badgeBg: "bg-[#D19864] text-slate-950",
+                pillBg: "bg-amber-50 text-amber-950 border-amber-200",
+                tags: ["Solários Ensolarados", "Canis Climatizados", "Gatil Vertical com Telas", "Socialização Diária"],
+                hasDropCap: false
+              },
+              {
+                number: "05",
+                chapterName: "Capítulo 05",
+                theme: "Compromisso Social",
+                title: "Castração Obrigatória & Apoio Gratuito a Filhotes",
+                icon: "shield-check",
+                borderColor: "border-[#007E82]",
+                badgeBg: "bg-[#007E82] text-white",
+                pillBg: "bg-teal-50 text-teal-900 border-teal-200",
+                tags: ["100% Castrados", "Microchip de Identificação", "Cirurgias Financiadas pela ONG"],
+                hasDropCap: false
+              },
+              {
+                number: "06",
+                chapterName: "Capítulo 06",
+                theme: "Destino com Amor",
+                title: "Adoção Responsável: Um Pacto para Toda a Vida",
+                icon: "heart-handshake",
+                borderColor: "border-[#D19864]",
+                badgeBg: "bg-[#D19864] text-slate-950",
+                pillBg: "bg-amber-50 text-amber-950 border-amber-200",
+                tags: ["Entrevistas Conscientes", "Termo de Tutela Legal", "Acompanhamento Vitalício"],
+                hasDropCap: false
+              }
+            ];
+
+            return paragraphs.map((paragrafo, idx) => {
+              const meta = defaultChapterMeta[idx] || {
+                number: String(idx + 1).padStart(2, '0'),
+                chapterName: `Capítulo ${String(idx + 1).padStart(2, '0')}`,
+                theme: idx % 2 === 0 ? "Compromisso Institucional" : "Nossa Missão no DF",
+                title: idx === 0 ? "A Fundação & Propósito Inicial" : `Diretriz & Atuação no DF #${idx + 1}`,
+                icon: idx % 2 === 0 ? "sparkles" : "heart",
+                borderColor: idx % 2 === 0 ? "border-[#007E82]" : "border-[#D19864]",
+                badgeBg: idx % 2 === 0 ? "bg-[#007E82] text-white" : "bg-[#D19864] text-slate-950",
+                pillBg: idx % 2 === 0 ? "bg-teal-50 text-teal-900 border-teal-200" : "bg-amber-50 text-amber-950 border-amber-200",
+                tags: [],
+                hasDropCap: idx === 0
+              };
+
+              const firstLetter = paragrafo.charAt(0);
+              const remainingText = paragrafo.slice(1);
+
+              return `
+                <div class="relative bg-white rounded-3xl p-6 sm:p-7 border-2 border-[#e8ddcf] hover:border-[#007E82]/50 shadow-xs hover:shadow-md transition-all duration-300 border-l-[6px] ${meta.borderColor} group space-y-3.5">
+                  <!-- Cabeçalho do Capítulo -->
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                      <span class="w-7 h-7 rounded-full ${meta.badgeBg} flex items-center justify-center font-black text-xs shadow-2xs">
+                        <i data-lucide="${meta.icon}" class="w-3.5 h-3.5"></i>
+                      </span>
+                      <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider border ${meta.pillBg}">
+                        ${meta.chapterName} • ${meta.theme}
+                      </span>
+                    </div>
+                    <span class="text-xs font-mono font-bold text-slate-400 group-hover:text-[#007E82] transition-colors">
+                      § ${meta.number}
+                    </span>
+                  </div>
+
+                  <!-- Título do Capítulo -->
+                  <h4 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-lg sm:text-xl font-black text-slate-950 tracking-tight group-hover:text-[#007E82] transition-colors">
+                    ${meta.title}
+                  </h4>
+
+                  <!-- Texto com Tipografia Confortável e Drop-Cap no Primeiro Capítulo -->
+                  <div class="text-sm sm:text-base text-slate-800 leading-relaxed font-normal">
+                    ${meta.hasDropCap ? `
+                      <span class="float-left text-4xl sm:text-5xl font-black text-[#007E82] leading-none pr-3 pt-1 select-none font-serif">
+                        ${firstLetter}
+                      </span>
+                      ${remainingText}
+                    ` : paragrafo}
+                  </div>
+
+                  <!-- Tags / Marcos Relevantes do Capítulo -->
+                  ${meta.tags && meta.tags.length > 0 ? `
+                    <div class="flex items-center flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+                      ${meta.tags.map(t => `
+                        <span class="text-[11px] font-bold text-slate-600 bg-slate-50 hover:bg-[#F9F3EA] px-2.5 py-0.5 rounded-lg border border-slate-200 transition-colors">
+                          • ${t}
+                        </span>
+                      `).join("")}
+                    </div>
+                  ` : ''}
                 </div>
-                <p class="leading-relaxed text-slate-900 font-normal">
-                  ${paragrafo}
-                </p>
+              `;
+            }).join("");
+          })()}
+
+          <!-- Banner / Manifesto Emocional & Citação Inspiradora -->
+          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#003c3f] via-[#005e62] to-[#007E82] p-6 sm:p-8 md:p-9 text-white shadow-xl shadow-teal-950/15 border border-teal-500/30 space-y-4">
+            <div class="absolute -right-4 -bottom-4 text-white/10 select-none pointer-events-none">
+              <i data-lucide="quote" class="w-36 h-36"></i>
+            </div>
+            
+            <div class="relative z-10 space-y-3.5">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-teal-100 text-xs font-black uppercase tracking-wider backdrop-blur-xs border border-white/20">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#D19864]"></i>
+                <span>Manifesto &amp; Filosofia de Resgate</span>
+              </div>
+
+              <blockquote class="text-lg sm:text-xl md:text-2xl font-bold leading-relaxed italic text-white/95">
+                "Resgatar é apenas o primeiro passo; devolver a dignidade, curar feridas invisíveis e entregar cada animal a um lar que o ame para sempre é o propósito que nos move todos os dias há mais de duas décadas."
+              </blockquote>
+
+              <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-teal-100 font-semibold border-t border-teal-400/30">
+                <div class="flex items-center gap-2 font-bold text-white text-sm">
+                  <span class="w-6 h-6 rounded-full bg-[#D19864] text-slate-950 flex items-center justify-center font-black text-xs">🐾</span>
+                  <span>Equipe, Médicos Veterinários &amp; Voluntários • Lar dos Anjos DF</span>
+                </div>
+                <button 
+                  type="button" 
+                  onclick="switchMainTab('animais')" 
+                  class="px-4 py-2 rounded-xl bg-white hover:bg-teal-50 text-teal-950 font-black text-xs transition-all shadow-sm flex items-center gap-1.5 cursor-pointer flex-shrink-0"
+                >
+                  <i data-lucide="paw-print" class="w-3.5 h-3.5 text-[#007E82]"></i>
+                  <span>Ver Animais para Adoção</span>
+                </button>
               </div>
             </div>
-          `).join("")}
-
-          <!-- Compromisso e Apoio -->
-          <div class="p-4 rounded-2xl bg-[#e6f4f5] border border-[#b2dedf] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-800">
-            <span class="flex items-center gap-2 font-bold">
-              <i data-lucide="heart" class="w-4 h-4 text-[#D19864] flex-shrink-0"></i>
-              <span>Adoção é um ato de amor e compromisso para toda a vida. Visitas mediante agendamento prévio.</span>
-            </span>
-
           </div>
         </div>
 
-        <!-- Coluna Lateral de Fotos Reduzidas & Lateralizadas ao Texto (5 colunas) -->
-        <div class="lg:col-span-5 space-y-4">
-          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#007E82]">
-            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
-            <span>Momentos do Abrigo &amp; Resgates</span>
+        <!-- Coluna Lateral de Fotos & Apoio Institucional (5 colunas) -->
+        <div class="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
+          
+          <!-- Cabeçalho da Galeria Lateral com Dica de Zoom -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#007E82]">
+              <i data-lucide="camera" class="w-4 h-4"></i>
+              <span>Momentos do Abrigo &amp; Resgates</span>
+            </div>
+            <span class="text-[11px] font-bold text-slate-500 bg-[#F9F3EA] px-2.5 py-0.5 rounded-full border border-[#e8ddcf] flex items-center gap-1">
+              <i data-lucide="maximize-2" class="w-3 h-3 text-[#007E82]"></i>
+              <span>Clique p/ Ampliar</span>
+            </span>
           </div>
 
-          <!-- Mini Galeria Lateralizada de Fotos Compactas -->
+          <!-- Mini Galeria Lateralizada de Fotos Interativas -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
             ${fotosAbrigo.slice(0, 4).map((f, i) => {
               const legendas = [
@@ -3353,9 +3565,19 @@ async function renderOngsGrid() {
               ];
               const legenda = legendas[i] || `Instalação Lar dos Anjos #${i+1}`;
               return `
-                <div class="group relative rounded-2xl overflow-hidden ong-lateral-story-photo bg-slate-100 border-2 border-[#e8ddcf] shadow-xs hover:shadow-md transition-all">
-                  <img src="${f}" alt="${legenda}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-3">
+                <div 
+                  onclick="openShelterMediaLightbox(${i})" 
+                  title="Clique para ver foto ampliada em tamanho original"
+                  class="group relative rounded-2xl overflow-hidden ong-lateral-story-photo bg-slate-100 border-2 border-[#e8ddcf] hover:border-[#007E82] shadow-xs hover:shadow-md transition-all cursor-pointer"
+                >
+                  <img src="${f}" alt="${legenda}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500">
+                  
+                  <!-- Botão flutuante de Zoom -->
+                  <div class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/50 group-hover:bg-[#007E82] text-white flex items-center justify-center shadow-md transition-all opacity-80 group-hover:opacity-100 group-hover:scale-110">
+                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                  </div>
+
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-3.5">
                     <span class="text-xs text-white font-bold flex items-center gap-1.5">
                       <i data-lucide="image" class="w-3.5 h-3.5 text-[#D19864] flex-shrink-0"></i>
                       <span class="truncate">${legenda}</span>
@@ -3366,26 +3588,77 @@ async function renderOngsGrid() {
             }).join("")}
           </div>
 
-          <!-- Card Solidário de Apoio Lateral -->
-          <div class="p-4 rounded-2xl bg-[#faeee3] border border-[#e8ddcf] space-y-2">
-            <span class="text-xs font-black text-amber-950 uppercase tracking-wider block flex items-center gap-1.5">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#D19864]"></i>
-              <span>Como Apoiar o Lar dos Anjos</span>
-            </span>
-            <p class="text-xs text-slate-700 leading-relaxed">
-              Nossa instituição é mantida 100% por doações de pessoas como você. Qualquer valor contribui com remédios, vacinas e ração especial.
+          <!-- Card de Visita Agendada ao Abrigo -->
+          <div class="p-5 rounded-3xl bg-gradient-to-br from-[#fefbf6] to-[#faeee3] border-2 border-[#e8ddcf] space-y-3 shadow-xs">
+            <div class="flex items-center gap-2.5 text-xs font-black text-amber-950 uppercase tracking-wider">
+              <span class="w-7 h-7 rounded-xl bg-[#D19864] text-white flex items-center justify-center font-black shadow-2xs">
+                <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              </span>
+              <span>Visitas ao Abrigo no DF</span>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed font-medium">
+              Deseja conhecer nossos resgatados pessoalmente? Realizamos visitas acompanhadas aos fins de semana mediante agendamento prévio. Venha passear com os cães no solário e conhecer o gatil!
             </p>
-            <div class="pt-1 flex items-center justify-between gap-2">
-              <code class="text-[11px] font-mono font-black text-slate-900 truncate">${activeOng.chavePix || 'contato@lardosanjos.org.br'}</code>
+            <a 
+              href="https://wa.me/${activeOng.whatsapp || '5561999998888'}?text=${encodeURIComponent('Olá! Gostaria de agendar uma visita ao abrigo do Lar dos Anjos!')}" 
+              target="_blank" 
+              class="w-full py-2.5 px-4 rounded-xl bg-[#007E82] hover:bg-[#005c60] text-white font-black text-xs transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+            >
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+              <span>Agendar Visita via WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Card Solidário de Apoio e PIX -->
+          <div class="p-5 rounded-3xl bg-white border-2 border-[#D19864]/50 shadow-md space-y-3.5 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-950 uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#D19864]"></i>
+                <span>Apoie Nossa Missão Diária</span>
+              </span>
+              <span class="text-[10px] font-black text-[#007E82] bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
+                100% Voluntário
+              </span>
+            </div>
+            
+            <p class="text-xs text-slate-700 leading-relaxed">
+              Nossa instituição é mantida unicamente por doações da comunidade do DF. Qualquer valor contribui com remédios, vacinas e ração especial.
+            </p>
+
+            <!-- Sugestões Rápidas de Impacto -->
+            <div class="grid grid-cols-3 gap-1.5 text-center text-[10.5px] font-bold">
+              <div class="p-2 rounded-xl bg-amber-50 text-amber-950 border border-amber-200">
+                <span class="block font-black text-xs text-[#D19864]">R$ 20</span>
+                <span>Ração Diária</span>
+              </div>
+              <div class="p-2 rounded-xl bg-teal-50 text-teal-950 border border-teal-200">
+                <span class="block font-black text-xs text-[#007E82]">R$ 50</span>
+                <span>Vacina V10</span>
+              </div>
+              <div class="p-2 rounded-xl bg-emerald-50 text-emerald-950 border border-emerald-200">
+                <span class="block font-black text-xs text-emerald-700">R$ 100</span>
+                <span>Castração</span>
+              </div>
+            </div>
+
+            <!-- Chave Pix com Copiar -->
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+              <div class="overflow-hidden">
+                <span class="text-[9.5px] font-bold uppercase text-slate-500 tracking-wider block">Chave PIX Oficial</span>
+                <code class="text-xs font-mono font-black text-slate-900 truncate block select-all">${activeOng.chavePix || 'contato@lardosanjos.org.br'}</code>
+              </div>
               <button 
                 type="button" 
                 onclick="copyPixKey('${activeOng.chavePix || 'contato@lardosanjos.org.br'}', this)" 
-                class="btn-pix-copy-solid px-3 py-1.5 rounded-lg font-black text-[11px] transition-colors cursor-pointer"
+                class="btn-pix-copy-solid px-3.5 py-2 rounded-xl font-black text-xs transition-colors cursor-pointer flex items-center gap-1 flex-shrink-0"
+                title="Copiar Chave Pix"
               >
-                Copiar Pix
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copiar</span>
               </button>
             </div>
           </div>
+
         </div>
 
       </div>
@@ -3418,12 +3691,15 @@ async function renderOngsGrid() {
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           ${fotosAbrigo.map((f, i) => `
-            <div class="group relative rounded-2xl overflow-hidden ong-facility-card bg-slate-100 border-2 border-[#e8ddcf] shadow-xs hover:shadow-md transition-all">
+                        <div onclick="openShelterMediaLightbox(${i})" title="Clique para ver foto ampliada em tamanho original" class="group relative rounded-2xl overflow-hidden ong-facility-card bg-slate-100 border-2 border-[#e8ddcf] hover:border-[#007E82] shadow-xs hover:shadow-md transition-all cursor-pointer">
               <img src="${f}" alt="Instalações do Abrigo ${i+1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-3.5">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end justify-between p-3.5">
                 <span class="text-xs text-white font-bold flex items-center gap-1.5">
                   <i data-lucide="eye" class="w-3.5 h-3.5 text-[#D19864]"></i>
                   <span>Instalação do Abrigo #${i+1}</span>
+                </span>
+                <span class="w-6 h-6 rounded-full bg-white/20 backdrop-blur-xs text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <i data-lucide="maximize-2" class="w-3 h-3"></i>
                 </span>
               </div>
             </div>

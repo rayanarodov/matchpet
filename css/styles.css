@@ -1617,12 +1617,13 @@ header.sticky {
 }
 
 .ong-lateral-story-photo {
-  height: 155px !important;
-  max-height: 155px !important;
+  height: 175px !important;
+  max-height: 175px !important;
   width: 100% !important;
   overflow: hidden !important;
-  border-radius: 1rem !important;
+  border-radius: 1.25rem !important;
   position: relative !important;
+  cursor: pointer !important;
 }
 
 .ong-lateral-story-photo img {
