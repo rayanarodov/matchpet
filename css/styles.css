@@ -2211,3 +2211,44 @@ html, body {
   transform: translateY(-1px) scale(1.01) !important;
   box-shadow: 0 6px 16px rgba(5, 150, 105, 0.45) !important;
 }
+
+/* ==========================================================================
+   FILTROS DA SEÇÃO BLOG ATUALIZADO (ALTA VISIBILIDADE & HOVER VIBRANTE)
+   ========================================================================== */
+.blog-filter-btn {
+  background-color: #ffffff !important;
+  color: #004d50 !important;
+  border: 1.5px solid #d1e7e8 !important;
+  font-weight: 900 !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  padding: 0.5rem 0.875rem !important;
+  border-radius: 0.75rem !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+}
+
+.blog-filter-btn:hover {
+  background-color: #e6f4f5 !important;
+  color: #007E82 !important;
+  border-color: #007E82 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 8px rgba(0, 126, 130, 0.2) !important;
+}
+
+.blog-filter-btn.active {
+  background-color: #007E82 !important;
+  color: #ffffff !important;
+  border-color: #005659 !important;
+  box-shadow: 0 3px 10px rgba(0, 126, 130, 0.35) !important;
+}
+
+.blog-filter-btn.active:hover {
+  background-color: #006366 !important;
+  color: #ffffff !important;
+  border-color: #004547 !important;
+}

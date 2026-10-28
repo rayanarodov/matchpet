@@ -2633,9 +2633,9 @@ function filterBlogPosts(category) {
     if (!btn) return;
     const isActive = cat === category;
     if (isActive) {
-      btn.className = "blog-filter-btn active px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#003e40] transition-all shadow-sm cursor-pointer";
+      btn.classList.add("active");
     } else {
-      btn.className = "blog-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#F9F3EA] hover:text-white hover:bg-white transition-all cursor-pointer";
+      btn.classList.remove("active");
     }
   });
 
