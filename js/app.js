@@ -612,6 +612,7 @@ const FAST_ICONS = {
   'file-text': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text [CLASS]"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>',
   'play': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play [CLASS]"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
   'sparkles': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles [CLASS]"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>',
+  'message-circle': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle [CLASS]"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>',
   'shield-alert': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-alert [CLASS]"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>'
 };
 
@@ -867,7 +868,7 @@ function renderPetsGrid(pets) {
             </div>
           </div>
 
-          <!-- Ações no Desktop: Ler Ficha Completa + Quero Adotar -->
+          <!-- Ações no Desktop: Ler Ficha Completa + Falar no WhatsApp -->
           <div class="grid grid-cols-2 gap-2 pt-2 mt-auto">
             <button 
               type="button"
@@ -882,11 +883,11 @@ function renderPetsGrid(pets) {
             <button 
               type="button" 
               onclick="handleCardAdoptClick('${pet.id}')" 
-              class="w-full py-2.5 px-2 rounded-xl bg-[#D19864] hover:bg-[#c2844d] text-slate-950 font-black text-xs shadow-md shadow-[#D19864]/25 hover:shadow-lg transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer border border-[#b87e4c]"
-              title="Entrar em contato direto para adotar ${pet.nome}"
+              class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs shadow-md shadow-emerald-950/20 hover:shadow-lg transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02] cursor-pointer border border-emerald-400"
+              title="Falar no WhatsApp para adotar ${pet.nome}"
             >
-              ${getFastIconSvg('heart', 'w-3.5 h-3.5 fill-slate-950 text-white flex-shrink-0')}
-              <span>Quero Adotar</span>
+              ${getFastIconSvg('message-circle', 'w-3.5 h-3.5 text-white flex-shrink-0')}
+              <span>Falar no WhatsApp</span>
             </button>
           </div>
         </div>
@@ -951,7 +952,7 @@ function renderPetsGrid(pets) {
             </p>
           </div>
 
-          <!-- Ações: Ficha Completa + Quero Adotar (Toque Seguro & Ergonômico) -->
+          <!-- Ações: Ficha Completa + Falar no WhatsApp (Toque Seguro & Ergonômico) -->
           <div class="grid grid-cols-2 gap-2 pt-2 mt-auto border-t border-slate-100">
             <!-- 1. Ficha Completa -->
             <button 
@@ -964,15 +965,15 @@ function renderPetsGrid(pets) {
               <span class="truncate">Ficha Completa</span>
             </button>
 
-            <!-- 2. Quero Adotar -->
+            <!-- 2. Falar no WhatsApp -->
             <button 
               type="button" 
               onclick="handleCardAdoptClick('${pet.id}')" 
-              class="w-full py-2.5 px-2 rounded-xl bg-[#D19864] hover:bg-[#c2844d] text-slate-950 font-black text-xs shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#b87e4c] min-h-[44px]"
-              title="Entrar em contato direto para adotar ${pet.nome}"
+              class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-emerald-400 min-h-[44px]"
+              title="Falar no WhatsApp para adotar ${pet.nome}"
             >
-              ${getFastIconSvg('heart', 'w-3.5 h-3.5 fill-slate-950 text-slate-950 flex-shrink-0')}
-              <span>Quero Adotar</span>
+              ${getFastIconSvg('message-circle', 'w-3.5 h-3.5 text-white flex-shrink-0')}
+              <span>WhatsApp</span>
             </button>
           </div>
         </div>
@@ -1756,11 +1757,11 @@ function renderFavoritesModalUI() {
           <button 
             type="button" 
             onclick="closeFavoritesModal(); handleCardAdoptClick('${pet.id}');"
-            class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00383b] hover:to-[#004d50] text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
-            title="Quero Adotar / Falar com a ONG"
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer border border-emerald-400"
+            title="Falar no WhatsApp com a ONG"
           >
-            <i data-lucide="heart" class="w-3.5 h-3.5 fill-slate-950 text-white"></i>
-            <span>Quero Adotar</span>
+            <i data-lucide="message-circle" class="w-3.5 h-3.5 text-white"></i>
+            <span>Falar no WhatsApp</span>
           </button>
           <button 
             type="button" 

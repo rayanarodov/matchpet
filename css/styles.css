@@ -1838,6 +1838,7 @@ html, body {
   #quiz-modal .modal-content,
   #ong-management-modal .ong-modal-wide,
   #ong-add-pet-modal .modal-content {
+    background-color: #ffffff !important;
     width: 94vw !important;
     max-width: 94vw !important;
     margin: 0.5rem auto !important;
@@ -2195,32 +2196,20 @@ html, body {
   border: 2px solid #bae6fd !important;
 }
 
-#modal-adopt-btn {
-  background: linear-gradient(135deg, #D19864 0%, #dfa46e 50%, #c2844d 100%) !important;
-  color: #020617 !important;
-  border: 2px solid #b87e4c !important;
-  box-shadow: 0 4px 15px rgba(209, 152, 100, 0.45) !important;
-  font-weight: 900 !important;
-}
-
-#modal-adopt-btn:hover {
-  background: linear-gradient(135deg, #dfa46e 0%, #e8b382 50%, #d19864 100%) !important;
-  transform: translateY(-1px) scale(1.01) !important;
-  box-shadow: 0 6px 18px rgba(209, 152, 100, 0.55) !important;
-}
-
 #modal-whatsapp-btn {
-  background: linear-gradient(135deg, #059669 0%, #007E82 100%) !important;
+  background: linear-gradient(135deg, #25D366 0%, #16a34a 50%, #0d9488 100%) !important;
   color: #ffffff !important;
-  border: 1.5px solid #047857 !important;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35) !important;
+  border: 2px solid #4ade80 !important;
+  box-shadow: 0 4px 18px rgba(22, 163, 74, 0.4) !important;
   font-weight: 900 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 #modal-whatsapp-btn:hover {
-  background: linear-gradient(135deg, #047857 0%, #005659 100%) !important;
-  transform: translateY(-1px) scale(1.01) !important;
-  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.45) !important;
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 50%, #0f766e 100%) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) scale(1.015) !important;
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.55) !important;
 }
 
 /* ==========================================================================

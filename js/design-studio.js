@@ -599,7 +599,7 @@
           </p>
           <div class="pt-2 flex items-center gap-1.5 border-t border-slate-100">
             <button class="flex-1 py-1.5 rounded-xl text-[11px] font-bold bg-slate-100 text-slate-700">Ver Ficha</button>
-            <button class="flex-1 py-1.5 rounded-xl text-[11px] font-black bg-orange-600 text-white shadow-xs">Quero Adotar</button>
+            <button class="flex-1 py-1.5 rounded-xl text-[11px] font-black bg-emerald-600 text-white shadow-xs">Falar no WhatsApp</button>
           </div>
         </div>
       </div>

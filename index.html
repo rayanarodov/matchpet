@@ -1519,32 +1519,26 @@
         </div>
       </div>
 
-      <!-- Ação Inferior: Botão Sólido "Adotar Agora", WhatsApp e Compartilhar -->
-      <div class="pt-5 mt-5 border-t border-slate-200 flex flex-col sm:flex-row items-center gap-2.5">
-        <button 
-          id="modal-adopt-btn" 
-          onclick="handlePetModalAdoptClick()" 
-          class="w-full sm:flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-[#D19864] via-[#dfa46e] to-[#c2844d] hover:brightness-105 text-slate-950 font-black text-base shadow-lg shadow-[#D19864]/25 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] cursor-pointer border-2 border-[#b87e4c]"
-        >
-          <span>Quero Adotar</span>
-          <i data-lucide="arrow-right" class="w-5 h-5"></i>
-        </button>
-
+      <!-- Ação Inferior: Botão Oficial "Falar no WhatsApp" e Compartilhar -->
+      <div class="pt-5 mt-5 border-t border-slate-200 flex flex-col sm:flex-row items-center gap-3">
         <a 
           id="modal-whatsapp-btn" 
           href="#" 
           target="_blank" 
-          class="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer hover:scale-[1.01]"
-          title="Tirar dúvidas com a ONG via WhatsApp"
+          class="w-full sm:flex-1 py-4 px-6 rounded-2xl text-white font-black text-base sm:text-lg transition-all flex items-center justify-center gap-3 cursor-pointer group shadow-lg"
+          title="Falar diretamente com a ONG responsável via WhatsApp"
         >
-          <i data-lucide="message-circle" class="w-4 h-4 text-white"></i>
-          <span>Falar no WhatsApp</span>
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+            <i data-lucide="message-circle" class="w-5 h-5 text-white stroke-[2.5]"></i>
+          </div>
+          <span class="tracking-wide">Falar no WhatsApp</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 text-emerald-100 group-hover:translate-x-1.5 transition-transform ml-auto sm:ml-0"></i>
         </a>
 
         <button 
           type="button" 
           onclick="sharePetProfile(activePet?.id)" 
-          class="w-full sm:w-auto px-4 py-3.5 rounded-2xl bg-purple-50 hover:bg-purple-100 text-purple-900 border-2 border-purple-200 font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+          class="w-full sm:w-auto px-5 py-4 rounded-2xl bg-purple-50 hover:bg-purple-100 text-purple-900 border-2 border-purple-200 font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:scale-[1.01]"
           title="Compartilhar o perfil deste pet"
         >
           <i data-lucide="share-2" class="w-4 h-4 text-purple-700"></i>
