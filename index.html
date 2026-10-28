@@ -1199,18 +1199,29 @@
         <!-- Topo da Ficha: Foto Principal à esquerda + 2 Miniaturas empilhadas à direita (Exato do Mockup) -->
         <div class="grid grid-cols-12 gap-3 sm:gap-4">
           
-          <!-- Foto Principal (com botão de favorito no canto) -->
-          <div class="col-span-9 relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 shadow-md">
-            <img id="modal-main-photo" src="" alt="Pet" class="w-full h-full object-cover">
+          <!-- Foto Principal (com botão de favorito e zoom em tamanho original) -->
+          <div class="col-span-9 relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 shadow-md group cursor-zoom-in" onclick="openActivePetMediaLightbox()">
+            <img id="modal-main-photo" src="" alt="Pet" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300">
             
             <!-- Botão de Coração / Favorito Flutuante -->
             <button 
               id="modal-pet-fav-btn" 
-              onclick="toggleActivePetFavorite(event)" 
-              class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white hover:bg-white text-rose-600 flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-pointer"
+              onclick="event.stopPropagation(); toggleActivePetFavorite(event)" 
+              class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white hover:bg-white text-rose-600 flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-pointer z-20"
               title="Salvar em Meus Favoritos"
             >
               <i data-lucide="heart" class="w-5 h-5 fill-rose-500"></i>
+            </button>
+
+            <!-- Botão Flutuante: Tamanho Original -->
+            <button 
+              type="button" 
+              onclick="event.stopPropagation(); openActivePetMediaLightbox()" 
+              class="absolute top-3 left-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/65 hover:bg-black/85 text-white font-bold text-xs backdrop-blur-md transition-all shadow-md cursor-pointer hover:scale-105 border border-white/20"
+              title="Clique para ver a foto em tamanho original"
+            >
+              <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-teal-300"></i>
+              <span>Tamanho Original</span>
             </button>
 
             <!-- Badges de Espécie, Sexo e Status na Foto (Cores Chamativas & 100% Sólidas) -->
@@ -1361,7 +1372,22 @@
         </div>
 
         <!-- Vídeo do animal (se houver) -->
-        <div id="media-videos-container" class="hidden pt-2 border-t border-slate-100">
+        <div id="media-videos-container" class="hidden pt-2 border-t border-slate-100 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black uppercase text-slate-800 tracking-wider flex items-center gap-1.5">
+              <i data-lucide="video" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span>Vídeo do Animal</span>
+            </span>
+            <button 
+              type="button" 
+              onclick="openActivePetVideoLightbox()" 
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-teal-50 hover:bg-teal-100 text-[#007E82] font-black text-xs border border-teal-200 transition-colors cursor-pointer shadow-2xs"
+              title="Assistir vídeo em tela cheia / tamanho original"
+            >
+              <i data-lucide="maximize" class="w-3.5 h-3.5"></i>
+              <span>Ver em Tela Cheia</span>
+            </button>
+          </div>
           <div class="video-responsive-wrapper rounded-2xl overflow-hidden shadow-inner">
             <div id="modal-video-player-target"></div>
           </div>
@@ -1395,6 +1421,125 @@
         </button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Lightbox / Visualizador de Mídias em Tamanho Original (Fotos & Vídeos) -->
+  <div 
+    id="media-lightbox-modal" 
+    class="fixed inset-0 z-[100] flex flex-col items-center justify-between p-3 sm:p-6 bg-black/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 select-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Visualizador de fotos e vídeos em tamanho original"
+  >
+    <!-- Barra Superior: Nome do Pet, Contador, Ações de Zoom e Fechar -->
+    <div class="w-full max-w-6xl flex items-center justify-between gap-3 text-white z-20 pt-1 pb-2 flex-shrink-0">
+      <div class="flex items-center gap-2.5 truncate">
+        <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm flex-shrink-0">🐾</span>
+        <div class="truncate">
+          <h3 id="lightbox-pet-name" class="font-brand font-black text-sm sm:text-base text-white tracking-wide truncate">Nome do Pet</h3>
+          <span id="lightbox-counter" class="text-[11px] text-slate-400 font-bold block truncate">Foto 1 de 1 • Tamanho Original</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <!-- Controles de Zoom (para imagens) -->
+        <div id="lightbox-zoom-controls" class="hidden sm:flex items-center gap-1 bg-white/10 rounded-xl p-1 border border-white/10">
+          <button 
+            type="button" 
+            onclick="zoomLightboxMedia(-0.25)" 
+            class="w-8 h-8 rounded-lg hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            title="Diminuir Zoom (-)"
+          >
+            <i data-lucide="zoom-out" class="w-4 h-4"></i>
+          </button>
+          <span id="lightbox-zoom-level" class="text-xs font-mono font-bold px-1.5 text-slate-200">100%</span>
+          <button 
+            type="button" 
+            onclick="zoomLightboxMedia(0.25)" 
+            class="w-8 h-8 rounded-lg hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            title="Aumentar Zoom (+)"
+          >
+            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+          </button>
+          <button 
+            type="button" 
+            onclick="resetLightboxZoom()" 
+            class="px-2 py-1 text-[11px] font-bold rounded-lg hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            title="Resetar Zoom"
+          >
+            Reset
+          </button>
+        </div>
+
+        <!-- Botão Abrir Link Direto -->
+        <a 
+          id="lightbox-open-external" 
+          href="#" 
+          target="_blank" 
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors cursor-pointer border border-white/10"
+          title="Abrir arquivo original em nova aba"
+        >
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <span>Arquivo Original</span>
+        </a>
+
+        <!-- Botão Fechar -->
+        <button 
+          type="button" 
+          onclick="closeMediaLightbox()" 
+          class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-transform hover:scale-110 cursor-pointer shadow-lg"
+          title="Fechar Visualizador (Esc)"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Área Central de Exibição da Mídia -->
+    <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden my-auto py-2" onclick="onLightboxBackdropClick(event)">
+      <!-- Seta Anterior -->
+      <button 
+        type="button" 
+        id="lightbox-prev-btn" 
+        onclick="navigateLightboxMedia(-1)" 
+        class="absolute left-2 sm:left-4 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/20 flex items-center justify-center transition-all hover:scale-110 cursor-pointer shadow-xl"
+        title="Mídia Anterior (Seta Esquerda)"
+      >
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Wrapper da Imagem -->
+      <div id="lightbox-image-wrapper" class="w-full h-full flex items-center justify-center overflow-auto p-1">
+        <img 
+          id="lightbox-image" 
+          src="" 
+          alt="Visualização em tamanho original" 
+          class="max-w-[95vw] max-h-[82vh] object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-in"
+          onclick="toggleLightboxZoom(event)"
+        >
+      </div>
+
+      <!-- Wrapper do Vídeo -->
+      <div id="lightbox-video-wrapper" class="hidden w-full h-full flex items-center justify-center p-1">
+        <!-- Vídeo ou iframe renderizado dinamicamente -->
+      </div>
+
+      <!-- Seta Próxima -->
+      <button 
+        type="button" 
+        id="lightbox-next-btn" 
+        onclick="navigateLightboxMedia(1)" 
+        class="absolute right-2 sm:right-4 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-black/80 text-white border border-white/20 flex items-center justify-center transition-all hover:scale-110 cursor-pointer shadow-xl"
+        title="Próxima Mídia (Seta Direita)"
+      >
+        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Barra Inferior: Miniaturas -->
+    <div id="lightbox-thumbnails-container" class="w-full max-w-4xl flex items-center justify-center gap-2 overflow-x-auto py-2 z-20 no-scrollbar flex-shrink-0">
+      <!-- Miniaturas dinâmicas -->
     </div>
   </div>
 

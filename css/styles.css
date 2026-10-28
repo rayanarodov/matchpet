@@ -2197,3 +2197,25 @@ html, body {
   color: #ffffff !important;
   border-color: #004547 !important;
 }
+
+/* ==========================================================================
+   LIGHTBOX / VISUALIZADOR DE MÍDIAS EM TAMANHO ORIGINAL
+   ========================================================================== */
+#media-lightbox-modal {
+  z-index: 99999 !important;
+}
+#media-lightbox-modal.opacity-100 {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+#media-lightbox-modal.opacity-0 {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.cursor-zoom-in {
+  cursor: zoom-in !important;
+}
+.cursor-zoom-out {
+  cursor: zoom-out !important;
+}
+

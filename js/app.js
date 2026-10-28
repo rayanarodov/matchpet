@@ -776,6 +776,16 @@ function renderPetsGrid(pets) {
           ${stickers.patinhas ? `<span class="absolute top-3 right-12 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Patinhas">🐾</span>` : ''}
           ${stickers.coracao ? `<span class="absolute bottom-3 right-12 text-sm z-10 select-none pointer-events-none drop-shadow-xs" title="Amor">❤️</span>` : ''}
 
+          <!-- Botão de Ver em Tamanho Original no Card -->
+          <button 
+            type="button" 
+            onclick="openPetMediaLightboxById('${pet.id}', event)" 
+            title="Ver fotos e vídeos de ${pet.nome} em tamanho original" 
+            class="absolute top-3 right-12 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-[#007E82] flex items-center justify-center shadow-md transition-all hover:scale-110 z-10 cursor-pointer pointer-events-auto border border-slate-200"
+          >
+            ${getFastIconSvg('maximize-2', 'w-3.5 h-3.5 text-[#007E82]')}
+          </button>
+
           <!-- Botão de Favorito (Coração) no Topo Direito -->
           <button 
             type="button"
@@ -2295,6 +2305,300 @@ function onWhatsAppClick(petId, petName, score = null, rank = null) {
 
 // Expõe funções no escopo global
 window.getActiveQuiz = () => activeQuiz;
+
+// ==========================================================================
+// SISTEMA DE VISUALIZAÇÃO DE FOTOS E VÍDEOS EM TAMANHO ORIGINAL (LIGHTBOX)
+// ==========================================================================
+let lightboxItems = [];
+let lightboxCurrentIndex = 0;
+let lightboxPetName = "";
+let lightboxZoomLevel = 1.0;
+
+function openMediaLightbox(items, startIndex = 0, petName = "Animal") {
+  if (!items || items.length === 0) return;
+  lightboxItems = items;
+  lightboxCurrentIndex = Math.max(0, Math.min(startIndex, items.length - 1));
+  lightboxPetName = petName;
+  lightboxZoomLevel = 1.0;
+
+  const modal = document.getElementById("media-lightbox-modal");
+  if (!modal) return;
+
+  renderLightboxCurrentItem();
+  renderLightboxThumbnails();
+
+  modal.classList.remove("opacity-0", "pointer-events-none");
+  modal.classList.add("opacity-100", "pointer-events-auto");
+  document.body.classList.add("overflow-hidden");
+
+  if (window.lucide) lucide.createIcons({ root: modal });
+}
+window.openMediaLightbox = openMediaLightbox;
+
+function closeMediaLightbox() {
+  const modal = document.getElementById("media-lightbox-modal");
+  if (!modal) return;
+
+  // Encerra qualquer vídeo em reprodução
+  const videoWrapper = document.getElementById("lightbox-video-wrapper");
+  if (videoWrapper) videoWrapper.innerHTML = "";
+
+  modal.classList.add("opacity-0", "pointer-events-none");
+  modal.classList.remove("opacity-100", "pointer-events-auto");
+  document.body.classList.remove("overflow-hidden");
+  lightboxZoomLevel = 1.0;
+}
+window.closeMediaLightbox = closeMediaLightbox;
+
+function renderLightboxCurrentItem() {
+  const item = lightboxItems[lightboxCurrentIndex];
+  if (!item) return;
+
+  const imgWrapper = document.getElementById("lightbox-image-wrapper");
+  const videoWrapper = document.getElementById("lightbox-video-wrapper");
+  const imgEl = document.getElementById("lightbox-image");
+  const nameEl = document.getElementById("lightbox-pet-name");
+  const counterEl = document.getElementById("lightbox-counter");
+  const zoomControls = document.getElementById("lightbox-zoom-controls");
+  const externalLink = document.getElementById("lightbox-open-external");
+  const prevBtn = document.getElementById("lightbox-prev-btn");
+  const nextBtn = document.getElementById("lightbox-next-btn");
+
+  if (nameEl) nameEl.textContent = lightboxPetName;
+  if (counterEl) {
+    const typeLabel = item.type === "video" ? "Vídeo" : "Foto";
+    counterEl.textContent = `${typeLabel} ${lightboxCurrentIndex + 1} de ${lightboxItems.length} • Resolução Original`;
+  }
+  if (externalLink) {
+    externalLink.href = item.url;
+  }
+
+  // Oculta setas se houver apenas 1 mídia
+  if (prevBtn) prevBtn.style.display = lightboxItems.length > 1 ? "flex" : "none";
+  if (nextBtn) nextBtn.style.display = lightboxItems.length > 1 ? "flex" : "none";
+
+  lightboxZoomLevel = 1.0;
+  updateLightboxZoomDisplay();
+
+  if (item.type === "video") {
+    if (imgWrapper) imgWrapper.classList.add("hidden");
+    if (videoWrapper) {
+      videoWrapper.classList.remove("hidden");
+      if (item.url.includes("youtube.com") || item.url.includes("youtu.be")) {
+        let vidId = "";
+        if (item.url.includes("youtu.be/")) vidId = item.url.split("youtu.be/")[1].split("?")[0];
+        else if (item.url.includes("watch?v=")) vidId = item.url.split("watch?v=")[1].split("&")[0];
+        videoWrapper.innerHTML = `
+          <iframe 
+            src="https://www.youtube.com/embed/${vidId}?autoplay=1&rel=0" 
+            title="Vídeo em tamanho original" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            class="w-full max-w-4xl aspect-video rounded-2xl shadow-2xl"
+          ></iframe>
+        `;
+      } else {
+        videoWrapper.innerHTML = `
+          <video controls autoplay playsinline class="max-w-[95vw] max-h-[80vh] rounded-2xl shadow-2xl bg-black">
+            <source src="${item.url}">
+            Seu navegador não suporta a tag de vídeo.
+          </video>
+        `;
+      }
+    }
+    if (zoomControls) zoomControls.classList.add("hidden");
+  } else {
+    // Imagem
+    if (videoWrapper) {
+      videoWrapper.classList.add("hidden");
+      videoWrapper.innerHTML = "";
+    }
+    if (imgWrapper) imgWrapper.classList.remove("hidden");
+    if (imgEl) {
+      imgEl.src = item.url;
+      imgEl.alt = `${lightboxPetName} foto ${lightboxCurrentIndex + 1}`;
+      imgEl.style.transform = "scale(1)";
+    }
+    if (zoomControls) zoomControls.classList.remove("hidden");
+  }
+
+  updateActiveLightboxThumbnail();
+}
+
+function navigateLightboxMedia(delta) {
+  if (lightboxItems.length <= 1) return;
+  lightboxCurrentIndex = (lightboxCurrentIndex + delta + lightboxItems.length) % lightboxItems.length;
+  renderLightboxCurrentItem();
+}
+window.navigateLightboxMedia = navigateLightboxMedia;
+
+function zoomLightboxMedia(delta) {
+  const item = lightboxItems[lightboxCurrentIndex];
+  if (!item || item.type === "video") return;
+  lightboxZoomLevel = Math.max(0.5, Math.min(3.0, lightboxZoomLevel + delta));
+  applyLightboxZoom();
+}
+window.zoomLightboxMedia = zoomLightboxMedia;
+
+function resetLightboxZoom() {
+  lightboxZoomLevel = 1.0;
+  applyLightboxZoom();
+}
+window.resetLightboxZoom = resetLightboxZoom;
+
+function toggleLightboxZoom(event) {
+  if (event) event.stopPropagation();
+  const item = lightboxItems[lightboxCurrentIndex];
+  if (!item || item.type === "video") return;
+  lightboxZoomLevel = lightboxZoomLevel === 1.0 ? 1.75 : 1.0;
+  applyLightboxZoom();
+}
+window.toggleLightboxZoom = toggleLightboxZoom;
+
+function applyLightboxZoom() {
+  const imgEl = document.getElementById("lightbox-image");
+  if (imgEl) {
+    imgEl.style.transform = `scale(${lightboxZoomLevel})`;
+    imgEl.className = lightboxZoomLevel > 1.0 
+      ? "max-w-[95vw] max-h-[82vh] object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-out"
+      : "max-w-[95vw] max-h-[82vh] object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-in";
+  }
+  updateLightboxZoomDisplay();
+}
+
+function updateLightboxZoomDisplay() {
+  const zoomDisplay = document.getElementById("lightbox-zoom-level");
+  if (zoomDisplay) {
+    zoomDisplay.textContent = `${Math.round(lightboxZoomLevel * 100)}%`;
+  }
+}
+
+function renderLightboxThumbnails() {
+  const container = document.getElementById("lightbox-thumbnails-container");
+  if (!container) return;
+
+  if (lightboxItems.length <= 1) {
+    container.innerHTML = "";
+    container.classList.add("hidden");
+    return;
+  }
+  container.classList.remove("hidden");
+
+  container.innerHTML = lightboxItems.map((item, idx) => `
+    <button 
+      type="button" 
+      onclick="selectLightboxThumbnail(${idx})" 
+      class="lightbox-thumb-btn w-14 h-14 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer ${idx === lightboxCurrentIndex ? 'border-teal-400 ring-2 ring-teal-400/50 scale-105' : 'border-white/20 opacity-60 hover:opacity-100'}"
+      title="${item.type === 'video' ? 'Ver Vídeo' : `Ver Foto ${idx + 1}`}"
+    >
+      ${item.type === 'video' ? `
+        <div class="w-full h-full bg-slate-800 flex items-center justify-center text-white text-xs font-bold">
+          ▶️
+        </div>
+      ` : `
+        <img src="${item.url}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover">
+      `}
+    </button>
+  `).join("");
+}
+
+function selectLightboxThumbnail(idx) {
+  lightboxCurrentIndex = idx;
+  renderLightboxCurrentItem();
+}
+window.selectLightboxThumbnail = selectLightboxThumbnail;
+
+function updateActiveLightboxThumbnail() {
+  const thumbs = document.querySelectorAll(".lightbox-thumb-btn");
+  thumbs.forEach((thumb, idx) => {
+    if (idx === lightboxCurrentIndex) {
+      thumb.className = "lightbox-thumb-btn w-14 h-14 rounded-xl overflow-hidden border-2 border-teal-400 ring-2 ring-teal-400/50 scale-105 transition-all flex-shrink-0 cursor-pointer";
+      thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } else {
+      thumb.className = "lightbox-thumb-btn w-14 h-14 rounded-xl overflow-hidden border-2 border-white/20 opacity-60 hover:opacity-100 transition-all flex-shrink-0 cursor-pointer";
+    }
+  });
+}
+
+function onLightboxBackdropClick(event) {
+  if (event.target.id === "lightbox-image-wrapper" || event.target.id === "lightbox-video-wrapper") {
+    closeMediaLightbox();
+  }
+}
+window.onLightboxBackdropClick = onLightboxBackdropClick;
+
+// Abre a mídia do pet ativo no modal
+function openActivePetMediaLightbox(startIndex = 0) {
+  if (!activePet) return;
+  const items = [];
+  const photos = (activePet.fotos || []).map(f => window.PetDB ? PetDB.getMediaUrl(f) : f);
+  photos.forEach(f => items.push({ type: 'image', url: f }));
+  const videos = (activePet.videos || []).map(v => window.PetDB ? PetDB.getMediaUrl(v) : v);
+  videos.forEach(v => items.push({ type: 'video', url: v }));
+
+  // Se houver foto principal exibida no modal, tenta começar nela
+  const mainPhotoEl = document.getElementById("modal-main-photo");
+  if (mainPhotoEl && mainPhotoEl.src) {
+    const currentPhotoUrl = mainPhotoEl.src;
+    const foundIdx = items.findIndex(item => item.url === currentPhotoUrl);
+    if (foundIdx !== -1) startIndex = foundIdx;
+  }
+
+  openMediaLightbox(items, startIndex, activePet.nome);
+}
+window.openActivePetMediaLightbox = openActivePetMediaLightbox;
+
+// Abre o vídeo do pet ativo no lightbox
+function openActivePetVideoLightbox() {
+  if (!activePet) return;
+  const items = [];
+  const photos = (activePet.fotos || []).map(f => window.PetDB ? PetDB.getMediaUrl(f) : f);
+  photos.forEach(f => items.push({ type: 'image', url: f }));
+  const videos = (activePet.videos || []).map(v => window.PetDB ? PetDB.getMediaUrl(v) : v);
+  videos.forEach(v => items.push({ type: 'video', url: v }));
+
+  const firstVideoIdx = items.findIndex(item => item.type === 'video');
+  const targetIdx = firstVideoIdx !== -1 ? firstVideoIdx : 0;
+  openMediaLightbox(items, targetIdx, activePet.nome);
+}
+window.openActivePetVideoLightbox = openActivePetVideoLightbox;
+
+// Abre a mídia diretamente pelo ID do pet (a partir do card)
+function openPetMediaLightboxById(petId, event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const list = (window.currentAnimals && window.currentAnimals.length > 0) ? window.currentAnimals : (window.DEFAULT_ANIMALS || []);
+  const pet = list.find(a => String(a.id) === String(petId));
+  if (!pet) return;
+
+  const items = [];
+  const photos = (pet.fotos || []).map(f => window.PetDB ? PetDB.getMediaUrl(f) : f);
+  photos.forEach(f => items.push({ type: 'image', url: f }));
+  const videos = (pet.videos || []).map(v => window.PetDB ? PetDB.getMediaUrl(v) : v);
+  videos.forEach(v => items.push({ type: 'video', url: v }));
+
+  openMediaLightbox(items, 0, pet.nome);
+}
+window.openPetMediaLightboxById = openPetMediaLightboxById;
+
+// Listener global de teclado (Esc, Seta Esquerda, Seta Direita)
+if (typeof document !== "undefined") {
+  document.addEventListener("keydown", (e) => {
+    const modal = document.getElementById("media-lightbox-modal");
+    if (!modal || modal.classList.contains("opacity-0")) return;
+
+    if (e.key === "Escape") {
+      closeMediaLightbox();
+    } else if (e.key === "ArrowLeft") {
+      navigateLightboxMedia(-1);
+    } else if (e.key === "ArrowRight") {
+      navigateLightboxMedia(1);
+    }
+  });
+}
+
 window.openPetModalById = openPetModalById;
 window.closePetModal = closePetModal;
 window.setModalMainPhoto = setModalMainPhoto;
