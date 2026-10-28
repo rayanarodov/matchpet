@@ -1182,28 +1182,17 @@ function openPetModal(pet, scrollToContact = false) {
     }
   }
 
-  // Lista de Vacinas Coloridas
+  // Lista de Vacinas (Padronizadas em uma cor única, elegante e harmoniosa)
   const vacinasListEl = document.getElementById("modal-pet-vacinas-list");
   if (vacinasListEl) {
     const vacinas = (pet.saude && Array.isArray(pet.saude.vacinas)) ? pet.saude.vacinas : [];
     if (vacinas.length > 0) {
-      const vacinaColors = [
-        { bg: "bg-purple-100 text-purple-950 border-purple-300", icon: "text-purple-700" },
-        { bg: "bg-rose-100 text-rose-950 border-rose-300", icon: "text-rose-700" },
-        { bg: "bg-teal-100 text-teal-950 border-teal-300", icon: "text-teal-700" },
-        { bg: "bg-sky-100 text-sky-950 border-sky-300", icon: "text-sky-700" },
-        { bg: "bg-amber-100 text-amber-950 border-amber-300", icon: "text-amber-700" },
-        { bg: "bg-emerald-100 text-emerald-950 border-emerald-300", icon: "text-emerald-700" }
-      ];
-      vacinasListEl.innerHTML = vacinas.map((v, i) => {
-        const theme = vacinaColors[i % vacinaColors.length];
-        return `
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black border ${theme.bg} shadow-2xs">
-            <i data-lucide="shield-check" class="w-3.5 h-3.5 ${theme.icon}"></i>
-            <span>${v}</span>
-          </span>
-        `;
-      }).join("");
+      vacinasListEl.innerHTML = vacinas.map((v) => `
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black border bg-emerald-50 text-emerald-950 border-emerald-300 shadow-2xs">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-700"></i>
+          <span>${v}</span>
+        </span>
+      `).join("");
     } else {
       vacinasListEl.innerHTML = `
         <span class="text-xs text-slate-500 italic">Cronograma vacinal em acompanhamento pela equipe veterinária da ONG.</span>
@@ -1264,13 +1253,13 @@ function openPetModal(pet, scrollToContact = false) {
     }).join("");
   }
 
-  // Critérios de Compatibilidade & Perfil em Cores Vibrantes (Quiz de Afinidade)
+  // Critérios de Compatibilidade & Perfil em Cor Única e Harmoniosa (Quiz de Afinidade)
   const compatContainer = document.getElementById("modal-pet-compatibility-container");
   if (compatContainer) {
     const energiaMap = {
-      baixa: { label: "Baixa Energia (Calmo)", icon: "🛋️", bg: "bg-emerald-50 text-emerald-950 border-emerald-300", iconBg: "bg-emerald-100 text-emerald-800", labelColor: "text-emerald-800" },
-      moderada: { label: "Energia Moderada", icon: "🐕", bg: "bg-teal-50 text-teal-950 border-teal-300", iconBg: "bg-teal-100 text-teal-800", labelColor: "text-teal-800" },
-      alta: { label: "Alta Energia (Ativo)", icon: "⚡", bg: "bg-amber-50 text-amber-950 border-amber-300", iconBg: "bg-amber-100 text-amber-800", labelColor: "text-amber-800" }
+      baixa: { label: "Baixa Energia (Calmo)", icon: "🛋️" },
+      moderada: { label: "Energia Moderada", icon: "🐕" },
+      alta: { label: "Alta Energia (Ativo)", icon: "⚡" }
     };
     const domMap = {
       apartamento: { label: "Apto ou Casa compacta", icon: "🏢" },
@@ -1313,62 +1302,26 @@ function openPetModal(pet, scrollToContact = false) {
     const caesInfo = caesMap[caesKey] || caesMap.sim;
     const gatosInfo = gatosMap[gatosKey] || gatosMap.sim;
 
-    compatContainer.innerHTML = `
-      <div class="p-2.5 rounded-xl border-2 ${energiaInfo.bg} shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl ${energiaInfo.iconBg} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${energiaInfo.icon}
+    const items = [
+      { label: "Nível de Energia", value: energiaInfo.label, icon: energiaInfo.icon },
+      { label: "Domicílio", value: domInfo.label, icon: domInfo.icon },
+      { label: "Tempo Sozinho", value: sozinhoInfo.label, icon: sozinhoInfo.icon },
+      { label: "Crianças", value: criancasInfo.label, icon: criancasInfo.icon },
+      { label: "Outros Cães", value: caesInfo.label, icon: caesInfo.icon },
+      { label: "Gatos", value: gatosInfo.label, icon: gatosInfo.icon }
+    ];
+
+    compatContainer.innerHTML = items.map(item => `
+      <div class="p-2.5 rounded-xl border-2 bg-white text-slate-900 border-[#e8ddcf] shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-[#e6f4f5] text-[#007E82] flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${item.icon}
         </div>
         <div class="min-w-0">
-          <span class="text-[10px] ${energiaInfo.labelColor} uppercase tracking-wider block font-black">Nível de Energia</span>
-          <span class="font-extrabold text-xs truncate block">${energiaInfo.label}</span>
+          <span class="text-[10px] text-[#007E82] uppercase tracking-wider block font-black">${item.label}</span>
+          <span class="font-extrabold text-xs truncate block text-slate-900">${item.value}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border-2 bg-purple-50/90 text-purple-950 border-purple-200 shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${domInfo.icon}
-        </div>
-        <div class="min-w-0">
-          <span class="text-[10px] text-purple-700 uppercase tracking-wider block font-black">Domicílio</span>
-          <span class="font-extrabold text-xs truncate block">${domInfo.label}</span>
-        </div>
-      </div>
-      <div class="p-2.5 rounded-xl border-2 bg-blue-50/90 text-blue-950 border-blue-200 shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${sozinhoInfo.icon}
-        </div>
-        <div class="min-w-0">
-          <span class="text-[10px] text-blue-700 uppercase tracking-wider block font-black">Tempo Sozinho</span>
-          <span class="font-extrabold text-xs truncate block">${sozinhoInfo.label}</span>
-        </div>
-      </div>
-      <div class="p-2.5 rounded-xl border-2 ${criancasKey === 'sim' ? 'bg-rose-50/90 text-rose-950 border-rose-200' : 'bg-amber-50/90 text-amber-950 border-amber-200'} shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl ${criancasKey === 'sim' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${criancasInfo.icon}
-        </div>
-        <div class="min-w-0">
-          <span class="text-[10px] ${criancasKey === 'sim' ? 'text-rose-700' : 'text-amber-700'} uppercase tracking-wider block font-black">Crianças</span>
-          <span class="font-extrabold text-xs truncate block">${criancasInfo.label}</span>
-        </div>
-      </div>
-      <div class="p-2.5 rounded-xl border-2 ${caesKey === 'sim' ? 'bg-amber-50/90 text-amber-950 border-amber-200' : 'bg-teal-50/90 text-teal-950 border-teal-200'} shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl ${caesKey === 'sim' ? 'bg-amber-100 text-amber-700' : 'bg-teal-100 text-teal-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${caesInfo.icon}
-        </div>
-        <div class="min-w-0">
-          <span class="text-[10px] ${caesKey === 'sim' ? 'text-amber-700' : 'text-teal-700'} uppercase tracking-wider block font-black">Outros Cães</span>
-          <span class="font-extrabold text-xs truncate block">${caesInfo.label}</span>
-        </div>
-      </div>
-      <div class="p-2.5 rounded-xl border-2 ${gatosKey === 'sim' ? 'bg-emerald-50/90 text-emerald-950 border-emerald-200' : 'bg-cyan-50/90 text-cyan-950 border-cyan-200'} shadow-2xs flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-xl ${gatosKey === 'sim' ? 'bg-emerald-100 text-emerald-700' : 'bg-cyan-100 text-cyan-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
-          ${gatosInfo.icon}
-        </div>
-        <div class="min-w-0">
-          <span class="text-[10px] ${gatosKey === 'sim' ? 'text-emerald-700' : 'text-cyan-700'} uppercase tracking-wider block font-black">Gatos</span>
-          <span class="font-extrabold text-xs truncate block">${gatosInfo.label}</span>
-        </div>
-      </div>
-    `;
+    `).join("");
   }
 
   // Configura botão de WhatsApp
