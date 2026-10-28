@@ -21,7 +21,7 @@ function debounce(fn, delay = 180) {
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const initialTab = urlParams.get('tab') || window.location.hash.replace('#', '');
-  if (initialTab && ['solidarity', 'analytics', 'crud'].includes(initialTab)) {
+  if (initialTab && ['solidarity', 'analytics', 'crud', 'ong'].includes(initialTab)) {
     switchAdminTab(initialTab);
   }
 
@@ -1034,41 +1034,43 @@ let currentAnalyticsPetList = [];
 function switchAdminTab(tabName) {
   currentAdminTab = tabName;
   const crudContent = document.getElementById("tab-content-crud");
+  const ongContent = document.getElementById("tab-content-ong");
   const solidarityContent = document.getElementById("tab-content-solidarity");
   const analyticsContent = document.getElementById("tab-content-analytics");
   
   const btnCrud = document.getElementById("tab-btn-crud");
+  const btnOng = document.getElementById("tab-btn-ong");
   const btnSolidarity = document.getElementById("tab-btn-solidarity");
   const btnAnalytics = document.getElementById("tab-btn-analytics");
 
   if (crudContent) crudContent.classList.add("hidden");
+  if (ongContent) ongContent.classList.add("hidden");
   if (solidarityContent) solidarityContent.classList.add("hidden");
   if (analyticsContent) analyticsContent.classList.add("hidden");
 
   const inactiveClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#007E82] hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap cursor-pointer";
   if (btnCrud) btnCrud.className = inactiveClass;
+  if (btnOng) btnOng.className = inactiveClass;
   if (btnSolidarity) btnSolidarity.className = inactiveClass;
   if (btnAnalytics) btnAnalytics.className = inactiveClass;
 
   const activeClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-[#e6f4f5] text-[#007E82] shadow-xs border-2 border-[#007E82] transition-all flex-shrink-0 whitespace-nowrap cursor-pointer";
 
-  if (tabName === "solidarity") {
+  if (tabName === "ong") {
+    if (ongContent) ongContent.classList.remove("hidden");
+    if (btnOng) btnOng.className = activeClass;
+    loadAdminOngTab();
+  } else if (tabName === "solidarity") {
     if (solidarityContent) solidarityContent.classList.remove("hidden");
-    if (btnSolidarity) {
-      btnSolidarity.className = activeClass;
-    }
+    if (btnSolidarity) btnSolidarity.className = activeClass;
     renderAdminSolidarity();
   } else if (tabName === "analytics") {
     if (analyticsContent) analyticsContent.classList.remove("hidden");
-    if (btnAnalytics) {
-      btnAnalytics.className = activeClass;
-    }
+    if (btnAnalytics) btnAnalytics.className = activeClass;
     renderAnalyticsDashboard();
   } else {
     if (crudContent) crudContent.classList.remove("hidden");
-    if (btnCrud) {
-      btnCrud.className = activeClass;
-    }
+    if (btnCrud) btnCrud.className = activeClass;
   }
 }
 
@@ -2666,3 +2668,266 @@ async function handleAdminNewOngSubmit(event) {
 window.handleAdminNewOngSubmit = handleAdminNewOngSubmit;
 
 
+
+/* ==========================================================================
+   GESTAO DA ABA "CONHECA A ONG" NO PAINEL ADMINISTRATIVO
+   ========================================================================== */
+
+let tabOngPhotos = [];
+let tabOngVideos = [];
+
+async function loadAdminOngTab(targetOngId = null) {
+  let ongs = [];
+  try {
+    ongs = await SolidarityStorage.getOngs();
+  } catch (e) {
+    ongs = window.DEFAULT_ONGS || [];
+  }
+
+  const activeSelect = document.getElementById("admin-active-ong-select");
+  const selectedId = targetOngId || (activeSelect ? activeSelect.value : null) || (ongs[0] ? ongs[0].id : "ong-001");
+  const ong = ongs.find(o => o.id === selectedId) || ongs[0];
+  if (!ong) return;
+
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val !== undefined && val !== null ? val : "";
+  };
+
+  setVal("tab-ong-id", ong.id);
+  setVal("tab-ong-nome", ong.nome);
+  setVal("tab-ong-sigla", ong.sigla);
+  setVal("tab-ong-cidade", ong.cidade);
+  setVal("tab-ong-regiao", ong.regiao);
+  setVal("tab-ong-ano", ong.anoFundacao || 2003);
+  setVal("tab-ong-foto", ong.foto);
+  setVal("tab-ong-descricao", ong.descricao);
+  setVal("tab-ong-total-adotados", ong.totalAdotados || 0);
+  setVal("tab-ong-base-disponiveis", ong.baseDisponiveis || 0);
+  setVal("tab-ong-pix", ong.chavePix);
+  setVal("tab-ong-whatsapp", ong.whatsapp);
+  setVal("tab-ong-instagram", ong.instagram);
+  setVal("tab-ong-historia", ong.historia || "");
+
+  tabOngPhotos = Array.isArray(ong.fotosAbrigo) ? [...ong.fotosAbrigo] : [];
+  tabOngVideos = Array.isArray(ong.videosAbrigo) ? [...ong.videosAbrigo] : [];
+
+  tabRenderShelterPhotos();
+  tabRenderShelterVideos();
+  syncTabOngLivePreview();
+
+  const tabContainer = document.getElementById("tab-content-ong");
+  if (window.lucide && tabContainer) lucide.createIcons({ root: tabContainer });
+}
+
+function syncTabOngLivePreview() {
+  const getVal = (id, def = "") => {
+    const el = document.getElementById(id);
+    return el && el.value ? el.value : def;
+  };
+
+  const nome = getVal("tab-ong-nome", "Lar dos Anjos");
+  const cidade = getVal("tab-ong-cidade", "Brasília");
+  const regiao = getVal("tab-ong-regiao", "DF");
+  const ano = getVal("tab-ong-ano", "2003");
+  const foto = getVal("tab-ong-foto", "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80");
+  const desc = getVal("tab-ong-descricao", "Pioneira na proteção e bem-estar animal no DF...");
+  const adotados = getVal("tab-ong-total-adotados", "540");
+  const disponiveis = getVal("tab-ong-base-disponiveis", "16");
+  const pix = getVal("tab-ong-pix", "contato@lardosanjos.org.br");
+  const zap = getVal("tab-ong-whatsapp", "");
+  const insta = getVal("tab-ong-instagram", "");
+
+  const setText = (id, txt) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  };
+
+  setText("prev-ong-nome", nome);
+  setText("prev-ong-local", `${cidade}${regiao ? ` • ${regiao}` : ''}`);
+  setText("prev-ong-ano", `Fundada em ${ano}`);
+  setText("prev-ong-desc", desc);
+  setText("prev-ong-adotados", adotados);
+  setText("prev-ong-disponiveis", disponiveis);
+  setText("prev-ong-pix", pix);
+
+  const prevFoto = document.getElementById("prev-ong-foto");
+  if (prevFoto) prevFoto.src = foto;
+  const thumbFoto = document.getElementById("tab-ong-foto-thumb");
+  if (thumbFoto) thumbFoto.src = foto;
+
+  const zapEl = document.getElementById("prev-ong-whatsapp");
+  if (zapEl) zapEl.textContent = zap ? `WhatsApp: ${zap}` : "WhatsApp Ativo";
+  const instaEl = document.getElementById("prev-ong-instagram");
+  if (instaEl) instaEl.textContent = insta ? insta : "Instagram Oficial";
+}
+
+function tabRenderShelterPhotos() {
+  const container = document.getElementById("tab-shelter-photos-container");
+  if (!container) return;
+
+  if (!tabOngPhotos || tabOngPhotos.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-300 p-4 text-xs text-slate-500 font-bold">
+        Nenhuma foto do abrigo adicionada ainda. Clique em "+ Adicionar Foto" para incluir fotos das baias, solário e estrutura.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = tabOngPhotos.map((url, idx) => `
+    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200 shadow-2xs">
+      <div class="w-14 h-14 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0 border border-slate-300 shadow-xs">
+        <img src="${url}" alt="Foto ${idx+1}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80'">
+      </div>
+      <div class="flex-1 min-w-0">
+        <label class="block text-[10px] font-black text-slate-500 uppercase mb-0.5">Foto das Instalações #${idx+1}</label>
+        <input 
+          type="url" 
+          value="${url}" 
+          placeholder="https://images.unsplash.com/..." 
+          oninput="tabOngPhotos[${idx}] = this.value; syncTabOngPhotoThumb(this, ${idx});" 
+          class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-[#007E82] outline-none"
+        >
+      </div>
+      <button 
+        type="button" 
+        onclick="tabRemoveShelterPhoto(${idx})" 
+        class="p-2.5 text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer border border-rose-200 flex-shrink-0"
+        title="Remover esta foto"
+      >
+        <i data-lucide="trash-2" class="w-4 h-4"></i>
+      </button>
+    </div>
+  `).join("");
+
+  if (window.lucide) lucide.createIcons({ root: container });
+}
+
+function syncTabOngPhotoThumb(input, idx) {
+  tabOngPhotos[idx] = input.value;
+  const parent = input.closest(".flex");
+  if (parent) {
+    const img = parent.querySelector("img");
+    if (img) img.src = input.value;
+  }
+}
+
+function tabAddShelterPhoto() {
+  if (!tabOngPhotos) tabOngPhotos = [];
+  tabOngPhotos.push("https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=80");
+  tabRenderShelterPhotos();
+}
+
+function tabRemoveShelterPhoto(idx) {
+  if (!tabOngPhotos) return;
+  tabOngPhotos.splice(idx, 1);
+  tabRenderShelterPhotos();
+}
+
+function tabRenderShelterVideos() {
+  const container = document.getElementById("tab-shelter-videos-container");
+  if (!container) return;
+
+  if (!tabOngVideos || tabOngVideos.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-6 bg-slate-50 rounded-2xl border border-dashed border-slate-300 p-4 text-xs text-slate-500 font-bold">
+        Nenhum vídeo do abrigo cadastrado ainda. Clique em "+ Adicionar Vídeo" para incluir vídeos da rotina e acolhimento.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = tabOngVideos.map((url, idx) => `
+    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200 shadow-2xs">
+      <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-black flex-shrink-0 border border-amber-300 text-lg">
+        🎬
+      </div>
+      <div class="flex-1 min-w-0">
+        <label class="block text-[10px] font-black text-slate-500 uppercase mb-0.5">Vídeo da Rotina #${idx+1}</label>
+        <input 
+          type="url" 
+          value="${url}" 
+          placeholder="https://...mp4 ou YouTube" 
+          oninput="tabOngVideos[${idx}] = this.value;" 
+          class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-[#007E82] outline-none"
+        >
+      </div>
+      <button 
+        type="button" 
+        onclick="tabRemoveShelterVideo(${idx})" 
+        class="p-2.5 text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer border border-rose-200 flex-shrink-0"
+        title="Remover este vídeo"
+      >
+        <i data-lucide="trash-2" class="w-4 h-4"></i>
+      </button>
+    </div>
+  `).join("");
+
+  if (window.lucide) lucide.createIcons({ root: container });
+}
+
+function tabAddShelterVideo() {
+  if (!tabOngVideos) tabOngVideos = [];
+  tabOngVideos.push("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4");
+  tabRenderShelterVideos();
+}
+
+function tabRemoveShelterVideo(idx) {
+  if (!tabOngVideos) return;
+  tabOngVideos.splice(idx, 1);
+  tabRenderShelterVideos();
+}
+
+async function handleSaveOngTab(e) {
+  if (e) e.preventDefault();
+  const id = document.getElementById("tab-ong-id")?.value || "ong-001";
+  let ongs = [];
+  try {
+    ongs = await SolidarityStorage.getOngs();
+  } catch (err) {
+    ongs = window.DEFAULT_ONGS || [];
+  }
+  const existing = ongs.find(o => o.id === id) || ongs[0] || {};
+
+  const getV = (elemId, fallback = "") => {
+    const el = document.getElementById(elemId);
+    return el ? el.value.trim() : fallback;
+  };
+
+  const updatedOng = {
+    ...existing,
+    id: id,
+    nome: getV("tab-ong-nome", existing.nome || "Lar dos Anjos"),
+    sigla: getV("tab-ong-sigla", existing.sigla || "LAR DOS ANJOS"),
+    cidade: getV("tab-ong-cidade", existing.cidade || "Brasília - DF"),
+    regiao: getV("tab-ong-regiao", existing.regiao || "Plano Piloto"),
+    anoFundacao: parseInt(getV("tab-ong-ano", existing.anoFundacao || 2003), 10) || 2003,
+    foto: getV("tab-ong-foto", existing.foto),
+    descricao: getV("tab-ong-descricao", existing.descricao),
+    totalAdotados: parseInt(getV("tab-ong-total-adotados", existing.totalAdotados || 0), 10) || 0,
+    baseDisponiveis: parseInt(getV("tab-ong-base-disponiveis", existing.baseDisponiveis || 0), 10) || 0,
+    chavePix: getV("tab-ong-pix", existing.chavePix),
+    whatsapp: getV("tab-ong-whatsapp", existing.whatsapp),
+    instagram: getV("tab-ong-instagram", existing.instagram),
+    historia: getV("tab-ong-historia", existing.historia || ""),
+    fotosAbrigo: (tabOngPhotos || []).filter(u => u && u.trim().length > 0),
+    videosAbrigo: (tabOngVideos || []).filter(u => u && u.trim().length > 0)
+  };
+
+  await SolidarityStorage.saveOng(updatedOng);
+  showToast("✅ Conteúdo da aba 'Conheça a ONG' atualizado com sucesso!");
+  syncTabOngLivePreview();
+  if (typeof loadAdminOngs === "function") await loadAdminOngs();
+}
+
+window.loadAdminOngTab = loadAdminOngTab;
+window.syncTabOngLivePreview = syncTabOngLivePreview;
+window.tabRenderShelterPhotos = tabRenderShelterPhotos;
+window.syncTabOngPhotoThumb = syncTabOngPhotoThumb;
+window.tabAddShelterPhoto = tabAddShelterPhoto;
+window.tabRemoveShelterPhoto = tabRemoveShelterPhoto;
+window.tabRenderShelterVideos = tabRenderShelterVideos;
+window.tabAddShelterVideo = tabAddShelterVideo;
+window.tabRemoveShelterVideo = tabRemoveShelterVideo;
+window.handleSaveOngTab = handleSaveOngTab;
