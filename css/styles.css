@@ -1305,6 +1305,46 @@ body {
   gap: 0.75rem;
 }
 
+/* ==========================================================================
+   PAINEL "CONHEÇA A ONG" - LAYOUT RESPONSIVO E ESPAÇOSO (MODERADOR)
+   ========================================================================== */
+.admin-ong-layout-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.45fr) minmax(340px, 420px) !important;
+  gap: 2rem !important;
+  align-items: start !important;
+  width: 100% !important;
+}
+
+@media (max-width: 1100px) {
+  .admin-ong-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+.admin-ong-form-pane {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.admin-ong-preview-pane {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  position: sticky !important;
+  top: 7rem !important;
+  z-index: 10 !important;
+}
+
+@media (max-width: 1100px) {
+  .admin-ong-preview-pane {
+    position: static !important;
+    top: auto !important;
+  }
+}
+
 /* Modal de Gestão da ONG no Index - Tela Ampla no Desktop e Fluida no Mobile */
 @media (min-width: 769px) {
   .ong-modal-wide {
