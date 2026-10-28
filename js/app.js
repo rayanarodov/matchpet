@@ -4711,6 +4711,11 @@ async function openOngManagementModal(ongId = null) {
     }
   }
 
+  const searchInput = document.getElementById("ong-management-search");
+  if (searchInput) searchInput.value = "";
+  const clearBtn = document.getElementById("ong-management-search-clear");
+  if (clearBtn) clearBtn.classList.add("hidden");
+
   updateOngManagementGuidelinesStatus(currentManagingOngId);
   await renderOngPetsList(currentManagingOngId);
 
@@ -4734,6 +4739,22 @@ function closeOngManagementModal() {
   }
 }
 
+
+function handleOngPetsSearchInput(val) {
+  renderOngPetsList(currentManagingOngId);
+}
+window.handleOngPetsSearchInput = handleOngPetsSearchInput;
+
+function clearOngPetsSearch() {
+  const searchInput = document.getElementById("ong-management-search");
+  if (searchInput) {
+    searchInput.value = "";
+    searchInput.focus();
+  }
+  renderOngPetsList(currentManagingOngId);
+}
+window.clearOngPetsSearch = clearOngPetsSearch;
+
 async function filterOngPetsList(ongId) {
   currentManagingOngId = ongId;
   updateOngManagementGuidelinesStatus(ongId);
@@ -4745,6 +4766,13 @@ async function renderOngPetsList(ongId = "todas") {
   const summaryEl = document.getElementById("ong-pets-count-summary");
   if (!container) return;
 
+  const searchInput = document.getElementById("ong-management-search");
+  const searchQuery = (searchInput ? searchInput.value : "").trim().toLowerCase();
+  const clearBtn = document.getElementById("ong-management-search-clear");
+  if (clearBtn) {
+    clearBtn.classList.toggle("hidden", !searchQuery);
+  }
+
   const allPets = (window.currentAnimals && window.currentAnimals.length > 0) 
     ? window.currentAnimals 
     : await PetStorage.getAll();
@@ -4754,18 +4782,41 @@ async function renderOngPetsList(ongId = "todas") {
     filtered = allPets.filter(p => p.ongId === ongId || (p.ongNome && p.ongNome.toLowerCase().includes(ongId.toLowerCase())));
   }
 
+  // Filtro por Nome do Animal
+  if (searchQuery) {
+    filtered = filtered.filter(p => {
+      const nome = (p.nome || "").toLowerCase();
+      return nome.includes(searchQuery);
+    });
+  }
+
   if (summaryEl) {
-    summaryEl.textContent = `Total: ${filtered.length} animal(is) cadastrado(s) na visualização.`;
+    if (searchQuery) {
+      summaryEl.textContent = `Encontrado(s) ${filtered.length} animal(is) com o nome "${searchQuery}".`;
+    } else {
+      summaryEl.textContent = `Total: ${filtered.length} animal(is) cadastrado(s) na visualização.`;
+    }
   }
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-300 p-6">
-        <div class="text-3xl mb-2">🐾</div>
-        <p class="text-xs sm:text-sm font-bold text-slate-700">Nenhum animal cadastrado para esta ONG ainda.</p>
-        <p class="text-[11px] text-slate-500 mt-1">Clique no botão acima para cadastrar o primeiro pet!</p>
+      <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-300 p-6 col-span-full" style="grid-column: 1 / -1;">
+        <div class="text-3xl mb-2">${searchQuery ? '🔍' : '🐾'}</div>
+        <p class="text-xs sm:text-sm font-bold text-slate-700">
+          ${searchQuery ? `Nenhum animal encontrado com o nome "${searchQuery}".` : 'Nenhum animal cadastrado para esta ONG ainda.'}
+        </p>
+        <p class="text-[11px] text-slate-500 mt-1">
+          ${searchQuery ? 'Verifique a grafia ou limpe o campo de pesquisa.' : 'Clique no botão acima para cadastrar o primeiro pet!'}
+        </p>
+        ${searchQuery ? `
+          <button type="button" onclick="clearOngPetsSearch()" class="mt-3 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-[#007E82] text-xs font-black border border-slate-300 shadow-2xs transition-all cursor-pointer inline-flex items-center gap-1.5">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            <span>Limpar Pesquisa</span>
+          </button>
+        ` : ''}
       </div>
     `;
+    if (window.lucide) lucide.createIcons({ root: container });
     return;
   }
 

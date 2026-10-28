@@ -2195,16 +2195,45 @@
         </button>
       </div>
 
-      <!-- Barra de Filtro de ONG & Ações Rápidas -->
-      <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-shrink-0">
-        <div class="flex items-center gap-2 w-full sm:w-auto">
-          <label for="ong-management-filter" class="text-xs font-bold text-slate-600 whitespace-nowrap">Filtrar por ONG:</label>
-          <select id="ong-management-filter" onchange="filterOngPetsList(this.value)" class="text-xs font-bold bg-white border border-slate-300 rounded-xl px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-[#007E82] w-full sm:w-64">
-            <!-- Opções preenchidas dinamicamente -->
-          </select>
+      <!-- Barra de Filtro de ONG, Pesquisa por Nome & Ações Rápidas -->
+      <div class="p-3.5 sm:p-4 bg-slate-50 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 flex-shrink-0">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 flex-1 max-w-2xl">
+          <!-- Filtro por ONG -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <label for="ong-management-filter" class="text-xs font-bold text-slate-600 whitespace-nowrap flex items-center gap-1">
+              <i data-lucide="filter" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span>ONG:</span>
+            </label>
+            <select id="ong-management-filter" onchange="filterOngPetsList(this.value)" class="text-xs font-bold bg-white border border-slate-300 rounded-xl px-3 py-2 text-slate-800 outline-none focus:ring-2 focus:ring-[#007E82] w-full sm:w-56 cursor-pointer">
+              <!-- Opções preenchidas dinamicamente -->
+            </select>
+          </div>
+
+          <!-- Pesquisa por Nome do Animal -->
+          <div class="relative flex-1 min-w-[200px]">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input 
+              type="text" 
+              id="ong-management-search" 
+              oninput="handleOngPetsSearchInput(this.value)" 
+              placeholder="Pesquisar por nome do animal..." 
+              class="w-full pl-9 pr-8 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#007E82] focus:border-[#007E82] transition-all"
+            >
+            <button 
+              type="button" 
+              id="ong-management-search-clear" 
+              onclick="clearOngPetsSearch()" 
+              class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 hidden cursor-pointer"
+              title="Limpar pesquisa"
+            >
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto flex-wrap">
-          <button onclick="openOngAddPetModal(document.getElementById('ong-management-filter').value)" class="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-slate-950 font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+
+        <!-- Botão de Ação: Cadastrar Novo Animal -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button onclick="openOngAddPetModal(document.getElementById('ong-management-filter').value)" class="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Cadastrar Novo Animal</span>
           </button>
