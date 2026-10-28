@@ -8,13 +8,20 @@ const STORAGE_KEY = "patinhas_adocao_animais_v1";
 const PetStorage = {
   // Carrega a lista completa de animais de forma assíncrona do PetDB
   async getAll() {
+    const sanitizePet = p => {
+      if (!p.ongNome || p.ongNome.includes("ProAnima")) {
+        return { ...p, ongNome: "Lar dos Anjos" };
+      }
+      return p;
+    };
+
     if (window.PetDB) {
       try {
         const list = await Promise.race([
           PetDB.getAll(),
           new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout DB")), 5000))
         ]);
-        if (list && list.length > 0) return list;
+        if (list && list.length > 0) return list.map(sanitizePet);
       } catch (e) {
         console.warn("Aviso ao ler do PetDB, usando fallback:", e);
       }
@@ -24,11 +31,11 @@ const PetStorage = {
       const data = localStorage.getItem(STORAGE_KEY);
       if (data) {
         const parsed = JSON.parse(data);
-        if (parsed && parsed.length > 0) return parsed;
+        if (parsed && parsed.length > 0) return parsed.map(sanitizePet);
       }
-      return window.DEFAULT_ANIMALS || [];
+      return (window.DEFAULT_ANIMALS || []).map(sanitizePet);
     } catch (e) {
-      return window.DEFAULT_ANIMALS || [];
+      return (window.DEFAULT_ANIMALS || []).map(sanitizePet);
     }
   },
 
@@ -185,11 +192,18 @@ const SolidarityStorage = {
         let changed = false;
         ongs = ongs.map(o => {
           let updated = { ...o };
-          if ((!updated.historia || updated.historia.length < 800) && def.historia) {
+          if (updated.nome !== def.nome || updated.sigla !== def.sigla || updated.chavePix !== def.chavePix) {
+            updated.nome = def.nome;
+            updated.sigla = def.sigla;
+            updated.chavePix = def.chavePix;
+            updated.instagram = def.instagram;
+            changed = true;
+          }
+          if ((!updated.historia || updated.historia.length < 800 || updated.historia.includes("ProAnima")) && def.historia) {
             updated.historia = def.historia;
             changed = true;
           }
-          if ((!updated.descricao || updated.descricao.includes("Pioneira na proteção e bem-estar animal no Distrito Federal.")) && def.descricao) {
+          if ((!updated.descricao || updated.descricao.includes("Pioneira na proteção e bem-estar animal no Distrito Federal.") || updated.descricao.includes("ProAnima")) && def.descricao) {
             updated.descricao = def.descricao;
             changed = true;
           }
@@ -279,7 +293,7 @@ const SolidarityStorage = {
       if (data) {
         let parsed = JSON.parse(data);
         if (parsed && parsed.length > 0) {
-          // Garante fotos e dados atualizados da única ONG ProAnima
+          // Garante fotos e dados atualizados da única ONG Lar dos Anjos
           const defMap = {};
           (window.DEFAULT_EVENTOS || []).forEach(d => { defMap[d.id] = d; });
           let updated = false;
@@ -294,6 +308,9 @@ const SolidarityStorage = {
             if (defItem && (!e.ongNome || e.ongNome !== defItem.ongNome)) {
               e.ongNome = defItem.ongNome;
               e.ongId = defItem.ongId;
+              updated = true;
+            } else if (e.ongNome && e.ongNome.includes("ProAnima")) {
+              e.ongNome = "Lar dos Anjos";
               updated = true;
             }
             return e;
@@ -344,7 +361,7 @@ const SolidarityStorage = {
       if (data) {
         let parsed = JSON.parse(data);
         if (parsed && parsed.length > 0) {
-          // Garante fotos e dados atualizados da única ONG ProAnima
+          // Garante fotos e dados atualizados da única ONG Lar dos Anjos
           const defMap = {};
           (window.DEFAULT_RIFAS || []).forEach(d => { defMap[d.id] = d; });
           let updated = false;
@@ -362,6 +379,17 @@ const SolidarityStorage = {
             if (defItem && (!r.ongNome || r.ongNome !== defItem.ongNome)) {
               r.ongNome = defItem.ongNome;
               r.ongId = defItem.ongId;
+              updated = true;
+            } else if (r.ongNome && r.ongNome.includes("ProAnima")) {
+              r.ongNome = "Lar dos Anjos";
+              updated = true;
+            }
+            if (r.chavePix && r.chavePix.includes("proanimadf")) {
+              r.chavePix = "contato@lardosanjos.org.br";
+              updated = true;
+            }
+            if (r.pontoColeta && r.pontoColeta.includes("ProAnima")) {
+              r.pontoColeta = "Sede do Abrigo Lar dos Anjos ou entrega agendada";
               updated = true;
             }
             return r;

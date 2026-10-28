@@ -154,7 +154,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -206,7 +206,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -258,7 +258,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -308,7 +308,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -360,7 +360,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -410,7 +410,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -460,7 +460,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -510,7 +510,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -560,7 +560,7 @@ const DEFAULT_ANIMALS = [
     },
     status: "disponivel",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     contatoWhatsapp: "5561999998888"
@@ -574,19 +574,19 @@ const DEFAULT_ANIMALS = [
 const DEFAULT_ONGS = [
   {
     id: "ong-001",
-    nome: "Associação ProAnima DF",
-    sigla: "PROANIMA",
+    nome: "Lar dos Anjos",
+    sigla: "LAR DOS ANJOS",
     cidade: "Brasília / Plano Piloto - DF",
     regiao: "Brasília / Plano Piloto",
     anoFundacao: 2003,
     foto: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
     descricao: "Pioneira na proteção e bem-estar animal no Distrito Federal há mais de 23 anos. Atuamos com resgate ético, reabilitação veterinária completa, acolhimento em abrigo estruturado e intermediação de adoções conscientes em Brasília e regiões administrativas.",
-    chavePix: "contato@proanimadf.org.br",
+    chavePix: "contato@lardosanjos.org.br",
     whatsapp: "5561999998888",
-    instagram: "@proanima_df",
+    instagram: "@lardosanjos_df",
     totalAdotados: 540,
     baseDisponiveis: 16,
-    historia: "Fundada em 2003 no coração de Brasília por uma aliança pioneira de médicos veterinários, biólogos e voluntários apaixonados pela causa, a Associação ProAnima nasceu com um propósito claro e inegociável: construir uma resposta ética, estruturada e permanente contra o abandono e os maus-tratos de animais no Distrito Federal.\n\nAo longo de mais de 23 anos de dedicação ininterrupta, nossa instituição já transformou a história de mais de 1.500 cães e gatos vulneráveis acolhidos, reabilitados e encaminhados para lares responsáveis. Atuamos com resgates prioritários em diversas regiões administrativas do DF — de Ceilândia, Samambaia e Taguatinga ao Plano Piloto, Guará e Sobradinho —, priorizando animais doentes, atropelados, vítimas de negligência severa ou ninhadas sem amparo maternal.\n\nNosso protocolo de acolhimento é conduzido sob os mais rigorosos padrões da medicina veterinária ética. Todo animal que chega ao abrigo é imediatamente recebido em nossa enfermaria para triagem clínica geral, testagem sorológica para zoonoses, coleta de exames laboratoriais, banho terapêutico, vermifugação e início do esquema vacinal com imunizantes importados polivalentes. Para preservar a saúde coletiva de todos os residentes, os recém-chegados cumprem período de quarentena monitorado antes de sua integração aos espaços de convivência.\n\nA infraestrutura do nosso abrigo no Distrito Federal foi planejada exclusivamente para devolver a dignidade, a segurança e a alegria aos resgatados. Dispomos de solários amplos e ensolarados, canis higienizados com isolamento térmico e piso antiderrapante, além de um gatil vertical enriquecido com pontes suspensas, tocas confortáveis e telas de proteção completas. Nossos cuidadores e adestradores voluntários realizam atividades diárias de enriquecimento comportamental e passeios guiados, restaurando a autoconfiança de pets que sofreram traumas no passado.\n\nAcreditamos firmemente que a castração é a única medida humanitária eficaz para combater a superpopulação e prevenir doenças graves. Por essa razão, 100% dos animais adultos acolhidos pela ProAnima são castrados e microchipados antes de serem liberados para adoção. No caso de filhotes resgatados que encontram um lar antes da idade mínima cirúrgica, a ProAnima assegura e financia o procedimento gratuitamente em nossa rede veterinária credenciada assim que atingem o desenvolvimento necessário.\n\nA adoção responsável na ProAnima é um pacto de amor e cidadania: realizamos entrevistas criteriosas de alinhamento com a família, visitas acompanhadas ao abrigo e assinatura do termo de tutela responsável, mantendo um canal permanente de suporte e acompanhamento no pós-adoção. Mantida unicamente pelo amor de voluntários, doações voluntárias e feirinhas solidárias, a ProAnima reafirma todos os dias que adotar não é apenas salvar uma vida — é transformar uma família inteira.",
+    historia: "Fundada em 2003 no coração de Brasília por uma aliança pioneira de médicos veterinários, biólogos e voluntários apaixonados pela causa, a ONG Lar dos Anjos nasceu com um propósito claro e inegociável: construir uma resposta ética, estruturada e permanente contra o abandono e os maus-tratos de animais no Distrito Federal.\n\nAo longo de mais de 23 anos de dedicação ininterrupta, nossa instituição já transformou a história de mais de 1.500 cães e gatos vulneráveis acolhidos, reabilitados e encaminhados para lares responsáveis. Atuamos com resgates prioritários em diversas regiões administrativas do DF — de Ceilândia, Samambaia e Taguatinga ao Plano Piloto, Guará e Sobradinho —, priorizando animais doentes, atropelados, vítimas de negligência severa ou ninhadas sem amparo maternal.\n\nNosso protocolo de acolhimento é conduzido sob os mais rigorosos padrões da medicina veterinária ética. Todo animal que chega ao abrigo é imediatamente recebido em nossa enfermaria para triagem clínica geral, testagem sorológica para zoonoses, coleta de exames laboratoriais, banho terapêutico, vermifugação e início do esquema vacinal com imunizantes importados polivalentes. Para preservar a saúde coletiva de todos os residentes, os recém-chegados cumprem período de quarentena monitorado antes de sua integração aos espaços de convivência.\n\nA infraestrutura do nosso abrigo no Distrito Federal foi planejada exclusivamente para devolver a dignidade, a segurança e a alegria aos resgatados. Dispomos de solários amplos e ensolarados, canis higienizados com isolamento térmico e piso antiderrapante, além de um gatil vertical enriquecido com pontes suspensas, tocas confortáveis e telas de proteção completas. Nossos cuidadores e adestradores voluntários realizam atividades diárias de enriquecimento comportamental e passeios guiados, restaurando a autoconfiança de pets que sofreram traumas no passado.\n\nAcreditamos firmemente que a castração é a única medida humanitária eficaz para combater a superpopulação e prevenir doenças graves. Por essa razão, 100% dos animais adultos acolhidos pelo Lar dos Anjos são castrados e microchipados antes de serem liberados para adoção. No caso de filhotes resgatados que encontram um lar antes da idade mínima cirúrgica, o Lar dos Anjos assegura e financia o procedimento gratuitamente em nossa rede veterinária credenciada assim que atingem o desenvolvimento necessário.\n\nA adoção responsável no Lar dos Anjos é um pacto de amor e cidadania: realizamos entrevistas criteriosas de alinhamento com a família, visitas acompanhadas ao abrigo e assinatura do termo de tutela responsável, mantendo um canal permanente de suporte e acompanhamento no pós-adoção. Mantida unicamente pelo amor de voluntários, doações voluntárias e feirinhas solidárias, o Lar dos Anjos reafirma todos os dias que adotar não é apenas salvar uma vida — é transformar uma família inteira.",
     fotosAbrigo: [
       "https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80",
@@ -618,7 +618,7 @@ const DEFAULT_EVENTOS = [
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80",
     descricao: "Mais de 30 cães e gatos castrados, vermifugados e vacinados esperando por você! Teremos lojinha beneficente, veterinários voluntários tirando dúvidas e mimos para todos que adotarem.",
     animaisPresentes: ["Thor", "Max"],
@@ -635,7 +635,7 @@ const DEFAULT_EVENTOS = [
     cidade: "Taguatinga - DF",
     regiaoDF: "Taguatinga",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80",
     descricao: "Traga sua família para um dia de muito amor! Espaço com dezenas de peludinhos esperando um lar responsável, com destaque especial para os nossos vovôs dóceis.",
     animaisPresentes: ["Mel", "Barnabé", "Chico"],
@@ -652,7 +652,7 @@ const DEFAULT_EVENTOS = [
     cidade: "Ceilândia - DF",
     regiaoDF: "Ceilândia",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80",
     descricao: "Feirinha de adoção consciente com orientação sobre guarda responsável e cuidados especiais para pets idosos e filhotes.",
     animaisPresentes: ["Fred", "Bob"],
@@ -670,7 +670,7 @@ const DEFAULT_RIFAS = [
     titulo: "Rifa Solidária: Cirurgia Ortopédica & Reabilitação do Thor",
     tipo: "dinheiro",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
     descricao: "Arrecadação para custear a cirurgia de ligamento e sessões de fisioterapia veterinária do Thor. Com o seu bilhete, ele voltará a correr sem dor no DF!",
     premio: "Cesta Pet Premium (Cama ortopédica + R$ 250 em compras no pet shop + brinquedos)",
@@ -679,7 +679,7 @@ const DEFAULT_RIFAS = [
     valorBilhete: 15,
     totalBilhetes: 170,
     bilhetesVendidos: 130,
-    chavePix: "contato@proanimadf.org.br",
+    chavePix: "contato@lardosanjos.org.br",
     whatsapp: "5561999998888",
     dataSorteio: "30 de Outubro de 2026"
   },
@@ -688,7 +688,7 @@ const DEFAULT_RIFAS = [
     titulo: "Campanha Emergencial de Ração: 1 Tonelada para o Abrigo Central",
     tipo: "racao",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=800&q=80",
     descricao: "O estoque de ração do abrigo está no fim. Alimentamos mais de 120 cães e gatos resgatados diariamente. Doe 1 saco ou compre cotas para abastecermos as tigelas!",
     premio: "Campanha 100% Solidária (Prestação de contas transparente com fotos e vídeos semanais)",
@@ -696,8 +696,8 @@ const DEFAULT_RIFAS = [
     arrecadado: 720,
     unidade: "kg",
     precoSaco15kg: 85,
-    chavePix: "contato@proanimadf.org.br",
-    pontoColeta: "Sede do Abrigo ProAnima DF ou entrega agendada",
+    chavePix: "contato@lardosanjos.org.br",
+    pontoColeta: "Sede do Abrigo Lar dos Anjos ou entrega agendada",
     whatsapp: "5561999998888",
     dataSorteio: "Meta Contínua de Outubro"
   },
@@ -706,7 +706,7 @@ const DEFAULT_RIFAS = [
     titulo: "Rifa do Bem: Mutirão de Castração & Vacinas de Filhotes",
     tipo: "dinheiro",
     ongId: "ong-001",
-    ongNome: "Associação ProAnima DF",
+    ongNome: "Lar dos Anjos",
     foto: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=80",
     descricao: "Recursos destinados a castrar e vacinar 45 filhotes e mães resgatados de situação de vulnerabilidade no DF. Cada bilhete apoia um futuro saudável e digno!",
     premio: "Vale-Compras Pet de R$ 500 + Ensaio Fotográfico Profissional com seu Pet",
@@ -715,7 +715,7 @@ const DEFAULT_RIFAS = [
     valorBilhete: 20,
     totalBilhetes: 160,
     bilhetesVendidos: 120,
-    chavePix: "contato@proanimadf.org.br",
+    chavePix: "contato@lardosanjos.org.br",
     whatsapp: "5561999998888",
     dataSorteio: "15 de Novembro de 2026"
   }
@@ -737,7 +737,7 @@ const DEFAULT_BLOG_POSTS = [
     foto: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80",
     resumo: "Encontrada debilitada em Ceilândia, Pipoca passou por meses de reabilitação e carinho com a ONG parceira e hoje vive uma rotina repleta de amor e passeios no Plano Piloto.",
     conteudo: `
-      <p class="mb-3">A história de Pipoca começou em um dia chuvoso de março, quando foi resgatada debilitada e assustada nas proximidades de uma avenida movimentada em Ceilândia. Graças à intervenção rápida de protetores independentes e da ONG parceira ProAnima DF, ela recebeu atendimento veterinário imediato, vacinas e cuidados intensivos.</p>
+      <p class="mb-3">A história de Pipoca começou em um dia chuvoso de março, quando foi resgatada debilitada e assustada nas proximidades de uma avenida movimentada em Ceilândia. Graças à intervenção rápida de protetores independentes e da ONG parceira Lar dos Anjos, ela recebeu atendimento veterinário imediato, vacinas e cuidados intensivos.</p>
       <p class="mb-3">Durante dois meses em lar temporário, Pipoca reaprendeu a confiar nos humanos. Quando Mariana e Carlos viram o perfil dela na plataforma MatchPet, foi amor à primeira vista. <em>'O teste de compatibilidade indicou 98% de afinidade com nossa rotina. Quando a conhecemos pessoalmente na feirinha, tivemos a certeza de que ela era nossa filha de quatro patas'</em>, relata Mariana.</p>
       <p>Hoje, Pipoca é cheia de energia, adora passear no Parque da Cidade e enche a casa de alegria. Adotar é dar uma segunda chance e transformar vidas para sempre!</p>
     `
@@ -779,7 +779,7 @@ const DEFAULT_BLOG_POSTS = [
     titulo: "Como Apoiar Nossas ONGs Parceiras Além da Adoção Direta",
     categoria: "Notícias das ONGs",
     categoriaBadge: "bg-amber-50 text-amber-800 border-amber-200",
-    autor: "Associação ProAnima DF",
+    autor: "Lar dos Anjos",
     data: "25 de Agosto de 2026",
     tempoLeitura: "3 min de leitura",
     foto: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",

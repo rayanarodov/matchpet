@@ -699,9 +699,9 @@ async function handleSavePet(event) {
   const status = document.getElementById("pet-status")?.value || "disponivel";
   const ongId = document.getElementById("pet-ong-id")?.value || "ong-001";
   const ongNames = {
-    "ong-001": "Associação ProAnima DF",
-    "ong-002": "Associação ProAnima DF",
-    "ong-003": "Associação ProAnima DF"
+    "ong-001": "Lar dos Anjos",
+    "ong-002": "Lar dos Anjos",
+    "ong-003": "Lar dos Anjos"
   };
 
   // Critérios de Compatibilidade para o Quiz
@@ -1045,27 +1045,29 @@ function switchAdminTab(tabName) {
   if (solidarityContent) solidarityContent.classList.add("hidden");
   if (analyticsContent) analyticsContent.classList.add("hidden");
 
-  const inactiveClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all border border-transparent";
+  const inactiveClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#007E82] hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap cursor-pointer";
   if (btnCrud) btnCrud.className = inactiveClass;
   if (btnSolidarity) btnSolidarity.className = inactiveClass;
   if (btnAnalytics) btnAnalytics.className = inactiveClass;
 
+  const activeClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-[#e6f4f5] text-[#007E82] shadow-xs border-2 border-[#007E82] transition-all flex-shrink-0 whitespace-nowrap cursor-pointer";
+
   if (tabName === "solidarity") {
     if (solidarityContent) solidarityContent.classList.remove("hidden");
     if (btnSolidarity) {
-      btnSolidarity.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-teal-600 text-white shadow-sm border border-teal-600 transition-all";
+      btnSolidarity.className = activeClass;
     }
     renderAdminSolidarity();
   } else if (tabName === "analytics") {
     if (analyticsContent) analyticsContent.classList.remove("hidden");
     if (btnAnalytics) {
-      btnAnalytics.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#007E82] text-white shadow-sm border border-[#007E82] transition-all";
+      btnAnalytics.className = activeClass;
     }
     renderAnalyticsDashboard();
   } else {
     if (crudContent) crudContent.classList.remove("hidden");
     if (btnCrud) {
-      btnCrud.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-orange-600 text-white shadow-sm transition-all";
+      btnCrud.className = activeClass;
     }
   }
 }

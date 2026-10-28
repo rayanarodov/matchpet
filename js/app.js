@@ -681,23 +681,23 @@ function renderPetsGrid(pets) {
     const sexoLabel = pet.sexo === 'femea' ? 'Fêmea' : 'Macho';
     const racaText = pet.raca || (pet.especie === 'gato' ? 'Gato Comum (SRD)' : pet.especie === 'outro' ? 'Coelho Doméstico' : 'Vira-lata (SRD)');
     const historiaText = pet.historiaResgate || pet.descricao || "Animal amoroso aguardando uma família com carinho e responsabilidade.";
-    const ongNome = pet.ongNome || "Associação ProAnima DF";
+    const ongNome = pet.ongNome || "Lar dos Anjos";
     const localidade = pet.regiaoDF || pet.cidade || "Brasília - DF";
 
     // Paleta de cores dinâmica e expressiva para destacar os perfis
     const especieTheme = pet.especie === 'gato'
       ? { 
-          badge: 'bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-xs', 
-          cardAccent: 'border-t-4 border-t-emerald-400',
-          racaBadge: 'bg-emerald-50 text-emerald-950 border-emerald-200',
-          nameHover: 'group-hover:text-emerald-700'
+          badge: 'bg-purple-600 text-white font-black border border-purple-500 shadow-xs', 
+          cardAccent: 'border-t-4 border-t-purple-400',
+          racaBadge: 'bg-purple-50 text-purple-950 border-purple-200',
+          nameHover: 'group-hover:text-purple-700'
         }
       : pet.especie === 'outro'
       ? { 
-          badge: 'bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-xs', 
-          cardAccent: 'border-t-4 border-t-fuchsia-400',
-          racaBadge: 'bg-fuchsia-50 text-fuchsia-950 border-fuchsia-200',
-          nameHover: 'group-hover:text-fuchsia-700'
+          badge: 'bg-rose-600 text-white font-black border border-rose-500 shadow-xs', 
+          cardAccent: 'border-t-4 border-t-rose-400',
+          racaBadge: 'bg-rose-50 text-rose-950 border-rose-200',
+          nameHover: 'group-hover:text-rose-700'
         }
       : { 
           badge: 'bg-[#D19864] text-slate-950 font-black border border-[#b87e4c] shadow-xs', 
@@ -706,24 +706,33 @@ function renderPetsGrid(pets) {
           nameHover: 'group-hover:text-amber-700'
         };
 
-    const especieBadgeStyle = 'badge-specie-chamativa';
+    const especieBadgeStyle = pet.especie === 'gato'
+      ? 'badge-specie-chamativa-cat'
+      : pet.especie === 'outro'
+      ? 'badge-specie-chamativa-other'
+      : 'badge-specie-chamativa-dog';
+
     const sexoBadgeStyle = pet.sexo === 'femea'
       ? 'badge-sexo-femea-chamativa'
       : 'badge-sexo-macho-chamativa';
 
-    // Tags de temperamento coloridas
+    // Tags de temperamento coloridas e expressivas
     const tempTags = (pet.temperamento && pet.temperamento.length > 0) 
       ? pet.temperamento.slice(0, 3) 
       : ['Dócil', 'Amoroso', 'Sociável'];
     const tempColorPalette = [
-      'bg-emerald-50 text-emerald-800 border-emerald-200',
-      'bg-amber-50 text-amber-900 border-amber-200',
-      'bg-[#F9F3EA] text-[#004d50] border-[#e8ddcf]',
-      'bg-sky-50 text-sky-900 border-sky-200'
+      'bg-emerald-50 text-emerald-900 border-emerald-300',
+      'bg-amber-50 text-amber-950 border-amber-300',
+      'bg-rose-50 text-rose-950 border-rose-300',
+      'bg-purple-50 text-purple-950 border-purple-300',
+      'bg-sky-50 text-sky-950 border-sky-300',
+      'bg-teal-50 text-teal-950 border-teal-300',
+      'bg-orange-50 text-orange-950 border-orange-300',
+      'bg-indigo-50 text-indigo-950 border-indigo-300'
     ];
     const tempHtml = tempTags.map((t, idx) => `
-      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${tempColorPalette[idx % tempColorPalette.length]}">
-        <span class="w-1.5 h-1.5 rounded-full bg-current opacity-75"></span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black border ${tempColorPalette[idx % tempColorPalette.length]} shadow-2xs">
+        <span class="w-1.5 h-1.5 rounded-full bg-current opacity-80"></span>
         <span>${t}</span>
       </span>
     `).join("");
@@ -832,17 +841,17 @@ function renderPetsGrid(pets) {
 
             <!-- Painel de Saúde Explicativo: Castrado ou Não, Vacinas e Porte -->
             <div class="grid grid-cols-2 gap-1.5 mb-2.5">
-              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${isCastrado ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-amber-50 text-amber-900 border border-amber-200'}" title="Condição de Castração">
-                ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3.5 h-3.5 ${isCastrado ? 'text-emerald-600' : 'text-amber-600'} flex-shrink-0`)}
+              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${isCastrado ? 'bg-emerald-50 text-emerald-900 border border-emerald-300' : 'bg-amber-50 text-amber-950 border border-amber-300'}" title="Condição de Castração">
+                ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3.5 h-3.5 ${isCastrado ? 'text-emerald-700' : 'text-amber-700'} flex-shrink-0`)}
                 <span class="truncate">${castradoLabel}</span>
               </div>
-              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${hasVacinas ? 'bg-cyan-50 text-cyan-800 border border-cyan-200' : 'bg-amber-50 text-amber-900 border border-amber-200'}" title="Situação Vacinal">
-                ${getFastIconSvg('shield-check', `w-3.5 h-3.5 ${hasVacinas ? 'text-cyan-600' : 'text-amber-600'} flex-shrink-0`)}
+              <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold ${hasVacinas ? 'bg-cyan-50 text-cyan-950 border border-cyan-300' : 'bg-amber-50 text-amber-950 border border-amber-300'}" title="Situação Vacinal">
+                ${getFastIconSvg('shield-check', `w-3.5 h-3.5 ${hasVacinas ? 'text-cyan-700' : 'text-amber-700'} flex-shrink-0`)}
                 <span class="truncate">${vacinaLabel}</span>
               </div>
-              <div class="col-span-2 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-medium ${porteInfo.color} border">
-                ${getFastIconSvg('maximize-2', 'w-3 h-3 text-current flex-shrink-0 opacity-70')}
-                <span>Porte: <strong class="font-bold">${porteInfo.label}</strong> ${pet.peso ? `(${pet.peso})` : ''}</span>
+              <div class="col-span-2 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-purple-50 text-purple-950 border border-purple-200">
+                ${getFastIconSvg('maximize-2', 'w-3 h-3 text-purple-700 flex-shrink-0')}
+                <span>Porte: <strong class="font-black text-purple-900">${porteInfo.label}</strong> ${pet.peso ? `(${pet.peso})` : ''}</span>
               </div>
             </div>
 
@@ -907,37 +916,37 @@ function renderPetsGrid(pets) {
 
             <!-- Agrupamento Sutil de Características & Saúde -->
             <div class="flex flex-wrap gap-1.5 mb-2">
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold ${isCastrado ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-900'}">
-                ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3 h-3 ${isCastrado ? 'text-emerald-600' : 'text-amber-600'}`)}
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-black ${isCastrado ? 'bg-emerald-100 text-emerald-950 border border-emerald-300' : 'bg-amber-100 text-amber-950 border border-amber-300'} shadow-2xs">
+                ${getFastIconSvg(isCastrado ? 'check-circle-2' : 'info', `w-3 h-3 ${isCastrado ? 'text-emerald-700' : 'text-amber-700'}`)}
                 <span>${isCastrado ? 'Castrado(a)' : 'Não castrado'}</span>
               </span>
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold ${hasVacinas ? 'bg-teal-50 text-teal-800' : 'bg-amber-50 text-amber-900'}">
-                ${getFastIconSvg('shield-check', `w-3 h-3 ${hasVacinas ? 'text-teal-600' : 'text-amber-600'}`)}
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-black ${hasVacinas ? 'bg-cyan-100 text-cyan-950 border border-cyan-300' : 'bg-amber-100 text-amber-950 border border-amber-300'} shadow-2xs">
+                ${getFastIconSvg('shield-check', `w-3 h-3 ${hasVacinas ? 'text-cyan-700' : 'text-amber-700'}`)}
                 <span>${hasVacinas ? 'Vacinas em dia' : 'Vacinas pendentes'}</span>
               </span>
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700">
-                ${getFastIconSvg('maximize-2', 'w-3 h-3 text-slate-500')}
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-black bg-purple-100 text-purple-950 border border-purple-300 shadow-2xs">
+                ${getFastIconSvg('maximize-2', 'w-3 h-3 text-purple-700')}
                 <span>Porte ${porteInfo.label}</span>
               </span>
             </div>
 
-            <!-- Tags de Temperamento Sutis -->
+            <!-- Tags de Temperamento Coloridas no Celular -->
             <div class="flex flex-wrap gap-1 mb-2">
-              ${tempTags.map(t => `
-                <span class="px-2 py-0.5 rounded-md text-[10.5px] font-semibold text-slate-600 bg-slate-100">
+              ${tempTags.map((t, idx) => `
+                <span class="px-2 py-0.5 rounded-md text-[10.5px] font-black border ${tempColorPalette[idx % tempColorPalette.length]} shadow-2xs">
                   ${t}
                 </span>
               `).join("")}
             </div>
 
             <!-- ONG Acolhedora -->
-            <div class="text-[11px] text-slate-500 font-medium flex items-center gap-1.5 mb-2">
+            <div class="text-[11px] text-[#004d50] font-medium flex items-center gap-1.5 mb-2 bg-teal-50/80 border border-teal-200 px-2 py-0.5 rounded-lg">
               ${getFastIconSvg('building-2', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
-              <span class="truncate">Acolhido por: <strong class="font-bold text-slate-700">${ongNome}</strong></span>
+              <span class="truncate">Acolhido por: <strong class="font-bold text-slate-800">${ongNome}</strong></span>
             </div>
 
             <!-- História de Vida (Citação com Linha Lateral Suave) -->
-            <p class="text-xs text-slate-600 italic leading-relaxed line-clamp-2 pl-2 border-l-2 border-[#D19864]/50 mb-3">
+            <p class="text-xs text-slate-700 italic leading-relaxed line-clamp-2 pl-2.5 border-l-4 border-[#D19864] bg-amber-50/60 p-2 rounded-r-xl mb-3">
               "${historiaText}"
             </p>
           </div>
@@ -948,10 +957,10 @@ function renderPetsGrid(pets) {
             <button 
               type="button"
               onclick="openPetModalById('${pet.id}')" 
-              class="w-full py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer min-h-[44px]"
+              class="w-full py-2.5 px-2 rounded-xl bg-teal-50 hover:bg-teal-100 text-[#007E82] border-2 border-teal-300 font-black text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer min-h-[44px] shadow-2xs"
               title="Ler a ficha completa com histórico e exames de ${pet.nome}"
             >
-              ${getFastIconSvg('file-text', 'w-3.5 h-3.5 text-slate-600 flex-shrink-0')}
+              ${getFastIconSvg('file-text', 'w-3.5 h-3.5 text-[#007E82] flex-shrink-0')}
               <span class="truncate">Ficha Completa</span>
             </button>
 
@@ -977,6 +986,9 @@ function renderPetsGrid(pets) {
     lucide.createIcons({ root: grid });
   }
 }
+
+/**
+ * Gera link do WhatsApp pré-formatado
 
 /**
  * Gera link do WhatsApp pré-formatado com pontuação de afinidade e menção à adoção responsável
@@ -1043,7 +1055,24 @@ function openPetModal(pet, scrollToContact = false) {
   const locEl = document.getElementById("modal-pet-location");
   if (locEl) locEl.textContent = `${pet.cidade || 'Brasília - DF'} • Porte ${pet.porte || 'Médio'}`;
   const ongNameEl = document.getElementById("modal-pet-ong-name");
-  if (ongNameEl) ongNameEl.textContent = pet.ongNome || "Associação ProAnima DF";
+  if (ongNameEl) {
+    ongNameEl.innerHTML = `<i data-lucide="building-2" class="w-3.5 h-3.5 text-[#007E82]"></i><span>${pet.ongNome || "Lar dos Anjos"}</span>`;
+  }
+
+  // Chip de Destaque no Topo
+  const headerChipEl = document.getElementById("modal-pet-header-chip");
+  if (headerChipEl) {
+    if (pet.status === 'adotado') {
+      headerChipEl.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-slate-200 text-slate-800 border border-slate-300 shadow-2xs";
+      headerChipEl.innerHTML = "🎉 Final Feliz • Já Adotado!";
+    } else if (pet.status === 'em_processo') {
+      headerChipEl.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-100 text-amber-950 border border-amber-300 shadow-2xs";
+      headerChipEl.innerHTML = "⏳ Em Processo de Adoção";
+    } else {
+      headerChipEl.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gradient-to-r from-emerald-100 via-teal-100 to-cyan-100 text-teal-950 border border-teal-300 shadow-2xs";
+      headerChipEl.innerHTML = "🐾 Disponível • Acolhido com Amor";
+    }
+  }
   
   // Status & Badges de Destaque Chamativos e 100% Sólidos na Foto do Perfil
   const isFemea = pet.sexo === 'femea';
@@ -1051,7 +1080,7 @@ function openPetModal(pet, scrollToContact = false) {
   if (specieBadgeEl) {
     const icon = pet.especie === 'gato' ? '🐱 Gato' : pet.especie === 'outro' ? (pet.especieCustom ? `🐰 ${pet.especieCustom}` : '🐰 Outro') : '🐶 Cachorro';
     specieBadgeEl.textContent = icon;
-    specieBadgeEl.className = "modal-badge-solid badge-specie-chamativa";
+    specieBadgeEl.className = `modal-badge-solid ${pet.especie === 'gato' ? 'badge-specie-chamativa-cat' : pet.especie === 'outro' ? 'badge-specie-chamativa-other' : 'badge-specie-chamativa-dog'}`;
   }
 
   const sexoBadgeEl = document.getElementById("modal-pet-sexo-badge");
@@ -1115,8 +1144,8 @@ function openPetModal(pet, scrollToContact = false) {
   if (castradoStatusEl) {
     castradoStatusEl.textContent = isCastrado ? "Castrado(a)" : "Não castrado";
     castradoStatusEl.className = isCastrado 
-      ? "font-brand text-base sm:text-lg font-black text-[#007E82]" 
-      : "font-brand text-base sm:text-lg font-black text-amber-600";
+      ? "font-brand text-base sm:text-lg font-black text-emerald-950" 
+      : "font-brand text-base sm:text-lg font-black text-amber-700";
   }
 
   const isVacinado = (pet.saude?.vacinas && pet.saude.vacinas.length > 0) || pet.saude?.vacinado;
@@ -1124,8 +1153,8 @@ function openPetModal(pet, scrollToContact = false) {
   if (vacinasStatusEl) {
     vacinasStatusEl.textContent = isVacinado ? "Em dia" : "Pendente";
     vacinasStatusEl.className = isVacinado 
-      ? "font-brand text-base sm:text-lg font-black text-teal-600" 
-      : "font-brand text-base sm:text-lg font-black text-amber-600";
+      ? "font-brand text-base sm:text-lg font-black text-sky-950" 
+      : "font-brand text-base sm:text-lg font-black text-amber-700";
   }
 
   // Ficha Médica & Cuidados Veterinários Detalhados
@@ -1152,16 +1181,28 @@ function openPetModal(pet, scrollToContact = false) {
     }
   }
 
+  // Lista de Vacinas Coloridas
   const vacinasListEl = document.getElementById("modal-pet-vacinas-list");
   if (vacinasListEl) {
     const vacinas = (pet.saude && Array.isArray(pet.saude.vacinas)) ? pet.saude.vacinas : [];
     if (vacinas.length > 0) {
-      vacinasListEl.innerHTML = vacinas.map(v => `
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-teal-50 text-teal-800 border border-teal-200">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-600"></i>
-          <span>${v}</span>
-        </span>
-      `).join("");
+      const vacinaColors = [
+        { bg: "bg-purple-100 text-purple-950 border-purple-300", icon: "text-purple-700" },
+        { bg: "bg-rose-100 text-rose-950 border-rose-300", icon: "text-rose-700" },
+        { bg: "bg-teal-100 text-teal-950 border-teal-300", icon: "text-teal-700" },
+        { bg: "bg-sky-100 text-sky-950 border-sky-300", icon: "text-sky-700" },
+        { bg: "bg-amber-100 text-amber-950 border-amber-300", icon: "text-amber-700" },
+        { bg: "bg-emerald-100 text-emerald-950 border-emerald-300", icon: "text-emerald-700" }
+      ];
+      vacinasListEl.innerHTML = vacinas.map((v, i) => {
+        const theme = vacinaColors[i % vacinaColors.length];
+        return `
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-black border ${theme.bg} shadow-2xs">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 ${theme.icon}"></i>
+            <span>${v}</span>
+          </span>
+        `;
+      }).join("");
     } else {
       vacinasListEl.innerHTML = `
         <span class="text-xs text-slate-500 italic">Cronograma vacinal em acompanhamento pela equipe veterinária da ONG.</span>
@@ -1194,33 +1235,41 @@ function openPetModal(pet, scrollToContact = false) {
     rescueStoryEl.textContent = pet.historiaResgate || pet.descricao || "Animal amoroso acolhido e reabilitado com dedicação pela equipe da ONG parceira.";
   }
 
-  // Bio e temperamento
+  // Bio e temperamento em cores vivas
   const descEl = document.getElementById("modal-pet-description");
   if (descEl) descEl.textContent = pet.descricao || "Animal amoroso procurando um lar definitivo e responsável.";
   
   const tempContainer = document.getElementById("modal-pet-temperament");
   if (tempContainer) {
     const temps = pet.temperamento || ["Amoroso", "Dócil", "Brincalhão"];
-    const pastelBadgePalette = [
-      "bg-[#e6f4f5] text-[#006366] border-[#e8ddcf]",
-      "bg-sky-100 text-sky-800 border-sky-200",
-      "bg-teal-100 text-teal-800 border-teal-200",
-      "bg-amber-100 text-amber-800 border-amber-200"
+    const vibrantBadgePalette = [
+      { bg: "bg-emerald-100 text-emerald-950 border-emerald-300", dot: "bg-emerald-600" },
+      { bg: "bg-amber-100 text-amber-950 border-amber-300", dot: "bg-amber-600" },
+      { bg: "bg-rose-100 text-rose-950 border-rose-300", dot: "bg-rose-600" },
+      { bg: "bg-purple-100 text-purple-950 border-purple-300", dot: "bg-purple-600" },
+      { bg: "bg-sky-100 text-sky-950 border-sky-300", dot: "bg-sky-600" },
+      { bg: "bg-teal-100 text-teal-950 border-teal-300", dot: "bg-teal-600" },
+      { bg: "bg-orange-100 text-orange-950 border-orange-300", dot: "bg-orange-600" },
+      { bg: "bg-indigo-100 text-indigo-950 border-indigo-300", dot: "bg-indigo-600" }
     ];
-    tempContainer.innerHTML = temps.map((t, idx) => `
-      <span class="px-2.5 py-1 rounded-full text-xs font-semibold border ${pastelBadgePalette[idx % pastelBadgePalette.length]}">
-        ${t}
-      </span>
-    `).join("");
+    tempContainer.innerHTML = temps.map((t, idx) => {
+      const theme = vibrantBadgePalette[idx % vibrantBadgePalette.length];
+      return `
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black border ${theme.bg} shadow-2xs">
+          <span class="w-2 h-2 rounded-full ${theme.dot}"></span>
+          <span>${t}</span>
+        </span>
+      `;
+    }).join("");
   }
 
-  // Critérios de Compatibilidade & Perfil (Quiz de Afinidade)
+  // Critérios de Compatibilidade & Perfil em Cores Vibrantes (Quiz de Afinidade)
   const compatContainer = document.getElementById("modal-pet-compatibility-container");
   if (compatContainer) {
     const energiaMap = {
-      baixa: { label: "Baixa Energia (Calmo)", icon: "🛋️", bg: "bg-emerald-50 text-emerald-950 border-emerald-300" },
-      moderada: { label: "Energia Moderada", icon: "🐕", bg: "bg-teal-50 text-teal-950 border-teal-300" },
-      alta: { label: "Alta Energia (Ativo)", icon: "⚡", bg: "bg-amber-50 text-amber-950 border-amber-300" }
+      baixa: { label: "Baixa Energia (Calmo)", icon: "🛋️", bg: "bg-emerald-50 text-emerald-950 border-emerald-300", iconBg: "bg-emerald-100 text-emerald-800", labelColor: "text-emerald-800" },
+      moderada: { label: "Energia Moderada", icon: "🐕", bg: "bg-teal-50 text-teal-950 border-teal-300", iconBg: "bg-teal-100 text-teal-800", labelColor: "text-teal-800" },
+      alta: { label: "Alta Energia (Ativo)", icon: "⚡", bg: "bg-amber-50 text-amber-950 border-amber-300", iconBg: "bg-amber-100 text-amber-800", labelColor: "text-amber-800" }
     };
     const domMap = {
       apartamento: { label: "Apto ou Casa compacta", icon: "🏢" },
@@ -1264,46 +1313,58 @@ function openPetModal(pet, scrollToContact = false) {
     const gatosInfo = gatosMap[gatosKey] || gatosMap.sim;
 
     compatContainer.innerHTML = `
-      <div class="p-2.5 rounded-xl border ${energiaInfo.bg} flex items-center gap-2">
-        <span class="text-base">${energiaInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 ${energiaInfo.bg} shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl ${energiaInfo.iconBg} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${energiaInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Nível de Energia</span>
-          <span class="font-bold text-xs truncate block">${energiaInfo.label}</span>
+          <span class="text-[10px] ${energiaInfo.labelColor} uppercase tracking-wider block font-black">Nível de Energia</span>
+          <span class="font-extrabold text-xs truncate block">${energiaInfo.label}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border bg-white border-slate-200 shadow-2xs flex items-center gap-2">
-        <span class="text-base">${domInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 bg-purple-50/90 text-purple-950 border-purple-200 shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${domInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Domicílio</span>
-          <span class="font-bold text-xs text-slate-800 truncate block">${domInfo.label}</span>
+          <span class="text-[10px] text-purple-700 uppercase tracking-wider block font-black">Domicílio</span>
+          <span class="font-extrabold text-xs truncate block">${domInfo.label}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border bg-white border-slate-200 shadow-2xs flex items-center gap-2">
-        <span class="text-base">${sozinhoInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 bg-blue-50/90 text-blue-950 border-blue-200 shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${sozinhoInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Tempo Sozinho</span>
-          <span class="font-bold text-xs text-slate-800 truncate block">${sozinhoInfo.label}</span>
+          <span class="text-[10px] text-blue-700 uppercase tracking-wider block font-black">Tempo Sozinho</span>
+          <span class="font-extrabold text-xs truncate block">${sozinhoInfo.label}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border bg-white border-slate-200 shadow-2xs flex items-center gap-2">
-        <span class="text-base">${criancasInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 ${criancasKey === 'sim' ? 'bg-rose-50/90 text-rose-950 border-rose-200' : 'bg-amber-50/90 text-amber-950 border-amber-200'} shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl ${criancasKey === 'sim' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${criancasInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Crianças</span>
-          <span class="font-bold text-xs text-slate-800 truncate block">${criancasInfo.label}</span>
+          <span class="text-[10px] ${criancasKey === 'sim' ? 'text-rose-700' : 'text-amber-700'} uppercase tracking-wider block font-black">Crianças</span>
+          <span class="font-extrabold text-xs truncate block">${criancasInfo.label}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border bg-white border-slate-200 shadow-2xs flex items-center gap-2">
-        <span class="text-base">${caesInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 ${caesKey === 'sim' ? 'bg-amber-50/90 text-amber-950 border-amber-200' : 'bg-teal-50/90 text-teal-950 border-teal-200'} shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl ${caesKey === 'sim' ? 'bg-amber-100 text-amber-700' : 'bg-teal-100 text-teal-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${caesInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Outros Cães</span>
-          <span class="font-bold text-xs text-slate-800 truncate block">${caesInfo.label}</span>
+          <span class="text-[10px] ${caesKey === 'sim' ? 'text-amber-700' : 'text-teal-700'} uppercase tracking-wider block font-black">Outros Cães</span>
+          <span class="font-extrabold text-xs truncate block">${caesInfo.label}</span>
         </div>
       </div>
-      <div class="p-2.5 rounded-xl border bg-white border-slate-200 shadow-2xs flex items-center gap-2">
-        <span class="text-base">${gatosInfo.icon}</span>
+      <div class="p-2.5 rounded-xl border-2 ${gatosKey === 'sim' ? 'bg-emerald-50/90 text-emerald-950 border-emerald-200' : 'bg-cyan-50/90 text-cyan-950 border-cyan-200'} shadow-2xs flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl ${gatosKey === 'sim' ? 'bg-emerald-100 text-emerald-700' : 'bg-cyan-100 text-cyan-700'} flex items-center justify-center flex-shrink-0 text-base shadow-2xs">
+          ${gatosInfo.icon}
+        </div>
         <div class="min-w-0">
-          <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-bold">Gatos</span>
-          <span class="font-bold text-xs text-slate-800 truncate block">${gatosInfo.label}</span>
+          <span class="text-[10px] ${gatosKey === 'sim' ? 'text-emerald-700' : 'text-cyan-700'} uppercase tracking-wider block font-black">Gatos</span>
+          <span class="font-extrabold text-xs truncate block">${gatosInfo.label}</span>
         </div>
       </div>
     `;
@@ -1541,7 +1602,7 @@ function getCandidaturasList() {
         petId: "1",
         petNome: "Tobi",
         petFoto: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80",
-        ongNome: "Associação ProAnima DF",
+        ongNome: "Lar dos Anjos",
         data: new Date().toLocaleDateString("pt-BR"),
         status: "Em Análise pela ONG ✨",
         dataVisita: "Próximo Sábado, 10h"
@@ -2783,7 +2844,7 @@ async function renderOngsGrid() {
           <!-- Badges Oficiais -->
           <div class="flex items-center gap-2 flex-wrap">
             <span class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#F9F3EA] text-[#007E82] border border-[#e8ddcf] shadow-2xs">
-              ${activeOng.sigla || 'PROANIMA'} • Fundada em ${activeOng.anoFundacao || '2003'} (23 Anos)
+              ${activeOng.sigla || 'LAR DOS ANJOS'} • Fundada em ${activeOng.anoFundacao || '2003'} (23 Anos)
             </span>
             <span class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300 shadow-2xs flex items-center gap-1.5">
               <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i>
@@ -2855,7 +2916,7 @@ async function renderOngsGrid() {
             </button>
 
             <a 
-              href="https://wa.me/${activeOng.whatsapp || '5561999998888'}?text=${encodeURIComponent('Olá! Encontrei a Associação ProAnima DF no MatchPet e gostaria de saber mais sobre as adoções!')}" 
+              href="https://wa.me/${activeOng.whatsapp || '5561999998888'}?text=${encodeURIComponent('Olá! Encontrei o Lar dos Anjos no MatchPet e gostaria de saber mais sobre as adoções!')}" 
               target="_blank" 
               class="btn-whatsapp-solid px-4 py-3 rounded-2xl font-black text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2 cursor-pointer"
               title="Falar no WhatsApp"
@@ -2892,11 +2953,11 @@ async function renderOngsGrid() {
           <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2 overflow-hidden">
               <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex-shrink-0">Chave Pix:</span>
-              <code class="text-xs font-mono font-bold text-slate-900 truncate select-all">${activeOng.chavePix || 'contato@proanimadf.org.br'}</code>
+              <code class="text-xs font-mono font-bold text-slate-900 truncate select-all">${activeOng.chavePix || 'contato@lardosanjos.org.br'}</code>
             </div>
             <button 
               type="button" 
-              onclick="copyPixKey('${activeOng.chavePix || 'contato@proanimadf.org.br'}', this)" 
+              onclick="copyPixKey('${activeOng.chavePix || 'contato@lardosanjos.org.br'}', this)" 
               class="btn-pix-copy-solid px-3.5 py-1.5 rounded-lg font-black text-[11px] transition-colors flex-shrink-0 cursor-pointer"
               title="Copiar Chave Pix"
             >
@@ -2916,7 +2977,7 @@ async function renderOngsGrid() {
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
             <div class="absolute bottom-3 left-3 right-3 text-white">
               <span class="px-2.5 py-1 rounded-lg bg-[#007E82] text-white text-[11px] font-black uppercase tracking-wider inline-block">
-                Sede &amp; Abrigo ProAnima • DF
+                Sede &amp; Abrigo Lar dos Anjos • DF
               </span>
               <p class="text-xs text-slate-200 mt-1 font-medium">Ambiente acolhedor com solários e suporte veterinário integral</p>
             </div>
@@ -3025,7 +3086,7 @@ async function renderOngsGrid() {
                 "Atendimento Clínico & Triagem Veterinária",
                 "Socialização & Afeto Diário aos Resgatados"
               ];
-              const legenda = legendas[i] || `Instalação ProAnima #${i+1}`;
+              const legenda = legendas[i] || `Instalação Lar dos Anjos #${i+1}`;
               return `
                 <div class="group relative rounded-2xl overflow-hidden ong-lateral-story-photo bg-slate-100 border-2 border-[#e8ddcf] shadow-xs hover:shadow-md transition-all">
                   <img src="${f}" alt="${legenda}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -3044,16 +3105,16 @@ async function renderOngsGrid() {
           <div class="p-4 rounded-2xl bg-[#faeee3] border border-[#e8ddcf] space-y-2">
             <span class="text-xs font-black text-amber-950 uppercase tracking-wider block flex items-center gap-1.5">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#D19864]"></i>
-              <span>Como Apoiar a ProAnima</span>
+              <span>Como Apoiar o Lar dos Anjos</span>
             </span>
             <p class="text-xs text-slate-700 leading-relaxed">
               Nossa instituição é mantida 100% por doações de pessoas como você. Qualquer valor contribui com remédios, vacinas e ração especial.
             </p>
             <div class="pt-1 flex items-center justify-between gap-2">
-              <code class="text-[11px] font-mono font-black text-slate-900 truncate">${activeOng.chavePix || 'contato@proanimadf.org.br'}</code>
+              <code class="text-[11px] font-mono font-black text-slate-900 truncate">${activeOng.chavePix || 'contato@lardosanjos.org.br'}</code>
               <button 
                 type="button" 
-                onclick="copyPixKey('${activeOng.chavePix || 'contato@proanimadf.org.br'}', this)" 
+                onclick="copyPixKey('${activeOng.chavePix || 'contato@lardosanjos.org.br'}', this)" 
                 class="btn-pix-copy-solid px-3 py-1.5 rounded-lg font-black text-[11px] transition-colors cursor-pointer"
               >
                 Copiar Pix
@@ -3850,13 +3911,13 @@ function renderRifasGrid(filterType = 'todas') {
               <div class="truncate">
                 <div class="flex items-center gap-1.5 mb-0.5">
                   <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span class="text-[10px] font-black text-teal-950 uppercase tracking-wider block">Chave Pix Oficial ProAnima</span>
+                  <span class="text-[10px] font-black text-teal-950 uppercase tracking-wider block">Chave Pix Oficial Lar dos Anjos</span>
                 </div>
-                <code class="text-xs font-mono font-black text-slate-950 truncate block select-all">${rifa.chavePix || 'contato@proanimadf.org.br'}</code>
+                <code class="text-xs font-mono font-black text-slate-950 truncate block select-all">${rifa.chavePix || 'contato@lardosanjos.org.br'}</code>
               </div>
               <button 
                 type="button" 
-                onclick="copyPixKey('${rifa.chavePix || 'contato@proanimadf.org.br'}', this)" 
+                onclick="copyPixKey('${rifa.chavePix || 'contato@lardosanjos.org.br'}', this)" 
                 class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-black text-xs flex items-center gap-1.5 shadow-sm transition-all flex-shrink-0 cursor-pointer"
                 title="Copiar Chave Pix"
               >
@@ -4021,7 +4082,7 @@ function initLiveActivityTicker() {
 
   const tickerMessages = [
     "🐾 <strong>Luna</strong> (Gatinha dócil) foi adotada com sucesso em Águas Claras há 15 minutos! Parabéns à nova família! 🎉",
-    "🐶 <strong>Rex</strong> (Cão jovem, 1 ano) acabou de ser cadastrado para adoção pela Associação ProAnima DF! ❤️",
+    "🐶 <strong>Rex</strong> (Cão jovem, 1 ano) acabou de ser cadastrado para adoção pelo Lar dos Anjos! ❤️",
     "🎯 <strong>4 novos adotantes</strong> realizaram o Teste de Compatibilidade na última hora no DF!",
     "🥣 <strong>140 kg de ração</strong> arrecadados na Campanha Solidária de Ceilândia!",
     "🐱 <strong>Mingau</strong> encontrou um lar seguro e telado no Plano Piloto hoje! Parabéns! 🏠",
@@ -5136,3 +5197,30 @@ window.handleUserProfileSubmit = handleUserProfileSubmit;
 window.selectAnonymousModeFromProfile = selectAnonymousModeFromProfile;
 window.updateUserSessionUI = updateUserSessionUI;
 window.scrollToSiteTop = scrollToSiteTop;
+
+/**
+ * Compartilha o perfil do pet em redes sociais ou copia link
+ */
+function sharePetProfile(id) {
+  const pet = activePet || (window.currentAnimals || []).find(a => a.id === id);
+  const petName = pet ? pet.nome : 'esse pet especial';
+  const shareUrl = window.location.origin + window.location.pathname + '?pet=' + (id || (pet ? pet.id : ''));
+  if (navigator.share) {
+    navigator.share({
+      title: `Conheça ${petName} no MatchPet! 🐾`,
+      text: `Olha esse pet incrível para adoção consciente no MatchPet:`,
+      url: shareUrl
+    }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      if (typeof showToast === 'function') {
+        showToast(`Link do perfil de ${petName} copiado! Compartilhe! 🎉`);
+      }
+    }).catch(() => {
+      if (typeof showToast === 'function') {
+        showToast(`Perfil de ${petName}: ${shareUrl}`);
+      }
+    });
+  }
+}
+window.sharePetProfile = sharePetProfile;

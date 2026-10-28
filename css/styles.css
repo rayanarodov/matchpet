@@ -2113,4 +2113,101 @@ html, body {
   overflow: hidden !important;
 }
 
+/* ==========================================================================
+   ABAS DE NAVEGAÇÃO DO PAINEL ADMINISTRATIVO (CORES DA MARCA / SEM TEXTO BRANCO)
+   ========================================================================== */
+#tab-btn-crud.active,
+#tab-btn-solidarity.active,
+#tab-btn-analytics.active {
+  background-color: #e6f4f5 !important;
+  color: #007E82 !important;
+  border: 2px solid #007E82 !important;
+  font-weight: 900 !important;
+}
 
+
+
+
+/* ==========================================================================
+   BADGES COLORIDOS DE ESPÉCIE & PERFIL DO PET (CORES VIVAS & 100% SÓLIDAS)
+   ========================================================================== */
+.badge-specie-chamativa-dog {
+  background-color: #D19864 !important;
+  background: #D19864 !important;
+  color: #020617 !important;
+  border: 1.5px solid #b87e4c !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(209, 152, 100, 0.45) !important;
+}
+
+.badge-specie-chamativa-cat {
+  background-color: #8b5cf6 !important;
+  background: #8b5cf6 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #7c3aed !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(139, 92, 246, 0.45) !important;
+}
+
+.badge-specie-chamativa-other {
+  background-color: #d946ef !important;
+  background: #d946ef !important;
+  color: #ffffff !important;
+  border: 1.5px solid #c026d3 !important;
+  font-weight: 900 !important;
+  opacity: 1 !important;
+  box-shadow: 0 3px 10px rgba(217, 70, 239, 0.45) !important;
+}
+
+/* ==========================================================================
+   CARDS DE MÉTRICAS & BOTÕES DE AÇÃO DO MODAL DE PERFIL (CORES VIVAS & VIBRANTES)
+   ========================================================================== */
+.modal-metric-card-idade {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%) !important;
+  border: 2px solid #ddd6fe !important;
+}
+
+.modal-metric-card-porte {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+  border: 2px solid #fde68a !important;
+}
+
+.modal-metric-card-castracao {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%) !important;
+  border: 2px solid #a7f3d0 !important;
+}
+
+.modal-metric-card-vacinas {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border: 2px solid #bae6fd !important;
+}
+
+#modal-adopt-btn {
+  background: linear-gradient(135deg, #D19864 0%, #dfa46e 50%, #c2844d 100%) !important;
+  color: #020617 !important;
+  border: 2px solid #b87e4c !important;
+  box-shadow: 0 4px 15px rgba(209, 152, 100, 0.45) !important;
+  font-weight: 900 !important;
+}
+
+#modal-adopt-btn:hover {
+  background: linear-gradient(135deg, #dfa46e 0%, #e8b382 50%, #d19864 100%) !important;
+  transform: translateY(-1px) scale(1.01) !important;
+  box-shadow: 0 6px 18px rgba(209, 152, 100, 0.55) !important;
+}
+
+#modal-whatsapp-btn {
+  background: linear-gradient(135deg, #059669 0%, #007E82 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #047857 !important;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35) !important;
+  font-weight: 900 !important;
+}
+
+#modal-whatsapp-btn:hover {
+  background: linear-gradient(135deg, #047857 0%, #005659 100%) !important;
+  transform: translateY(-1px) scale(1.01) !important;
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.45) !important;
+}
