@@ -4874,14 +4874,8 @@ if (typeof document !== "undefined") {
 
 function renderAdminTopBar() {
   const bar = document.getElementById("admin-top-bar");
-  const isAuth = (typeof isAdminAuthenticated !== "undefined" && isAdminAuthenticated) || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
   if (bar) {
-    if (isAuth) {
-      bar.classList.remove("hidden");
-      if (window.lucide) lucide.createIcons({ root: bar });
-    } else {
-      bar.classList.add("hidden");
-    }
+    bar.remove();
   }
   updateAdminHeaderLoginUI();
 }
