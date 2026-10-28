@@ -5498,7 +5498,7 @@ function openAdminAuthModal(targetAction = "admin_panel") {
     if (descEl) descEl.textContent = "Área exclusiva para moderação de ONGs, gestão de pets, contratos e métricas da plataforma. Digite a senha de administrador:";
   } else {
     if (titleEl) titleEl.textContent = "Acesso Restrito ao Administrador";
-    if (descEl) descEl.textContent = "Digite a senha de administrador (adoção1410) para acessar:";
+    if (descEl) descEl.textContent = "Digite a senha de administrador para acessar:";
   }
 
   modal.classList.remove("opacity-0", "pointer-events-none");
