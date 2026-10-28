@@ -2344,7 +2344,7 @@ window.getActiveQuiz = () => activeQuiz;
 window.openPetModalById = openPetModalById;
 window.closePetModal = closePetModal;
 window.setModalMainPhoto = setModalMainPhoto;
-window.switchMediaTab = switchMediaTab;
+if (typeof switchMediaTab !== "undefined") window.switchMediaTab = switchMediaTab;
 window.renderVideoPlayer = renderVideoPlayer;
 window.resetAllFilters = resetAllFilters;
 window.applyFilters = applyFilters;
@@ -2366,7 +2366,7 @@ window.renderRifasGrid = renderRifasGrid;
 window.contributeSimulatedRifa = contributeSimulatedRifa;
 window.filterPetsByOng = filterPetsByOng;
 window.clearOngFilter = clearOngFilter;
-window.onContactTermsChange = onContactTermsChange;
+if (typeof onContactTermsChange !== "undefined") window.onContactTermsChange = onContactTermsChange;
 window.handleContactWhatsApp = handleContactWhatsApp;
 window.areAdoptionTermsAccepted = areAdoptionTermsAccepted;
 window.copyPixKey = copyPixKey;
@@ -4061,9 +4061,9 @@ window.showToast = showToast;
 window.openAdoptionProcessModal = openAdoptionProcessModal;
 window.openAdoptionProcessForActivePet = openAdoptionProcessForActivePet;
 window.closeAdoptionProcessModal = closeAdoptionProcessModal;
-window.setAdoptionStep = setAdoptionStep;
-window.goToAdoptionStep = goToAdoptionStep;
-window.submitAdoptionProcess = submitAdoptionProcess;
+if (typeof setAdoptionStep !== "undefined") window.setAdoptionStep = setAdoptionStep;
+if (typeof goToAdoptionStep !== "undefined") window.goToAdoptionStep = goToAdoptionStep;
+if (typeof submitAdoptionProcess !== "undefined") window.submitAdoptionProcess = submitAdoptionProcess;
 window.openAdopterDashboardModal = openAdopterDashboardModal;
 window.closeAdopterDashboardModal = closeAdopterDashboardModal;
 window.renderAdopterDashboardUI = renderAdopterDashboardUI;
@@ -4148,7 +4148,10 @@ function setSamplePhoto(type) {
    GESTÃO DE ANIMAIS DAS ONGS (ADICIONAR E REMOVER)
    ========================================================================== */
 
-let currentManagingOngId = "todas";
+var currentManagingOngId = "todas";
+if (typeof window !== "undefined") {
+  window.currentManagingOngId = currentManagingOngId;
+}
 
 async function openOngManagementModal(ongId = null) {
   const isAuth = isAdminAuthenticated || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
@@ -4870,7 +4873,7 @@ if (typeof document !== "undefined") {
 
 function renderAdminTopBar() {
   const bar = document.getElementById("admin-top-bar");
-  const isAuth = (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
+  const isAuth = (typeof isAdminAuthenticated !== "undefined" && isAdminAuthenticated) || (typeof sessionStorage !== "undefined" && sessionStorage.getItem("matchpet_admin_auth") === "true");
   if (bar) {
     if (isAuth) {
       bar.classList.remove("hidden");

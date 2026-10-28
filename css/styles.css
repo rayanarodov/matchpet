@@ -2059,17 +2059,20 @@ html, body {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5) !important;
 }
 
+.btn-admin-manage-softred,
 #admin-top-bar .btn-admin-action-manage {
-  background-color: #f59e0b !important;
-  color: #020617 !important;
-  border: 1px solid #fbbf24 !important;
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35) !important;
+  background-color: #e05353 !important;
+  color: #ffffff !important;
+  border: 1px solid #f87171 !important;
+  box-shadow: 0 2px 8px rgba(224, 83, 83, 0.35) !important;
   transition: all 0.2s ease !important;
 }
+.btn-admin-manage-softred:hover,
 #admin-top-bar .btn-admin-action-manage:hover {
-  background-color: #fbbf24 !important;
+  background-color: #cb4444 !important;
+  color: #ffffff !important;
   transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(224, 83, 83, 0.5) !important;
 }
 
 #admin-top-bar .btn-admin-action-dashboard {
@@ -2086,16 +2089,16 @@ html, body {
 }
 
 #admin-top-bar .btn-admin-action-logout {
-  background-color: #e11d48 !important;
+  background-color: #9f1239 !important;
   color: #ffffff !important;
-  border: 1px solid #f43f5e !important;
-  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35) !important;
+  border: 1px solid #be123c !important;
+  box-shadow: 0 2px 8px rgba(159, 18, 57, 0.35) !important;
   transition: all 0.2s ease !important;
 }
 #admin-top-bar .btn-admin-action-logout:hover {
-  background-color: #f43f5e !important;
+  background-color: #be123c !important;
   transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(159, 18, 57, 0.5) !important;
 }
 
 /* ==========================================================================
