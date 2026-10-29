@@ -9,10 +9,14 @@ const PetStorage = {
   // Carrega a lista completa de animais de forma assíncrona do PetDB
   async getAll() {
     const sanitizePet = p => {
-      if (!p.ongNome || p.ongNome.includes("ProAnima")) {
-        return { ...p, ongNome: "Lar dos Anjos" };
+      let petObj = { ...p };
+      if (!petObj.ongNome || petObj.ongNome.includes("ProAnima")) {
+        petObj.ongNome = "Lar dos Anjos";
       }
-      return p;
+      if (!petObj.contatoWhatsapp || petObj.contatoWhatsapp.includes("999998888") || petObj.contatoWhatsapp.includes("9999-8888") || petObj.contatoWhatsapp === "5511999998888") {
+        petObj.contatoWhatsapp = "5561985832237";
+      }
+      return petObj;
     };
 
     if (window.PetDB) {
@@ -207,12 +211,16 @@ const SolidarityStorage = {
           delete updated.equipeLinhaFrente;
           changed = true;
         }
+        if (!updated.whatsapp || updated.whatsapp.includes("999998888") || updated.whatsapp.includes("9999-8888") || updated.whatsapp.includes("999999999") || updated.whatsapp === "5511999998888") {
+          updated.whatsapp = "5561985832237";
+          changed = true;
+        }
         return updated;
       });
       if (changed) this.saveAllOngs(ongs);
 
       // Sincronização automática para manter dispositivos móveis sempre atualizados
-      const syncKey = "patinhas_mobile_sync_v3";
+      const syncKey = "patinhas_mobile_sync_v4";
       if (typeof localStorage !== "undefined" && localStorage.getItem(syncKey) !== "true") {
         const defOng = (window.DEFAULT_ONGS && window.DEFAULT_ONGS[0]) || {};
         ongs = ongs.map(o => {
@@ -220,6 +228,7 @@ const SolidarityStorage = {
             return {
               ...defOng,
               ...o,
+              whatsapp: "5561985832237",
               // Garante fotos e vídeos do abrigo atualizados se estiverem vazios
               fotosAbrigo: (o.fotosAbrigo && o.fotosAbrigo.length > 0) ? o.fotosAbrigo : (defOng.fotosAbrigo || []),
               videosAbrigo: (o.videosAbrigo && o.videosAbrigo.length > 0) ? o.videosAbrigo : (defOng.videosAbrigo || [])
@@ -386,6 +395,10 @@ const SolidarityStorage = {
             }
             if (r.ongNome && r.ongNome.includes("ProAnima")) {
               r.ongNome = "Lar dos Anjos";
+              updated = true;
+            }
+            if (!r.whatsapp || r.whatsapp.includes("999998888") || r.whatsapp.includes("9999-8888") || r.whatsapp === "5511999998888") {
+              r.whatsapp = "5561985832237";
               updated = true;
             }
             if (r.chavePix && r.chavePix.includes("proanimadf")) {

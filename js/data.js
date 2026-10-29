@@ -157,7 +157,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-002",
@@ -209,7 +209,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-003",
@@ -261,7 +261,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-004",
@@ -311,7 +311,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-005",
@@ -363,7 +363,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-006",
@@ -413,7 +413,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-007",
@@ -463,7 +463,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-008",
@@ -513,7 +513,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   },
   {
     id: "pet-009",
@@ -563,7 +563,7 @@ const DEFAULT_ANIMALS = [
     ongNome: "Lar dos Anjos",
     cidade: "Brasília / Plano Piloto - DF",
     regiaoDF: "Brasília / Plano Piloto",
-    contatoWhatsapp: "5561999998888"
+    contatoWhatsapp: "5561985832237"
   }
 ];
 
@@ -582,7 +582,7 @@ const DEFAULT_ONGS = [
     foto: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
     descricao: "Pioneira na proteção e bem-estar animal no Distrito Federal há mais de 23 anos. Atuamos com resgate ético, reabilitação veterinária completa, acolhimento em abrigo estruturado e intermediação de adoções conscientes em Brasília e regiões administrativas.",
     chavePix: "contato@lardosanjos.org.br",
-    whatsapp: "5561999998888",
+    whatsapp: "5561985832237",
     instagram: "@lardosanjos_df",
     totalAdotados: 540,
     baseDisponiveis: 16,
@@ -680,7 +680,7 @@ const DEFAULT_RIFAS = [
     totalBilhetes: 170,
     bilhetesVendidos: 130,
     chavePix: "contato@lardosanjos.org.br",
-    whatsapp: "5561999998888",
+    whatsapp: "5561985832237",
     dataSorteio: "30 de Outubro de 2026"
   },
   {
@@ -698,7 +698,7 @@ const DEFAULT_RIFAS = [
     precoSaco15kg: 85,
     chavePix: "contato@lardosanjos.org.br",
     pontoColeta: "Sede do Abrigo Lar dos Anjos ou entrega agendada",
-    whatsapp: "5561999998888",
+    whatsapp: "5561985832237",
     dataSorteio: "Meta Contínua de Outubro"
   },
   {
@@ -716,7 +716,7 @@ const DEFAULT_RIFAS = [
     totalBilhetes: 160,
     bilhetesVendidos: 120,
     chavePix: "contato@lardosanjos.org.br",
-    whatsapp: "5561999998888",
+    whatsapp: "5561985832237",
     dataSorteio: "15 de Novembro de 2026"
   }
 ];

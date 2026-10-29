@@ -1085,7 +1085,8 @@ function renderPetsGrid(pets) {
  * Gera link do WhatsApp pré-formatado com pontuação de afinidade e menção à adoção responsável
  */
 function generateWhatsAppLink(pet) {
-  const phone = pet.contatoWhatsapp || '5511999998888';
+  let phone = (pet.contatoWhatsapp || '5561985832237').replace(/\D/g, '');
+  if (!phone.startsWith('55')) phone = `55${phone}`;
   const profile = typeof getAdopterProfile === 'function' ? getAdopterProfile() : null;
   const identIntro = (profile && profile.nome) 
     ? `Olá! Meu nome é ${profile.nome} ${profile.sobrenome || ''} (Telefone: ${profile.telefone || ''}). ` 
@@ -1417,9 +1418,10 @@ function openPetModal(pet, scrollToContact = false) {
   // Configura botão de WhatsApp
   const whatsappBtn = document.getElementById("modal-whatsapp-btn");
   if (whatsappBtn) {
-    const ongPhone = (pet.ongWhatsapp || pet.contato?.whatsapp || pet.contato?.telefone || "61999999999").replace(/\D/g, "");
+    let ongPhone = (pet.ongWhatsapp || pet.contato?.whatsapp || pet.contato?.telefone || pet.contatoWhatsapp || "5561985832237").replace(/\D/g, "");
+    if (!ongPhone.startsWith("55")) ongPhone = `55${ongPhone}`;
     const msg = encodeURIComponent(`Olá! Tenho interesse em adotar o pet ${pet.nome} que vi na plataforma MatchPet!`);
-    whatsappBtn.href = `https://api.whatsapp.com/send?phone=55${ongPhone}&text=${msg}`;
+    whatsappBtn.href = `https://wa.me/${ongPhone}?text=${msg}`;
   }
 
   // Mídias: Foto Principal + 2 Miniaturas Empilhadas
@@ -3443,13 +3445,13 @@ async function renderOngsGrid() {
             </button>
 
             <a 
-              href="https://wa.me/${activeOng.whatsapp || '5561999998888'}?text=${encodeURIComponent('Olá! Encontrei o Lar dos Anjos no MatchPet e gostaria de saber mais sobre as adoções!')}" 
+              href="https://wa.me/${(activeOng.whatsapp || '5561985832237').replace(/\D/g, '').startsWith('55') ? (activeOng.whatsapp || '5561985832237').replace(/\D/g, '') : '55' + (activeOng.whatsapp || '5561985832237').replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Encontrei o Lar dos Anjos no MatchPet e gostaria de saber mais sobre as adoções!')}" 
               target="_blank" 
               class="btn-whatsapp-solid px-4 py-3 rounded-2xl font-black text-xs sm:text-sm shadow-sm transition-all flex items-center gap-2 cursor-pointer"
-              title="Falar no WhatsApp"
+              title="Falar no WhatsApp: (61) 98583-2237"
             >
               <i data-lucide="message-circle" class="w-4 h-4"></i>
-              <span>WhatsApp</span>
+              <span>WhatsApp: (61) 98583-2237</span>
             </a>
 
             ${activeOng.instagram ? `
@@ -3814,7 +3816,7 @@ async function renderOngsGrid() {
               Deseja conhecer nossos resgatados pessoalmente? Realizamos visitas acompanhadas aos fins de semana mediante agendamento prévio. Venha passear com os cães no solário e conhecer o gatil!
             </p>
             <a 
-              href="https://wa.me/${activeOng.whatsapp || '5561999998888'}?text=${encodeURIComponent('Olá! Gostaria de agendar uma visita ao abrigo do Lar dos Anjos!')}" 
+              href="https://wa.me/${(activeOng.whatsapp || '5561985832237').replace(/\D/g, '').startsWith('55') ? (activeOng.whatsapp || '5561985832237').replace(/\D/g, '') : '55' + (activeOng.whatsapp || '5561985832237').replace(/\D/g, '')}?text=${encodeURIComponent('Olá! Gostaria de agendar uma visita ao abrigo do Lar dos Anjos!')}" 
               target="_blank" 
               class="w-full py-2.5 px-4 rounded-xl bg-[#007E82] hover:bg-[#005c60] text-white font-black text-xs transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
             >
@@ -5339,7 +5341,7 @@ async function handleOngAddPetSubmit(event) {
   const selectedOption = selectOng ? selectOng.options[selectOng.selectedIndex] : null;
   const ongId = selectOng ? selectOng.value : "ong-001";
   const ongNome = selectedOption ? selectedOption.getAttribute("data-nome") : "ONG Parceira";
-  const ongWhatsapp = selectedOption ? selectedOption.getAttribute("data-whats") : "5561999998888";
+  const ongWhatsapp = selectedOption ? selectedOption.getAttribute("data-whats") : "5561985832237";
 
   const nome = document.getElementById("new-pet-nome")?.value?.trim();
   const especie = document.getElementById("new-pet-especie")?.value || "cachorro";

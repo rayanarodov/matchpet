@@ -771,7 +771,7 @@ async function handleSavePet(event) {
   const idade = document.getElementById("pet-idade").value.trim();
   const sexo = document.getElementById("pet-sexo").value;
   const cidade = document.getElementById("pet-cidade").value.trim() || "São Paulo - SP";
-  const whatsapp = document.getElementById("pet-whatsapp").value.trim() || "5511999998888";
+  const whatsapp = document.getElementById("pet-whatsapp").value.trim() || "5561985832237";
 
   // Porte e Físico
   const porte = document.getElementById("pet-porte").value;
@@ -2905,7 +2905,7 @@ function syncTabOngLivePreview() {
   if (thumbFoto) thumbFoto.src = foto;
 
   const zapEl = document.getElementById("prev-ong-whatsapp");
-  if (zapEl) zapEl.textContent = zap ? `WhatsApp: ${zap}` : "WhatsApp Ativo";
+  if (zapEl) zapEl.textContent = zap ? `WhatsApp: ${zap}` : "WhatsApp: (61) 98583-2237";
   const instaEl = document.getElementById("prev-ong-instagram");
   if (instaEl) instaEl.textContent = insta ? insta : "Instagram Oficial";
 }
