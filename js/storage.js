@@ -210,6 +210,28 @@ const SolidarityStorage = {
         return updated;
       });
       if (changed) this.saveAllOngs(ongs);
+
+      // Sincronização automática para manter dispositivos móveis sempre atualizados
+      const syncKey = "patinhas_mobile_sync_v3";
+      if (typeof localStorage !== "undefined" && localStorage.getItem(syncKey) !== "true") {
+        const defOng = (window.DEFAULT_ONGS && window.DEFAULT_ONGS[0]) || {};
+        ongs = ongs.map(o => {
+          if (o.id === "ong-001") {
+            return {
+              ...defOng,
+              ...o,
+              // Garante fotos e vídeos do abrigo atualizados se estiverem vazios
+              fotosAbrigo: (o.fotosAbrigo && o.fotosAbrigo.length > 0) ? o.fotosAbrigo : (defOng.fotosAbrigo || []),
+              videosAbrigo: (o.videosAbrigo && o.videosAbrigo.length > 0) ? o.videosAbrigo : (defOng.videosAbrigo || [])
+            };
+          }
+          return o;
+        });
+        try {
+          localStorage.setItem(syncKey, "true");
+        } catch (e) {}
+        this.saveAllOngs(ongs);
+      }
     }
 
     // Calcula animais disponíveis dinamicamente - usa cache em memória antes de tocar no IndexedDB
