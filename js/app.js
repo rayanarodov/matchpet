@@ -4680,30 +4680,17 @@ function renderRifasGrid(filterType = 'todas') {
           </div>
         </div>
 
-        <!-- Rodapé do Card: Ações Interativas -->
-        <div class="p-5 pt-0 space-y-2">
-          <div class="flex items-center gap-2">
-            <!-- Botão de Simulação Interativa de Apoio/Compra -->
-            <button 
-              type="button"
-              onclick="contributeSimulatedRifa('${rifa.id}', ${isMoney ? (rifa.valorBilhete || 15) : 15})" 
-              class="flex-1 py-2.5 px-3 ${pal.btnAction} text-xs font-black rounded-xl flex items-center justify-center gap-1.5 transition-all hover:scale-[1.01]"
-              title="${isMoney ? 'Simular compra de bilhete' : 'Simular doação de ração'}"
-            >
-              <i data-lucide="${isMoney ? 'ticket' : 'plus-circle'}" class="w-4 h-4"></i>
-              <span>${isMoney ? `Simular Compra (+R$ ${rifa.valorBilhete || 15})` : `Simular Doação (+15 kg)`}</span>
-            </button>
-
-            <!-- Link WhatsApp para Enviar Comprovante -->
-            <a 
-              href="https://wa.me/${rifa.whatsapp}?text=${encodeURIComponent('Olá! Acabei de fazer um Pix para a campanha ' + rifa.titulo + ' da ' + rifa.ongNome + ' e gostaria de enviar o comprovante!')}" 
-              target="_blank" 
-              class="p-2.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white shadow-md shadow-green-500/20 transition-all flex items-center justify-center cursor-pointer"
-              title="Enviar Comprovante de Apoio no WhatsApp"
-            >
-              <i data-lucide="message-circle" class="w-4 h-4"></i>
-            </a>
-          </div>
+        <!-- Rodapé do Card: Ação Oficial de Apoio -->
+        <div class="p-5 pt-0">
+          <a 
+            href="https://wa.me/${rifa.whatsapp}?text=${encodeURIComponent('Olá! Gostaria de apoiar a campanha ' + rifa.titulo + ' da ' + rifa.ongNome + ' e enviar o comprovante Pix!')}" 
+            target="_blank" 
+            class="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-black text-xs shadow-md shadow-green-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
+            title="Enviar Comprovante de Apoio no WhatsApp"
+          >
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Enviar Comprovante via WhatsApp</span>
+          </a>
         </div>
       </div>
     `;
