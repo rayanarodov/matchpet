@@ -149,7 +149,7 @@ function debounce(fn, delay = 180) {
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const initialTab = urlParams.get('tab') || window.location.hash.replace('#', '');
-  if (initialTab && ['solidarity', 'analytics', 'crud', 'ong'].includes(initialTab)) {
+  if (initialTab && ['solidarity', 'analytics', 'crud', 'ong', 'blog'].includes(initialTab)) {
     switchAdminTab(initialTab);
   }
 
@@ -1165,22 +1165,26 @@ function switchAdminTab(tabName) {
   const ongContent = document.getElementById("tab-content-ong");
   const solidarityContent = document.getElementById("tab-content-solidarity");
   const analyticsContent = document.getElementById("tab-content-analytics");
+  const blogContent = document.getElementById("tab-content-blog");
   
   const btnCrud = document.getElementById("tab-btn-crud");
   const btnOng = document.getElementById("tab-btn-ong");
   const btnSolidarity = document.getElementById("tab-btn-solidarity");
   const btnAnalytics = document.getElementById("tab-btn-analytics");
+  const btnBlog = document.getElementById("tab-btn-blog");
 
   if (crudContent) crudContent.classList.add("hidden");
   if (ongContent) ongContent.classList.add("hidden");
   if (solidarityContent) solidarityContent.classList.add("hidden");
   if (analyticsContent) analyticsContent.classList.add("hidden");
+  if (blogContent) blogContent.classList.add("hidden");
 
   const inactiveClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#007E82] hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap cursor-pointer";
   if (btnCrud) btnCrud.className = inactiveClass;
   if (btnOng) btnOng.className = inactiveClass;
   if (btnSolidarity) btnSolidarity.className = inactiveClass;
   if (btnAnalytics) btnAnalytics.className = inactiveClass;
+  if (btnBlog) btnBlog.className = inactiveClass;
 
   const activeClass = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-black bg-[#e6f4f5] text-[#007E82] shadow-xs border-2 border-[#007E82] transition-all flex-shrink-0 whitespace-nowrap cursor-pointer";
 
@@ -1196,6 +1200,10 @@ function switchAdminTab(tabName) {
     if (analyticsContent) analyticsContent.classList.remove("hidden");
     if (btnAnalytics) btnAnalytics.className = activeClass;
     renderAnalyticsDashboard();
+  } else if (tabName === "blog") {
+    if (blogContent) blogContent.classList.remove("hidden");
+    if (btnBlog) btnBlog.className = activeClass;
+    renderAdminBlog();
   } else {
     if (crudContent) crudContent.classList.remove("hidden");
     if (btnCrud) btnCrud.className = activeClass;
@@ -3111,3 +3119,367 @@ function submitTabOngForm() {
   handleSaveOngTab();
 }
 window.submitTabOngForm = submitTabOngForm;
+
+
+/* ==========================================================================
+   MÓDULO DE GESTÃO DO BLOG ATUALIZADO (MODERADOR)
+   ========================================================================== */
+
+function getCategoryBadgeClass(category) {
+  const cat = (category || "").toLowerCase();
+  if (cat.includes("história") || cat.includes("adocao") || cat.includes("adoção")) {
+    return "bg-rose-50 text-rose-700 border-rose-200";
+  }
+  if (cat.includes("dicas") || cat.includes("guia")) {
+    return "bg-teal-50 text-teal-700 border-teal-200";
+  }
+  if (cat.includes("saúde") || cat.includes("saude") || cat.includes("vacina") || cat.includes("castra")) {
+    return "bg-[#e6f4f5] text-[#007E82] border-[#b2dedf]";
+  }
+  if (cat.includes("ong") || cat.includes("notícia") || cat.includes("noticia")) {
+    return "bg-amber-50 text-amber-800 border-amber-200";
+  }
+  return "bg-[#F9F3EA] text-[#007E82] border-[#e8ddcf]";
+}
+
+function renderAdminBlog(filterText = "", filterCategory = "todas") {
+  const container = document.getElementById("admin-blog-list");
+  if (!container) return;
+
+  const countBadge = document.getElementById("admin-blog-count");
+  const posts = window.BlogStorage ? BlogStorage.getPosts() : (window.DEFAULT_BLOG_POSTS || []);
+
+  const searchVal = (filterText || (document.getElementById("admin-blog-search")?.value) || "").trim().toLowerCase();
+  const catVal = filterCategory || (document.getElementById("admin-blog-category-filter")?.value) || "todas";
+
+  let filtered = posts;
+
+  if (catVal && catVal !== "todas") {
+    filtered = filtered.filter(p => (p.categoria && p.categoria.toLowerCase().includes(catVal.toLowerCase())) || (catVal.toLowerCase().includes(p.categoria?.toLowerCase() || "")));
+  }
+
+  if (searchVal) {
+    filtered = filtered.filter(p => 
+      (p.titulo && p.titulo.toLowerCase().includes(searchVal)) ||
+      (p.autor && p.autor.toLowerCase().includes(searchVal)) ||
+      (p.resumo && p.resumo.toLowerCase().includes(searchVal)) ||
+      (p.categoria && p.categoria.toLowerCase().includes(searchVal))
+    );
+  }
+
+  if (countBadge) {
+    countBadge.textContent = filtered.length;
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full text-center py-12 bg-slate-50 rounded-3xl border border-dashed border-slate-300 p-8">
+        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="newspaper" class="w-6 h-6"></i>
+        </div>
+        <h4 class="text-sm font-black text-slate-700 mb-1">Nenhuma matéria encontrada</h4>
+        <p class="text-xs text-slate-500 mb-4">Tente alterar os termos da busca ou clique abaixo para criar a primeira publicação.</p>
+        <button 
+          type="button" 
+          onclick="openAdminNewBlogModal()" 
+          class="px-4 py-2 rounded-xl bg-[#007E82] text-white text-xs font-black shadow-sm hover:bg-[#00686c] transition-all cursor-pointer inline-flex items-center gap-1.5"
+        >
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>+ Criar Nova Matéria</span>
+        </button>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons({ root: container });
+    return;
+  }
+
+  container.innerHTML = filtered.map(post => {
+    const badgeClass = post.categoriaBadge || getCategoryBadgeClass(post.categoria);
+    const safeFoto = post.foto || "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80";
+
+    return `
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col group border-hover">
+        <!-- Imagem de Capa com Badge -->
+        <div class="relative aspect-[16/10] bg-slate-100 overflow-hidden">
+          <img 
+            src="${safeFoto}" 
+            alt="${post.titulo || 'Capa do artigo'}" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+            onerror="this.src='img/matchpet-icon.png'"
+            loading="lazy"
+          >
+          <div class="absolute top-3 left-3">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border shadow-2xs ${badgeClass}">
+              ${post.categoria || 'Geral'}
+            </span>
+          </div>
+          <div class="absolute top-3 right-3 flex items-center gap-1.5">
+            <button 
+              type="button" 
+              onclick="openAdminEditBlogModal('${post.id}')" 
+              title="Editar Matéria" 
+              class="w-8 h-8 rounded-xl bg-white/90 backdrop-blur-xs text-slate-700 hover:text-[#007E82] hover:bg-white flex items-center justify-center shadow-xs transition-colors cursor-pointer"
+            >
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </button>
+            <button 
+              type="button" 
+              onclick="adminDeleteBlogPost('${post.id}')" 
+              title="Excluir Matéria" 
+              class="w-8 h-8 rounded-xl bg-white/90 backdrop-blur-xs text-rose-600 hover:text-white hover:bg-rose-600 flex items-center justify-center shadow-xs transition-colors cursor-pointer"
+            >
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Conteúdo do Card -->
+        <div class="p-4 sm:p-5 flex flex-col flex-1 justify-between gap-3">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-[11px] text-slate-400 font-medium">
+              <span class="flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3 text-[#007E82]"></i>
+                ${post.data || 'Publicado recentemente'}
+              </span>
+              <span class="flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3"></i>
+                ${post.tempoLeitura || '3 min'}
+              </span>
+            </div>
+
+            <h4 class="font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#007E82] transition-colors line-clamp-2 leading-snug">
+              ${post.titulo}
+            </h4>
+
+            <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed">
+              ${post.resumo || ''}
+            </p>
+          </div>
+
+          <!-- Rodapé do Card com Autor e Ações -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
+            <span class="text-[11px] text-slate-500 font-bold truncate max-w-[50%]" title="${post.autor || ''}">
+              ✍️ ${post.autor || 'Autor'}
+            </span>
+
+            <div class="flex items-center gap-1.5">
+              <button 
+                type="button" 
+                onclick="openAdminEditBlogModal('${post.id}')" 
+                class="px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                <i data-lucide="edit-3" class="w-3 h-3"></i>
+                <span>Editar</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="adminDeleteBlogPost('${post.id}')" 
+                class="p-1.5 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                title="Excluir"
+              >
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) lucide.createIcons({ root: container });
+}
+
+function filterAdminBlogList() {
+  const search = document.getElementById("admin-blog-search")?.value || "";
+  const category = document.getElementById("admin-blog-category-filter")?.value || "todas";
+  renderAdminBlog(search, category);
+}
+
+function openAdminNewBlogModal() {
+  const modal = document.getElementById("modal-admin-blog");
+  if (!modal) return;
+
+  const form = document.getElementById("admin-blog-form");
+  if (form) form.reset();
+
+  const idInput = document.getElementById("blog-edit-id");
+  if (idInput) idInput.value = "";
+
+  const titleEl = document.getElementById("modal-blog-title");
+  if (titleEl) titleEl.textContent = "Nova Matéria do Blog";
+
+  const hoje = new Date();
+  const meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+  ];
+  const dataHojeFormatada = `${String(hoje.getDate()).padStart(2, "0")} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()}`;
+
+  const dateInput = document.getElementById("blog-edit-data");
+  if (dateInput) dateInput.value = dataHojeFormatada;
+
+  const autorInput = document.getElementById("blog-edit-autor");
+  if (autorInput) autorInput.value = "Lar dos Anjos";
+
+  const leituraInput = document.getElementById("blog-edit-leitura");
+  if (leituraInput) leituraInput.value = "4 min de leitura";
+
+  const catInput = document.getElementById("blog-edit-categoria");
+  if (catInput) catInput.value = "História de Adoção";
+
+  const fotoInput = document.getElementById("blog-edit-foto");
+  if (fotoInput) fotoInput.value = "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80";
+
+  const thumbImg = document.getElementById("blog-edit-foto-thumb");
+  if (thumbImg) thumbImg.src = "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80";
+
+  modal.classList.remove("opacity-0", "pointer-events-none");
+  const content = modal.querySelector(".modal-content");
+  if (content) {
+    content.classList.remove("scale-95");
+    content.classList.add("scale-100");
+  }
+  if (window.lucide) lucide.createIcons({ root: modal });
+}
+
+function openAdminEditBlogModal(id) {
+  const modal = document.getElementById("modal-admin-blog");
+  if (!modal) return;
+
+  const post = window.BlogStorage ? BlogStorage.getById(id) : (window.DEFAULT_BLOG_POSTS || []).find(p => p.id === id);
+  if (!post) {
+    showToast("Matéria não encontrada!", "error");
+    return;
+  }
+
+  const idInput = document.getElementById("blog-edit-id");
+  if (idInput) idInput.value = post.id;
+
+  const titleEl = document.getElementById("modal-blog-title");
+  if (titleEl) titleEl.textContent = "Editar Matéria do Blog";
+
+  const tituloInput = document.getElementById("blog-edit-titulo");
+  if (tituloInput) tituloInput.value = post.titulo || "";
+
+  const catInput = document.getElementById("blog-edit-categoria");
+  if (catInput) catInput.value = post.categoria || "História de Adoção";
+
+  const autorInput = document.getElementById("blog-edit-autor");
+  if (autorInput) autorInput.value = post.autor || "";
+
+  const dateInput = document.getElementById("blog-edit-data");
+  if (dateInput) dateInput.value = post.data || "";
+
+  const leituraInput = document.getElementById("blog-edit-leitura");
+  if (leituraInput) leituraInput.value = post.tempoLeitura || "4 min de leitura";
+
+  const fotoInput = document.getElementById("blog-edit-foto");
+  if (fotoInput) fotoInput.value = post.foto || "";
+
+  const thumbImg = document.getElementById("blog-edit-foto-thumb");
+  if (thumbImg) thumbImg.src = post.foto || "img/matchpet-icon.png";
+
+  const resumoInput = document.getElementById("blog-edit-resumo");
+  if (resumoInput) resumoInput.value = post.resumo || "";
+
+  const conteudoInput = document.getElementById("blog-edit-conteudo");
+  if (conteudoInput) {
+    let cleanContent = post.conteudo || "";
+    if (typeof cleanContent === "string" && cleanContent.includes("<p")) {
+      cleanContent = cleanContent
+        .replace(/<p[^>]*>/gi, "")
+        .replace(/<\/p>/gi, "\n\n")
+        .replace(/<br\s*[\/]?>/gi, "\n")
+        .trim();
+    }
+    conteudoInput.value = cleanContent;
+  }
+
+  modal.classList.remove("opacity-0", "pointer-events-none");
+  const content = modal.querySelector(".modal-content");
+  if (content) {
+    content.classList.remove("scale-95");
+    content.classList.add("scale-100");
+  }
+  if (window.lucide) lucide.createIcons({ root: modal });
+}
+
+function closeAdminBlogModal() {
+  const modal = document.getElementById("modal-admin-blog");
+  if (!modal) return;
+  modal.classList.add("opacity-0", "pointer-events-none");
+  const content = modal.querySelector(".modal-content");
+  if (content) {
+    content.classList.remove("scale-100");
+    content.classList.add("scale-95");
+  }
+}
+
+function handleAdminSaveBlogPost(e) {
+  if (e) e.preventDefault();
+
+  const id = document.getElementById("blog-edit-id")?.value?.trim() || ("blog-" + Date.now());
+  const titulo = document.getElementById("blog-edit-titulo")?.value?.trim() || "";
+  const categoria = document.getElementById("blog-edit-categoria")?.value?.trim() || "História de Adoção";
+  const autor = document.getElementById("blog-edit-autor")?.value?.trim() || "Lar dos Anjos";
+  const data = document.getElementById("blog-edit-data")?.value?.trim() || "29 de Outubro de 2026";
+  const tempoLeitura = document.getElementById("blog-edit-leitura")?.value?.trim() || "4 min de leitura";
+  const foto = document.getElementById("blog-edit-foto")?.value?.trim() || "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80";
+  const resumo = document.getElementById("blog-edit-resumo")?.value?.trim() || "";
+  const rawConteudo = document.getElementById("blog-edit-conteudo")?.value?.trim() || "";
+
+  if (!titulo || !resumo || !rawConteudo) {
+    showToast("Por favor, preencha todos os campos obrigatórios (*)", "error");
+    return;
+  }
+
+  let formattedConteudo = rawConteudo;
+  if (!rawConteudo.startsWith("<")) {
+    const paras = rawConteudo.split(/\n{2,}/);
+    formattedConteudo = paras.map(p => `<p class="mb-3">${p.trim().replace(/\n/g, "<br>")}</p>`).join("\n");
+  }
+
+  const postData = {
+    id,
+    titulo,
+    categoria,
+    categoriaBadge: getCategoryBadgeClass(categoria),
+    autor,
+    data,
+    tempoLeitura,
+    foto,
+    resumo,
+    conteudo: formattedConteudo
+  };
+
+  if (window.BlogStorage) {
+    BlogStorage.savePost(postData);
+  }
+
+  closeAdminBlogModal();
+  renderAdminBlog();
+  showToast("✅ Matéria salva com sucesso e publicada no Blog!", "success");
+}
+
+function adminDeleteBlogPost(id) {
+  if (!confirm("Tem certeza que deseja excluir esta matéria do blog?")) {
+    return;
+  }
+
+  if (window.BlogStorage) {
+    BlogStorage.deletePost(id);
+  }
+
+  renderAdminBlog();
+  showToast("Matéria removida com sucesso!");
+}
+
+// Expõe no escopo global
+window.renderAdminBlog = renderAdminBlog;
+window.filterAdminBlogList = filterAdminBlogList;
+window.openAdminNewBlogModal = openAdminNewBlogModal;
+window.openAdminEditBlogModal = openAdminEditBlogModal;
+window.closeAdminBlogModal = closeAdminBlogModal;
+window.handleAdminSaveBlogPost = handleAdminSaveBlogPost;
+window.adminDeleteBlogPost = adminDeleteBlogPost;
+window.getCategoryBadgeClass = getCategoryBadgeClass;

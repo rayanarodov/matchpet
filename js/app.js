@@ -3175,7 +3175,7 @@ function renderBlogSection(category) {
   const grid = document.getElementById("blog-grid");
   if (!grid) return;
 
-  const posts = window.DEFAULT_BLOG_POSTS || [];
+  const posts = (window.BlogStorage ? BlogStorage.getPosts() : null) || window.DEFAULT_BLOG_POSTS || [];
   let filtered = posts;
 
   if (category && category !== "todas") {
@@ -3259,7 +3259,7 @@ function renderBlogSection(category) {
 }
 
 function openBlogModal(postId) {
-  const posts = window.DEFAULT_BLOG_POSTS || [];
+  const posts = (window.BlogStorage ? BlogStorage.getPosts() : null) || window.DEFAULT_BLOG_POSTS || [];
   const post = posts.find(p => p.id === postId);
   if (!post) return;
 
@@ -3285,7 +3285,16 @@ function openBlogModal(postId) {
   if (readEl) readEl.textContent = post.tempoLeitura;
   if (titleEl) titleEl.textContent = post.titulo;
   if (summaryEl) summaryEl.textContent = post.resumo;
-  if (bodyEl) bodyEl.innerHTML = post.conteudo;
+  if (bodyEl) {
+    if (typeof post.conteudo === 'string' && post.conteudo.trim().startsWith('<')) {
+      bodyEl.innerHTML = post.conteudo;
+    } else if (typeof post.conteudo === 'string') {
+      const paragraphs = post.conteudo.replace(/\r\n/g, '\n').split(/\n{2,}/);
+      bodyEl.innerHTML = paragraphs.map(p => `<p class="mb-4 text-slate-700 leading-relaxed font-sans">${p.replace(/\n/g, '<br>')}</p>`).join('');
+    } else {
+      bodyEl.innerHTML = '';
+    }
+  }
 
   modal.classList.remove("opacity-0", "pointer-events-none");
   const content = modal.querySelector(".modal-content");

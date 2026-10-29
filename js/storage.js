@@ -827,10 +827,73 @@ const LayoutDesignStorage = {
   }
 };
 
+const BLOG_STORAGE_KEY = "patinhas_blog_posts_v1";
+
+const BlogStorage = {
+  getPosts() {
+    try {
+      const data = localStorage.getItem(BLOG_STORAGE_KEY);
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn("Aviso ao ler Blog do LocalStorage:", e);
+    }
+    const def = JSON.parse(JSON.stringify(window.DEFAULT_BLOG_POSTS || []));
+    this.saveAllPosts(def);
+    return def;
+  },
+
+  saveAllPosts(posts) {
+    try {
+      localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
+    } catch (e) {
+      console.warn("Erro ao salvar Blog:", e);
+    }
+  },
+
+  getById(id) {
+    const posts = this.getPosts();
+    return posts.find(p => p.id === id) || null;
+  },
+
+  savePost(post) {
+    const posts = this.getPosts();
+    if (!post.id) post.id = "blog-" + Date.now();
+    const idx = posts.findIndex(p => p.id === post.id);
+    if (idx >= 0) {
+      posts[idx] = { ...posts[idx], ...post };
+    } else {
+      posts.unshift(post);
+    }
+    this.saveAllPosts(posts);
+    if (window.DEFAULT_BLOG_POSTS) {
+      const defIdx = window.DEFAULT_BLOG_POSTS.findIndex(p => p.id === post.id);
+      if (defIdx >= 0) window.DEFAULT_BLOG_POSTS[defIdx] = { ...window.DEFAULT_BLOG_POSTS[defIdx], ...post };
+      else window.DEFAULT_BLOG_POSTS.unshift(post);
+    }
+    return post;
+  },
+
+  deletePost(id) {
+    let posts = this.getPosts();
+    posts = posts.filter(p => p.id !== id);
+    this.saveAllPosts(posts);
+    if (window.DEFAULT_BLOG_POSTS) {
+      window.DEFAULT_BLOG_POSTS = window.DEFAULT_BLOG_POSTS.filter(p => p.id !== id);
+    }
+    return true;
+  }
+};
+
 if (typeof window !== "undefined") {
   window.PetStorage = PetStorage;
   window.SolidarityStorage = SolidarityStorage;
   window.NgoContractStorage = NgoContractStorage;
   window.LayoutDesignStorage = LayoutDesignStorage;
+  window.BlogStorage = BlogStorage;
 }
 

@@ -18,9 +18,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v6">
+  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v7">
   <!-- Estilos Globais -->
-  <link rel="stylesheet" href="css/styles.css?v=20261029_v6">
+  <link rel="stylesheet" href="css/styles.css?v=20261029_v7">
   
   
 </head>
@@ -165,6 +165,16 @@
           <span>Métricas & Pesquisa (Analytics)</span>
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-[#e6f4f5] text-[#004d50] font-extrabold tracking-wide uppercase border border-[#e8ddcf]">Exclusivo Moderador</span>
         </button>
+        <button 
+          id="tab-btn-blog" 
+          onclick="switchAdminTab('blog')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#007E82] hover:bg-[#F9F3EA] transition-all border border-transparent flex-shrink-0 whitespace-nowrap cursor-pointer"
+        >
+          <i data-lucide="newspaper" class="w-4 h-4 text-[#007E82]"></i>
+          <span>Blog Atualizado</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800 font-extrabold tracking-wide uppercase border border-sky-200">Matérias</span>
+        </button>
+
       </div>
 
       <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
@@ -1494,6 +1504,95 @@
 
     </div>
 
+  
+    <!-- SEÇÃO: GESTÃO DO BLOG ATUALIZADO (MODERADOR) -->
+    <div id="tab-content-blog" class="space-y-8 hidden">
+
+      <!-- Cabeçalho do Módulo do Blog -->
+      <div class="bg-[#F9F3EA] rounded-3xl p-6 sm:p-8 text-slate-950 border-2 border-[#007E82] shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-950 text-xs font-black uppercase tracking-wider">
+            <i data-lucide="newspaper" class="w-3.5 h-3.5 text-[#007E82]"></i> Conteúdo Editorial &amp; Notícias
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">
+            Blog Atualizado • Histórias, Dicas &amp; Notícias
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            Crie, edite, organize e publique matérias completas, histórias de superação e orientações veterinárias. Todas as alterações são sincronizadas e refletidas instantaneamente na aba pública do Blog.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button 
+            type="button" 
+            onclick="openAdminNewBlogModal()" 
+            class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004e52] text-white text-xs font-black transition-all shadow-md flex items-center gap-1.5 cursor-pointer hover:scale-[1.02]"
+          >
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>+ Nova Matéria</span>
+          </button>
+          <a 
+            href="index.html#blog" 
+            target="_blank" 
+            class="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+          >
+            <i data-lucide="external-link" class="w-4 h-4 text-slate-500"></i>
+            <span>Ver no Portal</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Barra de Estatísticas & Filtros do Blog -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold">
+              <i data-lucide="book-open" class="w-5 h-5 text-sky-600"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-black text-slate-900">
+                Matérias Cadastradas (<span id="admin-blog-count">0</span>)
+              </h3>
+              <p class="text-xs text-slate-500">Gerencie todos os artigos publicados para a comunidade de tutores e adotantes</p>
+            </div>
+          </div>
+
+          <!-- Filtro de Busca e Categoria -->
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="relative min-w-[200px]">
+              <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="admin-blog-search" 
+                oninput="filterAdminBlogList()" 
+                placeholder="Buscar matéria..." 
+                class="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+              >
+            </div>
+
+            <select 
+              id="admin-blog-category-filter" 
+              onchange="filterAdminBlogList()" 
+              class="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none cursor-pointer"
+            >
+              <option value="todas">Todas as Categorias</option>
+              <option value="História de Adoção">História de Adoção</option>
+              <option value="Dicas &amp; Saúde">Dicas &amp; Saúde</option>
+              <option value="Saúde Animal">Saúde Animal</option>
+              <option value="Notícias das ONGs">Notícias das ONGs</option>
+              <option value="Comunidade">Comunidade</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grade de Matérias Cadastradas -->
+        <div id="admin-blog-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Renderizado via admin.js -->
+        </div>
+      </div>
+
+    </div>
+
   </main>
 
   <!-- Modal de Configuração do Cloudinary -->
@@ -1960,6 +2059,174 @@
   </div>
 
   <!-- Modal de Cadastro de Nova ONG com Diretrizes Integradas (Exclusivo Administrador) -->
+  
+  <!-- Modal de Adicionar / Editar Matéria do Blog -->
+  <div id="modal-admin-blog" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 opacity-0 pointer-events-none modal-backdrop bg-slate-900/70 shadow-xs transition-opacity duration-200">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[92vh] flex flex-col modal-content transform scale-95 transition-all overflow-hidden border border-slate-200">
+      
+      <!-- Cabeçalho do Modal -->
+      <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-gradient-to-r from-sky-50 via-teal-50 to-[#F9F3EA] flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold shadow-xs">
+            <i data-lucide="newspaper" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900" id="modal-blog-title">Nova Matéria do Blog</h3>
+            <p class="text-xs text-slate-500">Preencha os dados do artigo para publicação no portal</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeAdminBlogModal()" class="w-8 h-8 rounded-full bg-white/80 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors shadow-2xs cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Formulário do Modal com Rolagem Suave -->
+      <form id="admin-blog-form" onsubmit="handleAdminSaveBlogPost(event)" class="p-6 overflow-y-auto space-y-4 flex-1 overscroll-contain modal-scroll">
+        <input type="hidden" id="blog-edit-id" value="">
+
+        <!-- Título -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Título da Matéria *</label>
+          <input 
+            type="text" 
+            id="blog-edit-titulo" 
+            required 
+            placeholder="Ex: O Recomeço de Pipoca: De animal resgatado a membro da família" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+          >
+        </div>
+
+        <!-- Categoria e Autor -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Categoria *</label>
+            <select 
+              id="blog-edit-categoria" 
+              required 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none cursor-pointer"
+            >
+              <option value="História de Adoção">História de Adoção</option>
+              <option value="Dicas &amp; Saúde">Dicas &amp; Saúde</option>
+              <option value="Saúde Animal">Saúde Animal</option>
+              <option value="Notícias das ONGs">Notícias das ONGs</option>
+              <option value="Comunidade">Comunidade</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Autor / Crédito *</label>
+            <input 
+              type="text" 
+              id="blog-edit-autor" 
+              required 
+              placeholder="Ex: Dra. Patrícia Mendes ou Lar dos Anjos" 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+            >
+          </div>
+        </div>
+
+        <!-- Data de Publicação e Tempo de Leitura -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Data de Publicação</label>
+            <input 
+              type="text" 
+              id="blog-edit-data" 
+              placeholder="Ex: 29 de Outubro de 2026" 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+            >
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tempo Estimado de Leitura</label>
+            <input 
+              type="text" 
+              id="blog-edit-leitura" 
+              placeholder="Ex: 4 min de leitura" 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+            >
+          </div>
+        </div>
+
+        <!-- Foto de Capa (Upload do Dispositivo + URL + Preview) -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Foto de Capa da Matéria *</label>
+          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-20 h-14 rounded-xl bg-slate-200 overflow-hidden border border-slate-300 flex-shrink-0 shadow-2xs">
+                <img id="blog-edit-foto-thumb" src="" alt="Prévia da Capa" class="w-full h-full object-cover" onerror="this.src='img/matchpet-icon.png'">
+              </div>
+              <div class="flex-1 space-y-1">
+                <label class="inline-flex px-3 py-1.5 rounded-xl bg-[#007E82] hover:bg-[#00686c] text-white text-xs font-bold transition-all items-center gap-1.5 cursor-pointer shadow-xs active:scale-95">
+                  <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                  <span>Escolher Foto do Aparelho</span>
+                  <input type="file" id="blog-edit-foto-file" accept="image/*" class="hidden" onchange="handleSingleImageUpload(event, 'blog-edit-foto', 'blog-edit-foto-thumb')">
+                </label>
+                <span class="block text-[11px] text-slate-500">Selecione uma imagem direto do celular ou computador</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-200">
+              <label for="blog-edit-foto" class="block text-[10px] font-bold text-slate-500 uppercase mb-0.5">Ou cole o link da foto (URL):</label>
+              <input 
+                type="text" 
+                id="blog-edit-foto" 
+                oninput="updateImageThumbFromInput('blog-edit-foto', 'blog-edit-foto-thumb')" 
+                placeholder="https://images.unsplash.com/... ou foto enviada acima" 
+                required 
+                class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-[#007E82] focus:outline-none"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumo / Subtítulo -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Resumo Curto (Exibido no Card do Artigo) *</label>
+          <textarea 
+            id="blog-edit-resumo" 
+            rows="2" 
+            required 
+            placeholder="Breve resumo atraente de 1 a 3 frases que desperte o interesse do leitor..." 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+          ></textarea>
+        </div>
+
+        <!-- Conteúdo Completo do Artigo -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold text-slate-700">Conteúdo Completo da Matéria *</label>
+            <span class="text-[10px] text-slate-400 font-medium">Separe os parágrafos com uma linha em branco</span>
+          </div>
+          <textarea 
+            id="blog-edit-conteudo" 
+            rows="7" 
+            required 
+            placeholder="Escreva aqui o texto completo da matéria. Pode usar parágrafos simples separados por linha vazia ou tags HTML como <p>, <strong>, <em>, etc." 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-sans leading-relaxed focus:ring-2 focus:ring-[#007E82] focus:bg-white focus:outline-none"
+          ></textarea>
+        </div>
+
+        <!-- Rodapé / Ações do Modal -->
+        <div class="pt-3 border-t border-slate-200 flex items-center justify-end gap-2.5">
+          <button 
+            type="button" 
+            onclick="closeAdminBlogModal()" 
+            class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 text-xs font-bold transition-colors cursor-pointer"
+          >
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004e52] text-white text-xs font-black shadow-md transition-all cursor-pointer flex items-center gap-1.5 active:scale-95"
+          >
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>Salvar Matéria</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div id="admin-ong-register-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/80 shadow-xs transition-all duration-300">
     <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[94vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-all border border-orange-200 relative">
       
@@ -2236,14 +2503,14 @@
   </div>
 
   <!-- Scripts: Banco de Dados IndexedDB, Cloudinary, Analytics, Storage e Lógica do CRUD -->
-  <script src="js/lucide.min.js?v=20261029_v6"></script>
-  <script src="js/data.js?v=20261029_v6"></script>
-  <script src="js/db.js?v=20261029_v6"></script>
-  <script src="js/cloudinary.js?v=20261029_v6"></script>
-  <script src="js/analytics.js?v=20261029_v6"></script>
-  <script src="js/storage.js?v=20261029_v6"></script>
-  <script src="js/design-studio.js?v=20261029_v6"></script>
-  <script src="js/admin.js?v=20261029_v6"></script>
+  <script src="js/lucide.min.js?v=20261029_v7"></script>
+  <script src="js/data.js?v=20261029_v7"></script>
+  <script src="js/db.js?v=20261029_v7"></script>
+  <script src="js/cloudinary.js?v=20261029_v7"></script>
+  <script src="js/analytics.js?v=20261029_v7"></script>
+  <script src="js/storage.js?v=20261029_v7"></script>
+  <script src="js/design-studio.js?v=20261029_v7"></script>
+  <script src="js/admin.js?v=20261029_v7"></script>
   <script>
     function setCrudLayout(mode) {
       const grid = document.getElementById('admin-crud-main-grid');
