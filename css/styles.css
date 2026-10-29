@@ -2473,20 +2473,27 @@ button,
 }
 
 /* ==========================================================================
-   MODAIS DE GESTÃO DO ADMIN (FEIRINHAS, RIFAS & ONGS) - ROLAGEM 100% FLUIDA
+   MODAIS DE GESTÃO DO ADMIN (FEIRINHAS, RIFAS, ONGS & BLOG) - ROLAGEM 100% FLUIDA
    ========================================================================== */
 #modal-edit-evento,
 #modal-edit-rifa,
-#modal-edit-ong {
+#modal-edit-ong,
+#modal-admin-blog {
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 1rem !important;
+  overscroll-behavior: contain !important;
 }
 
 #modal-edit-evento .modal-content,
 #modal-edit-rifa .modal-content,
-#modal-edit-ong .modal-content {
-  max-height: 90vh !important;
-  max-height: calc(100vh - 3rem) !important;
+#modal-edit-ong .modal-content,
+#modal-admin-blog .modal-content {
+  margin: auto !important; /* Evita que o topo seja cortado no zoom ou telas menores */
+  max-height: calc(100vh - 2rem) !important;
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
@@ -2495,7 +2502,8 @@ button,
 
 #modal-edit-evento form,
 #modal-edit-rifa form,
-#modal-edit-ong form {
+#modal-edit-ong form,
+#modal-admin-blog form {
   display: flex !important;
   flex-direction: column !important;
   flex: 1 1 auto !important;
@@ -2503,27 +2511,35 @@ button,
   overflow: hidden !important;
 }
 
-.modal-scroll-body {
+.modal-scroll-body,
+.modal-scroll {
   overflow-y: auto !important;
   overscroll-behavior: contain !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: #cbd5e1 #f8fafc !important;
+  scrollbar-width: auto !important;
+  scrollbar-color: #007E82 #f1f5f9 !important;
+  scrollbar-gutter: stable;
 }
 
-.modal-scroll-body::-webkit-scrollbar {
-  width: 7px !important;
+.modal-scroll-body::-webkit-scrollbar,
+.modal-scroll::-webkit-scrollbar {
+  width: 10px !important;
 }
 
-.modal-scroll-body::-webkit-scrollbar-track {
-  background: #f8fafc !important;
+.modal-scroll-body::-webkit-scrollbar-track,
+.modal-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
   border-radius: 9999px !important;
+  border: 1px solid #e2e8f0 !important;
 }
 
-.modal-scroll-body::-webkit-scrollbar-thumb {
-  background: #cbd5e1 !important;
+.modal-scroll-body::-webkit-scrollbar-thumb,
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: #007E82 !important;
   border-radius: 9999px !important;
+  border: 2px solid #f1f5f9 !important;
 }
 
-.modal-scroll-body::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8 !important;
+.modal-scroll-body::-webkit-scrollbar-thumb:hover,
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #005c60 !important;
 }

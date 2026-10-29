@@ -18,9 +18,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v7">
+  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v8">
   <!-- Estilos Globais -->
-  <link rel="stylesheet" href="css/styles.css?v=20261029_v7">
+  <link rel="stylesheet" href="css/styles.css?v=20261029_v8">
   
   
 </head>
@@ -1672,14 +1672,48 @@
   <!-- MODAL: EDITAR DADOS DA ONG -->
   <div id="modal-edit-ong" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
     <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
-      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
-        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
-          <i data-lucide="building-2" class="w-5 h-5 text-orange-600"></i>
-          <span id="modal-ong-title">Editar Perfil & Métricas da ONG</span>
-        </h3>
-        <button type="button" onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+      <div class="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3.5 bg-gradient-to-r from-orange-50/50 via-white to-teal-50/40 flex-shrink-0 gap-2">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold flex-shrink-0 shadow-2xs">
+            <i data-lucide="building-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-sm sm:text-base font-black text-slate-900 leading-tight truncate">
+              <span id="modal-ong-title">Editar ONG &amp; Abrigo: Lar dos Anjos</span>
+            </h3>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium block truncate">Role pelo painel ou use os botões rápidos de subir e descer</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+          <!-- Botões Rápidos Subir / Descer -->
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-ong', 'top')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Subir até o topo do formulário"
+          >
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-[#007E82]"></i>
+            <span class="hidden sm:inline">Subir</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-ong', 'bottom')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Descer até o final / salvar"
+          >
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#007E82]"></i>
+            <span class="hidden sm:inline">Descer</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="closeModalEditOng()" 
+            class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors shadow-2xs ml-0.5" 
+            title="Fechar"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
       <form id="form-edit-ong" onsubmit="handleSaveOng(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
@@ -1811,13 +1845,41 @@
         </div>
 
         </div>
-        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
-          <button type="button" onclick="closeModalEditOng()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
-            Cancelar
-          </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
-            Salvar Alterações da ONG &amp; Abrigo
-          </button>
+        <div class="flex items-center justify-between gap-2 px-4 sm:px-6 py-3 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <!-- Ações Rápidas de Navegação -->
+          <div class="flex items-center gap-1.5">
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-ong', 'top')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+              title="Voltar ao início do formulário"
+            >
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span class="hidden sm:inline">Voltar ao Topo</span>
+              <span class="sm:hidden">Topo</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-ong', 'bottom')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+              title="Ir para o final do formulário"
+            >
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span class="hidden sm:inline">Ir ao Final</span>
+              <span class="sm:hidden">Final</span>
+            </button>
+          </div>
+
+          <!-- Ações de Submissão -->
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeModalEditOng()" class="px-3 sm:px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
+              Cancelar
+            </button>
+            <button type="submit" class="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white text-xs font-black shadow-md cursor-pointer transition-all active:scale-95 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Salvar Alterações</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -1826,14 +1888,47 @@
   <!-- MODAL: NOVA / EDITAR FEIRINHA DE ADOÇÃO -->
   <div id="modal-edit-evento" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
     <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
-      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
-        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
-          <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
-          <span id="modal-evento-title">Adicionar Feirinha de Adoção</span>
-        </h3>
-        <button type="button" onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+      <div class="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3.5 bg-gradient-to-r from-teal-50/50 via-white to-sky-50/40 flex-shrink-0 gap-2">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center font-bold flex-shrink-0 shadow-2xs">
+            <i data-lucide="calendar" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-sm sm:text-base font-black text-slate-900 leading-tight truncate">
+              <span id="modal-evento-title">Adicionar Feirinha de Adoção</span>
+            </h3>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium block truncate">Role pelo painel ou use os botões rápidos de subir e descer</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-evento', 'top')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Subir até o topo"
+          >
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-teal-600"></i>
+            <span class="hidden sm:inline">Subir</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-evento', 'bottom')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Descer até o final"
+          >
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-teal-600"></i>
+            <span class="hidden sm:inline">Descer</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="closeModalEditEvento()" 
+            class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors shadow-2xs ml-0.5" 
+            title="Fechar"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
       <form id="form-edit-evento" onsubmit="handleSaveEvento(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
@@ -1919,13 +2014,36 @@
         </div>
 
         </div>
-        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
-          <button type="button" onclick="closeModalEditEvento()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
-            Cancelar
-          </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
-            Salvar Feirinha
-          </button>
+        <div class="flex items-center justify-between gap-2 px-4 sm:px-6 py-3 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <div class="flex items-center gap-1.5">
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-evento', 'top')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-teal-600"></i>
+              <span class="hidden sm:inline">Voltar ao Topo</span>
+              <span class="sm:hidden">Topo</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-evento', 'bottom')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-teal-600"></i>
+              <span class="hidden sm:inline">Ir ao Final</span>
+              <span class="sm:hidden">Final</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeModalEditEvento()" class="px-3 sm:px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
+              Cancelar
+            </button>
+            <button type="submit" class="px-4 sm:px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-black shadow-md cursor-pointer transition-all flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Salvar Feirinha</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -1934,14 +2052,47 @@
   <!-- MODAL: NOVA / EDITAR RIFA OU CAMPANHA DE RAÇÃO -->
   <div id="modal-edit-rifa" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
     <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
-      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
-        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
-          <i data-lucide="ticket" class="w-5 h-5 text-amber-500"></i>
-          <span id="modal-rifa-title">Adicionar Rifa / Campanha Solidária</span>
-        </h3>
-        <button type="button" onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+      <div class="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3.5 bg-gradient-to-r from-amber-50/50 via-white to-orange-50/40 flex-shrink-0 gap-2">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold flex-shrink-0 shadow-2xs">
+            <i data-lucide="ticket" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-sm sm:text-base font-black text-slate-900 leading-tight truncate">
+              <span id="modal-rifa-title">Adicionar Rifa / Campanha Solidária</span>
+            </h3>
+            <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium block truncate">Role pelo painel ou use os botões rápidos de subir e descer</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-rifa', 'top')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Subir até o topo"
+          >
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span class="hidden sm:inline">Subir</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-edit-rifa', 'bottom')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Descer até o final"
+          >
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span class="hidden sm:inline">Descer</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="closeModalEditRifa()" 
+            class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors shadow-2xs ml-0.5" 
+            title="Fechar"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
       <form id="form-edit-rifa" onsubmit="handleSaveRifa(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
@@ -2046,13 +2197,36 @@
         </div>
 
         </div>
-        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
-          <button type="button" onclick="closeModalEditRifa()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
-            Cancelar
-          </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
-            Salvar Campanha
-          </button>
+        <div class="flex items-center justify-between gap-2 px-4 sm:px-6 py-3 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <div class="flex items-center gap-1.5">
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-rifa', 'top')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-amber-600"></i>
+              <span class="hidden sm:inline">Voltar ao Topo</span>
+              <span class="sm:hidden">Topo</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-edit-rifa', 'bottom')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-amber-600"></i>
+              <span class="hidden sm:inline">Ir ao Final</span>
+              <span class="sm:hidden">Final</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeModalEditRifa()" class="px-3 sm:px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
+              Cancelar
+            </button>
+            <button type="submit" class="px-4 sm:px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-black shadow-md cursor-pointer transition-all flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Salvar Campanha</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -2065,19 +2239,39 @@
     <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[92vh] flex flex-col modal-content transform scale-95 transition-all overflow-hidden border border-slate-200">
       
       <!-- Cabeçalho do Modal -->
-      <div class="p-5 border-b border-slate-200 flex items-center justify-between bg-gradient-to-r from-sky-50 via-teal-50 to-[#F9F3EA] flex-shrink-0">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold shadow-xs">
-            <i data-lucide="newspaper" class="w-5 h-5"></i>
+      <div class="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-gradient-to-r from-sky-50 via-teal-50 to-[#F9F3EA] flex-shrink-0 gap-2">
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold shadow-xs flex-shrink-0">
+            <i data-lucide="newspaper" class="w-4 h-4 sm:w-5 sm:h-5"></i>
           </div>
-          <div>
-            <h3 class="text-base font-extrabold text-slate-900" id="modal-blog-title">Nova Matéria do Blog</h3>
-            <p class="text-xs text-slate-500">Preencha os dados do artigo para publicação no portal</p>
+          <div class="min-w-0">
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 truncate" id="modal-blog-title">Nova Matéria do Blog</h3>
+            <p class="text-[10px] sm:text-xs text-slate-500 truncate">Preencha os dados ou use os botões rápidos de subir e descer</p>
           </div>
         </div>
-        <button type="button" onclick="closeAdminBlogModal()" class="w-8 h-8 rounded-full bg-white/80 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors shadow-2xs cursor-pointer">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
+        <div class="flex items-center gap-1.5 flex-shrink-0">
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-admin-blog', 'top')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Subir até o topo"
+          >
+            <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-[#007E82]"></i>
+            <span class="hidden sm:inline">Subir</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="scrollAdminModalBody('modal-admin-blog', 'bottom')" 
+            class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1 shadow-2xs cursor-pointer active:scale-95" 
+            title="Descer até o final"
+          >
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#007E82]"></i>
+            <span class="hidden sm:inline">Descer</span>
+          </button>
+          <button type="button" onclick="closeAdminBlogModal()" class="w-8 h-8 rounded-full bg-white/80 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors shadow-2xs cursor-pointer ml-0.5">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Formulário do Modal com Rolagem Suave -->
@@ -2207,21 +2401,43 @@
         </div>
 
         <!-- Rodapé / Ações do Modal -->
-        <div class="pt-3 border-t border-slate-200 flex items-center justify-end gap-2.5">
-          <button 
-            type="button" 
-            onclick="closeAdminBlogModal()" 
-            class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 text-xs font-bold transition-colors cursor-pointer"
-          >
-            Cancelar
-          </button>
-          <button 
-            type="submit" 
-            class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004e52] text-white text-xs font-black shadow-md transition-all cursor-pointer flex items-center gap-1.5 active:scale-95"
-          >
-            <i data-lucide="check" class="w-4 h-4"></i>
-            <span>Salvar Matéria</span>
-          </button>
+        <div class="pt-3 border-t border-slate-200 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5">
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-admin-blog', 'top')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span class="hidden sm:inline">Voltar ao Topo</span>
+              <span class="sm:hidden">Topo</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="scrollAdminModalBody('modal-admin-blog', 'bottom')" 
+              class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[11px] sm:text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer shadow-2xs"
+            >
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#007E82]"></i>
+              <span class="hidden sm:inline">Ir ao Final</span>
+              <span class="sm:hidden">Final</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              onclick="closeAdminBlogModal()" 
+              class="px-3 sm:px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 text-xs font-bold transition-colors cursor-pointer"
+            >
+              Cancelar
+            </button>
+            <button 
+              type="submit" 
+              class="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-[#007E82] to-[#005c60] hover:from-[#00686c] hover:to-[#004e52] text-white text-xs font-black shadow-md transition-all cursor-pointer flex items-center gap-1.5 active:scale-95"
+            >
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Salvar Matéria</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -2503,14 +2719,14 @@
   </div>
 
   <!-- Scripts: Banco de Dados IndexedDB, Cloudinary, Analytics, Storage e Lógica do CRUD -->
-  <script src="js/lucide.min.js?v=20261029_v7"></script>
-  <script src="js/data.js?v=20261029_v7"></script>
-  <script src="js/db.js?v=20261029_v7"></script>
-  <script src="js/cloudinary.js?v=20261029_v7"></script>
-  <script src="js/analytics.js?v=20261029_v7"></script>
-  <script src="js/storage.js?v=20261029_v7"></script>
-  <script src="js/design-studio.js?v=20261029_v7"></script>
-  <script src="js/admin.js?v=20261029_v7"></script>
+  <script src="js/lucide.min.js?v=20261029_v8"></script>
+  <script src="js/data.js?v=20261029_v8"></script>
+  <script src="js/db.js?v=20261029_v8"></script>
+  <script src="js/cloudinary.js?v=20261029_v8"></script>
+  <script src="js/analytics.js?v=20261029_v8"></script>
+  <script src="js/storage.js?v=20261029_v8"></script>
+  <script src="js/design-studio.js?v=20261029_v8"></script>
+  <script src="js/admin.js?v=20261029_v8"></script>
   <script>
     function setCrudLayout(mode) {
       const grid = document.getElementById('admin-crud-main-grid');

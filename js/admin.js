@@ -2370,6 +2370,7 @@ function deleteAdminRifa(id) {
 
 // Helpers de Modal Genérico
 function openModalGeneric(modalId) {
+    if (typeof setupModalWheelForwarding === 'function') setupModalWheelForwarding();
   const modal = document.getElementById(modalId);
   if (!modal) return;
   modal.classList.remove("opacity-0", "pointer-events-none");
@@ -3483,3 +3484,95 @@ window.closeAdminBlogModal = closeAdminBlogModal;
 window.handleAdminSaveBlogPost = handleAdminSaveBlogPost;
 window.adminDeleteBlogPost = adminDeleteBlogPost;
 window.getCategoryBadgeClass = getCategoryBadgeClass;
+
+
+/* ==========================================================================
+   NAVEGAÇÃO SUAVE E ROLAGEM DE MODAIS (SUBIR / DESCER & WHEEL FORWARDING)
+   ========================================================================== */
+
+function scrollAdminModalBody(targetIdOrModalId, direction) {
+  let scrollBody = null;
+  const el = document.getElementById(targetIdOrModalId);
+  if (el) {
+    scrollBody = el.querySelector('.modal-scroll-body') || 
+                 el.querySelector('.modal-scroll') || 
+                 el.querySelector('form .overflow-y-auto') || 
+                 el.querySelector('.overflow-y-auto') ||
+                 (el.classList.contains('overflow-y-auto') ? el : null);
+  }
+  if (!scrollBody) {
+    const activeModal = document.querySelector('#modal-edit-ong:not(.opacity-0), #modal-edit-evento:not(.opacity-0), #modal-edit-rifa:not(.opacity-0), #modal-admin-blog:not(.opacity-0)');
+    if (activeModal) {
+      scrollBody = activeModal.querySelector('.modal-scroll-body') || 
+                   activeModal.querySelector('.modal-scroll') || 
+                   activeModal.querySelector('form .overflow-y-auto');
+    }
+  }
+
+  if (!scrollBody) return;
+
+  if (direction === 'top') {
+    scrollBody.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (direction === 'bottom') {
+    scrollBody.scrollTo({ top: scrollBody.scrollHeight, behavior: 'smooth' });
+  } else if (typeof direction === 'number') {
+    scrollBody.scrollBy({ top: direction, behavior: 'smooth' });
+  }
+}
+window.scrollAdminModalBody = scrollAdminModalBody;
+
+function setupModalWheelForwarding() {
+  const modalIds = ['modal-edit-ong', 'modal-edit-evento', 'modal-edit-rifa', 'modal-admin-blog'];
+  modalIds.forEach(mId => {
+    const modalEl = document.getElementById(mId);
+    if (!modalEl || modalEl._wheelBound) return;
+    modalEl._wheelBound = true;
+
+    modalEl.addEventListener('wheel', (e) => {
+      const scrollBody = modalEl.querySelector('.modal-scroll-body') || 
+                         modalEl.querySelector('.modal-scroll') || 
+                         modalEl.querySelector('form .overflow-y-auto');
+      if (!scrollBody) return;
+
+      const target = e.target;
+      const isInside = scrollBody.contains(target);
+      const isTextarea = target.tagName === 'TEXTAREA';
+      const isScrollableTextarea = isTextarea && (target.scrollHeight > target.clientHeight);
+
+      // If wheel is on header, footer, backdrop or non-scrollable area, scroll the modal body!
+      if (!isInside || (!isScrollableTextarea && !isTextarea)) {
+        scrollBody.scrollTop += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+  });
+}
+window.setupModalWheelForwarding = setupModalWheelForwarding;
+
+// Atalhos de teclado para rolagem (PageDown, PageUp, Home, End)
+document.addEventListener('keydown', (e) => {
+  const openModal = document.querySelector('#modal-edit-ong:not(.opacity-0), #modal-edit-evento:not(.opacity-0), #modal-edit-rifa:not(.opacity-0), #modal-admin-blog:not(.opacity-0)');
+  if (!openModal) return;
+
+  const active = document.activeElement;
+  const isTyping = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT');
+
+  const scrollBody = openModal.querySelector('.modal-scroll-body') || 
+                     openModal.querySelector('.modal-scroll') || 
+                     openModal.querySelector('form .overflow-y-auto');
+  if (!scrollBody) return;
+
+  if (e.key === 'PageDown' && !isTyping) {
+    scrollBody.scrollBy({ top: 320, behavior: 'smooth' });
+    e.preventDefault();
+  } else if (e.key === 'PageUp' && !isTyping) {
+    scrollBody.scrollBy({ top: -320, behavior: 'smooth' });
+    e.preventDefault();
+  } else if (e.key === 'Home' && !isTyping) {
+    scrollBody.scrollTo({ top: 0, behavior: 'smooth' });
+    e.preventDefault();
+  } else if (e.key === 'End' && !isTyping) {
+    scrollBody.scrollTo({ top: scrollBody.scrollHeight, behavior: 'smooth' });
+    e.preventDefault();
+  }
+});
