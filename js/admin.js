@@ -3075,9 +3075,12 @@ async function handleSaveOngTab(e) {
   };
 
   await SolidarityStorage.saveOng(updatedOng);
-  showToast("✅ Conteúdo da aba 'Conheça a ONG' atualizado com sucesso!");
+  showToast("✅ Conteúdo da aba 'Conheça a ONG' salvo com sucesso!");
   syncTabOngLivePreview();
   if (typeof loadAdminOngs === "function") await loadAdminOngs();
+  if (typeof populateAdminOngSelectors === "function") {
+    populateAdminOngSelectors(await SolidarityStorage.getOngs());
+  }
 }
 
 window.loadAdminOngTab = loadAdminOngTab;
@@ -3090,3 +3093,15 @@ window.tabRenderShelterVideos = tabRenderShelterVideos;
 window.tabAddShelterVideo = tabAddShelterVideo;
 window.tabRemoveShelterVideo = tabRemoveShelterVideo;
 window.handleSaveOngTab = handleSaveOngTab;
+
+
+function submitTabOngForm() {
+  const form = document.getElementById("form-tab-ong");
+  if (form) {
+    if (form.reportValidity && !form.reportValidity()) {
+      return;
+    }
+  }
+  handleSaveOngTab();
+}
+window.submitTabOngForm = submitTabOngForm;

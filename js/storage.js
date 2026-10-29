@@ -187,42 +187,29 @@ const SolidarityStorage = {
         this.saveAllOngs(ongs);
       }
 
-      if (window.DEFAULT_ONGS && window.DEFAULT_ONGS.length > 0) {
-        const def = window.DEFAULT_ONGS[0];
-        let changed = false;
-        ongs = ongs.map(o => {
-          let updated = { ...o };
-          if (updated.nome !== def.nome || updated.sigla !== def.sigla || updated.chavePix !== def.chavePix) {
-            updated.nome = def.nome;
-            updated.sigla = def.sigla;
-            updated.chavePix = def.chavePix;
-            updated.instagram = def.instagram;
-            changed = true;
-          }
-          if ((!updated.historia || updated.historia.length < 800 || updated.historia.includes("ProAnima")) && def.historia) {
-            updated.historia = def.historia;
-            changed = true;
-          }
-          if ((!updated.descricao || updated.descricao.includes("Pioneira na proteção e bem-estar animal no Distrito Federal.") || updated.descricao.includes("ProAnima")) && def.descricao) {
-            updated.descricao = def.descricao;
-            changed = true;
-          }
-          if ((!updated.fotosAbrigo || updated.fotosAbrigo.length === 0) && def.fotosAbrigo) {
-            updated.fotosAbrigo = [...def.fotosAbrigo];
-            changed = true;
-          }
-          if ((!updated.videosAbrigo || updated.videosAbrigo.length === 0) && def.videosAbrigo) {
-            updated.videosAbrigo = [...def.videosAbrigo];
-            changed = true;
-          }
-          if (updated.equipeLinhaFrente) {
-            delete updated.equipeLinhaFrente;
-            changed = true;
-          }
-          return updated;
-        });
-        if (changed) this.saveAllOngs(ongs);
-      }
+      // Preserva 100% as alterações feitas pelo usuário, limpando apenas dados legados se existirem
+      let changed = false;
+      ongs = ongs.map(o => {
+        let updated = { ...o };
+        if (updated.nome && updated.nome.includes("ProAnima")) {
+          updated.nome = "Lar dos Anjos";
+          changed = true;
+        }
+        if (updated.historia && updated.historia.includes("ProAnima")) {
+          updated.historia = updated.historia.replace(/ProAnima/g, "Lar dos Anjos");
+          changed = true;
+        }
+        if (updated.descricao && updated.descricao.includes("ProAnima")) {
+          updated.descricao = updated.descricao.replace(/ProAnima/g, "Lar dos Anjos");
+          changed = true;
+        }
+        if (updated.equipeLinhaFrente) {
+          delete updated.equipeLinhaFrente;
+          changed = true;
+        }
+        return updated;
+      });
+      if (changed) this.saveAllOngs(ongs);
     }
 
     // Calcula animais disponíveis dinamicamente - usa cache em memória antes de tocar no IndexedDB
@@ -283,6 +270,9 @@ const SolidarityStorage = {
       ongs.push(ong);
     }
     this.saveAllOngs(ongs);
+    if (window.DEFAULT_ONGS && window.DEFAULT_ONGS.length > 0 && ong.id === "ong-001") {
+      window.DEFAULT_ONGS[0] = { ...window.DEFAULT_ONGS[0], ...ong };
+    }
     return ong;
   },
 
@@ -305,11 +295,7 @@ const SolidarityStorage = {
                 updated = true;
               }
             }
-            if (defItem && (!e.ongNome || e.ongNome !== defItem.ongNome)) {
-              e.ongNome = defItem.ongNome;
-              e.ongId = defItem.ongId;
-              updated = true;
-            } else if (e.ongNome && e.ongNome.includes("ProAnima")) {
+            if (e.ongNome && e.ongNome.includes("ProAnima")) {
               e.ongNome = "Lar dos Anjos";
               updated = true;
             }
@@ -376,11 +362,7 @@ const SolidarityStorage = {
                 updated = true;
               }
             }
-            if (defItem && (!r.ongNome || r.ongNome !== defItem.ongNome)) {
-              r.ongNome = defItem.ongNome;
-              r.ongId = defItem.ongId;
-              updated = true;
-            } else if (r.ongNome && r.ongNome.includes("ProAnima")) {
+            if (r.ongNome && r.ongNome.includes("ProAnima")) {
               r.ongNome = "Lar dos Anjos";
               updated = true;
             }
