@@ -2929,7 +2929,7 @@ function switchMainTab(tabName) {
   const portalSegmentTabs = [
     { id: 'animais', btn: 'portal-tab-animais', badge: 'panel-badge-pets', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
     { id: 'ongs', btn: 'portal-tab-ongs', badge: 'panel-badge-ongs', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
-    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: 'panel-badge-rifas-eventos', activeBadgeCls: 'bg-white text-slate-950 font-black shadow-xs border border-amber-300', inactiveBadgeCls: 'bg-gradient-to-r from-amber-100 to-rose-100 text-rose-900 font-bold border border-amber-300' },
+    { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: null },
     { id: 'favoritos', btn: 'portal-tab-favoritos', badge: 'panel-badge-favoritos', activeBadgeCls: 'bg-white text-rose-900 font-black shadow-xs border border-rose-300', inactiveBadgeCls: 'bg-rose-100 text-rose-800 font-bold border border-rose-200' }
   ];
 
@@ -3133,8 +3133,7 @@ async function updatePortalBadges() {
       if (badgeRifas) badgeRifas.textContent = `${rifas.length} ativas`;
 
       if (badgeRifasEventos) {
-        const totalAcoes = eventos.length + rifas.length;
-        badgeRifasEventos.innerHTML = `${totalAcoes}<span class="hidden sm:inline"> ações</span>`;
+        badgeRifasEventos.remove();
       }
     } catch (e) {
       console.warn("Erro ao atualizar contadores do portal:", e);
