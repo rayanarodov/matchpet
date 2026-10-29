@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await initApp();
 });
 
+let isInitialPlatformLoad = true;
 let currentAnimals = [];
 let activePet = null;
 let activeMediaTab = 'photos'; // 'photos' ou 'videos'
@@ -218,8 +219,18 @@ async function initApp() {
   }
 
   // Renderiza e ativa a aba inicial de forma limpa e unificada
-  switchMainTab(currentMainTab);
+  // Renderiza e ativa a aba inicial na abertura da plataforma SEM rolar a tela
+  if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+    try { history.scrollRestoration = 'manual'; } catch (_) {}
+  }
+  window.scrollTo(0, 0);
+
+  switchMainTab(currentMainTab, false);
   updatePortalBadges();
+
+  setTimeout(() => {
+    isInitialPlatformLoad = false;
+  }, 1200);
 
   // Rastreia visita silenciosa pelo coletor de métricas analíticas (deferido para não disputar thread de renderização)
   if (window.AdoteAnalytics && typeof AdoteAnalytics.trackSiteVisit === "function") {
@@ -2879,7 +2890,7 @@ window.closeBlogModal = closeBlogModal;
    NAVEGAÇÃO POR ABAS DO PORTAL (Encontrar Animais, Painéis ONGs, Blog Atualizado)
    ========================================================================== */
 
-function switchMainTab(tabName) {
+function switchMainTab(tabName, shouldScroll = true) {
   let targetSubTab = null;
   if (tabName === 'eventos') {
     tabName = 'rifas-eventos';
@@ -3014,23 +3025,27 @@ function switchMainTab(tabName) {
     applyFilters();
   }
 
-  // Garante que o conteúdo ativado seja rolado suavemente para o campo de visão do usuário
-  try {
-    const targetElement = (tabName === 'animais' || tabName === 'favoritos')
-      ? (document.getElementById('catalogo') || document.getElementById('tab-content-animais'))
-      : document.getElementById('tab-content-' + tabName);
-    
-    if (targetElement) {
-      setTimeout(() => {
-        const headerOffset = 70;
-        const elemPos = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: Math.max(0, elemPos - headerOffset),
-          behavior: 'smooth'
-        });
-      }, 50);
-    }
-  } catch (_) {}
+  // Garante que o conteúdo ativado seja rolado suavemente apenas por clique explícito do usuário,
+  // NUNCA na abertura inicial da plataforma
+  if (shouldScroll && !isInitialPlatformLoad) {
+    try {
+      const targetElement = (tabName === 'animais' || tabName === 'favoritos')
+        ? (document.getElementById('catalogo') || document.getElementById('tab-content-animais'))
+        : document.getElementById('tab-content-' + tabName);
+      
+      if (targetElement) {
+        setTimeout(() => {
+          if (isInitialPlatformLoad) return;
+          const headerOffset = 70;
+          const elemPos = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: Math.max(0, elemPos - headerOffset),
+            behavior: 'smooth'
+          });
+        }, 50);
+      }
+    } catch (_) {}
+  }
 
   updatePortalBadges();
   if (typeof lucide !== "undefined" && lucide.createIcons) {
