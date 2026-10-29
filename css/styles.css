@@ -2471,3 +2471,59 @@ button,
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   MODAIS DE GESTÃO DO ADMIN (FEIRINHAS, RIFAS & ONGS) - ROLAGEM 100% FLUIDA
+   ========================================================================== */
+#modal-edit-evento,
+#modal-edit-rifa,
+#modal-edit-ong {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#modal-edit-evento .modal-content,
+#modal-edit-rifa .modal-content,
+#modal-edit-ong .modal-content {
+  max-height: 90vh !important;
+  max-height: calc(100vh - 3rem) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+}
+
+#modal-edit-evento form,
+#modal-edit-rifa form,
+#modal-edit-ong form {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.modal-scroll-body {
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 #f8fafc !important;
+}
+
+.modal-scroll-body::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.modal-scroll-body::-webkit-scrollbar-track {
+  background: #f8fafc !important;
+  border-radius: 9999px !important;
+}
+
+.modal-scroll-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 9999px !important;
+}
+
+.modal-scroll-body::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}

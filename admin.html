@@ -1527,20 +1527,21 @@
   </div>
 
   <!-- MODAL: EDITAR DADOS DA ONG -->
-  <div id="modal-edit-ong" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+  <div id="modal-edit-ong" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
+      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
         <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
           <i data-lucide="building-2" class="w-5 h-5 text-orange-600"></i>
           <span id="modal-ong-title">Editar Perfil & Métricas da ONG</span>
         </h3>
-        <button onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button type="button" onclick="closeModalEditOng()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <form id="form-edit-ong" onsubmit="handleSaveOng(event)" class="space-y-4">
+      <form id="form-edit-ong" onsubmit="handleSaveOng(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
         <input type="hidden" id="ong-edit-id">
+        <div class="p-6 overflow-y-auto space-y-4 flex-1 overscroll-contain modal-scroll-body">
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
@@ -1641,11 +1642,12 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
-          <button type="button" onclick="closeModalEditOng()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+        </div>
+        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <button type="button" onclick="closeModalEditOng()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
             Cancelar
           </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-slate-950 text-xs font-black shadow-md">
+          <button type="submit" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
             Salvar Alterações da ONG &amp; Abrigo
           </button>
         </div>
@@ -1654,20 +1656,21 @@
   </div>
 
   <!-- MODAL: NOVA / EDITAR FEIRINHA DE ADOÇÃO -->
-  <div id="modal-edit-evento" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+  <div id="modal-edit-evento" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
+      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
         <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
           <i data-lucide="calendar" class="w-5 h-5 text-teal-600"></i>
           <span id="modal-evento-title">Adicionar Feirinha de Adoção</span>
         </h3>
-        <button onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button type="button" onclick="closeModalEditEvento()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <form id="form-edit-evento" onsubmit="handleSaveEvento(event)" class="space-y-4">
+      <form id="form-edit-evento" onsubmit="handleSaveEvento(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
         <input type="hidden" id="evento-edit-id">
+        <div class="p-6 overflow-y-auto space-y-4 flex-1 overscroll-contain modal-scroll-body">
 
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Título do Evento</label>
@@ -1729,11 +1732,12 @@
           <textarea id="evento-edit-descricao" rows="2" placeholder="Conte o que haverá na feirinha: veterinários voluntários, brindes, etc." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-teal-500 focus:bg-white focus:outline-none"></textarea>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
-          <button type="button" onclick="closeModalEditEvento()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+        </div>
+        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <button type="button" onclick="closeModalEditEvento()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
             Cancelar
           </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-slate-950 text-xs font-black shadow-md">
+          <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
             Salvar Feirinha
           </button>
         </div>
@@ -1742,20 +1746,21 @@
   </div>
 
   <!-- MODAL: NOVA / EDITAR RIFA OU CAMPANHA DE RAÇÃO -->
-  <div id="modal-edit-rifa" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/60 shadow-xs transition-opacity duration-200">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto modal-content transform scale-95 transition-transform duration-200 p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+  <div id="modal-edit-rifa" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none modal-backdrop bg-slate-900/75 shadow-xs transition-opacity duration-200 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden modal-content transform scale-95 transition-transform duration-200 border border-slate-200 relative">
+      <div class="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white flex-shrink-0">
         <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
           <i data-lucide="ticket" class="w-5 h-5 text-amber-500"></i>
           <span id="modal-rifa-title">Adicionar Rifa / Campanha Solidária</span>
         </h3>
-        <button onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-[#F9F3EA] text-slate-500 hover:text-slate-800 flex items-center justify-center">
+        <button type="button" onclick="closeModalEditRifa()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 hover:bg-slate-200 flex items-center justify-center cursor-pointer transition-colors" title="Fechar">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <form id="form-edit-rifa" onsubmit="handleSaveRifa(event)" class="space-y-4">
+      <form id="form-edit-rifa" onsubmit="handleSaveRifa(event)" class="flex flex-col flex-1 overflow-hidden min-h-0">
         <input type="hidden" id="rifa-edit-id">
+        <div class="p-6 overflow-y-auto space-y-4 flex-1 overscroll-contain modal-scroll-body">
 
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Título da Campanha</label>
@@ -1836,11 +1841,12 @@
           <textarea id="rifa-edit-descricao" rows="2" placeholder="Explique para onde irão os recursos e o impacto positivo para os animais." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-amber-500 focus:bg-white focus:outline-none"></textarea>
         </div>
 
-        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200">
-          <button type="button" onclick="closeModalEditRifa()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50">
+        </div>
+        <div class="flex items-center justify-end gap-2 px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex-shrink-0">
+          <button type="button" onclick="closeModalEditRifa()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer transition-colors">
             Cancelar
           </button>
-          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-slate-950 text-xs font-black shadow-md">
+          <button type="submit" class="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-black shadow-md cursor-pointer transition-all">
             Salvar Campanha
           </button>
         </div>
