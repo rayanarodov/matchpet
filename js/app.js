@@ -2894,8 +2894,7 @@ function switchMainTab(tabName) {
   const headerNavTabs = [
     { id: 'animais', btn: 'nav-btn-animais' },
     { id: 'ongs', btn: 'nav-btn-ongs' },
-    { id: 'blog', btn: 'nav-btn-blog' },
-    { id: 'favoritos', btn: 'nav-btn-favoritos' }
+    { id: 'blog', btn: 'nav-btn-blog' }
   ];
 
   headerNavTabs.forEach(t => {
