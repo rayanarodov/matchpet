@@ -1913,15 +1913,19 @@ html, body {
     display: none !important;
   }
 
-  /* Barra de abas do portal (Animais, ONG, Rifas, Favoritos): respiro e toque suave */
+  /* Barra de abas do portal (Animais, ONG, Rifas, Favoritos): Grid 2x2 no mobile, 100% visível e acessível */
   .portal-segment-tab {
-    flex: 0 0 auto !important;
-    min-width: max-content !important;
-    padding: 0.6rem 0.95rem !important;
-    font-size: 12px !important;
-    gap: 0.45rem !important;
-    border-radius: 9999px !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0.65rem 0.6rem !important;
+    font-size: 11.5px !important;
+    gap: 0.35rem !important;
+    border-radius: 0.875rem !important;
     box-sizing: border-box !important;
+    min-height: 44px !important;
+    touch-action: manipulation !important;
+    cursor: pointer !important;
   }
 
   /* Container de Busca e Filtros com Respiro */
@@ -2433,3 +2437,37 @@ html, body {
   cursor: zoom-out !important;
 }
 
+
+/* ==========================================================================
+   INTERATIVIDADE GLOBAL DE BOTÕES E ATALHOS (MOBILE & DESKTOP)
+   ========================================================================== */
+button,
+[role="button"],
+.portal-segment-tab,
+.species-quick-btn,
+.nav-tab-btn,
+.btn-quiz-cta,
+#btn-header-favorites,
+#btn-toggle-admin-panel {
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Controle responsivo dos rótulos das abas do portal */
+@media (min-width: 640px) {
+  .portal-tab-label-short {
+    display: none !important;
+  }
+  .portal-tab-label-full {
+    display: inline !important;
+  }
+}
+@media (max-width: 639px) {
+  .portal-tab-label-short {
+    display: inline !important;
+  }
+  .portal-tab-label-full {
+    display: none !important;
+  }
+}

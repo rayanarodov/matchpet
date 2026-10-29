@@ -485,6 +485,9 @@ function applyFilters(forceTabSwitch = false) {
  * Limpa todos os filtros da barra de busca
  */
 function resetAllFilters() {
+  if (typeof currentMainTab !== "undefined" && currentMainTab !== 'animais') {
+    switchMainTab('animais');
+  }
   activeOngFilter = null;
   window.onlyFavoritesFilter = false;
   const favBanner = document.getElementById("favorites-active-banner");
@@ -537,6 +540,9 @@ function resetAllFilters() {
  * Filtro rápido por espécie (Todos, Cachorro, Gato)
  */
 function setSpeciesFilter(species) {
+  if (typeof currentMainTab !== "undefined" && currentMainTab !== 'animais' && currentMainTab !== 'favoritos') {
+    switchMainTab('animais');
+  }
   const selectPill = document.getElementById("species-filter-pill");
   const selectFilter = document.getElementById("species-filter");
   if (selectPill) selectPill.value = species;
@@ -2933,14 +2939,22 @@ function switchMainTab(tabName) {
     if (!el) return;
     const isActive = t.id === tabName;
     if (isActive) {
-      el.className = "portal-segment-tab active flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer";
+      if (t.id === 'favoritos') {
+        el.className = "portal-segment-tab active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-rose-600 text-white border border-rose-500 shadow-md shadow-rose-600/20 cursor-pointer";
+      } else {
+        el.className = "portal-segment-tab active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer";
+      }
       if (badgeEl) {
-        badgeEl.className = `ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.activeBadgeCls}`;
+        badgeEl.className = `ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.activeBadgeCls}`;
       }
     } else {
-      el.className = "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
+      if (t.id === 'favoritos') {
+        el.className = "portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer";
+      } else {
+        el.className = "portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
+      }
       if (badgeEl) {
-        badgeEl.className = `ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.inactiveBadgeCls}`;
+        badgeEl.className = `ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.inactiveBadgeCls}`;
       }
     }
   });
@@ -2999,11 +3013,21 @@ function switchMainTab(tabName) {
     applyFilters();
   }
 
-  // Em mobile, garante rolagem suave da aba ativa e visualização imediata do conteúdo
+  // Garante que o conteúdo ativado seja rolado suavemente para o campo de visão do usuário
   try {
-    const activeTabBtn = document.getElementById('portal-tab-' + tabName);
-    if (activeTabBtn) {
-      activeTabBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const targetElement = (tabName === 'animais' || tabName === 'favoritos')
+      ? (document.getElementById('catalogo') || document.getElementById('tab-content-animais'))
+      : document.getElementById('tab-content-' + tabName);
+    
+    if (targetElement) {
+      setTimeout(() => {
+        const headerOffset = 70;
+        const elemPos = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: Math.max(0, elemPos - headerOffset),
+          behavior: 'smooth'
+        });
+      }, 50);
     }
   } catch (_) {}
 
@@ -5985,3 +6009,12 @@ window.sharePetProfile = sharePetProfile;
 window.setFavoritesOnlyFilter = setFavoritesOnlyFilter;
 window.toggleFavoritesOnlyFilter = toggleFavoritesOnlyFilter;
 window.updateFavoritesCountBadges = updateFavoritesCountBadges;
+// Exportações Globais para Garantir Funcionamento 100% dos Botões
+window.deactivateFavoritesUI = deactivateFavoritesUI;
+if (typeof openPetModal === 'function') window.openPetModal = openPetModal;
+if (typeof closePetModal === 'function') window.closePetModal = closePetModal;
+if (typeof openQuizModal === 'function') window.openQuizModal = openQuizModal;
+if (typeof closeQuizModal === 'function') window.closeQuizModal = closeQuizModal;
+if (typeof openFavoritesModal === 'function') window.openFavoritesModal = openFavoritesModal;
+if (typeof closeFavoritesModal === 'function') window.closeFavoritesModal = closeFavoritesModal;
+if (typeof toggleAdminHeaderPanel === 'function') window.toggleAdminHeaderPanel = toggleAdminHeaderPanel;

@@ -434,18 +434,18 @@
 
       <!-- Novo Painel de Abas do Portal (Animais, ONGs, Rifas ou Eventos) - Posicionado Acima da Barra de Pesquisa -->
       <div class="max-w-5xl mx-auto mb-4 sm:mb-5">
-        <div class="bg-white p-1.5 sm:p-2 rounded-2xl sm:rounded-full border border-[#b2dedf]/90 shadow-sm flex items-center justify-between gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
+        <div class="bg-white p-1.5 sm:p-2 rounded-2xl sm:rounded-full border border-[#b2dedf]/90 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2">
           
           <!-- Aba 1: Animais -->
           <button 
             type="button" 
             id="portal-tab-animais" 
             onclick="switchMainTab('animais')" 
-            class="portal-segment-tab active flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer"
+            class="portal-segment-tab active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer"
           >
-            <span class="text-xs sm:text-lg">🐶</span>
+            <span class="text-sm sm:text-lg flex-shrink-0">🐶</span>
             <span>Animais</span>
-            <span id="panel-badge-pets" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-[#F9F3EA] text-slate-950 font-black">9</span>
+            <span id="panel-badge-pets" class="ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-[#F9F3EA] text-slate-950 font-black flex-shrink-0">9</span>
           </button>
 
           <!-- Aba 2: Conheça a ONG -->
@@ -453,11 +453,11 @@
             type="button" 
             id="portal-tab-ongs" 
             onclick="switchMainTab('ongs')" 
-            class="portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#004245] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer"
+            class="portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-[#004245] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer"
           >
-            <span class="text-xs sm:text-lg">🏛️</span>
+            <span class="text-sm sm:text-lg flex-shrink-0">🏛️</span>
             <span>Conheça a ONG</span>
-            <span id="panel-badge-ongs" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-[#e6f4f5] text-[#007E82] font-bold">1</span>
+            <span id="panel-badge-ongs" class="ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-[#e6f4f5] text-[#007E82] font-bold flex-shrink-0">1</span>
           </button>
 
           <!-- Aba 3: Rifas ou Eventos -->
@@ -465,11 +465,12 @@
             type="button" 
             id="portal-tab-rifas-eventos" 
             onclick="switchMainTab('rifas-eventos')" 
-            class="portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#004245] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer"
+            class="portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-[#004245] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer"
           >
-            <span class="text-xs sm:text-lg">🎪</span>
-            <span>Feirinhas, Rifas &amp; Campanhas</span>
-            <span id="panel-badge-rifas-eventos" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-gradient-to-r from-amber-100 to-rose-100 text-rose-900 font-black border border-amber-300">6<span class="hidden sm:inline"> ações</span></span>
+            <span class="text-sm sm:text-lg flex-shrink-0">🎪</span>
+            <span class="portal-tab-label-full hidden sm:inline">Feirinhas, Rifas &amp; Campanhas</span>
+            <span class="portal-tab-label-short sm:hidden">Rifas &amp; Eventos</span>
+            <span id="panel-badge-rifas-eventos" class="ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-gradient-to-r from-amber-100 to-rose-100 text-rose-900 font-black border border-amber-300 flex-shrink-0">6<span class="hidden sm:inline"> ações</span></span>
           </button>
 
           <!-- Aba 4: Meus Favoritos -->
@@ -477,12 +478,12 @@
             type="button" 
             id="portal-tab-favoritos" 
             onclick="switchMainTab('favoritos')" 
-            class="portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer"
+            class="portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer"
             title="Exibir apenas seus animais favoritos"
           >
-            <span class="text-xs sm:text-lg">❤️</span>
+            <span class="text-sm sm:text-lg flex-shrink-0">❤️</span>
             <span>Favoritos</span>
-            <span id="panel-badge-favoritos" class="ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-rose-100 text-rose-800 font-bold border border-rose-200">0</span>
+            <span id="panel-badge-favoritos" class="ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] bg-rose-100 text-rose-800 font-bold border border-rose-200 flex-shrink-0">0</span>
           </button>
 
         </div>
