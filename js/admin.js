@@ -1,3 +1,131 @@
+
+/* ==========================================================================
+   HELPERS UNIVERSAIS DE UPLOAD E CONVERSÃO DE FOTOS (DISPOSITIVO / CLOUD)
+   ========================================================================== */
+
+async function uploadOrConvertImageFile(file) {
+  if (!file) return null;
+  if (window.CloudinaryService && CloudinaryService.isConfigured()) {
+    try {
+      const res = await CloudinaryService.uploadMedia(file, "image");
+      if (res && res.url) return res.url;
+    } catch (e) {
+      console.warn("Cloudinary upload failed, falling back to DataURL:", e);
+    }
+  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+window.uploadOrConvertImageFile = uploadOrConvertImageFile;
+
+async function handleSingleImageUpload(event, inputId, thumbId, callback) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  try {
+    const dataUrl = await uploadOrConvertImageFile(file);
+    if (!dataUrl) return;
+
+    const input = document.getElementById(inputId);
+    if (input) {
+      input.value = dataUrl;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    const thumb = document.getElementById(thumbId);
+    if (thumb) {
+      thumb.src = dataUrl;
+    }
+
+    if (typeof callback === 'function') {
+      callback();
+    }
+
+    showToast("Foto selecionada e carregada com sucesso!");
+  } catch (err) {
+    console.error("Erro ao carregar imagem:", err);
+    showToast("Erro ao processar imagem: " + (err.message || err), "error");
+  } finally {
+    event.target.value = "";
+  }
+}
+window.handleSingleImageUpload = handleSingleImageUpload;
+
+function updateImageThumbFromInput(inputId, thumbId) {
+  const input = document.getElementById(inputId);
+  const thumb = document.getElementById(thumbId);
+  if (input && thumb) {
+    thumb.src = input.value || "img/matchpet-icon.png";
+  }
+}
+window.updateImageThumbFromInput = updateImageThumbFromInput;
+
+async function handleShelterPhotoRowUpload(event, idx, context) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  try {
+    const dataUrl = await uploadOrConvertImageFile(file);
+    if (!dataUrl) return;
+
+    if (context === 'tab') {
+      if (!tabOngPhotos) tabOngPhotos = [];
+      tabOngPhotos[idx] = dataUrl;
+      tabRenderShelterPhotos();
+    } else {
+      if (!adminEditingShelterPhotos) adminEditingShelterPhotos = [];
+      adminEditingShelterPhotos[idx] = dataUrl;
+      adminRenderShelterPhotos();
+    }
+    showToast("Foto do abrigo atualizada com sucesso!");
+  } catch (err) {
+    console.error("Erro ao carregar foto do abrigo:", err);
+    showToast("Erro ao carregar foto do abrigo.", "error");
+  } finally {
+    event.target.value = "";
+  }
+}
+window.handleShelterPhotoRowUpload = handleShelterPhotoRowUpload;
+
+async function handleMultipleShelterPhotosUpload(event, context) {
+  const files = Array.from(event.target.files || []);
+  if (files.length === 0) return;
+
+  showToast(`Carregando ${files.length} foto(s) do dispositivo...`);
+
+  for (const file of files) {
+    try {
+      const dataUrl = await uploadOrConvertImageFile(file);
+      if (dataUrl) {
+        if (context === 'tab') {
+          if (!tabOngPhotos) tabOngPhotos = [];
+          tabOngPhotos.push(dataUrl);
+        } else {
+          if (!adminEditingShelterPhotos) adminEditingShelterPhotos = [];
+          adminEditingShelterPhotos.push(dataUrl);
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao processar foto:", e);
+    }
+  }
+
+  if (context === 'tab') {
+    tabRenderShelterPhotos();
+  } else {
+    adminRenderShelterPhotos();
+  }
+
+  showToast(`${files.length} foto(s) adicionada(s) à galeria!`);
+  event.target.value = "";
+}
+window.handleMultipleShelterPhotosUpload = handleMultipleShelterPhotosUpload;
+
 /**
  * Controlador do Painel Administrativo (CRUD Completo)
  * Ficha Médica Básica Obrigatória (Porte, Castração, Vermífugo, Vacinas)
@@ -1640,16 +1768,24 @@ function adminRenderShelterPhotos() {
 
   container.innerHTML = adminEditingShelterPhotos.map((url, idx) => `
     <div class="flex items-center gap-2 bg-white p-2 rounded-xl border border-slate-200 shadow-2xs">
-      <div class="w-10 h-10 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200">
+      <div class="w-10 h-10 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200 relative group">
         <img src="${url}" alt="Foto ${idx+1}" class="w-full h-full object-cover" onerror="this.src='img/matchpet-icon.png'">
+        <label class="absolute inset-0 bg-slate-900/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-xs" title="Trocar foto">
+          <i data-lucide="camera" class="w-3 h-3"></i>
+          <input type="file" accept="image/*" class="hidden" onchange="handleShelterPhotoRowUpload(event, ${idx}, 'modal')">
+        </label>
       </div>
       <input 
-        type="url" 
+        type="text" 
         value="${url}" 
-        placeholder="https://images.unsplash.com/..." 
+        placeholder="https://... ou arquivo enviado" 
         onchange="adminEditingShelterPhotos[${idx}] = this.value; adminRenderShelterPhotos();" 
         class="flex-1 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-slate-800 focus:bg-white focus:ring-2 focus:ring-[#007E82] outline-none"
       >
+      <label class="p-1.5 text-teal-700 hover:bg-teal-50 rounded-lg transition-colors cursor-pointer" title="Escolher arquivo do dispositivo">
+        <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+        <input type="file" accept="image/*" class="hidden" onchange="handleShelterPhotoRowUpload(event, ${idx}, 'modal')">
+      </label>
       <button 
         type="button" 
         onclick="adminRemoveShelterPhotoField(${idx})" 
@@ -1742,6 +1878,8 @@ async function openEditOngModal(ongId) {
   document.getElementById("ong-edit-chave-pix").value = ong.chavePix || "";
   document.getElementById("ong-edit-whatsapp").value = ong.whatsapp || "";
   document.getElementById("ong-edit-foto").value = ong.foto || "";
+  const ongThumb = document.getElementById("ong-edit-foto-thumb");
+  if (ongThumb) ongThumb.src = ong.foto || "img/matchpet-icon.png";
   document.getElementById("ong-edit-descricao").value = ong.descricao || "";
   
   const historiaInput = document.getElementById("ong-edit-historia");
@@ -1912,6 +2050,8 @@ async function populateOngSelect(selectId, selectedId = "") {
 async function openNewEventoModal() {
   document.getElementById("form-edit-evento").reset();
   document.getElementById("evento-edit-id").value = "";
+  const evNewThumb = document.getElementById("evento-edit-foto-thumb");
+  if (evNewThumb) evNewThumb.src = "img/matchpet-icon.png";
   document.getElementById("modal-evento-title").textContent = "Adicionar Feirinha de Adoção";
   await populateOngSelect("evento-edit-ong-id");
   openModalGeneric("modal-edit-evento");
@@ -1932,6 +2072,8 @@ async function openEditEventoModal(eventoId) {
   document.getElementById("evento-edit-endereco").value = ev.endereco || "";
   document.getElementById("evento-edit-link-maps").value = ev.linkMaps || "";
   document.getElementById("evento-edit-foto").value = ev.foto || "";
+  const evEditThumb = document.getElementById("evento-edit-foto-thumb");
+  if (evEditThumb) evEditThumb.src = ev.foto || "img/matchpet-icon.png";
   document.getElementById("evento-edit-animais").value = (ev.animaisPresentes || []).join(", ");
   document.getElementById("evento-edit-descricao").value = ev.descricao || "";
 
@@ -2110,6 +2252,8 @@ function quickAddContribution(rifaId, amount) {
 async function openNewRifaModal() {
   document.getElementById("form-edit-rifa").reset();
   document.getElementById("rifa-edit-id").value = "";
+  const rifaNewThumb = document.getElementById("rifa-edit-foto-thumb");
+  if (rifaNewThumb) rifaNewThumb.src = "img/matchpet-icon.png";
   document.getElementById("modal-rifa-title").textContent = "Adicionar Rifa / Campanha Solidária";
   await populateOngSelect("rifa-edit-ong-id");
   toggleRifaTypeFields();
@@ -2135,6 +2279,8 @@ async function openEditRifaModal(rifaId) {
   document.getElementById("rifa-edit-whatsapp").value = rifa.whatsapp || "";
   document.getElementById("rifa-edit-data-sorteio").value = rifa.dataSorteio || "";
   document.getElementById("rifa-edit-foto").value = rifa.foto || "";
+  const rifaEditThumb = document.getElementById("rifa-edit-foto-thumb");
+  if (rifaEditThumb) rifaEditThumb.src = rifa.foto || "img/matchpet-icon.png";
   document.getElementById("rifa-edit-descricao").value = rifa.descricao || "";
 
   toggleRifaTypeFields();
@@ -2499,6 +2645,8 @@ function setAdminSampleOngLogo(type) {
     general: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&q=80"
   };
   input.value = samples[type] || samples.rescue;
+  const regThumb = document.getElementById("admin-reg-ong-foto-thumb");
+  if (regThumb) regThumb.src = input.value;
 }
 window.setAdminSampleOngLogo = setAdminSampleOngLogo;
 
@@ -2777,17 +2925,28 @@ function tabRenderShelterPhotos() {
 
   container.innerHTML = tabOngPhotos.map((url, idx) => `
     <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200 shadow-2xs">
-      <div class="w-14 h-14 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0 border border-slate-300 shadow-xs">
+      <div class="w-14 h-14 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0 border border-slate-300 shadow-xs relative group">
         <img src="${url}" alt="Foto ${idx+1}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80'">
+        <label class="absolute inset-0 bg-slate-900/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-xs" title="Trocar foto pelo dispositivo">
+          <i data-lucide="camera" class="w-4 h-4"></i>
+          <input type="file" accept="image/*" class="hidden" onchange="handleShelterPhotoRowUpload(event, ${idx}, 'tab')">
+        </label>
       </div>
-      <div class="flex-1 min-w-0">
-        <label class="block text-[10px] font-black text-slate-500 uppercase mb-0.5">Foto das Instalações #${idx+1}</label>
+      <div class="flex-1 min-w-0 space-y-1">
+        <div class="flex items-center justify-between">
+          <label class="block text-[10px] font-black text-slate-500 uppercase">Foto das Instalações #${idx+1}</label>
+          <label class="inline-flex items-center gap-1 text-[10.5px] font-bold text-[#007E82] hover:text-[#005c60] cursor-pointer">
+            <i data-lucide="upload" class="w-3 h-3"></i>
+            <span>Trocar por arquivo</span>
+            <input type="file" accept="image/*" class="hidden" onchange="handleShelterPhotoRowUpload(event, ${idx}, 'tab')">
+          </label>
+        </div>
         <input 
-          type="url" 
+          type="text" 
           value="${url}" 
-          placeholder="https://images.unsplash.com/..." 
+          placeholder="https://... ou imagem carregada acima" 
           oninput="tabOngPhotos[${idx}] = this.value; syncTabOngPhotoThumb(this, ${idx});" 
-          class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-[#007E82] outline-none"
+          class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-[#007E82] outline-none"
         >
       </div>
       <button 
