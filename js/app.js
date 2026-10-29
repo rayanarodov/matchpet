@@ -1610,25 +1610,31 @@ function updateFavoritesCountBadges() {
   }
 }
 
+function deactivateFavoritesUI() {
+  window.onlyFavoritesFilter = false;
+  const banner = document.getElementById("favorites-active-banner");
+  if (banner) banner.classList.add("hidden");
+
+  const btnQuick = document.getElementById("btn-filter-favoritos");
+  if (btnQuick) {
+    btnQuick.className = "species-quick-btn px-3 py-1.5 rounded-full text-xs font-bold bg-[#F9F3EA] hover:bg-rose-50 hover:text-rose-900 hover:border-rose-300 text-rose-700 border border-[#e8ddcf] transition-all flex items-center gap-1.5 cursor-pointer";
+  }
+
+  const navBtnFav = document.getElementById("nav-btn-favoritos");
+  if (navBtnFav) {
+    navBtnFav.className = "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-rose-600 hover:bg-rose-50 transition-all flex items-center gap-1.5 cursor-pointer";
+  }
+
+  const portalTabFav = document.getElementById("portal-tab-favoritos");
+  if (portalTabFav) {
+    portalTabFav.className = "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer";
+  }
+
+  updateFavoritesCountBadges();
+}
+
 function setFavoritesOnlyFilter(active = true) {
   window.onlyFavoritesFilter = active;
-  currentMainTab = active ? 'favoritos' : 'animais';
-
-  // Garante que o catálogo de animais esteja visível
-  const contentMap = {
-    'animais': document.getElementById('tab-content-animais'),
-    'ongs': document.getElementById('tab-content-ongs'),
-    'blog': document.getElementById('tab-content-blog'),
-    'rifas-eventos': document.getElementById('tab-content-rifas-eventos')
-  };
-
-  if (contentMap.animais) contentMap.animais.classList.remove('hidden');
-  if (contentMap.ongs) contentMap.ongs.classList.add('hidden');
-  if (contentMap.blog) contentMap.blog.classList.add('hidden');
-  if (contentMap['rifas-eventos']) contentMap['rifas-eventos'].classList.add('hidden');
-
-  const heroSearchContainer = document.getElementById('hero-search-container');
-  if (heroSearchContainer) heroSearchContainer.classList.remove('hidden');
 
   // Atualiza banner de favoritos
   const banner = document.getElementById("favorites-active-banner");
@@ -1649,42 +1655,35 @@ function setFavoritesOnlyFilter(active = true) {
 
   // Atualiza aba no desktop navbar
   const navBtnFav = document.getElementById("nav-btn-favoritos");
-  const navBtnAnimais = document.getElementById("nav-btn-animais");
-  const navBtnOngs = document.getElementById("nav-btn-ongs");
-  const navBtnBlog = document.getElementById("nav-btn-blog");
-
   if (navBtnFav) {
     navBtnFav.className = active 
       ? "nav-tab-btn active px-4 py-2.5 rounded-full text-white font-black bg-rose-600 border border-rose-500 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
       : "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-rose-600 hover:bg-rose-50 transition-all flex items-center gap-1.5 cursor-pointer";
   }
-  if (navBtnAnimais) {
-    navBtnAnimais.className = (!active)
-      ? "nav-tab-btn active px-4 py-2.5 rounded-full text-slate-950 font-black bg-[#D19864] border border-[#b87e4c] shadow-sm transition-all flex items-center gap-2 cursor-pointer"
-      : "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all flex items-center gap-2 cursor-pointer";
-  }
-  if (navBtnOngs) navBtnOngs.className = "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all flex items-center gap-2 cursor-pointer";
-  if (navBtnBlog) navBtnBlog.className = "nav-tab-btn px-4 py-2.5 rounded-full text-slate-700 hover:text-[#004d50] hover:bg-[#F9F3EA] transition-all flex items-center gap-2 cursor-pointer";
 
   // Atualiza aba no portal segment tabs
   const portalTabFav = document.getElementById("portal-tab-favoritos");
-  const portalTabAnimais = document.getElementById("portal-tab-animais");
-  const portalTabOngs = document.getElementById("portal-tab-ongs");
-  const portalTabRifas = document.getElementById("portal-tab-rifas-eventos");
-
   if (portalTabFav) {
     portalTabFav.className = active
       ? "portal-segment-tab active flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-extrabold transition-all whitespace-nowrap bg-rose-600 text-white border border-rose-500 shadow-md shadow-rose-600/20 cursor-pointer"
       : "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer";
   }
-  if (portalTabAnimais) {
-    portalTabAnimais.className = (!active)
-      ? "portal-segment-tab active flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer"
-      : "portal-segment-tab flex-auto sm:flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-full text-[10.5px] sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
-  }
 
   updateFavoritesCountBadges();
-  applyFilters();
+
+  if (active) {
+    // Alterna para aba favoritos
+    if (typeof switchMainTab === 'function') {
+      switchMainTab('favoritos');
+    }
+  } else {
+    // Se estava em favoritos e desativou, volta para animais
+    if (currentMainTab === 'favoritos' && typeof switchMainTab === 'function') {
+      switchMainTab('animais');
+    } else if (currentMainTab === 'animais') {
+      applyFilters();
+    }
+  }
 }
 
 function toggleFavoritesOnlyFilter() {
@@ -2956,25 +2955,26 @@ function switchMainTab(tabName) {
 
   Object.entries(contentMap).forEach(([id, el]) => {
     if (el) {
-      el.classList.toggle('hidden', id !== tabName);
+      const shouldBeVisible = (id === tabName) || (tabName === 'favoritos' && id === 'animais');
+      el.classList.toggle('hidden', !shouldBeVisible);
     }
   });
 
-  // 4. Alterna visibilidade da barra de pesquisa e filtros (ativa e visível na aba Animais)
+  // 4. Alterna visibilidade da barra de pesquisa e filtros (ativa e visível nas abas Animais e Favoritos)
   const heroSearchContainer = document.getElementById('hero-search-container');
   if (heroSearchContainer) {
-    heroSearchContainer.classList.toggle('hidden', tabName !== 'animais');
+    heroSearchContainer.classList.toggle('hidden', tabName !== 'animais' && tabName !== 'favoritos');
   }
 
   // 5. Executa renderizadores específicos para cada seção
   if (tabName === 'ongs') {
-    setFavoritesOnlyFilter(false);
+    deactivateFavoritesUI();
     renderOngsGrid();
   } else if (tabName === 'blog') {
-    setFavoritesOnlyFilter(false);
+    deactivateFavoritesUI();
     renderBlogSection();
   } else if (tabName === 'rifas-eventos') {
-    setFavoritesOnlyFilter(false);
+    deactivateFavoritesUI();
     if (targetSubTab) {
       filterRifasEventosSubTab(targetSubTab);
     } else {
@@ -2983,11 +2983,29 @@ function switchMainTab(tabName) {
     renderEventosGrid();
     renderRifasGrid(window.currentRifaFilter || 'todas');
   } else if (tabName === 'favoritos') {
-    setFavoritesOnlyFilter(true);
+    window.onlyFavoritesFilter = true;
+    const banner = document.getElementById("favorites-active-banner");
+    if (banner) {
+      banner.classList.remove("hidden");
+      if (window.lucide) lucide.createIcons({ root: banner });
+    }
+    const btnQuick = document.getElementById("btn-filter-favoritos");
+    if (btnQuick) {
+      btnQuick.className = "species-quick-btn active px-3 py-1.5 rounded-full text-xs font-black bg-rose-600 text-white border border-rose-500 shadow-2xs transition-all flex items-center gap-1.5 cursor-pointer";
+    }
+    applyFilters();
   } else if (tabName === 'animais') {
-    setFavoritesOnlyFilter(false);
+    deactivateFavoritesUI();
     applyFilters();
   }
+
+  // Em mobile, garante rolagem suave da aba ativa e visualização imediata do conteúdo
+  try {
+    const activeTabBtn = document.getElementById('portal-tab-' + tabName);
+    if (activeTabBtn) {
+      activeTabBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  } catch (_) {}
 
   updatePortalBadges();
   if (typeof lucide !== "undefined" && lucide.createIcons) {
