@@ -229,6 +229,9 @@ const SolidarityStorage = {
               ...defOng,
               ...o,
               whatsapp: "5561985832237",
+              historiaTitulo: o.historiaTitulo || defOng.historiaTitulo || "A História da Lar dos Anjos",
+              historiaBadge: o.historiaBadge || defOng.historiaBadge || "Nossa Trajetória & Memória Viva • 2003 - 2026",
+              historiaSubtitulo: o.historiaSubtitulo || defOng.historiaSubtitulo || "Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia.",
               // Garante fotos e vídeos do abrigo atualizados se estiverem vazios
               fotosAbrigo: (o.fotosAbrigo && o.fotosAbrigo.length > 0) ? o.fotosAbrigo : (defOng.fotosAbrigo || []),
               videosAbrigo: (o.videosAbrigo && o.videosAbrigo.length > 0) ? o.videosAbrigo : (defOng.videosAbrigo || [])

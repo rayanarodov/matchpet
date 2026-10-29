@@ -18,9 +18,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v4">
+  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v5">
   <!-- Estilos Globais -->
-  <link rel="stylesheet" href="css/styles.css?v=20261029_v4">
+  <link rel="stylesheet" href="css/styles.css?v=20261029_v5">
   
   
 </head>
@@ -980,13 +980,13 @@
           </div>
 
           <!-- Bloco C: História Institucional Completa -->
-          <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <div id="bloco-historia-ong" class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
               <div class="flex items-center gap-2">
                 <span class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-black text-sm">📖</span>
                 <div>
-                  <h3 class="text-base font-black text-slate-900">3. História Institucional & Propósito</h3>
-                  <p class="text-xs text-slate-500">Histórico completo de resgate ético, reabilitação e acolhimento</p>
+                  <h3 class="text-base font-black text-slate-900">3. História Institucional &amp; Propósito</h3>
+                  <p class="text-xs text-slate-500">Altere o título, o selo da trajetória e os textos da história no perfil público</p>
                 </div>
               </div>
               <span class="text-[11px] font-bold text-slate-500 bg-[#F9F3EA] px-2.5 py-1 rounded-lg border border-[#e8ddcf]">
@@ -994,10 +994,27 @@
               </span>
             </div>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="tab-ong-historia-badge" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1">Selo da Trajetória (Badge Superior) *</label>
+                <input type="text" id="tab-ong-historia-badge" oninput="syncTabOngLivePreview()" placeholder="Ex: Nossa Trajetória &amp; Memória Viva • 2003 - 2026" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#007E82] rounded-xl text-xs sm:text-sm font-bold text-slate-900 outline-none transition-all focus:bg-white focus:ring-2 focus:ring-[#007E82]/20">
+              </div>
+              <div>
+                <label for="tab-ong-historia-titulo" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1">Título Principal da História *</label>
+                <input type="text" id="tab-ong-historia-titulo" oninput="syncTabOngLivePreview()" placeholder="Ex: A História da Lar dos Anjos" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#007E82] rounded-xl text-xs sm:text-sm font-bold text-slate-900 outline-none transition-all focus:bg-white focus:ring-2 focus:ring-[#007E82]/20">
+              </div>
+            </div>
+
             <div>
+              <label for="tab-ong-historia-subtitulo" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1">Subtítulo / Introdução da Trajetória</label>
+              <textarea id="tab-ong-historia-subtitulo" rows="2" oninput="syncTabOngLivePreview()" placeholder="Ex: Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 focus:border-[#007E82] rounded-xl text-xs sm:text-sm font-medium text-slate-900 leading-relaxed outline-none transition-all focus:bg-white focus:ring-2 focus:ring-[#007E82]/20"></textarea>
+            </div>
+
+            <div>
+              <label for="tab-ong-historia" class="block text-xs font-black text-slate-800 uppercase tracking-wider mb-1">Texto Completo da História (Narrativa em Capítulos) *</label>
               <textarea 
                 id="tab-ong-historia" 
-                rows="8" 
+                rows="10" 
                 required 
                 oninput="syncTabOngLivePreview()" 
                 placeholder="Conte a história da fundação da ONG, motivações, atuação nas regiões do DF e compromisso com o bem-estar animal..." 
@@ -2219,14 +2236,14 @@
   </div>
 
   <!-- Scripts: Banco de Dados IndexedDB, Cloudinary, Analytics, Storage e Lógica do CRUD -->
-  <script src="js/lucide.min.js?v=20261029_v4"></script>
-  <script src="js/data.js?v=20261029_v4"></script>
-  <script src="js/db.js?v=20261029_v4"></script>
-  <script src="js/cloudinary.js?v=20261029_v4"></script>
-  <script src="js/analytics.js?v=20261029_v4"></script>
-  <script src="js/storage.js?v=20261029_v4"></script>
-  <script src="js/design-studio.js?v=20261029_v4"></script>
-  <script src="js/admin.js?v=20261029_v4"></script>
+  <script src="js/lucide.min.js?v=20261029_v5"></script>
+  <script src="js/data.js?v=20261029_v5"></script>
+  <script src="js/db.js?v=20261029_v5"></script>
+  <script src="js/cloudinary.js?v=20261029_v5"></script>
+  <script src="js/analytics.js?v=20261029_v5"></script>
+  <script src="js/storage.js?v=20261029_v5"></script>
+  <script src="js/design-studio.js?v=20261029_v5"></script>
+  <script src="js/admin.js?v=20261029_v5"></script>
   <script>
     function setCrudLayout(mode) {
       const grid = document.getElementById('admin-crud-main-grid');
@@ -2245,6 +2262,24 @@
       grid.classList.remove('mode-split', 'mode-form', 'mode-list');
       grid.classList.add(`mode-${mode}`);
     }
+
+    // Ativação automática da aba 'Conheça a ONG' e foco na História Institucional
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hash = window.location.hash;
+      if (urlParams.get('tab') === 'ong' || hash === '#ong' || hash === '#tab-ong-historia' || hash === '#bloco-historia-ong') {
+        if (typeof switchAdminTab === 'function') switchAdminTab('ong');
+        setTimeout(() => {
+          const target = document.getElementById('bloco-historia-ong') || document.getElementById('tab-ong-historia');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('ring-4', 'ring-[#007E82]/50');
+            setTimeout(() => target.classList.remove('ring-4', 'ring-[#007E82]/50'), 3500);
+          }
+        }, 350);
+      }
+    });
+
     lucide.createIcons();
   </script>
 </body>

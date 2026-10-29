@@ -2855,6 +2855,9 @@ async function loadAdminOngTab(targetOngId = null) {
   setVal("tab-ong-pix", ong.chavePix);
   setVal("tab-ong-whatsapp", ong.whatsapp);
   setVal("tab-ong-instagram", ong.instagram);
+  setVal("tab-ong-historia-badge", ong.historiaBadge || "Nossa Trajetória & Memória Viva • 2003 - 2026");
+  setVal("tab-ong-historia-titulo", ong.historiaTitulo || `A História da ${ong.nome || 'Lar dos Anjos'}`);
+  setVal("tab-ong-historia-subtitulo", ong.historiaSubtitulo || "Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia.");
   setVal("tab-ong-historia", ong.historia || "");
 
   tabOngPhotos = Array.isArray(ong.fotosAbrigo) ? [...ong.fotosAbrigo] : [];
@@ -3069,6 +3072,9 @@ async function handleSaveOngTab(e) {
     chavePix: getV("tab-ong-pix", existing.chavePix),
     whatsapp: getV("tab-ong-whatsapp", existing.whatsapp),
     instagram: getV("tab-ong-instagram", existing.instagram),
+    historiaBadge: getV("tab-ong-historia-badge", existing.historiaBadge || "Nossa Trajetória & Memória Viva • 2003 - 2026"),
+    historiaTitulo: getV("tab-ong-historia-titulo", existing.historiaTitulo || ("A História da " + (existing.nome || "Lar dos Anjos"))),
+    historiaSubtitulo: getV("tab-ong-historia-subtitulo", existing.historiaSubtitulo || "Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia."),
     historia: getV("tab-ong-historia", existing.historia || ""),
     fotosAbrigo: (tabOngPhotos || []).filter(u => u && u.trim().length > 0),
     videosAbrigo: (tabOngVideos || []).filter(u => u && u.trim().length > 0)

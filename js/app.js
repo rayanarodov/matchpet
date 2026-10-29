@@ -3535,15 +3535,15 @@ async function renderOngsGrid() {
         <div class="space-y-3 max-w-3xl">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-teal-50 via-[#F9F3EA] to-amber-50 text-[#007E82] text-xs font-black uppercase tracking-wider border border-[#b2dedf]/80 shadow-2xs">
             <i data-lucide="book-open" class="w-4 h-4 text-[#007E82]"></i>
-            <span>Nossa Trajetória &amp; Memória Viva • 2003 - 2026</span>
+            <span id="ong-rendered-historia-badge">${activeOng.historiaBadge || 'Nossa Trajetória &amp; Memória Viva • 2003 - 2026'}</span>
           </div>
           
           <h3 style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
-            A História da ${activeOng.nome}
+            <span id="ong-rendered-historia-titulo">${activeOng.historiaTitulo || ('A História da ' + activeOng.nome)}</span>
           </h3>
           
-          <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-            Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia.
+          <p id="ong-rendered-historia-subtitulo" class="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+            ${activeOng.historiaSubtitulo || 'Mais de 23 anos dedicados ao resgate ético, à reabilitação clínica e ao acolhimento com dignidade de animais vulneráveis no Distrito Federal. Conheça os pilares que constroem nossa história dia após dia.'}
           </p>
 
           <!-- Fita de Marcos de Impacto -->
@@ -3567,10 +3567,18 @@ async function renderOngsGrid() {
           </div>
         </div>
 
-        <div class="flex-shrink-0 flex items-center gap-2">
-          <span class="text-xs text-slate-500 font-bold bg-[#F9F3EA] px-3.5 py-2 rounded-2xl border border-[#e8ddcf] flex items-center gap-1.5 shadow-2xs">
+        <div class="flex-shrink-0 flex flex-wrap items-center gap-2.5">
+          <a 
+            href="admin.html?tab=ong#tab-ong-historia" 
+            class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-[#007E82] hover:from-emerald-700 hover:to-[#005c60] text-white text-xs font-black shadow-sm hover:shadow-md transition-all flex items-center gap-2 cursor-pointer border border-emerald-400 active:scale-95"
+            title="Alterar a História e Trajetória no Painel Geral após Login Administrativo"
+          >
+            <i data-lucide="edit-3" class="w-4 h-4"></i>
+            <span>Editar História no Painel Geral</span>
+          </a>
+          <span class="text-xs text-slate-500 font-bold bg-[#F9F3EA] px-3.5 py-2.5 rounded-2xl border border-[#e8ddcf] flex items-center gap-1.5 shadow-2xs">
             <i data-lucide="badge-check" class="w-4 h-4 text-[#007E82]"></i>
-            <span>Conteúdo Institucional Auditado</span>
+            <span>Conteúdo Auditado</span>
           </span>
         </div>
       </div>
@@ -3581,7 +3589,14 @@ async function renderOngsGrid() {
         <!-- Coluna de Narrativa Editorial (7 colunas) -->
         <div class="lg:col-span-7 space-y-6">
           ${(() => {
-            const paragraphs = (historia || "").split('\n\n').filter(p => p.trim().length > 0);
+            const rawText = (historia || "").replace(/\r\n/g, '\n').trim();
+            let paragraphs = rawText.split(/\n{2,}/).map(p => p.trim()).filter(p => p.length > 0);
+            if (paragraphs.length <= 1 && rawText.includes('\n')) {
+              paragraphs = rawText.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0);
+            }
+            if (paragraphs.length === 0 && rawText.length > 0) {
+              paragraphs = [rawText];
+            }
             const defaultChapterMeta = [
               {
                 number: "01",
