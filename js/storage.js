@@ -320,6 +320,12 @@ const SolidarityStorage = {
           // Garante fotos e dados atualizados da única ONG Lar dos Anjos
           const defMap = {};
           (window.DEFAULT_EVENTOS || []).forEach(d => { defMap[d.id] = d; });
+          const oldPlaceholderEvtIds = new Set(["evt-001", "evt-002", "evt-003"]);
+          if (parsed.every(e => oldPlaceholderEvtIds.has(e.id))) {
+            const def = JSON.parse(JSON.stringify(window.DEFAULT_EVENTOS || []));
+            this.saveAllEventos(def);
+            return def;
+          }
           let updated = false;
           parsed = parsed.map(e => {
             const defItem = defMap[e.id];
@@ -384,6 +390,12 @@ const SolidarityStorage = {
           // Garante fotos e dados atualizados da única ONG Lar dos Anjos
           const defMap = {};
           (window.DEFAULT_RIFAS || []).forEach(d => { defMap[d.id] = d; });
+          const oldPlaceholderRifaIds = new Set(["rifa-001", "rifa-002", "rifa-003"]);
+          if (parsed.every(r => oldPlaceholderRifaIds.has(r.id))) {
+            const def = JSON.parse(JSON.stringify(window.DEFAULT_RIFAS || []));
+            this.saveAllRifas(def);
+            return def;
+          }
           let updated = false;
           parsed = parsed.map(r => {
             const defItem = defMap[r.id];
@@ -904,7 +916,7 @@ if (typeof window !== "undefined") {
    Garante que celulares e dispositivos móveis NUNCA fiquem desatualizados
    ========================================================================== */
 
-const CURRENT_APP_DATA_VERSION = "20261102_v10";
+const CURRENT_APP_DATA_VERSION = "20261102_v11";
 
 function syncAllDataToLatest(force = false) {
   try {
@@ -983,7 +995,7 @@ function syncAllDataToLatest(force = false) {
       } catch (_) {}
     }
 
-    // 3. Sincroniza Eventos / Feirinhas
+    // 3. Sincroniza Eventos / Feirinhas (garante feiras reais da ONG em todos os aparelhos)
     if (window.DEFAULT_EVENTOS && Array.isArray(window.DEFAULT_EVENTOS)) {
       let storedEvts = [];
       try {
@@ -991,12 +1003,20 @@ function syncAllDataToLatest(force = false) {
         if (raw) storedEvts = JSON.parse(raw);
       } catch (_) {}
 
-      if (!storedEvts || !Array.isArray(storedEvts) || storedEvts.length === 0) {
-        storedEvts = JSON.parse(JSON.stringify(window.DEFAULT_EVENTOS));
+      const oldPlaceholderEvtIds = new Set(["evt-001", "evt-002", "evt-003"]);
+      const hasOldEvts = Array.isArray(storedEvts) && storedEvts.some(e => oldPlaceholderEvtIds.has(e.id));
+      const missingRealEvts = window.DEFAULT_EVENTOS.some(def => !storedEvts.some(e => e.id === def.id));
+
+      if (!storedEvts || !Array.isArray(storedEvts) || storedEvts.length === 0 || hasOldEvts || missingRealEvts) {
+        const customEvts = Array.isArray(storedEvts) ? storedEvts.filter(e => !oldPlaceholderEvtIds.has(e.id) && !window.DEFAULT_EVENTOS.some(d => d.id === e.id)) : [];
+        storedEvts = [...window.DEFAULT_EVENTOS, ...customEvts];
       } else {
         window.DEFAULT_EVENTOS.forEach(de => {
           const idx = storedEvts.findIndex(e => e.id === de.id);
           if (idx >= 0) {
+            if (storedEvts[idx].foto && storedEvts[idx].foto.startsWith("data:")) {
+              storedEvts[idx].foto = de.foto;
+            }
             storedEvts[idx] = { ...de, ...storedEvts[idx] };
           } else {
             storedEvts.push(de);
@@ -1008,7 +1028,7 @@ function syncAllDataToLatest(force = false) {
       } catch (_) {}
     }
 
-    // 4. Sincroniza Rifas
+    // 4. Sincroniza Rifas (garante rifas reais da ONG em todos os aparelhos)
     if (window.DEFAULT_RIFAS && Array.isArray(window.DEFAULT_RIFAS)) {
       let storedRifas = [];
       try {
@@ -1016,12 +1036,20 @@ function syncAllDataToLatest(force = false) {
         if (raw) storedRifas = JSON.parse(raw);
       } catch (_) {}
 
-      if (!storedRifas || !Array.isArray(storedRifas) || storedRifas.length === 0) {
-        storedRifas = JSON.parse(JSON.stringify(window.DEFAULT_RIFAS));
+      const oldPlaceholderRifaIds = new Set(["rifa-001", "rifa-002", "rifa-003"]);
+      const hasOldRifas = Array.isArray(storedRifas) && storedRifas.some(r => oldPlaceholderRifaIds.has(r.id));
+      const missingRealRifas = window.DEFAULT_RIFAS.some(def => !storedRifas.some(r => r.id === def.id));
+
+      if (!storedRifas || !Array.isArray(storedRifas) || storedRifas.length === 0 || hasOldRifas || missingRealRifas) {
+        const customRifas = Array.isArray(storedRifas) ? storedRifas.filter(r => !oldPlaceholderRifaIds.has(r.id) && !window.DEFAULT_RIFAS.some(d => d.id === r.id)) : [];
+        storedRifas = [...window.DEFAULT_RIFAS, ...customRifas];
       } else {
         window.DEFAULT_RIFAS.forEach(dr => {
           const idx = storedRifas.findIndex(r => r.id === dr.id);
           if (idx >= 0) {
+            if (storedRifas[idx].foto && storedRifas[idx].foto.startsWith("data:")) {
+              storedRifas[idx].foto = dr.foto;
+            }
             storedRifas[idx] = { ...dr, ...storedRifas[idx], whatsapp: "5561985832237" };
           } else {
             storedRifas.push(dr);
