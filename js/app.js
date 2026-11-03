@@ -75,7 +75,8 @@ async function initApp() {
       if (storedPets && storedPets.length > 0) {
         const currentIds = (currentAnimals || []).map(p => p.id).join(',');
         const storedIds = storedPets.map(p => p.id).join(',');
-        if (currentIds !== storedIds) {
+        const hasDiff = currentIds !== storedIds || JSON.stringify(currentAnimals) !== JSON.stringify(storedPets);
+        if (hasDiff) {
           currentAnimals = storedPets;
           window.currentAnimals = currentAnimals;
           if (typeof applyFilters === "function" && currentMainTab === 'animais') {

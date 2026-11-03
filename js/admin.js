@@ -318,6 +318,13 @@ function setupDragAndDrop() {
 async function loadAdminList() {
   try {
     allAdminPets = await PetDB.getAll();
+    const oldPlaceholderIds = ['pet-001', 'pet-002', 'pet-003', 'pet-004', 'pet-005', 'pet-006', 'pet-007', 'pet-008', 'pet-009'];
+    const hasOld = Array.isArray(allAdminPets) && allAdminPets.some(p => oldPlaceholderIds.includes(p.id));
+    if (!allAdminPets || allAdminPets.length === 0 || hasOld) {
+      if (window.DEFAULT_ANIMALS && window.DEFAULT_ANIMALS.length > 0) {
+        allAdminPets = await PetDB.resetDefaults();
+      }
+    }
     updateDashboardStats(allAdminPets);
     renderAdminPets(allAdminPets);
   } catch (err) {

@@ -904,7 +904,7 @@ if (typeof window !== "undefined") {
    Garante que celulares e dispositivos móveis NUNCA fiquem desatualizados
    ========================================================================== */
 
-const CURRENT_APP_DATA_VERSION = "20261102_v9";
+const CURRENT_APP_DATA_VERSION = "20261102_v10";
 
 function syncAllDataToLatest(force = false) {
   try {
@@ -1033,13 +1033,24 @@ function syncAllDataToLatest(force = false) {
       } catch (_) {}
     }
 
-    // 5. Sincroniza Animais
+    // 5. Sincroniza Animais (garante que os animais reais do abrigo sejam carregados em todos os dispositivos)
     if (window.DEFAULT_ANIMALS && Array.isArray(window.DEFAULT_ANIMALS)) {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         let storedPets = raw ? JSON.parse(raw) : [];
-        if (!storedPets || storedPets.length === 0) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(window.DEFAULT_ANIMALS));
+        const oldPlaceholderIds = new Set([
+          "pet-001", "pet-002", "pet-003", "pet-004", "pet-005",
+          "pet-006", "pet-007", "pet-008", "pet-009"
+        ]);
+
+        const hasOldPlaceholders = Array.isArray(storedPets) && storedPets.some(p => oldPlaceholderIds.has(p.id));
+        const missingRealPets = window.DEFAULT_ANIMALS.some(def => !storedPets.some(p => p.id === def.id));
+
+        if (!storedPets || !Array.isArray(storedPets) || storedPets.length === 0 || hasOldPlaceholders || missingRealPets) {
+          // Mantém quaisquer animais adicionais que não sejam placeholders
+          const customPets = Array.isArray(storedPets) ? storedPets.filter(p => !oldPlaceholderIds.has(p.id) && !window.DEFAULT_ANIMALS.some(d => d.id === p.id)) : [];
+          const combined = [...window.DEFAULT_ANIMALS, ...customPets];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(combined));
         } else {
           storedPets = storedPets.map(p => {
             if (!p.contatoWhatsapp || p.contatoWhatsapp.includes("999998888") || p.contatoWhatsapp.includes("9999-8888") || p.contatoWhatsapp === "5511999998888") {
@@ -1051,6 +1062,23 @@ function syncAllDataToLatest(force = false) {
             return p;
           });
           localStorage.setItem(STORAGE_KEY, JSON.stringify(storedPets));
+        }
+
+        // Sincroniza também o IndexedDB (PetDB)
+        if (typeof window !== "undefined" && window.PetDB && typeof window.PetDB.init === "function") {
+          window.PetDB.init().then(async () => {
+            try {
+              const dbPets = await window.PetDB.getAll();
+              const dbHasOld = Array.isArray(dbPets) && dbPets.some(p => oldPlaceholderIds.has(p.id));
+              const dbMissingReal = window.DEFAULT_ANIMALS.some(def => !dbPets.some(p => p.id === def.id));
+              if (dbHasOld || dbMissingReal || !dbPets || dbPets.length === 0) {
+                console.log("[SyncEngine] Atualizando PetDB com os animais reais do abrigo...");
+                await window.PetDB.resetDefaults();
+              }
+            } catch (dbErr) {
+              console.warn("[SyncEngine] Aviso ao sincronizar PetDB:", dbErr);
+            }
+          }).catch(() => {});
         }
       } catch (_) {}
     }
