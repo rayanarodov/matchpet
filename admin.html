@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>MatchPet - Painel Administrativo | Gestão de Animais & Fichas Médicas</title>
+  <!-- Prevenção de Cache Obsoleto para Celular & Mobile -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   
   <!-- Favicon Oficial MatchPet (Logo Nova da Guia do Navegador) -->
   <link rel="icon" type="image/png" sizes="64x64" href="img/matchpet-icon.png?v=2">
@@ -18,9 +23,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261029_v8">
+  <link rel="stylesheet" href="css/tailwind.compiled.css?v=20261102_v9">
   <!-- Estilos Globais -->
-  <link rel="stylesheet" href="css/styles.css?v=20261029_v8">
+  <link rel="stylesheet" href="css/styles.css?v=20261102_v9">
   
   
 </head>
@@ -79,23 +84,23 @@
 
   <!-- Topo do Painel Administrativo Oficial -->
   <header class="bg-[#F9F3EA] shadow-xs border-b-2 border-[#e8ddcf] sticky top-0 z-30 shadow-xs">
-    <div class="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 py-2 sm:py-3 flex items-center justify-between min-h-[5.5rem] sm:min-h-[6.5rem]">
+    <div class="max-w-[1720px] mx-auto px-3 sm:px-8 lg:px-12 py-2 sm:py-3 flex flex-wrap items-center justify-between gap-2 min-h-[4rem] sm:min-h-[6.5rem]">
       <div class="flex items-center gap-3.5">
         <a href="index.html" class="flex items-center group py-0.5" title="Ir para a Página Inicial do MatchPet">
           <div class="relative flex items-center justify-center p-2 rounded-2xl bg-white border-2 border-[#007E82]/30 group-hover:scale-105 group-hover:border-[#007E82] transition-all duration-300 shadow-sm">
-            <img src="img/matchpet-icon.png" alt="MatchPet" class="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-xs transition-all duration-300">
+            <img src="img/matchpet-icon.png" alt="MatchPet" class="h-9 sm:h-14 md:h-16 w-auto object-contain drop-shadow-xs transition-all duration-300">
           </div>
         </a>
         <div class="flex flex-col justify-center">
           <div class="flex items-center gap-2.5">
-            <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-2xl sm:text-3xl font-extrabold tracking-normal leading-none select-none">
+            <span style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xl sm:text-3xl font-extrabold tracking-normal leading-none select-none">
               <span class="text-[#007E82]">Match</span><span class="text-[#D19864]">Pet</span>
             </span>
             <span class="text-[10px] sm:text-xs px-3 py-1 rounded-full bg-[#e6f4f5] text-[#007E82] font-black border-2 border-[#007E82]/30 uppercase tracking-wider shadow-2xs">
               Painel Administrativo
             </span>
           </div>
-          <p style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="text-xs sm:text-[13px] font-bold text-slate-700 tracking-wide mt-1 flex items-center gap-1.5 select-none">
+          <p style="font-family: 'Fredoka', 'Nunito', sans-serif;" class="hidden sm:flex text-xs sm:text-[13px] font-bold text-slate-700 tracking-wide mt-1 items-center gap-1.5 select-none">
             <span>Gestão Completa de Animais, Fichas Médicas &amp; Adoções</span>
             <span class="text-sm">🐾</span>
           </p>
@@ -118,6 +123,12 @@
           <i data-lucide="upload" class="w-3.5 h-3.5 text-slate-500"></i> Importar
           <input type="file" id="import-file-input" accept=".json" class="hidden" onchange="importData(event)">
         </label>
+                <!-- Botão de Sincronização de Dados Mobile / Cache -->
+        <button onclick="handleManualDataSync(this)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-teal-200 bg-teal-50 hover:bg-teal-100 text-xs font-bold text-teal-800 transition-colors shadow-xs cursor-pointer" title="Sincronizar e carregar dados mais recentes da plataforma">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-teal-600"></i>
+          <span class="hidden sm:inline">Sincronizar</span>
+        </button>
+
         <a href="index.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-[#F9F3EA] text-[#007E82] hover:text-[#005c60] text-xs font-black transition-all shadow-xs border-2 border-[#007E82] hover:scale-[1.02]">
           <i data-lucide="eye" class="w-3.5 h-3.5 text-[#007E82]"></i>
           <span>Ver Catálogo</span>
@@ -129,7 +140,7 @@
   <!-- Barra de Navegação em Abas do Moderador -->
   <div class="bg-white border-b border-slate-200 relative z-20 shadow-2xs">
     <div class="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 py-2.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 max-w-full">
+      <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1 max-w-full">
         <button 
           id="tab-btn-crud" 
           onclick="switchAdminTab('crud')" 
@@ -145,7 +156,7 @@
         >
           <i data-lucide="building-2" class="w-4 h-4 text-[#007E82]"></i>
           <span>Conheça a ONG</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-900 font-extrabold tracking-wide uppercase border border-amber-300">Alterar Conteúdo</span>
+          <span class="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-900 font-extrabold tracking-wide uppercase border border-amber-300">Alterar Conteúdo</span>
         </button>
         <button 
           id="tab-btn-solidarity" 
@@ -154,7 +165,7 @@
         >
           <i data-lucide="gift" class="w-4 h-4 text-teal-600"></i>
           <span>Feirinhas &amp; Rifas Solidárias</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-teal-100 text-teal-800 font-extrabold tracking-wide uppercase border border-teal-200">Solidário</span>
+          <span class="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] bg-teal-100 text-teal-800 font-extrabold tracking-wide uppercase border border-teal-200">Solidário</span>
         </button>
         <button 
           id="tab-btn-analytics" 
@@ -163,7 +174,7 @@
         >
           <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#007E82]"></i>
           <span>Métricas & Pesquisa (Analytics)</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-[#e6f4f5] text-[#004d50] font-extrabold tracking-wide uppercase border border-[#e8ddcf]">Exclusivo Moderador</span>
+          <span class="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] bg-[#e6f4f5] text-[#004d50] font-extrabold tracking-wide uppercase border border-[#e8ddcf]">Exclusivo Moderador</span>
         </button>
         <button 
           id="tab-btn-blog" 
@@ -172,7 +183,7 @@
         >
           <i data-lucide="newspaper" class="w-4 h-4 text-[#007E82]"></i>
           <span>Blog Atualizado</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800 font-extrabold tracking-wide uppercase border border-sky-200">Matérias</span>
+          <span class="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] bg-sky-100 text-sky-800 font-extrabold tracking-wide uppercase border border-sky-200">Matérias</span>
         </button>
 
       </div>
@@ -2719,14 +2730,14 @@
   </div>
 
   <!-- Scripts: Banco de Dados IndexedDB, Cloudinary, Analytics, Storage e Lógica do CRUD -->
-  <script src="js/lucide.min.js?v=20261029_v8"></script>
-  <script src="js/data.js?v=20261029_v8"></script>
-  <script src="js/db.js?v=20261029_v8"></script>
-  <script src="js/cloudinary.js?v=20261029_v8"></script>
-  <script src="js/analytics.js?v=20261029_v8"></script>
-  <script src="js/storage.js?v=20261029_v8"></script>
-  <script src="js/design-studio.js?v=20261029_v8"></script>
-  <script src="js/admin.js?v=20261029_v8"></script>
+  <script src="js/lucide.min.js?v=20261102_v9"></script>
+  <script src="js/data.js?v=20261102_v9"></script>
+  <script src="js/db.js?v=20261102_v9"></script>
+  <script src="js/cloudinary.js?v=20261102_v9"></script>
+  <script src="js/analytics.js?v=20261102_v9"></script>
+  <script src="js/storage.js?v=20261102_v9"></script>
+  <script src="js/design-studio.js?v=20261102_v9"></script>
+  <script src="js/admin.js?v=20261102_v9"></script>
   <script>
     function setCrudLayout(mode) {
       const grid = document.getElementById('admin-crud-main-grid');

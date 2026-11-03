@@ -897,3 +897,218 @@ if (typeof window !== "undefined") {
   window.BlogStorage = BlogStorage;
 }
 
+
+
+/* ==========================================================================
+   MOTOR DE SINCRONIZAÇÃO AUTOMÁTICA & RESILIÊNCIA MOBILE (CACHE BUSTER)
+   Garante que celulares e dispositivos móveis NUNCA fiquem desatualizados
+   ========================================================================== */
+
+const CURRENT_APP_DATA_VERSION = "20261102_v9";
+
+function syncAllDataToLatest(force = false) {
+  try {
+    const lastVersion = typeof localStorage !== "undefined" ? localStorage.getItem("matchpet_app_data_version") : null;
+    if (!force && lastVersion === CURRENT_APP_DATA_VERSION) {
+      return;
+    }
+
+    console.log("[SyncEngine] Sincronizando dados locais com a versão mais recente " + CURRENT_APP_DATA_VERSION + "...");
+
+    // 1. Sincroniza ONGs
+    if (window.DEFAULT_ONGS && window.DEFAULT_ONGS.length > 0) {
+      const defOng = window.DEFAULT_ONGS[0];
+      let storedOngs = [];
+      try {
+        const raw = localStorage.getItem(ONGS_STORAGE_KEY);
+        if (raw) storedOngs = JSON.parse(raw);
+      } catch (_) {}
+
+      if (!storedOngs || !Array.isArray(storedOngs) || storedOngs.length === 0) {
+        storedOngs = [JSON.parse(JSON.stringify(defOng))];
+      } else {
+        storedOngs = storedOngs.map(o => {
+          if (o.id === "ong-001" || o.id === defOng.id) {
+            return {
+              ...defOng,
+              ...o,
+              nome: (o.nome && !o.nome.includes("ProAnima")) ? o.nome : defOng.nome,
+              whatsapp: "5561985832237",
+              historiaTitulo: o.historiaTitulo || defOng.historiaTitulo,
+              historiaBadge: o.historiaBadge || defOng.historiaBadge,
+              historiaSubtitulo: o.historiaSubtitulo || defOng.historiaSubtitulo,
+              historia: o.historia || defOng.historia,
+              fotosAbrigo: (o.fotosAbrigo && o.fotosAbrigo.length > 0) ? o.fotosAbrigo : (defOng.fotosAbrigo || []),
+              videosAbrigo: (o.videosAbrigo && o.videosAbrigo.length > 0) ? o.videosAbrigo : (defOng.videosAbrigo || [])
+            };
+          }
+          return o;
+        });
+      }
+      try {
+        localStorage.setItem(ONGS_STORAGE_KEY, JSON.stringify(storedOngs));
+        if (typeof SolidarityStorage !== "undefined" && SolidarityStorage) {
+          SolidarityStorage._cachedOngs = null;
+          SolidarityStorage._cachedOngsAt = 0;
+        }
+      } catch (_) {}
+    }
+
+    // 2. Sincroniza Blog Posts
+    if (window.DEFAULT_BLOG_POSTS && Array.isArray(window.DEFAULT_BLOG_POSTS)) {
+      let storedPosts = [];
+      try {
+        const raw = localStorage.getItem(BLOG_STORAGE_KEY);
+        if (raw) storedPosts = JSON.parse(raw);
+      } catch (_) {}
+
+      if (!storedPosts || !Array.isArray(storedPosts) || storedPosts.length === 0) {
+        storedPosts = JSON.parse(JSON.stringify(window.DEFAULT_BLOG_POSTS));
+      } else {
+        window.DEFAULT_BLOG_POSTS.forEach(dp => {
+          const idx = storedPosts.findIndex(p => p.id === dp.id);
+          if (idx >= 0) {
+            storedPosts[idx] = { 
+              ...dp, 
+              ...storedPosts[idx], 
+              categoriaBadge: dp.categoriaBadge || storedPosts[idx].categoriaBadge 
+            };
+          } else {
+            storedPosts.unshift(dp);
+          }
+        });
+      }
+      try {
+        localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(storedPosts));
+      } catch (_) {}
+    }
+
+    // 3. Sincroniza Eventos / Feirinhas
+    if (window.DEFAULT_EVENTOS && Array.isArray(window.DEFAULT_EVENTOS)) {
+      let storedEvts = [];
+      try {
+        const raw = localStorage.getItem(EVENTOS_STORAGE_KEY);
+        if (raw) storedEvts = JSON.parse(raw);
+      } catch (_) {}
+
+      if (!storedEvts || !Array.isArray(storedEvts) || storedEvts.length === 0) {
+        storedEvts = JSON.parse(JSON.stringify(window.DEFAULT_EVENTOS));
+      } else {
+        window.DEFAULT_EVENTOS.forEach(de => {
+          const idx = storedEvts.findIndex(e => e.id === de.id);
+          if (idx >= 0) {
+            storedEvts[idx] = { ...de, ...storedEvts[idx] };
+          } else {
+            storedEvts.push(de);
+          }
+        });
+      }
+      try {
+        localStorage.setItem(EVENTOS_STORAGE_KEY, JSON.stringify(storedEvts));
+      } catch (_) {}
+    }
+
+    // 4. Sincroniza Rifas
+    if (window.DEFAULT_RIFAS && Array.isArray(window.DEFAULT_RIFAS)) {
+      let storedRifas = [];
+      try {
+        const raw = localStorage.getItem(RIFAS_STORAGE_KEY);
+        if (raw) storedRifas = JSON.parse(raw);
+      } catch (_) {}
+
+      if (!storedRifas || !Array.isArray(storedRifas) || storedRifas.length === 0) {
+        storedRifas = JSON.parse(JSON.stringify(window.DEFAULT_RIFAS));
+      } else {
+        window.DEFAULT_RIFAS.forEach(dr => {
+          const idx = storedRifas.findIndex(r => r.id === dr.id);
+          if (idx >= 0) {
+            storedRifas[idx] = { ...dr, ...storedRifas[idx], whatsapp: "5561985832237" };
+          } else {
+            storedRifas.push(dr);
+          }
+        });
+      }
+      try {
+        localStorage.setItem(RIFAS_STORAGE_KEY, JSON.stringify(storedRifas));
+      } catch (_) {}
+    }
+
+    // 5. Sincroniza Animais
+    if (window.DEFAULT_ANIMALS && Array.isArray(window.DEFAULT_ANIMALS)) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        let storedPets = raw ? JSON.parse(raw) : [];
+        if (!storedPets || storedPets.length === 0) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(window.DEFAULT_ANIMALS));
+        } else {
+          storedPets = storedPets.map(p => {
+            if (!p.contatoWhatsapp || p.contatoWhatsapp.includes("999998888") || p.contatoWhatsapp.includes("9999-8888") || p.contatoWhatsapp === "5511999998888") {
+              p.contatoWhatsapp = "5561985832237";
+            }
+            if (!p.ongNome || p.ongNome.includes("ProAnima")) {
+              p.ongNome = "Lar dos Anjos";
+            }
+            return p;
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(storedPets));
+        }
+      } catch (_) {}
+    }
+
+    localStorage.setItem("matchpet_app_data_version", CURRENT_APP_DATA_VERSION);
+    console.log("[SyncEngine] Sucesso: Dados atualizados para " + CURRENT_APP_DATA_VERSION);
+  } catch (err) {
+    console.warn("[SyncEngine] Aviso na sincronização:", err);
+  }
+}
+
+function handleManualDataSync(btn) {
+  if (btn) {
+    const icon = btn.querySelector('[data-lucide="refresh-cw"]') || btn.querySelector('i');
+    if (icon) icon.classList.add('animate-spin');
+  }
+  syncAllDataToLatest(true);
+  setTimeout(() => {
+    if (typeof showToast === 'function') {
+      showToast('✅ Plataforma e dados atualizados com sucesso!');
+    }
+    if (btn) {
+      const icon = btn.querySelector('[data-lucide="refresh-cw"]') || btn.querySelector('i');
+      if (icon) icon.classList.remove('animate-spin');
+    }
+    // Re-renderiza abas ativas
+    if (typeof currentMainTab !== 'undefined' && typeof switchMainTab === 'function') {
+      switchMainTab(currentMainTab, false);
+    }
+    if (typeof loadAdminList === 'function') {
+      loadAdminList();
+    }
+    if (typeof renderAdminBlog === 'function' && typeof currentAdminTab !== 'undefined' && currentAdminTab === 'blog') {
+      renderAdminBlog();
+    }
+    if (typeof renderAdminSolidarity === 'function' && typeof currentAdminTab !== 'undefined' && currentAdminTab === 'solidarity') {
+      renderAdminSolidarity();
+    }
+  }, 450);
+}
+
+// Inicializa no escopo global
+if (typeof window !== "undefined") {
+  window.CURRENT_APP_DATA_VERSION = CURRENT_APP_DATA_VERSION;
+  window.syncAllDataToLatest = syncAllDataToLatest;
+  window.handleManualDataSync = handleManualDataSync;
+
+  syncAllDataToLatest();
+
+  // Escuta quando o usuário volta para o navegador no celular
+  if (typeof document !== "undefined") {
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        syncAllDataToLatest();
+      }
+    });
+    window.addEventListener("online", () => {
+      syncAllDataToLatest();
+    });
+  }
+}

@@ -243,6 +243,14 @@ async function initApp() {
   initLiveActivityTicker();
   initDailyTip();
   updateFavoritesCountBadges();
+  const badgeBlog = document.getElementById("panel-badge-blog");
+  if (badgeBlog && window.BlogStorage) {
+    try {
+      const posts = BlogStorage.getPosts() || [];
+      badgeBlog.textContent = posts.length;
+    } catch (_) {}
+  }
+
 }
 
 /**
@@ -2919,11 +2927,13 @@ function switchMainTab(tabName, shouldScroll = true) {
     }
   });
 
-  // 1.1 Atualiza botões da navegação exclusiva para celular
+  // 1.1 Atualiza botões da barra de navegação rápida para celular (Sticky Mobile Nav)
   const mobileNavTabs = [
     { id: 'animais', btn: 'mobile-nav-btn-animais' },
     { id: 'ongs', btn: 'mobile-nav-btn-ongs' },
-    { id: 'blog', btn: 'mobile-nav-btn-blog' }
+    { id: 'rifas-eventos', btn: 'mobile-nav-btn-rifas-eventos' },
+    { id: 'blog', btn: 'mobile-nav-btn-blog' },
+    { id: 'favoritos', btn: 'mobile-nav-btn-favoritos' }
   ];
 
   mobileNavTabs.forEach(t => {
@@ -2931,17 +2941,22 @@ function switchMainTab(tabName, shouldScroll = true) {
     if (!el) return;
     const isActive = t.id === tabName;
     if (isActive) {
-      el.className = "mobile-nav-btn active flex-1 py-1.5 px-2 rounded-xl text-xs font-black text-center bg-[#D19864] text-slate-950 border border-[#b87e4c] flex items-center justify-center gap-1 shadow-2xs transition-all";
+      if (t.id === 'favoritos') {
+        el.className = "mobile-nav-pill active flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-black bg-rose-600 text-white border border-rose-500 shadow-2xs transition-all cursor-pointer whitespace-nowrap";
+      } else {
+        el.className = "mobile-nav-pill active flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-black bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-2xs transition-all cursor-pointer whitespace-nowrap";
+      }
     } else {
-      el.className = "mobile-nav-btn flex-1 py-1.5 px-2 rounded-xl text-xs font-bold text-center text-slate-700 bg-white hover:bg-[#F9F3EA] border border-[#e8ddcf] flex items-center justify-center gap-1 transition-all";
+      el.className = "mobile-nav-pill flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold text-slate-700 bg-white hover:bg-[#F9F3EA] border border-slate-200 shadow-2xs transition-all cursor-pointer whitespace-nowrap";
     }
   });
 
-  // 2. Atualiza botões do novo painel posicionado acima da barra de pesquisa (Animais, ONGs, Rifas ou Eventos)
+  // 2. Atualiza botões do painel segmentado acima da barra de pesquisa (5 abas completas)
   const portalSegmentTabs = [
     { id: 'animais', btn: 'portal-tab-animais', badge: 'panel-badge-pets', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
     { id: 'ongs', btn: 'portal-tab-ongs', badge: 'panel-badge-ongs', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-[#e6f4f5] text-[#006366] font-bold' },
     { id: 'rifas-eventos', btn: 'portal-tab-rifas-eventos', badge: null },
+    { id: 'blog', btn: 'portal-tab-blog', badge: 'panel-badge-blog', activeBadgeCls: 'bg-[#F9F3EA] text-slate-950 font-black', inactiveBadgeCls: 'bg-sky-100 text-sky-800 font-bold border border-sky-200' },
     { id: 'favoritos', btn: 'portal-tab-favoritos', badge: 'panel-badge-favoritos', activeBadgeCls: 'bg-white text-rose-900 font-black shadow-xs border border-rose-300', inactiveBadgeCls: 'bg-rose-100 text-rose-800 font-bold border border-rose-200' }
   ];
 
@@ -2950,23 +2965,26 @@ function switchMainTab(tabName, shouldScroll = true) {
     const badgeEl = document.getElementById(t.badge);
     if (!el) return;
     const isActive = t.id === tabName;
+    const isFav = t.id === 'favoritos';
+    const favColCls = isFav ? "col-span-2 sm:col-span-1 lg:col-span-1 " : "";
+
     if (isActive) {
-      if (t.id === 'favoritos') {
-        el.className = "portal-segment-tab active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-rose-600 text-white border border-rose-500 shadow-md shadow-rose-600/20 cursor-pointer";
+      if (isFav) {
+        el.className = "portal-segment-tab " + favColCls + "active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-rose-600 text-white border border-rose-500 shadow-md shadow-rose-600/20 cursor-pointer";
       } else {
-        el.className = "portal-segment-tab active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer";
+        el.className = "portal-segment-tab " + favColCls + "active flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all whitespace-nowrap bg-[#D19864] text-slate-950 border border-[#b87e4c] shadow-md shadow-[#D19864]/20 cursor-pointer";
       }
       if (badgeEl) {
-        badgeEl.className = `ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.activeBadgeCls}`;
+        badgeEl.className = "ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] " + t.activeBadgeCls;
       }
     } else {
-      if (t.id === 'favoritos') {
-        el.className = "portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer";
+      if (isFav) {
+        el.className = "portal-segment-tab " + favColCls + "flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition-all whitespace-nowrap cursor-pointer";
       } else {
-        el.className = "portal-segment-tab flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
+        el.className = "portal-segment-tab " + favColCls + "flex-1 inline-flex items-center justify-center gap-1 sm:gap-2 px-2.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold text-slate-600 hover:text-[#003e40] hover:bg-[#F9F3EA] transition-all whitespace-nowrap cursor-pointer";
       }
       if (badgeEl) {
-        badgeEl.className = `ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] ${t.inactiveBadgeCls}`;
+        badgeEl.className = "ml-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] " + t.inactiveBadgeCls;
       }
     }
   });
